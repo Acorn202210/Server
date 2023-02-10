@@ -110,5 +110,4 @@ public class Notice {
 		
 		return service.deleteContent(num);
 	}
-	ㄴㄴㄴ
 }
