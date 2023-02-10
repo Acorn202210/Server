@@ -21,9 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.acorn2.FinalProject.Exception.ExceptionResponse;
+import com.acorn2.FinalProject.Exception.CustomizedResponseEntityExceptionHandler;
 import com.acorn2.FinalProject.notice.dto.NoticeDto;
 import com.acorn2.FinalProject.notice.dto.NoticeReq;
 import com.acorn2.FinalProject.notice.dto.NoticeRes;
+import com.acorn2.FinalProject.notice.exception.NoticeNotFoundException;
 import com.acorn2.FinalProject.notice.service.NoticeService;
 
 import io.swagger.annotations.Api;
@@ -41,6 +44,8 @@ public class Notice {
 	public Map<String, Object> list(@RequestParam(value = "pageNum", required = true)int pageNum,
 			@RequestParam(value = "keyword", required = false)String keyword,
 			@RequestParam(value = "condition", required = false)String condition){	
+		
+		
 		return service.getList(pageNum, keyword, condition);
 	}
 	
@@ -49,6 +54,12 @@ public class Notice {
 	@GetMapping("/{num}")
 	public Map<String, Object> detail(@PathVariable int num, @RequestParam(value = "keyword", required = false)String keyword,
 			@RequestParam(value = "condition", required = false)String condition) {
+		
+		NoticeDto dto = (NoticeDto) service.getData(num).get("dto");
+		
+		if(dto == null) {
+			throw new NoticeNotFoundException(String.format("%d은 등록되어 있지 않은 num입니다!", num));
+		}
 		
 		return service.getDetail(num, keyword, condition);
 	}
@@ -63,24 +74,39 @@ public class Notice {
 	@PutMapping("/{num}/update")
 	public Map<String, String> update(@PathVariable int num, @RequestBody NoticeRes noticeRes){
 		
-		NoticeReq dto = new NoticeReq();
-		dto.setNum(num);
-		dto.setTitle(noticeRes.getTitle());
-		dto.setContent(noticeRes.getContent());
+		NoticeDto dto = (NoticeDto) service.getData(num).get("dto");
 		
-		return service.updateContent(dto);
+		if(dto == null) {
+			throw new NoticeNotFoundException(String.format("%d은 등록되어 있지 않은 num입니다!", num));
+		}
+		
+		NoticeReq notice = new NoticeReq();
+		notice.setNum(num);
+		notice.setTitle(noticeRes.getTitle());
+		notice.setContent(noticeRes.getContent());
+		
+		return service.updateContent(notice);
 	}
 	
 	@ApiOperation(value="공지 사항 업데이트 전 상세", notes = "공지사항의 업데이트 전 그 상세 데이터 내용을 가져온다.")
 	@GetMapping("/{num}/update")
 	public Map<String, Object> update(@PathVariable int num){
+		NoticeDto dto = (NoticeDto) service.getData(num).get("dto");
 		
+		if(dto == null) {
+			throw new NoticeNotFoundException(String.format("%d은 등록되어 있지 않은 num입니다!", num));
+		}
 		return service.getData(num);
 	}
 	
 	@ApiOperation(value="공지 사항 삭제", notes = "공지사항의 데이터를 삭제한다.")
 	@DeleteMapping("/{num}/delete")
 	public Map<String, String> delete(@PathVariable int num){
+		NoticeDto dto = (NoticeDto) service.getData(num).get("dto");
+		
+		if(dto == null) {
+			throw new NoticeNotFoundException(String.format("%d은 등록되어 있지 않은 num입니다!", num));
+		}
 		
 		return service.deleteContent(num);
 	}

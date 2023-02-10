@@ -172,6 +172,7 @@ public class NoticeServiceImpl implements NoticeService{
 		NoticeDto dto = noticeDao.getData(num);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+				
 		map.put("isSuccess","success");
 		map.put("dto", dto);
 		
