@@ -75,7 +75,7 @@ public class LectureServiceImpl implements LectureService{
 	}
 
 	@Override
-	public Map<String, Object> getDetail(int num, String ref_group) {
+	public ResponseEntity<LectureDto> getDetail(int num) {
 
 		lectureDao.addViewCount(num);
 
@@ -95,29 +95,13 @@ public class LectureServiceImpl implements LectureService{
 		//보여줄 페이지의 끝 ROWNUM
 		int endRowNum=pageNum*PAGE_ROW_COUNT;
 	
-		//원글의 글번호를 이용해서 해당글에 달린 댓글 목록을 얻어온다.
-		LectureReviewDto commentDto=new LectureReviewDto();
-		commentDto.setRef_group(num);
-		//1페이지에 해당하는 startRowNum 과 endRowNum 을 dto 에 담아서  
-		commentDto.setStartRowNum(startRowNum);
-		commentDto.setEndRowNum(endRowNum);
-		
-		//1페이지에 해당하는 댓글 목록만 select 되도록 한다. 
-		List<LectureReviewDto> commentList=reviewDao.getList(commentDto);
-		
 		//원글의 글번호를 이용해서 댓글 전체의 갯수를 얻어낸다.
 		int totalRow=reviewDao.getCount(num);
 		//댓글 전체 페이지의 갯수
 		int totalPageCount=(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
-				
-		LectureStudentDto lsDto = new LectureStudentDto();		
-		LectureStudentDto lsDto2  = studentDao.studentData(lsDto);
 		
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("dto", resultDto);
-		map.put("ref_group", ref_group);
-		return map;
+		return ResponseEntity.ok(resultDto);
 		
 	}
 
@@ -171,12 +155,10 @@ public class LectureServiceImpl implements LectureService{
 	
 
 	@Override
-	public Map<String, String> deleteContent(int num) {
+	public ResponseEntity<Object> deleteContent(int num) {
 		lectureDao.delete(num);
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("isSuccess","success");
 				
-		return map;
+		return ResponseEntity.ok("Success");
 	}
 
 	@Override

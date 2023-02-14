@@ -157,6 +157,9 @@ public class LectureRes {
 		this.viewCount = viewCount;
 	}
 
+
+
+	
 	
     
     

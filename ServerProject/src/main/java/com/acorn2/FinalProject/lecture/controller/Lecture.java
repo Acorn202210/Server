@@ -42,9 +42,9 @@ public class Lecture {
 		return service.LectureList(pageNum, large_category, small_category);
 	}
     
-	@GetMapping(value = "/lecture/detail")
-	public Map<String, Object> detail(@PathVariable int num, @RequestParam(value = "ref_group", required = false)String ref_group) {
-        return service.getDetail(num,ref_group);
+	@GetMapping(value = "/lecture/{num}")
+	public ResponseEntity<LectureDto> detail(@PathVariable int num){
+        return service.getDetail(num);
     }
 	
 	
@@ -55,9 +55,16 @@ public class Lecture {
 	 
 
     @DeleteMapping(value = "/lecture/delete/{num}")
-    public Map<String, String> deleteLecture(@PathVariable int num) {
+    public ResponseEntity<Object> deleteLecture(@PathVariable int num) {
     	
     	return service.deleteContent(num);
+    }
+    
+    @ApiOperation(value="강의 업데이트 전 상세", notes = "강의 업데이트 전 그 상세 데이터 내용을 가져온다.")
+    @GetMapping(value = "/lecture/{num}/getData")
+    public ResponseEntity<LectureDto> getData(@PathVariable int num){
+
+    	return service.getData(num);
     }
     
     @PutMapping("/lecture/{num}/update")
@@ -77,10 +84,5 @@ public class Lecture {
 		return service.updateContent(req);
 	}
     
-    @ApiOperation(value="강의 업데이트 전 상세", notes = "강의 업데이트 전 그 상세 데이터 내용을 가져온다.")
-    @GetMapping(value = "/lecture/{num}/update")
-    public ResponseEntity<LectureDto> getData(@RequestParam(value = "num", required = true,  defaultValue = "0")int num){
-
-    	return service.getData(num);
-    }
+   
 }

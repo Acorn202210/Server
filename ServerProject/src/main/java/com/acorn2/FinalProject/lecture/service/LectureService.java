@@ -30,13 +30,13 @@ public interface LectureService {
 	//강의 저장하기
 	public Map<String,String> insert(LectureRes lectureRes);
 	//강의 상세보기
-	public Map<String, Object> getDetail(int num,String ref_group);
+	public ResponseEntity<LectureDto> getDetail(int num);
 	//강의 하나의 정보 가져오기
 	public ResponseEntity<LectureDto> getData(int num);
 	//강의 수정
 	public Map<String, String> updateContent(LectureReq lectureReq);
 	//강의 삭제
-	public Map<String, String> deleteContent(int num);
+	public ResponseEntity<Object> deleteContent(int num);
 	
 	
 }

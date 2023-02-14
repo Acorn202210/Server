@@ -15,7 +15,7 @@ public class LectureReq {
     private String large_category;
     private String small_category; 
     private MultipartFile image;
-    private int viewCount;
+    private int viewCount;	
     
     public LectureReq() {}
 
@@ -123,9 +123,8 @@ public class LectureReq {
 		this.viewCount = viewCount;
 	}
 
+
+
 	
-	
-	
-    
     
 }
