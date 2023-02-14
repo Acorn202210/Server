@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,7 +38,7 @@ public class LectureServiceImpl implements LectureService{
 	private String fileLocation;
 	
 	@Override
-	public Map<String, Object> LectureList(int pageNum, String large_category, String small_category) {
+	public ResponseEntity<List<LectureDto>> LectureList(int pageNum, String large_category, String small_category) {
 		
 		final int PAGE_ROW_COUNT=8;
 		final int PAGE_DISPLAY_COUNT=5;
@@ -58,27 +59,9 @@ public class LectureServiceImpl implements LectureService{
 		dto.setSmall_category(small_category);
 	   
 		List<LectureDto> list = lectureDao.LectureList(dto);
-	   
-		int startPageNum = 1 + ((pageNum-1)/PAGE_DISPLAY_COUNT) * PAGE_DISPLAY_COUNT;
-		int endPageNum = startPageNum + PAGE_DISPLAY_COUNT - 1;
-	   
-		int totalRow = lectureDao.getCount();
-		int totalPageCount = (int)Math.ceil(totalRow / (double)PAGE_ROW_COUNT);
-		if(endPageNum > totalPageCount){
-			endPageNum = totalPageCount;  
-		}
 		
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("large_category", large_category);
-		map.put("small_category", small_category);
-		map.put("pageNum", pageNum);
-		map.put("startPageNum", startPageNum);
-		map.put("endPageNum", endPageNum);
-		map.put("totalPageCount", totalPageCount);
-		map.put("totalRow", totalRow);
-		map.put("list", list);
-		return map;
+		return ResponseEntity.ok(list);
+
 		
 	}
 	
@@ -197,14 +180,9 @@ public class LectureServiceImpl implements LectureService{
 	}
 
 	@Override
-	public Map<String, Object> getData(int num) {
+	public ResponseEntity<LectureDto> getData(int num) {
 		LectureDto dto=lectureDao.getData(num);
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("isSuccess","success");
-		map.put("dto", dto);
-		
-		return map;	
+		return ResponseEntity.ok(dto);
 		
 	}
 

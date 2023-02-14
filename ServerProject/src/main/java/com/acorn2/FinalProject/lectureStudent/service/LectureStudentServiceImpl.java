@@ -7,9 +7,10 @@ import java.util.Map;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.acorn2.FinalProject.lecture.dto.LectureDto;
 import com.acorn2.FinalProject.lectureStudent.dao.LectureStudentDao;
 import com.acorn2.FinalProject.lectureStudent.dto.LectureStudentDto;
 import com.acorn2.FinalProject.lectureStudent.dto.LectureStudentReq;
@@ -24,33 +25,27 @@ public class LectureStudentServiceImpl implements LectureStudentService{
 	@Autowired LectureStudentDao studentDao;
 
 	@Override
-	public Map<String, String> lectureSignup(LectureStudentRes res) {
-		studentDao.lectureSignup(res);
-
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("isSuccess","success");
-				
-		return map;
-	
+	public ResponseEntity<Object> lectureSignup(LectureStudentRes res) {
 		
+		studentDao.lectureSignup(res);
+		
+		return ResponseEntity.ok("Success");
 	}
 	
 	@Override
-	public Map<String, String> lectureComplete(LectureStudentReq req) {
+	public ResponseEntity<Object> lectureComplete(LectureStudentReq req) {
 		studentDao.lectureComplete(req);
 		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("isSuccess","success");
 				
-		return map;
+		return ResponseEntity.ok("Success");
 		
 	}
 
 	@Override
-	public Map<String, Object> studentList(int pageNum, String large_category, String small_category) {
+	public ResponseEntity<List<LectureStudentDto>> studentList(int pageNum, String large_category, String small_category) {
 		final int PAGE_ROW_COUNT=8;
 		final int PAGE_DISPLAY_COUNT=5;
-	   
+
 		int num=1;
 		String strPageNum = Integer.toString(pageNum);
 		if(strPageNum != null){
@@ -77,16 +72,7 @@ public class LectureStudentServiceImpl implements LectureStudentService{
 			endPageNum = totalPageCount;  
 		}
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("large_category", large_category);
-		map.put("small_category", small_category);
-		map.put("pageNum", pageNum);
-		map.put("startPageNum", startPageNum);
-		map.put("endPageNum", endPageNum);
-		map.put("totalPageCount", totalPageCount);
-		map.put("totalRow", totalRow);
-		map.put("list", list);
-		return map;
+		return ResponseEntity.ok(list);
 	}
 
 

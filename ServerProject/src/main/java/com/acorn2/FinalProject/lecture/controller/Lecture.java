@@ -1,9 +1,11 @@
 package com.acorn2.FinalProject.lecture.controller;
+import java.util.List;
 import java.util.Map;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,12 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.acorn2.FinalProject.lecture.dto.LectureDto;
 import com.acorn2.FinalProject.lecture.dto.LectureReq;
 import com.acorn2.FinalProject.lecture.dto.LectureRes;
 import com.acorn2.FinalProject.lecture.service.LectureService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 
@@ -31,14 +35,12 @@ public class Lecture {
     private LectureService service;
 	 
 	@ApiOperation(value = "lectureList")	
-    @GetMapping(value = "/lecture/list")
-    public Map<String,Object> list(@RequestParam(value = "pageNum", required = true)int pageNum,
-							@RequestParam(value = "large_category", required = false)String large_category,
-							@RequestParam(value = "small_category", required = false)String small_category){
-		
+	@GetMapping(value = "/lecture/list")
+	public ResponseEntity<List<LectureDto>> Lecturelist(@RequestParam(value = "pageNum", required = true)int pageNum,
+	@RequestParam(value = "large_category", required = false)String large_category,
+	@RequestParam(value = "small_category", required = false)String small_category){
 		return service.LectureList(pageNum, large_category, small_category);
 	}
-     
     
 	@GetMapping(value = "/lecture/detail")
 	public Map<String, Object> detail(@PathVariable int num, @RequestParam(value = "ref_group", required = false)String ref_group) {
@@ -58,7 +60,7 @@ public class Lecture {
     	return service.deleteContent(num);
     }
     
-    @PutMapping("/{num}/update")
+    @PutMapping("/lecture/{num}/update")
 	public Map<String, String> update(@PathVariable int num, @RequestBody LectureRes lectureRes){
 		
     	LectureReq req = new LectureReq();
@@ -77,7 +79,7 @@ public class Lecture {
     
     @ApiOperation(value="강의 업데이트 전 상세", notes = "강의 업데이트 전 그 상세 데이터 내용을 가져온다.")
     @GetMapping(value = "/lecture/{num}/update")
-    public Map<String, Object> getData(@PathVariable int num){
+    public ResponseEntity<LectureDto> getData(@RequestParam(value = "num", required = true,  defaultValue = "0")int num){
 
     	return service.getData(num);
     }

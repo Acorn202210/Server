@@ -8,10 +8,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.acorn2.FinalProject.lectureReview.dao.LectureReviewDao;
 import com.acorn2.FinalProject.lectureReview.dto.LectureReviewDto;
+import com.acorn2.FinalProject.lectureReview.dto.LectureReviewReq;
+import com.acorn2.FinalProject.lectureReview.dto.LectureReviewRes;
 
 
 @Service
@@ -19,28 +22,29 @@ public class LectureReviewServiceImpl implements LectureReviewService{
 	@Autowired LectureReviewDao reviewDao;
 
 	@Override
-	public void saveReview(HttpServletRequest request) {
-		
+	public ResponseEntity<Object> saveReview(LectureReviewRes res) {
+		reviewDao.insert(res);
+		return ResponseEntity.ok("Success");
 		
 	}
 
 	@Override
-	public void deleteReview(HttpServletRequest request) {
-		int num=Integer.parseInt(request.getParameter("num"));
-		LectureReviewDto dto=reviewDao.getData(num);
-	    String id=(String)request.getSession().getAttribute("id");      
+	public ResponseEntity<Object> deleteReview(int num) {    
 	    reviewDao.delete(num);
+	    return ResponseEntity.ok("Success");
 		
 	}
 
 	@Override
-	public void updateReview(LectureReviewDto dto) {
+	public ResponseEntity<Object> updateReview(LectureReviewReq req) {
+		reviewDao.update(req);
+		return ResponseEntity.ok("Success");
 	
 		
 	}
 
 	@Override
-	public Map<String, Object> getList(int pageNum,int ref_group) {
+	public ResponseEntity<List<LectureReviewDto>> LectureReviewList(int pageNum,int ref_group) {
 		final int PAGE_ROW_COUNT=5;
 		final int PAGE_DISPLAY_COUNT=5;
 		
@@ -52,13 +56,12 @@ public class LectureReviewServiceImpl implements LectureReviewService{
 		
 		int startRowNum=1+(pageNum-1)*PAGE_ROW_COUNT;
 		int endRowNum=pageNum*PAGE_ROW_COUNT;
-	
 
 			
 		LectureReviewDto dto = new LectureReviewDto();
 		dto.setStartRowNum(startRowNum);
 		dto.setEndRowNum(endRowNum);
-
+		dto.setRef_group(ref_group);
 		
 		int totalRow=reviewDao.getCount(ref_group);
 		
@@ -76,14 +79,13 @@ public class LectureReviewServiceImpl implements LectureReviewService{
 		}
 		
 		List<LectureReviewDto> list = reviewDao.getList(dto);
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("pageNum", pageNum);
-		map.put("startPageNum", startPageNum);
-		map.put("endPageNum", endPageNum);
-		map.put("totalPageCount", totalPageCount);
-		map.put("totalRow", totalRow);
-		map.put("list", list);
-		return map;
+		return ResponseEntity.ok(list);
 	}
+
+	@Override
+	public ResponseEntity<LectureReviewDto> getData(int num) {
+		LectureReviewDto data =reviewDao.getData(num);
+		return ResponseEntity.ok(data);
+		}
 
 }
