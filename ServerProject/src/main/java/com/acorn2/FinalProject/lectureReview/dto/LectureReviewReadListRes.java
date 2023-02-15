@@ -18,7 +18,7 @@ public class LectureReviewReadListRes extends PagingResponseDto{
 		super(totalCount, PageDto);
 	}
 	
-	@Schema(description = "코드 목록", example = "", required = true, minLength = 1, maxLength = 50)
+	@Schema(description = "강의 후기 목록", example = "", required = true, minLength = 1, maxLength = 50)
 	private List<LectureReviewReadRes> data;
 
 	public List<LectureReviewReadRes> getData() {

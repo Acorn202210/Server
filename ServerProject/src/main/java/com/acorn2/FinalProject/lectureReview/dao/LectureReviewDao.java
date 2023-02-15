@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.acorn2.FinalProject.lectureReview.dto.LectureReviewDto;
 import com.acorn2.FinalProject.lectureReview.dto.LectureReviewReadReq;
+import com.acorn2.FinalProject.lectureReview.dto.LectureReviewReadRes;
 import com.acorn2.FinalProject.lectureReview.dto.LectureReviewRes;
 
 
@@ -12,7 +13,7 @@ import com.acorn2.FinalProject.lectureReview.dto.LectureReviewRes;
 
 public interface LectureReviewDao {
 	//리뷰 목록 얻어오기
-	public List<LectureReviewDto> getList(LectureReviewDto dto);
+	public List<LectureReviewReadRes> getList(LectureReviewReadReq reviewReq);
 	//리뷰 삭제 
 	public void delete(int num);
 	//리뷰 저장

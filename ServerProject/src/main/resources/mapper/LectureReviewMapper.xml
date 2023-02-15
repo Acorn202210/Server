@@ -5,7 +5,7 @@
 	<select id="getList" parameterType="lectureReviewDto" resultType="lectureReviewDto">
      SELECT *
       FROM
-         (SELECT result1.*, ROWNUM AS rnum
+         (SELECT result1.*, ROWNUM AS "rownum"
          FROM
             (SELECT num, writer, content, target_id, ref_group, star,
                comment_group, deleted, LECTURE_REVIEW.regdate, profile
@@ -14,7 +14,7 @@
             ON LECTURE_REVIEW.writer=users.id
             WHERE ref_group=#{ref_group}
             ORDER BY comment_group ASC, num ASC) result1)
-      WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}   
+      WHERE rownum BETWEEN #{rowStart} AND #{limit}   
    </select>   
   
    <update id="delete" parameterType="int">

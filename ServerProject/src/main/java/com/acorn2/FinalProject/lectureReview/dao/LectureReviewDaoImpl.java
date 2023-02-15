@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.acorn2.FinalProject.lectureReview.dto.LectureReviewDto;
 import com.acorn2.FinalProject.lectureReview.dto.LectureReviewReadReq;
+import com.acorn2.FinalProject.lectureReview.dto.LectureReviewReadRes;
 import com.acorn2.FinalProject.lectureReview.dto.LectureReviewRes;
 
 
@@ -17,12 +18,11 @@ public class LectureReviewDaoImpl implements LectureReviewDao{
 	@Autowired
 	private SqlSession session;
 	
-
 	@Override
-	public List<LectureReviewDto> getList(LectureReviewDto dto) {
-		return session.selectList("lectureReview.getList", dto);
+	public List<LectureReviewReadRes> getList(LectureReviewReadReq reviewReq) {
+		return session.selectList("lectureReview.getList", reviewReq);
 	}
-
+	
 	@Override
 	public void delete(int num) {
 	      session.update("lectureReview.delete", num);
@@ -55,5 +55,7 @@ public class LectureReviewDaoImpl implements LectureReviewDao{
 	public int getCount(int num) {
 		return session.selectOne("lectureReview.getCount", num);
 	}
+
+	
 
 }

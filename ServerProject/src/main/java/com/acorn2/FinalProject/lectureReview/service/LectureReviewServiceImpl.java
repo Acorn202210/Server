@@ -1,11 +1,8 @@
 package com.acorn2.FinalProject.lectureReview.service;
 
-import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,9 +23,10 @@ public class LectureReviewServiceImpl implements LectureReviewService{
 	@Override
 	public LectureReviewReadListRes LectureReviewList(LectureReviewReadReq reviewReq) {
 		Integer totalCount = reviewDao.getCount(0);
-
-		
-		return null;
+		List<LectureReviewReadRes> ReviewReadList = reviewDao.getList(reviewReq);
+		LectureReviewReadListRes ReviewListRes = new LectureReviewReadListRes(totalCount,reviewReq);
+		ReviewListRes.setData(ReviewReadList);
+		return ReviewListRes;
 	}
 	
 	

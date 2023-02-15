@@ -9,14 +9,16 @@ public class LectureReviewReadReq extends PagingDto{
 	private int num;
 	private String content;
 	private int star;
+	private int ref_group;
 	
 	public LectureReviewReadReq() {}
 
-	public LectureReviewReadReq(int num, String content, int star) {
+	public LectureReviewReadReq(int num, String content, int star, int ref_group) {
 		super();
 		this.num = num;
 		this.content = content;
 		this.star = star;
+		this.ref_group = ref_group;
 	}
 
 	public int getNum() {
@@ -42,6 +44,16 @@ public class LectureReviewReadReq extends PagingDto{
 	public void setStar(int star) {
 		this.star = star;
 	}
+
+	public int getRef_group() {
+		return ref_group;
+	}
+
+	public void setRef_group(int ref_group) {
+		this.ref_group = ref_group;
+	}
+
+	
 	
 	
 }

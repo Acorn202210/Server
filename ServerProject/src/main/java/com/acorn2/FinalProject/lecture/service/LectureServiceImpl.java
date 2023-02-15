@@ -53,8 +53,6 @@ public class LectureServiceImpl implements LectureService{
 		int endRowNum = pageNum * PAGE_ROW_COUNT;
 	   
 		LectureDto dto = new LectureDto();
-		dto.setStartRowNum(startRowNum);
-		dto.setEndRowNum(endRowNum);
 		dto.setLarge_category(large_category);
 		dto.setSmall_category(small_category);
 	   
