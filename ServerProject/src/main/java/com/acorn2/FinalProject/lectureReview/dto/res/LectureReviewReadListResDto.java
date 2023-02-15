@@ -1,4 +1,4 @@
-package com.acorn2.FinalProject.lectureReview.dto;
+package com.acorn2.FinalProject.lectureReview.dto.res;
 
 import java.util.List;
 
@@ -9,23 +9,23 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 
 
-public class LectureReviewReadListRes extends PagingResponseDto{
-	public LectureReviewReadListRes() {
+public class LectureReviewReadListResDto extends PagingResponseDto{
+	public LectureReviewReadListResDto() {
 		super(0, new PagingDto());
 	}
 	
-	public LectureReviewReadListRes(Integer totalCount, PagingDto PageDto) {
+	public LectureReviewReadListResDto(Integer totalCount, PagingDto PageDto) {
 		super(totalCount, PageDto);
 	}
 	
 	@Schema(description = "강의 후기 목록", example = "", required = true, minLength = 1, maxLength = 50)
-	private List<LectureReviewReadRes> data;
+	private List<LectureReviewReadResDto> data;
 
-	public List<LectureReviewReadRes> getData() {
+	public List<LectureReviewReadResDto> getData() {
 		return data;
 	}
 
-	public void setData(List<LectureReviewReadRes> data) {
+	public void setData(List<LectureReviewReadResDto> data) {
 		this.data = data;
 	}
 

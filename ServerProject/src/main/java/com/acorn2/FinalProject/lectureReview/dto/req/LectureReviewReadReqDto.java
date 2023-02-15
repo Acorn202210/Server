@@ -1,19 +1,19 @@
-package com.acorn2.FinalProject.lectureReview.dto;
+package com.acorn2.FinalProject.lectureReview.dto.req;
 
 import org.apache.ibatis.type.Alias;
 
 import com.acorn2.FinalProject.common.dto.PagingDto;
 
 @Alias("lectureReviewReq")
-public class LectureReviewReadReq extends PagingDto{
+public class LectureReviewReadReqDto extends PagingDto{
 	private int num;
 	private String content;
 	private int star;
 	private int ref_group;
 	
-	public LectureReviewReadReq() {}
+	public LectureReviewReadReqDto() {}
 
-	public LectureReviewReadReq(int num, String content, int star, int ref_group) {
+	public LectureReviewReadReqDto(int num, String content, int star, int ref_group) {
 		super();
 		this.num = num;
 		this.content = content;

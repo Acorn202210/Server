@@ -1,9 +1,9 @@
-package com.acorn2.FinalProject.lectureReview.dto;
+package com.acorn2.FinalProject.lectureReview.dto.res;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "리뷰 정보")
-public class LectureReviewReadRes {
+public class LectureReviewReadResDto {
 	@Schema(description = "num", example = "1", required = true, minLength = 1, maxLength = 100)
 	private int num;
 	
