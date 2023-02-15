@@ -1,16 +1,18 @@
-package com.acorn2.FinalProject.notice.dto;
+package com.acorn2.FinalProject.notice.dto.req;
 
 import org.apache.ibatis.type.Alias;
 
+import com.acorn2.FinalProject.common.dto.PagingDto;
+
 @Alias("noticeReq")
-public class NoticeReq {
+public class NoticeReadReqDto extends PagingDto {
 	private int num;
 	private String title;
 	private String content;
 	
-	public NoticeReq() {}
+	public NoticeReadReqDto() {}
 	
-	public NoticeReq(int num, String title, String content) {
+	public NoticeReadReqDto(int num, String title, String content) {
 		super();
 		this.num = num;
 		this.title = title;
