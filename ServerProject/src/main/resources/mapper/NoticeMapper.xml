@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.acorn2.FinalProject.notice.dao.NoticeDao">
-	
+
+	<sql id="searchCondition">
+      <choose>
+         <when test="title != null and content != null">
+            WHERE title LIKE '%'||#{title}||'%' OR content LIKE '%'||#{content}||'%'
+         </when>
+         <when test="title != null">
+            WHERE title LIKE '%'||#{title}||'%'
+         </when>
+      </choose>
+   </sql>
+   
 	<select id="selectNoticeCount" parameterType="com.acorn2.FinalProject.notice.dto.req.NoticeReadReqDto" resultType="java.lang.Integer">
-		SELECT
-			COUNT(*)
-		FROM NOTICE
+		 SELECT NVL(MAX(ROWNUM), 0)
+      	 FROM NOTICE
+        <include refid="searchCondition"/>
 	</select>
 	
 	<select id="selectNoticeList" parameterType="com.acorn2.FinalProject.notice.dto.req.NoticeReadReqDto" resultType="com.acorn2.FinalProject.notice.dto.res.NoticeReadResDto">
@@ -15,8 +26,9 @@
           FROM
             (SELECT num,title,content,viewCount,regdate
              FROM NOTICE
+             <include refid="searchCondition"/>
              ORDER BY num DESC) result1)
-        WHERE rnum BETWEEN #{rowStart} AND #{limit}
+        WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
 		
 	</select>
 	
