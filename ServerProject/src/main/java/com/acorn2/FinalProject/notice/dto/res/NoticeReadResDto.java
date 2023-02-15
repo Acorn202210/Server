@@ -9,9 +9,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Alias("noticeRes")
 @Schema(description = "공지사항 정보")
 public class NoticeReadResDto {
-	@Schema(description = "공지사항 제목", example = "공지사항1", required = true, minLength = 1, maxLength = 50)
+	@Schema(description = "공지사항 조건", example = "제목", required = true, minLength = 1, maxLength = 50)
 	private String title;
-	@Schema(description = "공지사항 내용", example = "공지사항입니다", required = true, minLength = 1, maxLength = 10000)
+	@Schema(description = "공지사항 조건 내용", example = "공지사항", required = true, minLength = 1, maxLength = 10000)
 	private String content;
 	
 	public NoticeReadResDto(){}
