@@ -48,6 +48,11 @@ public class PagingDto {
 		if (this.limit == null) {
 			this.limit = PagingConstant.DEFAULT_LIMIT;
 		}
-		return (this.currentPage - 1) * limit;
+		return (this.currentPage - 1) * limit + 1;
+	}
+	
+	@JsonIgnore
+	public Integer getRowEnd() {
+		return (getRowStart()-1)+limit;
 	}
 }
