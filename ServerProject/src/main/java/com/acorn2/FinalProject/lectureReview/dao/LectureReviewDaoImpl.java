@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.acorn2.FinalProject.lectureReview.dto.LectureReviewDto;
-import com.acorn2.FinalProject.lectureReview.dto.LectureReviewReq;
+import com.acorn2.FinalProject.lectureReview.dto.LectureReviewReadReq;
 import com.acorn2.FinalProject.lectureReview.dto.LectureReviewRes;
 
 
@@ -41,7 +41,7 @@ public class LectureReviewDaoImpl implements LectureReviewDao{
 	}
 
 	@Override
-	public void update(LectureReviewReq req) {
+	public void update(LectureReviewReadReq req) {
 		session.update("lectureReview.update", req);
 		
 	}

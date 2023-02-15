@@ -1,6 +1,8 @@
 package com.acorn2.FinalProject.lectureStudent.dto;
 
-public class LectureStudentReq {
+import com.acorn2.FinalProject.common.dto.PagingDto;
+
+public class LectureStudentReq extends PagingDto{
 	private int num;
 	private String id;
 	private int ref_group;

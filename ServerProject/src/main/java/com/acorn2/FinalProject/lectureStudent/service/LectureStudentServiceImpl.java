@@ -1,16 +1,16 @@
 package com.acorn2.FinalProject.lectureStudent.service;
 
 
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.acorn2.FinalProject.lecture.dto.LectureDto;
+
 import com.acorn2.FinalProject.lectureStudent.dao.LectureStudentDao;
 import com.acorn2.FinalProject.lectureStudent.dto.LectureStudentDto;
 import com.acorn2.FinalProject.lectureStudent.dto.LectureStudentReq;

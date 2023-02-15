@@ -1,4 +1,4 @@
-package com.acorn2.FinalProject.paging.dto;
+package com.acorn2.FinalProject.common.dto;
 
 import com.acorn2.FinalProject.paging.Constant.PagingConstant;
 import com.fasterxml.jackson.annotation.JsonIgnore;

@@ -1,41 +1,41 @@
 package com.acorn2.FinalProject.lectureReview.dto;
 
-import org.apache.ibatis.type.Alias;
-
-import com.acorn2.FinalProject.common.dto.PagingDto;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Alias("lectureReviewDto")
-public class LectureReviewDto extends PagingDto{
+@Schema(description = "리뷰 정보")
+public class LectureReviewReadRes {
+	@Schema(description = "num", example = "1", required = true, minLength = 1, maxLength = 100)
 	private int num;
+	
+	@Schema(description = "writer", example = "sdm", required = true, minLength = 1, maxLength = 50)
 	private String writer;
+	
+	@Schema(description = "content", example = "어쩌구", required = true, minLength = 1, maxLength = 500)
 	private String content;
+	
+	@Schema(description = "target_id", example = "seo", required = true, minLength = 1, maxLength = 50)
 	private String target_id;
+	
+	@Schema(description = "ref_group", example = "1", required = true, minLength = 1, maxLength = 100)
 	private int ref_group;
+	
+	@Schema(description = "comment_group", example = "1", required = true, minLength = 1, maxLength = 100)
 	private int comment_group;
+	
+	@Schema(description = "deleted", example = "NO", required = true, minLength = 1, maxLength = 3)
 	private String deleted;
+	
+	@Schema(description = "regdate", example = "2022-10-12", required = true, minLength = 1, maxLength = 50)
 	private String regdate;
+	
+	@Schema(description = "prfile", example = "이미지 등록", required = true, minLength = 1, maxLength = 100)
 	private String profile;
+	
+	@Schema(description = "star", example = "1", required = true, minLength = 1, maxLength = 1)
 	private int star;
-    
-    public LectureReviewDto() {}
 
-	public LectureReviewDto(int num, String writer, String content, String target_id, int ref_group, int comment_group,
-			String deleted, String regdate, String profile, int star) {
-		super();
-		this.num = num;
-		this.writer = writer;
-		this.content = content;
-		this.target_id = target_id;
-		this.ref_group = ref_group;
-		this.comment_group = comment_group;
-		this.deleted = deleted;
-		this.regdate = regdate;
-		this.profile = profile;
-		this.star = star;
-	}
-
+	
+	
 	public int getNum() {
 		return num;
 	}
@@ -115,9 +115,7 @@ public class LectureReviewDto extends PagingDto{
 	public void setStar(int star) {
 		this.star = star;
 	}
-
-
-
-
-    
+	
+	
+	
 }
