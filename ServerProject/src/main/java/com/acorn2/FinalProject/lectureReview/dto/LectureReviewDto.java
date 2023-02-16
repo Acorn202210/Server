@@ -7,105 +7,65 @@ import com.acorn2.FinalProject.common.dto.PagingDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Alias("lectureReviewDto")
-public class LectureReviewDto extends PagingDto{
-	private int num;
-	private String writer;
-	private String content;
-	private String target_id;
-	private int ref_group;
-	private int comment_group;
-	private String deleted;
-	private String regdate;
-	private String profile;
-	private int star;
+public class LectureReviewDto extends PagingDto{ 
+    private int lec_re_num;
+    private String lec_re_writer;
+    private int lec_re_stu_ref_group;
+    private String delete_Yn;
+    private int star;
+    private String user_regdate;
+    private String profile;
+    private String content;
+    private String update_date;
+    private String Update_id;
     
     public LectureReviewDto() {}
 
-	public LectureReviewDto(int num, String writer, String content, String target_id, int ref_group, int comment_group,
-			String deleted, String regdate, String profile, int star) {
+	public LectureReviewDto(int lec_re_num, String lec_re_writer, int lec_re_stu_ref_group, String delete_Yn, int star,
+			String user_regdate, String profile, String content, String update_date, String update_id) {
 		super();
-		this.num = num;
-		this.writer = writer;
-		this.content = content;
-		this.target_id = target_id;
-		this.ref_group = ref_group;
-		this.comment_group = comment_group;
-		this.deleted = deleted;
-		this.regdate = regdate;
-		this.profile = profile;
+		this.lec_re_num = lec_re_num;
+		this.lec_re_writer = lec_re_writer;
+		this.lec_re_stu_ref_group = lec_re_stu_ref_group;
+		this.delete_Yn = delete_Yn;
 		this.star = star;
-	}
-
-	public int getNum() {
-		return num;
-	}
-
-	public void setNum(int num) {
-		this.num = num;
-	}
-
-	public String getWriter() {
-		return writer;
-	}
-
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public String getTarget_id() {
-		return target_id;
-	}
-
-	public void setTarget_id(String target_id) {
-		this.target_id = target_id;
-	}
-
-	public int getRef_group() {
-		return ref_group;
-	}
-
-	public void setRef_group(int ref_group) {
-		this.ref_group = ref_group;
-	}
-
-	public int getComment_group() {
-		return comment_group;
-	}
-
-	public void setComment_group(int comment_group) {
-		this.comment_group = comment_group;
-	}
-
-	public String getDeleted() {
-		return deleted;
-	}
-
-	public void setDeleted(String deleted) {
-		this.deleted = deleted;
-	}
-
-	public String getRegdate() {
-		return regdate;
-	}
-
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
-	}
-
-	public String getProfile() {
-		return profile;
-	}
-
-	public void setProfile(String profile) {
+		this.user_regdate = user_regdate;
 		this.profile = profile;
+		this.content = content;
+		this.update_date = update_date;
+		Update_id = update_id;
+	}
+
+	public int getLec_re_num() {
+		return lec_re_num;
+	}
+
+	public void setLec_re_num(int lec_re_num) {
+		this.lec_re_num = lec_re_num;
+	}
+
+	public String getLec_re_writer() {
+		return lec_re_writer;
+	}
+
+	public void setLec_re_writer(String lec_re_writer) {
+		this.lec_re_writer = lec_re_writer;
+	}
+
+	public int getLec_re_stu_ref_group() {
+		return lec_re_stu_ref_group;
+	}
+
+	public void setLec_re_stu_ref_group(int lec_re_stu_ref_group) {
+		this.lec_re_stu_ref_group = lec_re_stu_ref_group;
+	}
+
+	public String getDelete_Yn() {
+		return delete_Yn;
+	}
+
+	public void setDelete_Yn(String delete_Yn) {
+		this.delete_Yn = delete_Yn;
 	}
 
 	public int getStar() {
@@ -116,8 +76,44 @@ public class LectureReviewDto extends PagingDto{
 		this.star = star;
 	}
 
+	public String getUser_regdate() {
+		return user_regdate;
+	}
 
+	public void setUser_regdate(String user_regdate) {
+		this.user_regdate = user_regdate;
+	}
 
+	public String getProfile() {
+		return profile;
+	}
 
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getUpdate_date() {
+		return update_date;
+	}
+
+	public void setUpdate_date(String update_date) {
+		this.update_date = update_date;
+	}
+
+	public String getUpdate_id() {
+		return Update_id;
+	}
+
+	public void setUpdate_id(String update_id) {
+		Update_id = update_id;
+	}
     
 }

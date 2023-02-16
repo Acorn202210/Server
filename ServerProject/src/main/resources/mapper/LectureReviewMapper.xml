@@ -7,20 +7,24 @@
 		FROM LECTURE_REVIEW
 	</select>
 
-	<select id="getList" parameterType="com.acorn2.FinalProject.lectureReview.dto.req.LectureReviewReadReqDto" resultType="com.acorn2.FinalProject.lectureReview.dto.res.LectureReviewReadResDto">
+	<select id="LectureReviewList" parameterType="com.acorn2.FinalProject.lectureReview.dto.req.LectureReviewReadReqDto" resultType="com.acorn2.FinalProject.lectureReview.dto.res.LectureReviewReadResDto">
      SELECT *
       FROM
          (SELECT result1.*, ROWNUM AS rnum
          FROM
-            (SELECT num, writer, content, target_id, ref_group, star,
-               comment_group, deleted, LECTURE_REVIEW.regdate, profile
+            (SELECT lec_re_num, lec_re_writer, content, lec_re_stu_ref_group, star,
+               delete_Yn, LECTURE_REVIEW.user_regdate, profile
             FROM LECTURE_REVIEW
             INNER JOIN users
-            ON LECTURE_REVIEW.writer=users.id
-            WHERE ref_group=#{ref_group}
-            ORDER BY comment_group ASC, num ASC) result1)
-      WHERE rnum BETWEEN #{rowStart} AND #{limit}   
+            ON LECTURE_REVIEW.lec_re_writer=users.id
+            WHERE lec_re_stu_ref_group=#{lec_re_stu_ref_group}
+            ORDER BY lec_re_num ASC) result1)
+      WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}   
    </select>   
    
-  
+	<insert id="insertRectureReview" parameterType="com.acorn2.FinalProject.lectureReview.dto.LectureReviewDto">
+		INSERT INTO LECTURE_REVIEW
+		(lec_re_num, lec_re_writer, content, lec_re_stu_ref_group, star,user_regdate)
+		VALUES(#{lec_re_num},#{lec_re_writer},#{content},#{lec_re_stu_ref_group},#{star},SYSDATE)
+	</insert> 
 </mapper>

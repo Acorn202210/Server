@@ -4,117 +4,68 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "리뷰 정보")
 public class LectureReviewReadResDto {
-	@Schema(description = "num", example = "1", required = true, minLength = 1, maxLength = 100)
-	private int num;
-	
-	@Schema(description = "writer", example = "sdm", required = true, minLength = 1, maxLength = 50)
-	private String writer;
-	
-	@Schema(description = "content", example = "어쩌구", required = true, minLength = 1, maxLength = 500)
-	private String content;
-	
-	@Schema(description = "target_id", example = "seo", required = true, minLength = 1, maxLength = 50)
-	private String target_id;
-	
-	@Schema(description = "ref_group", example = "1", required = true, minLength = 1, maxLength = 100)
-	private int ref_group;
-	
-	@Schema(description = "comment_group", example = "1", required = true, minLength = 1, maxLength = 100)
-	private int comment_group;
-	
-	@Schema(description = "deleted", example = "NO", required = true, minLength = 1, maxLength = 3)
-	private String deleted;
-	
-	@Schema(description = "regdate", example = "2022-10-12", required = true, minLength = 1, maxLength = 50)
-	private String regdate;
-	
-	@Schema(description = "prfile", example = "이미지 등록", required = true, minLength = 1, maxLength = 100)
-	private String profile;
-	
-	@Schema(description = "star", example = "1", required = true, minLength = 1, maxLength = 1)
-	private int star;
-
-	
-	
-	public int getNum() {
-		return num;
+	private int lec_re_num;
+    private String lec_re_writer;
+    private int lec_re_stu_ref_group;
+    private String delete_Yn;
+    private int star;
+    private String user_regdate;
+    private String content;
+    private String update_date;
+	public int getlec_re_num() {
+		return lec_re_num;
 	}
-
-	public void setNum(int num) {
-		this.num = num;
+	public void setlec_re_num(int lec_re_num) {
+		this.lec_re_num = lec_re_num;
 	}
-
-	public String getWriter() {
-		return writer;
+	public String getLec_re_writer() {
+		return lec_re_writer;
 	}
-
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setLec_re_writer(String lec_re_writer) {
+		this.lec_re_writer = lec_re_writer;
 	}
-
-	public String getContent() {
-		return content;
+	public int getLec_re_stu_ref_group() {
+		return lec_re_stu_ref_group;
 	}
-
-	public void setContent(String content) {
-		this.content = content;
+	public void setLec_re_stu_ref_group(int lec_re_stu_ref_group) {
+		this.lec_re_stu_ref_group = lec_re_stu_ref_group;
 	}
-
-	public String getTarget_id() {
-		return target_id;
+	public String getDelete_Yn() {
+		return delete_Yn;
 	}
-
-	public void setTarget_id(String target_id) {
-		this.target_id = target_id;
+	public void setDelete_Yn(String delete_Yn) {
+		this.delete_Yn = delete_Yn;
 	}
-
-	public int getRef_group() {
-		return ref_group;
-	}
-
-	public void setRef_group(int ref_group) {
-		this.ref_group = ref_group;
-	}
-
-	public int getComment_group() {
-		return comment_group;
-	}
-
-	public void setComment_group(int comment_group) {
-		this.comment_group = comment_group;
-	}
-
-	public String getDeleted() {
-		return deleted;
-	}
-
-	public void setDeleted(String deleted) {
-		this.deleted = deleted;
-	}
-
-	public String getRegdate() {
-		return regdate;
-	}
-
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
-	}
-
-	public String getProfile() {
-		return profile;
-	}
-
-	public void setProfile(String profile) {
-		this.profile = profile;
-	}
-
 	public int getStar() {
 		return star;
 	}
-
 	public void setStar(int star) {
 		this.star = star;
 	}
+	public String getUser_regdate() {
+		return user_regdate;
+	}
+	public void setUser_regdate(String user_regdate) {
+		this.user_regdate = user_regdate;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getUpdate_date() {
+		return update_date;
+	}
+	public void setUpdate_date(String update_date) {
+		this.update_date = update_date;
+	}
+    
+	
+
+	
+	
+	
 	
 	
 	

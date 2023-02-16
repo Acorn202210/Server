@@ -6,27 +6,27 @@ import com.acorn2.FinalProject.common.dto.PagingDto;
 
 @Alias("lectureReviewReq")
 public class LectureReviewReadReqDto extends PagingDto{
-	private int num;
+	private int lec_re_num;
 	private String content;
 	private int star;
-	private int ref_group;
+	private int lec_re_stu_ref_group;
 	
 	public LectureReviewReadReqDto() {}
 
-	public LectureReviewReadReqDto(int num, String content, int star, int ref_group) {
+	public LectureReviewReadReqDto(int lec_re_num, String content, int star, int lec_re_stu_ref_group) {
 		super();
-		this.num = num;
+		this.lec_re_num = lec_re_num;
 		this.content = content;
 		this.star = star;
-		this.ref_group = ref_group;
+		this.lec_re_stu_ref_group = lec_re_stu_ref_group;
 	}
 
-	public int getNum() {
-		return num;
+	public int getlec_re_num() {
+		return lec_re_num;
 	}
 
-	public void setNum(int num) {
-		this.num = num;
+	public void setlec_re_num(int lec_re_num) {
+		this.lec_re_num = lec_re_num;
 	}
 
 	public String getContent() {
@@ -45,13 +45,15 @@ public class LectureReviewReadReqDto extends PagingDto{
 		this.star = star;
 	}
 
-	public int getRef_group() {
-		return ref_group;
+	public int getLec_re_stu_ref_group() {
+		return lec_re_stu_ref_group;
 	}
 
-	public void setRef_group(int ref_group) {
-		this.ref_group = ref_group;
+	public void setLec_re_stu_ref_group(int lec_re_stu_ref_group) {
+		this.lec_re_stu_ref_group = lec_re_stu_ref_group;
 	}
+
+	
 
 	
 	
