@@ -16,17 +16,13 @@ public class LectureDto {
 	private int viewCount;
 	private String large_category;
 	private String small_category;
-	private int startRowNum;
-	private int endRowNum;
-	private int prevNum; 
-	private int nextNum; 
 	private MultipartFile image;	
 	
 	public LectureDto() {}
 
 	public LectureDto(int num, String teacher, String writer, String title, String describe, String videoPath,
 			String imagePath, String regdate, int viewCount, String large_category, String small_category,
-			int startRowNum, int endRowNum, int prevNum, int nextNum, MultipartFile image) {
+			MultipartFile image) {
 		super();
 		this.num = num;
 		this.teacher = teacher;
@@ -39,10 +35,6 @@ public class LectureDto {
 		this.viewCount = viewCount;
 		this.large_category = large_category;
 		this.small_category = small_category;
-		this.startRowNum = startRowNum;
-		this.endRowNum = endRowNum;
-		this.prevNum = prevNum;
-		this.nextNum = nextNum;
 		this.image = image;
 	}
 
@@ -134,38 +126,6 @@ public class LectureDto {
 		this.small_category = small_category;
 	}
 
-	public int getStartRowNum() {
-		return startRowNum;
-	}
-
-	public void setStartRowNum(int startRowNum) {
-		this.startRowNum = startRowNum;
-	}
-
-	public int getEndRowNum() {
-		return endRowNum;
-	}
-
-	public void setEndRowNum(int endRowNum) {
-		this.endRowNum = endRowNum;
-	}
-
-	public int getPrevNum() {
-		return prevNum;
-	}
-
-	public void setPrevNum(int prevNum) {
-		this.prevNum = prevNum;
-	}
-
-	public int getNextNum() {
-		return nextNum;
-	}
-
-	public void setNextNum(int nextNum) {
-		this.nextNum = nextNum;
-	}
-
 	public MultipartFile getImage() {
 		return image;
 	}
@@ -173,6 +133,8 @@ public class LectureDto {
 	public void setImage(MultipartFile image) {
 		this.image = image;
 	}
+
+	
 
 	
 	
