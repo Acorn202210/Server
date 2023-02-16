@@ -1,22 +1,34 @@
-package com.acorn2.FinalProject.qnaboard.dto;
+package com.acorn2.FinalProject.qnaboard.dto.req;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("qnaBoardRes")
-public class QnaBoardRes {
+import com.acorn2.FinalProject.common.dto.PagingDto;
+
+@Alias("qnaBoardReq")
+public class QnaBoardReadReqDto extends PagingDto {
+	private int num;
 	private String writer;
 	private String title;
 	private String content;
 	
-	public QnaBoardRes() {}
+	public QnaBoardReadReqDto () {}
 
-	public QnaBoardRes(String writer, String title, String content) {
+	public QnaBoardReadReqDto(int num, String writer, String title, String content) {
 		super();
+		this.num = num;
 		this.writer = writer;
 		this.title = title;
 		this.content = content;
 	}
 
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+	
 	public String getWriter() {
 		return writer;
 	}
@@ -39,5 +51,5 @@ public class QnaBoardRes {
 
 	public void setContent(String content) {
 		this.content = content;
-	}
+	}	
 }

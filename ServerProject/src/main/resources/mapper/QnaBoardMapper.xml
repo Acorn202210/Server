@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="qnaboard">
+<mapper namespace="com.acorn2.FinalProject.qnaboard.dao.QnaBoardDao">
 
 	<sql id="searchCondition">
       <choose>
@@ -16,6 +16,25 @@
          </when>
       </choose>
 	</sql>
+	<select id="selectQnaBoardCount" parameterType="com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardReadReqDto" resultType="java.lang.Integer">
+		SELECT NVL(MAX(ROWNUM), 0)
+		FROM qna_board_question
+		<include refid="searchCondition"/>
+	</select>
+	
+	<select id="selectQnaBoardList" parameterType="com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardReadReqDto" resultType="com.acorn2.FinalProject.notice.dto.res.NoticeReadResDto">
+		SELECT *
+      	FROM
+         (SELECT result1.*, ROWNUM AS rnum
+          FROM
+            (SELECT num,title,content,viewCount,regdate
+             FROM qna_board_question
+             <include refid="searchCondition"/>
+             ORDER BY num DESC) result1)
+        WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
+		
+	</select>
+	<!-- 
 	
 	 <select id="getList" parameterType="QnaBoardDto" resultType="QnaBoardDto">
 	      SELECT *
@@ -87,5 +106,5 @@
 		UPDATE QNA_BOARD_QUESTION
 		SET answered=#{answered}
 		WHERE num=#{num}
-	</update>
+	</update> -->
 </mapper>

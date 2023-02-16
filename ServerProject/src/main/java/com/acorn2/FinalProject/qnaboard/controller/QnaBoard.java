@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import com.acorn2.FinalProject.qnaboard.dto.QnaBoardDto;
-import com.acorn2.FinalProject.qnaboard.dto.QnaBoardReq;
-import com.acorn2.FinalProject.qnaboard.dto.QnaBoardRes;
+import com.acorn2.FinalProject.common.dto.ComResponseDto;
+import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardReadReqDto;
+import com.acorn2.FinalProject.qnaboard.dto.res.QnaBoardReadListResDto;
+//import com.acorn2.FinalProject.qnaboard.dto.QnaBoardRes;
 import com.acorn2.FinalProject.qnaboard.service.QnaBoardService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
@@ -37,6 +37,13 @@ public class QnaBoard {
 	@ApiOperation(value = "QnaBoard")
 	@ApiResponse(responseCode = "200", description = "성공!")
 	
+	@GetMapping
+	public com.acorn2.FinalProject.common.dto.ComResponseEntity<QnaBoardReadListResDto> getCdList(
+			@Parameter(hidden = true) QnaBoardReadReqDto qnaBoardReqDto){
+		QnaBoardReadListResDto qnaBoardReadListResDto = service.selectQnaBoardList(qnaBoardReqDto);
+		return new com.acorn2.FinalProject.common.dto.ComResponseEntity<>(new ComResponseDto<>(qnaBoardReadListResDto));
+	}
+	/*
 	@GetMapping("/list")
 	public ResponseEntity<List<QnaBoardDto>> list(@RequestParam(value = "pageNum", required = false)int pageNum,
 			@RequestParam(value = "keyword", required = false)String keyword,
@@ -88,4 +95,5 @@ public class QnaBoard {
 				
 		return service.deleteContent(num);
 	}
+	*/
 }
