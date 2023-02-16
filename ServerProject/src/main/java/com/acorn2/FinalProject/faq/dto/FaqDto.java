@@ -9,8 +9,8 @@ public class FaqDto {
 	private String content;
 	private int startRowNum;
 	private int endRowNum;
-	private int prevNum;	//이전글의 글번호
-	private int nextNum;	//다음글의 글번호
+	private int prevNum;
+	private int nextNum;	
 	
 	public FaqDto() {}
 

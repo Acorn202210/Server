@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="faq">
+<mapper namespace="com.acorn2.FinalProject.faq.dao.FaqDao">
 	
 	<insert id="insert" parameterType="faqDto">
 		INSERT INTO faq
@@ -19,17 +19,15 @@
 		WHERE num=#{num}
 	</update>
 	
-	<select id="getList" parameterType="faqDto" resultType="faqDto">
+	<select id="selectFaqList" parameterType="com.acorn2.FinalProject.faq.dto.req.FaqReadReqDto" resultType="com.acorn2.FinalProject.faq.dto.res.FaqReadResDto">
 		SELECT *
 		FROM
 			(SELECT result1.*, ROWNUM AS rnum
 			FROM
 				(SELECT num,question,content
-				FROM faq
+				FROM FAQ
 				ORDER BY num DESC) result1)
-		<![CDATA[ 
-		WHERE rnum >= #{startRowNum} AND rnum <= #{endRowNum}
-		]]>
+		 WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
 				
 	</select>
 	
@@ -41,8 +39,8 @@
 		WHERE num=#{num}
    </select>
    
-   	<select id="getCount" parameterType="faqDto" resultType="int">
+   	<select id="selectFaqCount" parameterType="com.acorn2.FinalProject.faq.dto.req.FaqReadReqDto" resultType="java.lang.Integer">
    		SELECT NVL(MAX(ROWNUM), 0)
-		FROM faq
+		FROM FAQ
 	</select>
 </mapper>
