@@ -2,7 +2,7 @@ package com.acorn2.FinalProject.lectureReview.dto.res;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "리뷰 정보")
+@Schema(description = "후기 정보")
 public class LectureReviewReadResDto {
 	private int lec_re_num;
     private String lec_re_writer;
