@@ -5,9 +5,11 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +18,7 @@ import com.acorn2.FinalProject.common.dto.ComResponseDto;
 import com.acorn2.FinalProject.common.dto.ComResponseEntity;
 import com.acorn2.FinalProject.lectureReview.dto.req.LectureReviewCreateReqDto;
 import com.acorn2.FinalProject.lectureReview.dto.req.LectureReviewReadReqDto;
+import com.acorn2.FinalProject.lectureReview.dto.req.LectureReviewUpdateReqDto;
 import com.acorn2.FinalProject.lectureReview.dto.res.LectureReviewReadListResDto;
 import com.acorn2.FinalProject.lectureReview.service.LectureReviewService;
 
@@ -34,7 +37,7 @@ public class LectureReview {
 	@Autowired
 	private LectureReviewService service;
 
-	@GetMapping
+	@GetMapping("/LectureReviewList")
 	public ComResponseEntity<LectureReviewReadListResDto> getReviewList(@RequestParam(value = "lec_re_stu_ref_group",required = true ,defaultValue = "1") int lec_re_stu_ref_group, 
 					@Parameter(hidden = true) LectureReviewReadReqDto reviewReq) {
 		LectureReviewReadListResDto revicewReadListRes = service.LectureReviewList(lec_re_stu_ref_group,reviewReq);
@@ -42,13 +45,24 @@ public class LectureReview {
 		return new ComResponseEntity<>(new ComResponseDto<>(revicewReadListRes));
 	}
 	
-	@PostMapping
-	public ComResponseEntity<Void> LectureReviewInsert(@Valid @RequestBody LectureReviewCreateReqDto reviewCreatereqDto ){
-		service.LectureReviewInsert(reviewCreatereqDto);
+	@PostMapping("/LectureReviewinsert")
+	public ComResponseEntity<Void> LectureReviewInsert(@Valid @RequestBody LectureReviewCreateReqDto reviewCreateReqDto ){
+		service.LectureReviewInsert(reviewCreateReqDto);
 		return new ComResponseEntity<Void>();
 	}
-
-
+	
+	@PutMapping("/{lec_re_num}/update")
+	public ComResponseEntity<Void> LectureReviewUpdate(@RequestParam(value = "lec_re_num", required = true) int lec_re_num,
+											@Valid @RequestBody LectureReviewUpdateReqDto reviewUpdateReqDto){
+		service.LectureReviewUpdate(reviewUpdateReqDto);
+		return new ComResponseEntity<Void>();	
+	}
+	
+	@DeleteMapping("/{lec_re_num}")
+	public ComResponseEntity<Void> LectureReviewDelete(@RequestParam(value = "lec_re_num", required = true) int lec_re_num){
+		service.LectureReviewDelete(lec_re_num);
+		return new ComResponseEntity<Void>();
+	}
 
 	
 

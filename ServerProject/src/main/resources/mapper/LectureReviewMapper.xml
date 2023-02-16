@@ -8,23 +8,35 @@
 	</select>
 
 	<select id="LectureReviewList" parameterType="com.acorn2.FinalProject.lectureReview.dto.req.LectureReviewReadReqDto" resultType="com.acorn2.FinalProject.lectureReview.dto.res.LectureReviewReadResDto">
-     SELECT *
-      FROM
-         (SELECT result1.*, ROWNUM AS rnum
-         FROM
-            (SELECT lec_re_num, lec_re_writer, content, lec_re_stu_ref_group, star,
-               delete_Yn, LECTURE_REVIEW.user_regdate, profile
-            FROM LECTURE_REVIEW
-            INNER JOIN users
-            ON LECTURE_REVIEW.lec_re_writer=users.id
-            WHERE lec_re_stu_ref_group=#{lec_re_stu_ref_group}
-            ORDER BY lec_re_num ASC) result1)
-      WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}   
+	     SELECT *
+	      FROM
+	         (SELECT result1.*, ROWNUM AS rnum
+	         FROM
+	            (SELECT lec_re_num, lec_re_writer, content, lec_re_stu_ref_group, star,
+	               delete_Yn, LECTURE_REVIEW.user_regdate, profile
+	            FROM LECTURE_REVIEW
+	            INNER JOIN users
+	            ON LECTURE_REVIEW.lec_re_writer=users.id
+	            WHERE lec_re_stu_ref_group=#{lec_re_stu_ref_group}
+	            ORDER BY lec_re_num ASC) result1)
+	     WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}   
    </select>   
    
-	<insert id="insertRectureReview" parameterType="com.acorn2.FinalProject.lectureReview.dto.LectureReviewDto">
+	<insert id="insertLectureReview" parameterType="com.acorn2.FinalProject.lectureReview.dto.LectureReviewDto">
 		INSERT INTO LECTURE_REVIEW
 		(lec_re_num, lec_re_writer, content, lec_re_stu_ref_group, star,user_regdate)
 		VALUES(#{lec_re_num},#{lec_re_writer},#{content},#{lec_re_stu_ref_group},#{star},SYSDATE)
 	</insert> 
+	
+	<update id="deleteLectureReview" parameterType="int">
+	    UPDATE LECTURE_REVIEW
+	    SET delete_Yn='Y'
+	    WHERE lec_re_num=#{lec_re_num}
+	</update>
+	
+	<update id="updateLectureReview" parameterType="com.acorn2.FinalProject.lectureReview.dto.LectureReviewDto">
+		UPDATE LECTURE_REVIEW
+     	SET content=#{content}, star=#{star}, update_date=SYSDATE
+     	WHERE lec_re_num=#{lec_re_num}
+	</update>
 </mapper>

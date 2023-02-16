@@ -18,5 +18,9 @@ public interface LectureReviewDao {
 	
 	public Integer selectLectureReivewCount(LectureReviewReadReqDto reviewReq);
 	
-	Integer insertRectureReview(LectureReviewDto dto);
+	Integer insertLectureReview(LectureReviewDto dto);
+	
+	Integer deleteLectureReview(int lec_re_num);
+	
+	Integer updateLectureReview(LectureReviewDto dto);
 }

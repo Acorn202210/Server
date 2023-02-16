@@ -11,6 +11,7 @@ import com.acorn2.FinalProject.lectureReview.dao.LectureReviewDao;
 import com.acorn2.FinalProject.lectureReview.dto.LectureReviewDto;
 import com.acorn2.FinalProject.lectureReview.dto.req.LectureReviewCreateReqDto;
 import com.acorn2.FinalProject.lectureReview.dto.req.LectureReviewReadReqDto;
+import com.acorn2.FinalProject.lectureReview.dto.req.LectureReviewUpdateReqDto;
 import com.acorn2.FinalProject.lectureReview.dto.res.LectureReviewReadListResDto;
 import com.acorn2.FinalProject.lectureReview.dto.res.LectureReviewReadResDto;
 
@@ -37,8 +38,25 @@ public class LectureReviewServiceImpl implements LectureReviewService{
 		dto.setStar(ReviewCreateReqDto.getStar());
 		dto.setContent(ReviewCreateReqDto.getContent());
 		
-		reviewDao.insertRectureReview(dto);
+		reviewDao.insertLectureReview(dto);
 	}
+	
+	@Override
+	public void LectureReviewUpdate(LectureReviewUpdateReqDto reviewUpdateReqDto) {
+		LectureReviewDto dto = new LectureReviewDto();
+		dto.setContent(reviewUpdateReqDto.getContent());
+		dto.setStar(reviewUpdateReqDto.getStar());
+		reviewDao.updateLectureReview(dto);
+		
+		
+	}
+
+	@Override
+	public void LectureReviewDelete(int lec_re_num) {
+		reviewDao.deleteLectureReview(lec_re_num);
+		
+	}
+
 	
 	
 
