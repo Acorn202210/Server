@@ -18,8 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.acorn2.FinalProject.common.dto.ComResponseDto;
+import com.acorn2.FinalProject.common.dto.ComResponseEntity;
+import com.acorn2.FinalProject.notice.dto.req.NoticeCreateReqDto;
 import com.acorn2.FinalProject.notice.dto.req.NoticeReadReqDto;
+import com.acorn2.FinalProject.notice.dto.res.NoticeReadDetailResDto;
 import com.acorn2.FinalProject.notice.dto.res.NoticeReadListResDto;
+import com.acorn2.FinalProject.notice.dto.res.NoticeReadResDto;
 import com.acorn2.FinalProject.notice.service.NoticeService;
 
 
@@ -35,11 +39,23 @@ public class Notice {
 	@Autowired private NoticeService service;
 	
 	@GetMapping
-	public com.acorn2.FinalProject.common.dto.ComResponseEntity<NoticeReadListResDto> getCdList(
-			@Parameter(hidden = true) NoticeReadReqDto noticeReadReqDto) {
+	public ComResponseEntity<NoticeReadListResDto> getNoticeList(@Parameter(hidden = true) NoticeReadReqDto noticeReadReqDto) {
 		NoticeReadListResDto noticeReadListResDto = service.selectNoticeList(noticeReadReqDto);
-		return new com.acorn2.FinalProject.common.dto.ComResponseEntity<>(new ComResponseDto<>(noticeReadListResDto));
+		return new ComResponseEntity<>(new ComResponseDto<>(noticeReadListResDto));
 	}
+	
+	@GetMapping(value = "/{noti_num}")
+	public ComResponseEntity<NoticeReadDetailResDto> getNotice(@Parameter(hidden = true) NoticeReadReqDto noticeReadReqDto) {
+		NoticeReadDetailResDto noticeReadResDto = service.selectNoticeOne(noticeReadReqDto);
+		return new ComResponseEntity<>(new ComResponseDto<>(noticeReadResDto));
+	}
+	
+	@PostMapping
+	public ComResponseEntity<Void> insertNotice(@RequestBody NoticeCreateReqDto noticeCreateReqDto){
+		service.insertNotice(noticeCreateReqDto);
+		return new ComResponseEntity<Void>();
+	}
+	
 	
 //	
 //	@ApiOperation(value="공지 사항 상세", notes = "공지사항 상세 (검색에 대한 값도 포함되어 있음)")

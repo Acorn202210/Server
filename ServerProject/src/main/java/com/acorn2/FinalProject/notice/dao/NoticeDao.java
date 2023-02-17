@@ -6,7 +6,9 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.acorn2.FinalProject.notice.dto.NoticeDto;
 import com.acorn2.FinalProject.notice.dto.req.NoticeReadReqDto;
+import com.acorn2.FinalProject.notice.dto.res.NoticeReadDetailResDto;
 import com.acorn2.FinalProject.notice.dto.res.NoticeReadResDto;
+
 
 
 
@@ -42,12 +44,33 @@ public interface NoticeDao {
 	/**
 	 *
 	 * @methodName : selectNoticeList
-	 * @author : choen
+	 * @author : cheon
 	 * @param NoticeReadReqDto
 	 * @return
 	 * @return : NoticeReadResDto
-	 * @description : 공통코드 조회
+	 * @description : 공지사항 조회
 	 */
 	public List<NoticeReadResDto> selectNoticeList(NoticeReadReqDto noticeReadReqDto);
-
+	
+	/**
+	 *
+	 * @methodName : selectNotice
+	 * @author : cheon
+	 * @param NoticeReadReqDto
+	 * @return
+	 * @return : NoticeReadResDto
+	 * @description : 공지사항 단건 조회
+	 */
+	public NoticeReadDetailResDto selectNotice(NoticeReadReqDto noticeReadReqDto);
+	
+	/**
+	 *
+	 * @methodName : insertNotice
+	 * @author : cheon
+	 * @param NoticeDto
+	 * @return
+	 * @return : Integer
+	 * @description : 공지사항 등록
+	 */
+	Integer insertNotice(NoticeDto dto);
 }

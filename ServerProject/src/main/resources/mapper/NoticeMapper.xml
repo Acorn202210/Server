@@ -24,13 +24,34 @@
       	FROM
          (SELECT result1.*, ROWNUM AS rnum
           FROM
-            (SELECT num,title,content,viewCount,regdate
+            (SELECT noti_num, title, content, viewCount, regdate, noti_writer, update_regdate, update_id, delete_yn_code
              FROM NOTICE
              <include refid="searchCondition"/>
-             ORDER BY num DESC) result1)
+             WHERE delete_yn_code = 'N'
+             ORDER BY noti_num DESC) result1)
         WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
-		
 	</select>
+	
+	<select id="selectNotice" parameterType="com.acorn2.FinalProject.notice.dto.req.NoticeReadReqDto" resultType="com.acorn2.FinalProject.notice.dto.res.NoticeReadDetailResDto">
+		SELECT result1.*
+		FROM
+			(SELECT noti_num, title, content, viewCount, regdate, noti_writer, update_regdate, update_id, delete_yn_code,
+			   LAG(noti_num, 1, 0) OVER (ORDER BY noti_num DESC) nextNum,
+	   		   LEAD(noti_num, 1, 0) OVER (ORDER BY noti_num DESC) prevNum
+			 FROM NOTICE
+			 <include refid="searchCondition"/>
+			 ) result1
+		WHERE noti_num=#{noti_num}
+	</select>
+	
+	
+	<insert id="insertNotice" parameterType="com.acorn2.FinalProject.notice.dto.NoticeDto">
+      INSERT INTO NOTICE
+      (noti_num, title, content, viewCount, regdate, noti_writer, delete_yn_code)
+      VALUES(NOTICE_seq.NEXTVAL, #{title},#{content}, 0, SYSDATE, #{noti_writer}, 'N')
+   </insert>
+
+   
 	
 </mapper>
 

@@ -7,7 +7,7 @@ import com.acorn2.FinalProject.common.dto.PagingResponseDto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "코드 목록")
+@Schema(description = "공지사항 목록")
 public class NoticeReadListResDto extends PagingResponseDto {
 	public NoticeReadListResDto() {
 		super(0, new PagingDto());
@@ -17,7 +17,7 @@ public class NoticeReadListResDto extends PagingResponseDto {
 		super(totalCount, comPageDto);
 	}
 
-	@Schema(description = "코드 목록", example = "", required = true, minLength = 1, maxLength = 50)
+	@Schema(description = "공지사항 목록", example = "", required = true, minLength = 1, maxLength = 50)
 	private List<NoticeReadResDto> data;
 
 	public List<NoticeReadResDto> getData() {

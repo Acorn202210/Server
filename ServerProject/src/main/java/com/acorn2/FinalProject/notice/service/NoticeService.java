@@ -1,8 +1,11 @@
 package com.acorn2.FinalProject.notice.service;
 
 
+import com.acorn2.FinalProject.notice.dto.req.NoticeCreateReqDto;
 import com.acorn2.FinalProject.notice.dto.req.NoticeReadReqDto;
+import com.acorn2.FinalProject.notice.dto.res.NoticeReadDetailResDto;
 import com.acorn2.FinalProject.notice.dto.res.NoticeReadListResDto;
+import com.acorn2.FinalProject.notice.dto.res.NoticeReadResDto;
 
 
 public interface NoticeService {
@@ -13,5 +16,7 @@ public interface NoticeService {
 //	public Map<String, Object> getData(int num);
 //	public Map<String, Object> getDetail(int num, String keyword, String condition);
 	
-	NoticeReadListResDto selectNoticeList(NoticeReadReqDto noticeReadReq);
+	NoticeReadListResDto selectNoticeList(NoticeReadReqDto noticeReadReqDto);
+	NoticeReadDetailResDto selectNoticeOne(NoticeReadReqDto noticeReadReqDto);
+	void insertNotice(NoticeCreateReqDto noticeCreateReqDto);
 }

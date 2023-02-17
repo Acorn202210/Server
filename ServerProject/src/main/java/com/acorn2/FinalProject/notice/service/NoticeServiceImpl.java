@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 
 import com.acorn2.FinalProject.notice.dao.NoticeDao;
 import com.acorn2.FinalProject.notice.dto.NoticeDto;
+import com.acorn2.FinalProject.notice.dto.req.NoticeCreateReqDto;
 import com.acorn2.FinalProject.notice.dto.req.NoticeReadReqDto;
+import com.acorn2.FinalProject.notice.dto.res.NoticeReadDetailResDto;
 import com.acorn2.FinalProject.notice.dto.res.NoticeReadListResDto;
 import com.acorn2.FinalProject.notice.dto.res.NoticeReadResDto;
 
@@ -31,6 +33,22 @@ public class NoticeServiceImpl implements NoticeService{
 		noticeReadListResDto.setData(noticeReadResDtoList);
 		return noticeReadListResDto;
 	}
+	
+
+	@Override
+	public NoticeReadDetailResDto selectNoticeOne(NoticeReadReqDto noticeReadReqDto) {
+		return noticeDao.selectNotice(noticeReadReqDto);
+	}
+
+	@Override
+	public void insertNotice(NoticeCreateReqDto noticeCreateReqDto) {
+		NoticeDto dto = new NoticeDto();
+		dto.setTitle(noticeCreateReqDto.getTitle());
+		dto.setContent(noticeCreateReqDto.getContent());
+		dto.setNoti_writer("관리자1");
+		noticeDao.insertNotice(dto);
+	}
+
 	
 //	@Override
 //	public ResponseEntity<Map<String, Object>> getList(int pageNum, String keyword, String condition) {
