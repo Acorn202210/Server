@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.acorn2.FinalProject.common.dto.ComResponseDto;
 import com.acorn2.FinalProject.common.dto.ComResponseEntity;
+import com.acorn2.FinalProject.lectureReview.dto.LectureReviewDto;
 import com.acorn2.FinalProject.lectureReview.dto.req.LectureReviewCreateReqDto;
 import com.acorn2.FinalProject.lectureReview.dto.req.LectureReviewReadReqDto;
 import com.acorn2.FinalProject.lectureReview.dto.req.LectureReviewUpdateReqDto;
@@ -39,10 +40,16 @@ public class LectureReview {
 
 	@GetMapping("/LectureReviewList")
 	public ComResponseEntity<LectureReviewReadListResDto> getReviewList(@RequestParam(value = "lec_re_stu_ref_group",required = true ,defaultValue = "1") int lec_re_stu_ref_group, 
-					@Parameter(hidden = true) LectureReviewReadReqDto reviewReq) {
-		LectureReviewReadListResDto revicewReadListRes = service.LectureReviewList(lec_re_stu_ref_group,reviewReq);
+					@Parameter(hidden = true) LectureReviewReadReqDto reviewReadReqDto) {
+		LectureReviewReadListResDto revicewReadListRes = service.LectureReviewList(reviewReadReqDto);
 		
 		return new ComResponseEntity<>(new ComResponseDto<>(revicewReadListRes));
+	}
+	
+	@GetMapping("/{lec_re_num}/lectureReviewOne")
+	public ComResponseEntity<LectureReviewDto> LectureReviewOne(@PathVariable int lec_re_num){
+		LectureReviewDto dtoOne =  service.LectureReviewOne(lec_re_num);
+		return new ComResponseEntity<>(new ComResponseDto<>(dtoOne));	
 	}
 	
 	@PostMapping("/LectureReviewinsert")

@@ -39,4 +39,10 @@
      	SET content=#{content}, star=#{star}, update_date=SYSDATE
      	WHERE lec_re_num=#{lec_re_num}
 	</update>
+	
+	<select id="LectureReviewOne" parameterType="int" resultType="com.acorn2.FinalProject.lectureReview.dto.LectureReviewDto">
+		SELECT lec_re_num,lec_re_writer,content,lec_re_stu_ref_group,delete_Yn,user_regdate,star
+		FROM LECTURE_REVIEW
+		WHERE lec_re_num=#{lec_re_num}
+	</select>
 </mapper>

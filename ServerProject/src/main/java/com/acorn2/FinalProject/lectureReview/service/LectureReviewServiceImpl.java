@@ -21,12 +21,17 @@ public class LectureReviewServiceImpl implements LectureReviewService{
 	@Autowired LectureReviewDao reviewDao;
 	
 	@Override
-	public LectureReviewReadListResDto LectureReviewList(int lec_re_stu_ref_group,LectureReviewReadReqDto reviewReq) {
+	public LectureReviewReadListResDto LectureReviewList(LectureReviewReadReqDto reviewReq) {
 		Integer totalCount = reviewDao.selectLectureReivewCount(reviewReq); 
 		List<LectureReviewReadResDto> ReviewReadList = reviewDao.LectureReviewList(reviewReq);
 		LectureReviewReadListResDto ReviewListRes = new LectureReviewReadListResDto(totalCount,reviewReq);
 		ReviewListRes.setData(ReviewReadList);
 		return ReviewListRes;
+	}
+	
+	@Override
+	public LectureReviewDto LectureReviewOne(int lec_re_num) {
+		return reviewDao.LectureReviewOne(lec_re_num);
 	}
 
 	@Override
@@ -56,6 +61,8 @@ public class LectureReviewServiceImpl implements LectureReviewService{
 		reviewDao.deleteLectureReview(lec_re_num);
 		
 	}
+
+
 
 	
 	
