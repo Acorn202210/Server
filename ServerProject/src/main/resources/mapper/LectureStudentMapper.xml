@@ -15,12 +15,12 @@
 					(SELECT users.id,TO_CHAR(birth,'YYYY-MM-DD') birth, phone, email, User_Regdate, large_category, small_category
 					FROM users 
 					JOIN LECTURE_STUDENT
-					ON users.id=LECTURE_STUDENT.Lec_Stu_User_Id
+					ON users.id=LECTURE_STUDENT.lec_Stu_User_Id
 					JOIN LECTURE 
 					on LECTURE.lec_Num=LECTURE_STUDENT.lec_Stu_Ref_Group
 					
 					<where>
-						<if test="Lec_Stu_User_Id != null">AND Lec_Stu_User_Id LIKE '%'||#{Lec_Stu_User_Id}||'%'</if>
+						<if test="lec_Stu_User_Id != null">AND lec_Stu_User_Id LIKE '%'||#{lec_Stu_User_Id}||'%'</if>
 						<if test="birth != null">AND birth LIKE '%'||#{birth}||'%'</if>
 						<if test="phone != null">AND phone LIKE '%'||#{phone}||'%'</if>
 						<if test="email != null">AND email LIKE '%'||#{email}||'%'</if>
@@ -32,6 +32,30 @@
 			<![CDATA[		
 			WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
 			]]>
-	</select>   
+	</select>
 	
+    <select id="studentDataOne" parameterType="int" resultType="com.acorn2.FinalProject.lectureStudent.dto.req.LectureStudentOneReadReqDto">
+		SELECT lec_Stu_Num,lec_Stu_User_Id,lec_Stu_Ref_Group,Complete_Yn,User_Regdate,Update_Date 
+		FROM LECTURE_STUDENT
+		WHERE lec_Stu_Num=#{lec_Stu_Num}
+	</select>
+	
+	<update id="LectureCompleteYn" parameterType="lectureStudentDto">
+		UPDATE LECTURE_STUDENT
+		SET Complete_Yn=#{Complete_Yn}, Update_Date=SYSDATE
+		WHERE lec_Stu_Ref_Group=#{lec_Stu_Ref_Group} AND lec_Stu_User_Id=#{lec_Stu_User_Id}
+	</update>
+	
+	<insert id="LectureSignup" parameterType="lectureStudentDto">
+	  INSERT INTO LECTURE_STUDENT
+			(lec_Stu_Num, lec_Stu_User_Id, lec_Stu_Ref_Group, User_Regdate)
+			VALUES(#{lec_Stu_Num}, #{lec_Stu_User_Id}, #{lec_Stu_Ref_Group}, SYSDATE)
+   </insert>
+	
+	
+	<select id="getSequence" resultType="int">
+      SELECT LECTURE_STUDENT_seq.NEXTVAL
+      FROM DUAL
+   </select>
+   
 </mapper>

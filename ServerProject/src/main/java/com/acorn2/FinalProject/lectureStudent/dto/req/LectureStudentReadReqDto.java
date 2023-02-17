@@ -4,7 +4,7 @@ import com.acorn2.FinalProject.common.dto.PagingDto;
 
 public class LectureStudentReadReqDto extends PagingDto{
 
-	private String Lec_Stu_User_Id;
+	private String lec_Stu_User_Id;
 	private int lec_Stu_Ref_Group;
 	private String large_category;
 	private String small_category;
@@ -21,7 +21,7 @@ public class LectureStudentReadReqDto extends PagingDto{
 	public LectureStudentReadReqDto(String lec_Stu_User_Id, int lec_Stu_Ref_Group, String large_category,
 			String small_category, String id, String birth, String phone, String email, String user_Regdate) {
 		super();
-		Lec_Stu_User_Id = lec_Stu_User_Id;
+		this.lec_Stu_User_Id = lec_Stu_User_Id;
 		this.lec_Stu_Ref_Group = lec_Stu_Ref_Group;
 		this.large_category = large_category;
 		this.small_category = small_category;
@@ -34,12 +34,12 @@ public class LectureStudentReadReqDto extends PagingDto{
 
 
 	public String getLec_Stu_User_Id() {
-		return Lec_Stu_User_Id;
+		return lec_Stu_User_Id;
 	}
 
 
 	public void setLec_Stu_User_Id(String lec_Stu_User_Id) {
-		Lec_Stu_User_Id = lec_Stu_User_Id;
+		this.lec_Stu_User_Id = lec_Stu_User_Id;
 	}
 
 
@@ -123,6 +123,7 @@ public class LectureStudentReadReqDto extends PagingDto{
 	}
 
 
+	
 	
 	
 }

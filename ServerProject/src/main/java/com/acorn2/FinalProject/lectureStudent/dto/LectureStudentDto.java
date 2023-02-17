@@ -25,7 +25,7 @@ public class LectureStudentDto {
 			String small_category) {
 		super();
 		this.lec_Stu_Num = lec_Stu_Num;
-		this.lec_Stu_User_Id = lec_Stu_User_Id;
+		this.lec_Stu_User_Id = lec_Stu_User_Id; 
 		this.lec_Stu_Ref_Group = lec_Stu_Ref_Group;
 		Complete_Yn = complete_Yn;
 		User_Regdate = user_Regdate;
