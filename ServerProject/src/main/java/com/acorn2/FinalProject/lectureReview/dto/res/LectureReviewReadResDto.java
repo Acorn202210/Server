@@ -12,6 +12,7 @@ public class LectureReviewReadResDto {
     private String user_regdate;
     private String content;
     private String update_date;
+    
 	public int getlec_re_num() {
 		return lec_re_num;
 	}

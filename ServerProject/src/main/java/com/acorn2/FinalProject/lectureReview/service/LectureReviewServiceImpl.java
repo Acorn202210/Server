@@ -24,7 +24,7 @@ public class LectureReviewServiceImpl implements LectureReviewService{
 	public LectureReviewReadListResDto LectureReviewList(LectureReviewReadReqDto reviewReq) {
 		Integer totalCount = reviewDao.selectLectureReivewCount(reviewReq); 
 		List<LectureReviewReadResDto> ReviewReadList = reviewDao.LectureReviewList(reviewReq);
-		LectureReviewReadListResDto ReviewListRes = new LectureReviewReadListResDto(totalCount,reviewReq);
+		LectureReviewReadListResDto ReviewListRes = new LectureReviewReadListResDto(totalCount, reviewReq);
 		ReviewListRes.setData(ReviewReadList);
 		return ReviewListRes;
 	}

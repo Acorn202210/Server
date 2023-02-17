@@ -17,7 +17,7 @@
 	            FROM LECTURE_REVIEW
 	            INNER JOIN users
 	            ON LECTURE_REVIEW.lec_re_writer=users.id
-	            WHERE lec_re_stu_ref_group=#{lec_re_stu_ref_group}
+	            WHERE lec_re_stu_ref_group=#{lec_re_stu_ref_group} AND delete_Yn='N'
 	            ORDER BY lec_re_num ASC) result1)
 	     WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}   
    </select>   

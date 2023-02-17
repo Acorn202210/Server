@@ -4,7 +4,6 @@ package com.acorn2.FinalProject.lectureReview.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,8 +25,6 @@ import com.acorn2.FinalProject.lectureReview.service.LectureReviewService;
 
 import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 
@@ -41,9 +38,9 @@ public class LectureReview {
 	@GetMapping("/LectureReviewList")
 	public ComResponseEntity<LectureReviewReadListResDto> getReviewList(@RequestParam(value = "lec_re_stu_ref_group",required = true ,defaultValue = "1") int lec_re_stu_ref_group, 
 					@Parameter(hidden = true) LectureReviewReadReqDto reviewReadReqDto) {
-		LectureReviewReadListResDto revicewReadListRes = service.LectureReviewList(reviewReadReqDto);
+		LectureReviewReadListResDto revicewReadListResDto = service.LectureReviewList(reviewReadReqDto);
 		
-		return new ComResponseEntity<>(new ComResponseDto<>(revicewReadListRes));
+		return new ComResponseEntity<>(new ComResponseDto<>(revicewReadListResDto));
 	}
 	
 	@GetMapping("/{lec_re_num}/lectureReviewOne")

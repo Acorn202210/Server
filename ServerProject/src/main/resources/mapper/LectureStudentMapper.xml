@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="lectureStudent">
+<mapper namespace="com.acorn2.FinalProject.lectureStudent.dao.LectureStudentDao">
 	<sql id="searchCondition">
 		<choose>
-			<when test="id != null">
-				WHERE id LIKE '%'||#{id}||'%'
+			<when test="Lec_Stu_User_Id != null">
+				WHERE Lec_Stu_User_Id LIKE '%'||#{Lec_Stu_User_Id}||'%'
 			</when>
 			<when test="birth != null">
 				WHERE birth LIKE '%'||#{birth}||'%'
@@ -15,34 +15,29 @@
 			<when test="email != null">
 				WHERE email LIKE '%'||#{email}||'%'
 			</when>
-			<when test="regdate != null">
-				WHERE regdate LIKE '%'||#{regdate}||'%'
+			<when test="User_Regdate != null">
+				WHERE User_Regdate LIKE '%'||#{User_Regdate}||'%'
 			</when>
 		</choose>
 	</sql>
-
-	<select id="studentData" parameterType="lectureStudentDto" resultType="lectureStudentDto">
-		SELECT * FROM LECTURE_STUDENT
-		WHERE id=#{id, jdbcType=VARCHAR} AND ref_group=#{ref_group}
+	
+	<select id="SelectLectureStudentCount" parameterType="com.acorn2.FinalProject.lectureStudent.dto.req.LectureStudentReadReqDto" resultType="java.lang.Integer">
+		SELECT NVL(MAX(ROWNUM), 0)
+		FROM LECTURE_STUDENT
 	</select>
-
-	<update id="lectureComplete" parameterType="lectureStudentReq">
-		UPDATE LECTURE_STUDENT
-		SET complete=#{complete}
-		WHERE ref_group=#{ref_group} AND id=#{id}
-	</update>
-
-	<select id="studentList" parameterType="lectureStudentDto" resultType="lectureStudentDto">
+	
+	<select id="LectureStudentList" parameterType="com.acorn2.FinalProject.lectureStudent.dto.req.LectureStudentReadReqDto" resultType="com.acorn2.FinalProject.lectureStudent.dto.res.LectureStudentReadResDto">
 	  SELECT *
 			FROM	
 				(SELECT result1.*, ROWNUM as rnum
 				FROM
-					(SELECT users.id,TO_CHAR(birth,'YYYY-MM-DD') birth, phone, email, regdate, large_category, small_category
+					(SELECT users.id,TO_CHAR(birth,'YYYY-MM-DD') birth, phone, email, User_Regdate, large_category, small_category
 					FROM users 
 					JOIN LECTURE_STUDENT
-					ON users.id=LECTURE_STUDENT.id
+					ON users.id=LECTURE_STUDENT.Lec_Stu_User_Id
 					JOIN LECTURE 
-					on LECTURE.num=LECTURE_STUDENT.ref_group
+					on LECTURE.lec_Num=LECTURE_STUDENT.lec_Stu_Ref_Group
+					<include refid="searchCondition"/>
 					<choose>
 						<when test='small_category=="0"'>
 							WHERE large_category=#{large_category}
@@ -51,24 +46,10 @@
 							WHERE large_category=#{large_category} AND small_category=#{small_category}
 						</when>
 					</choose>
-					ORDER BY users.id DESC) result1)
-			WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
+					ORDER BY users.id DESC) result1)				
+			<![CDATA[		
+			WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
+			]]>
 	</select>   
-  
-  <insert id="lectureSignup" parameterType="lectureStudentDto">
-	  INSERT INTO LECTURE_STUDENT
-			(num, id, ref_group)
-			VALUES(#{num}, #{id}, #{ref_group})
-   </insert>
-   
-   
-   <select id="getSequence" resultType="int">
-      SELECT LECTURE_STUDENT_seq.NEXTVAL
-      FROM DUAL
-   </select>
-   
-   	<select id="getCount" resultType="int">
-		SELECT NVL(MAX(ROWNUM), 0)
-		FROM LECTURE_STUDENT
-	</select>
+	
 </mapper>

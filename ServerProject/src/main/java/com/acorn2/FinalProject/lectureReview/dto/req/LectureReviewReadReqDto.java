@@ -1,10 +1,10 @@
 package com.acorn2.FinalProject.lectureReview.dto.req;
 
-import org.apache.ibatis.type.Alias;
+
 
 import com.acorn2.FinalProject.common.dto.PagingDto;
 
-@Alias("lectureReviewReq")
+
 public class LectureReviewReadReqDto extends PagingDto{
 	private int lec_re_num;
 	private String content;
