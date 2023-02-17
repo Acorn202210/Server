@@ -9,7 +9,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public class QnaBoardReadResDto {
 
 	@Schema(description = "1:1문의 조건", example = "작성자", required = true, minLength = 1, maxLength = 50)
-	private String writer;
+	private String board_question_writer;
 	@Schema(description = "1:1문의 조건", example = "제목", required = true, minLength = 1, maxLength = 50)
 	private String title;
 	@Schema(description = "1:1문의 조건", example = "내용", required = true, minLength = 1, maxLength = 10000)
@@ -17,19 +17,19 @@ public class QnaBoardReadResDto {
 	
 	public QnaBoardReadResDto() {}
 
-	public QnaBoardReadResDto(String writer, String title, String content) {
+	public QnaBoardReadResDto(String board_question_writer, String title, String content) {
 		super();
-		this.writer = writer;
+		this.board_question_writer = board_question_writer;
 		this.title = title;
 		this.content = content;
 	}
 
-	public String getWriter() {
-		return writer;
+	public String getBoard_question_writer() {
+		return board_question_writer;
 	}
 
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setBoard_question_writer(String board_question_writer) {
+		this.board_question_writer = board_question_writer;
 	}
 
 	public String getTitle() {
@@ -47,4 +47,6 @@ public class QnaBoardReadResDto {
 	public void setContent(String content) {
 		this.content = content;
 	}
+
+	
 }

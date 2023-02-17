@@ -6,35 +6,35 @@ import com.acorn2.FinalProject.common.dto.PagingDto;
 
 @Alias("qnaBoardReq")
 public class QnaBoardReadReqDto extends PagingDto {
-	private int num;
-	private String writer;
+	private int board_question_num;
+	private String board_question_writer;
 	private String title;
 	private String content;
 	
 	public QnaBoardReadReqDto () {}
 
-	public QnaBoardReadReqDto(int num, String writer, String title, String content) {
+	public QnaBoardReadReqDto(int board_question_num, String board_question_writer, String title, String content) {
 		super();
-		this.num = num;
-		this.writer = writer;
+		this.board_question_num = board_question_num;
+		this.board_question_writer = board_question_writer;
 		this.title = title;
 		this.content = content;
 	}
 
-	public int getNum() {
-		return num;
+	public int getBoard_question_num() {
+		return board_question_num;
 	}
 
-	public void setNum(int num) {
-		this.num = num;
-	}
-	
-	public String getWriter() {
-		return writer;
+	public void setBoard_question_num(int board_question_num) {
+		this.board_question_num = board_question_num;
 	}
 
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public String getBoard_question_writer() {
+		return board_question_writer;
+	}
+
+	public void setBoard_question_writer(String board_question_writer) {
+		this.board_question_writer = board_question_writer;
 	}
 
 	public String getTitle() {
@@ -51,5 +51,7 @@ public class QnaBoardReadReqDto extends PagingDto {
 
 	public void setContent(String content) {
 		this.content = content;
-	}	
+	}
+
+	
 }

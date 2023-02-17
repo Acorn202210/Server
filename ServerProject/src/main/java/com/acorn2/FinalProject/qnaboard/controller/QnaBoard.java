@@ -37,7 +37,7 @@ public class QnaBoard {
 	@ApiOperation(value = "QnaBoard")
 	@ApiResponse(responseCode = "200", description = "성공!")
 	
-	@GetMapping
+	@GetMapping("/list")
 	public com.acorn2.FinalProject.common.dto.ComResponseEntity<QnaBoardReadListResDto> getCdList(
 			@Parameter(hidden = true) QnaBoardReadReqDto qnaBoardReqDto){
 		QnaBoardReadListResDto qnaBoardReadListResDto = service.selectQnaBoardList(qnaBoardReqDto);

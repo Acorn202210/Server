@@ -11,8 +11,8 @@
          <when test="title != null">
             WHERE title LIKE '%'||#{title}||'%'
          </when>
-         <when test="writer != null">
-            WHERE writer LIKE '%'||#{writer}||'%'
+         <when test="board_question_writer != null">
+            WHERE board_question_writer LIKE '%'||#{board_question_writer}||'%'
          </when>
       </choose>
 	</sql>
@@ -22,15 +22,15 @@
 		<include refid="searchCondition"/>
 	</select>
 	
-	<select id="selectQnaBoardList" parameterType="com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardReadReqDto" resultType="com.acorn2.FinalProject.notice.dto.res.NoticeReadResDto">
+	<select id="selectQnaBoardList" parameterType="com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardReadReqDto" resultType="com.acorn2.FinalProject.qnaboard.dto.res.QnaBoardReadResDto">
 		SELECT *
       	FROM
          (SELECT result1.*, ROWNUM AS rnum
           FROM
-            (SELECT num,title,content,viewCount,regdate
+            (SELECT board_question_num,board_question_writer,title,content,viewCount,user_regdate
              FROM qna_board_question
              <include refid="searchCondition"/>
-             ORDER BY num DESC) result1)
+             ORDER BY board_question_num DESC) result1)
         WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
 		
 	</select>

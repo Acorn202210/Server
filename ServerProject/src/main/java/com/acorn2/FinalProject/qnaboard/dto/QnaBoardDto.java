@@ -2,52 +2,50 @@ package com.acorn2.FinalProject.qnaboard.dto;
 
 import org.apache.ibatis.type.Alias;
 
+import com.acorn2.FinalProject.common.dto.PagingDto;
+
 @Alias("QnaBoardDto")
-public class QnaBoardDto {	
-		private int num;
-		private String writer;
-		private String title;
-		private String content;
+public class QnaBoardDto extends PagingDto {	
+		private int board_question_num;
+		private String board_question_writer;
+		private String title;		
 		private int viewCount;
-		private String regdate;
-		private String answered;
-		private int startRowNum;
-		private int endRowNum;
-		private int prevNum; //이전 글의 글번호
-		private int nextNum; //다음 글의 글번호
+		private String user_regdate;
+		private String answered_yn;
+		private String content;
+		private String update_date;
+		private String delete_yn_code;		
 		
 		public QnaBoardDto() {}
 
-		public QnaBoardDto(int num, String writer, String title, String content, int viewCount, String regdate, String answered,
-				int startRowNum, int endRowNum, int prevNum, int nextNum) {
+		public QnaBoardDto(int board_question_num, String board_question_writer, String title, int viewCount,
+				String user_regdate, String answered_yn, String content, String update_date, String delete_yn_code) {
 			super();
-			this.num = num;
-			this.writer = writer;
+			this.board_question_num = board_question_num;
+			this.board_question_writer = board_question_writer;
 			this.title = title;
-			this.content = content;
 			this.viewCount = viewCount;
-			this.regdate = regdate;
-			this.answered = answered;
-			this.startRowNum = startRowNum;
-			this.endRowNum = endRowNum;
-			this.prevNum = prevNum;
-			this.nextNum = nextNum;
+			this.user_regdate = user_regdate;
+			this.answered_yn = answered_yn;
+			this.content = content;
+			this.update_date = update_date;
+			this.delete_yn_code = delete_yn_code;
 		}
 
-		public int getNum() {
-			return num;
+		public int getBoard_question_num() {
+			return board_question_num;
 		}
 
-		public void setNum(int num) {
-			this.num = num;
+		public void setBoard_question_num(int board_question_num) {
+			this.board_question_num = board_question_num;
 		}
 
-		public String getWriter() {
-			return writer;
+		public String getBoard_question_writer() {
+			return board_question_writer;
 		}
 
-		public void setWriter(String writer) {
-			this.writer = writer;
+		public void setBoard_question_writer(String board_question_writer) {
+			this.board_question_writer = board_question_writer;
 		}
 
 		public String getTitle() {
@@ -58,14 +56,6 @@ public class QnaBoardDto {
 			this.title = title;
 		}
 
-		public String getContent() {
-			return content;
-		}
-
-		public void setContent(String content) {
-			this.content = content;
-		}
-
 		public int getViewCount() {
 			return viewCount;
 		}
@@ -74,51 +64,44 @@ public class QnaBoardDto {
 			this.viewCount = viewCount;
 		}
 
-		public String getRegdate() {
-			return regdate;
+		public String getUser_regdate() {
+			return user_regdate;
 		}
 
-		public void setRegdate(String regdate) {
-			this.regdate = regdate;
+		public void setUser_regdate(String user_regdate) {
+			this.user_regdate = user_regdate;
+		}
+
+		public String getAnswered_yn() {
+			return answered_yn;
+		}
+
+		public void setAnswered_yn(String answered_yn) {
+			this.answered_yn = answered_yn;
+		}
+
+		public String getContent() {
+			return content;
+		}
+
+		public void setContent(String content) {
+			this.content = content;
+		}
+
+		public String getUpdate_date() {
+			return update_date;
+		}
+
+		public void setUpdate_date(String update_date) {
+			this.update_date = update_date;
+		}
+
+		public String getDelete_yn_code() {
+			return delete_yn_code;
+		}
+
+		public void setDelete_yn_code(String delete_yn_code) {
+			this.delete_yn_code = delete_yn_code;
 		}
 		
-		public String getAnswered() {
-			return answered;
-		}
-
-		public void setAnswered(String answered) {
-			this.answered = answered;
-		}	
-		
-		public int getStartRowNum() {
-			return startRowNum;
-		}
-
-		public void setStartRowNum(int startRowNum) {
-			this.startRowNum = startRowNum;
-		}
-
-		public int getEndRowNum() {
-			return endRowNum;
-		}
-
-		public void setEndRowNum(int endRowNum) {
-			this.endRowNum = endRowNum;
-		}
-
-		public int getPrevNum() {
-			return prevNum;
-		}
-
-		public void setPrevNum(int prevNum) {
-			this.prevNum = prevNum;
-		}
-
-		public int getNextNum() {
-			return nextNum;
-		}
-
-		public void setNextNum(int nextNum) {
-			this.nextNum = nextNum;
-		}
 }
