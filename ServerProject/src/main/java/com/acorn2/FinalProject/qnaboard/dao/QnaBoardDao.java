@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.acorn2.FinalProject.qnaboard.dto.QnaBoardDto;
+import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardCreateReqDto;
 import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardReadReqDto;
 // import com.acorn2.FinalProject.qnaboard.dto.QnaBoardRes;
 import com.acorn2.FinalProject.qnaboard.dto.res.QnaBoardReadResDto;
@@ -52,4 +53,7 @@ public interface QnaBoardDao {
 	 * @description : 공통코드 조회
 	 */
 	public List<QnaBoardReadResDto> selectQnaBoardList(QnaBoardReadReqDto qnaBoardReadReqDto);
+	
+	
+	Integer insertQnaBoard(QnaBoardDto dto); 
 }

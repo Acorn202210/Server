@@ -12,6 +12,7 @@ import com.acorn2.FinalProject.qnaboard.dao.QnaBoardAnswerDao;
 import com.acorn2.FinalProject.qnaboard.dao.QnaBoardDao;
 import com.acorn2.FinalProject.qnaboard.dto.QnaBoardAnswerDto;
 import com.acorn2.FinalProject.qnaboard.dto.QnaBoardDto;
+import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardCreateReqDto;
 import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardReadReqDto;
 //import com.acorn2.FinalProject.qnaboard.dto.QnaBoardRes;
 import com.acorn2.FinalProject.qnaboard.dto.res.QnaBoardReadListResDto;
@@ -30,6 +31,17 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 		QnaBoardReadListResDto qnaBoardReadListResDto = new QnaBoardReadListResDto(totalCount, qnaBoardReadReqDto);
 		qnaBoardReadListResDto.setData(qnaBoardReadResDtoList);
 		return qnaBoardReadListResDto;
+	}
+
+	//글 추가하는 메소드
+	@Override
+	public void QnaBoardInsert(QnaBoardCreateReqDto qnaBoardCreateReqDto) {
+		QnaBoardDto dto = new QnaBoardDto();		
+		dto.setBoard_question_writer(qnaBoardCreateReqDto.getBoard_question_writer());
+		dto.setTitle(qnaBoardCreateReqDto.getTitle());
+		dto.setContent(qnaBoardCreateReqDto.getContent());
+		
+		qnaDao.insertQnaBoard(dto);
 	}
 	
 	

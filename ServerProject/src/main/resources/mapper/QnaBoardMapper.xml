@@ -34,6 +34,13 @@
         WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
 		
 	</select>
+		
+	<insert id="insertQnaBoard" parameterType="com.acorn2.FinalProject.qnaboard.dto.QnaBoardDto">
+		INSERT INTO qna_board_question
+		(board_question_num,board_question_writer,title,content,viewCount,user_regdate, 
+		ANSWERED_YN, UPDATE_DATE, DELETE_YN_CODE)
+		VALUES(QNA_BOARD_QUESTION_seq.NEXTVAL, #{board_question_writer}, #{title}, #{content}, 0, SYSDATE, 'no', sysdate, 'no')
+	</insert>
 	<!-- 
 	
 	 <select id="getList" parameterType="QnaBoardDto" resultType="QnaBoardDto">

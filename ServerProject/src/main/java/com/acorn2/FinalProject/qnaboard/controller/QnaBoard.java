@@ -3,6 +3,8 @@ package com.acorn2.FinalProject.qnaboard.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,9 +15,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.acorn2.FinalProject.common.dto.ComResponseDto;
+import com.acorn2.FinalProject.common.dto.ComResponseEntity;
+import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardCreateReqDto;
 import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardReadReqDto;
 import com.acorn2.FinalProject.qnaboard.dto.res.QnaBoardReadListResDto;
 //import com.acorn2.FinalProject.qnaboard.dto.QnaBoardRes;
@@ -43,6 +48,13 @@ public class QnaBoard {
 		QnaBoardReadListResDto qnaBoardReadListResDto = service.selectQnaBoardList(qnaBoardReqDto);
 		return new com.acorn2.FinalProject.common.dto.ComResponseEntity<>(new ComResponseDto<>(qnaBoardReadListResDto));
 	}
+	
+	@PostMapping("/insert")
+	public ComResponseEntity<Void> QnaBoardInsert(@Valid @RequestBody QnaBoardCreateReqDto qnaBoardCreateReqDto){
+		service.QnaBoardInsert(qnaBoardCreateReqDto);
+		return new ComResponseEntity<Void>();
+	}
+	
 	/*
 	@GetMapping("/list")
 	public ResponseEntity<List<QnaBoardDto>> list(@RequestParam(value = "pageNum", required = false)int pageNum,

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.acorn2.FinalProject.qnaboard.dto.QnaBoardDto;
+import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardCreateReqDto;
 import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardReadReqDto;
 import com.acorn2.FinalProject.qnaboard.dto.res.QnaBoardReadListResDto;
 import com.acorn2.FinalProject.qnaboard.dto.res.QnaBoardReadResDto;
@@ -11,6 +12,8 @@ import com.acorn2.FinalProject.qnaboard.dto.res.QnaBoardReadResDto;
 public interface QnaBoardService {
 	
 	QnaBoardReadListResDto selectQnaBoardList(QnaBoardReadReqDto qnaBoardReadReq);
+	
+	void QnaBoardInsert(QnaBoardCreateReqDto qnaBoardCreateReqDto);
 	
 //	public List<QnaBoardDto> getList(int pageNum, String keyword, String condition); //목록불러오기
 //	public Map<String, Object> getDetail(int num, String keyword, String condition);
