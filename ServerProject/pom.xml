@@ -66,9 +66,9 @@
 		</dependency>
 		<!-- 외부 tomcat으로 실행하기 위한 dependency -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
+	    	<groupId>org.springframework.boot</groupId>
+	     	<artifactId>spring-boot-starter-tomcat</artifactId>
+	      	<scope>provided</scope>
 		</dependency>
 		<!-- IOUtils 클래스를 사용하기 위한 라이브러리 -->
 		<dependency>

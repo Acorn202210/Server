@@ -11,24 +11,29 @@ CREATE TABLE users(
 
 -- QNA_BOARD_QUESTION
 CREATE TABLE QNA_BOARD_QUESTION(
-    num NUMBER PRIMARY KEY, --글번호
-    writer VARCHAR2(50) NOT NULL, --작성자 (로그인된 아이디)
-    title VARCHAR2(50) NOT NULL, --제목
-    content CLOB, --글 내용
-    viewCount NUMBER, -- 조회수
-    regdate DATE, --글 작성일
-    answered CHAR(3) DEFAULT 'no' -- 답변여부
-);
+	BOARD_QUESTION_NUM NUMBER PRIMARY KEY,
+	BOARD_QUESTION_WRITER VARCHAR2(50),
+	TITLE VARCHAR2(50),
+	VIEWCOUNT NUMBER,
+	USER_REGDATE DATE,
+	ANSWERED_YN VARCHAR2(3) DEFAULT 'N',
+	CONTENT CLOB, 
+	UPDATE_DATE DATE,
+	DELETE_YN_CODE VARCHAR2(3) DEFAULT 'N'
+
 -- QNA_BOARD_QUESTION 시퀀스
 CREATE SEQUENCE QNA_BOARD_QUESTION_seq; 
 
 -- QNA_BOARD_ANSWER
 CREATE TABLE QNA_BOARD_ANSWER(
-    num NUMBER PRIMARY KEY, --댓글의 글번호
-    writer VARCHAR2(50), --댓글 작성자의 아이디
-    content CLOB, -- 글 내용
-    ref_group NUMBER, -- 질문의 번호
-    regdate DATE -- 글 작성일
+	BOARD_COMMENT_NUM NUMBER,
+	BOARD_COMMENT_WRITER VARCHAR2(50),
+	BOARD_COMMENT_REF_GROUP NUMBER,
+	USER_REGDATE DATE,
+	CONTENT CLOB,
+	UPDATE_DATE DATE,
+	UPDATE_ID VARCHAR2(50),
+	DELETE_YN_CODE VARCHAR2(3) DEFAULT 'N'
 );
 -- QNA_BOARD_ANSWER 시퀀스
 CREATE SEQUENCE QNA_BOARD_ANSWER_seq;
@@ -88,15 +93,15 @@ CREATE SEQUENCE QNA_FREE_ANSWER_seq;
 
 -- NOTICE(공지사항)
 CREATE TABLE NOTICE(   
-	noti_num NUMBER PRIMARY KEY, 
-  	title VARCHAR2(50) NOT NULL, 
- 	content CLOB, 
-  	viewCount NUMBER, 
-  	regdate DATE, 
-  	update_regdate DATE,   
-	update_id VARCHAR2(50),   
-	noti_writer VARCHAR2(50),   
-	delete_YN_code VARCHAR2(3)  
+    noti_num NUMBER PRIMARY KEY, 
+      title VARCHAR2(50) NOT NULL, 
+     content CLOB, 
+      viewCount NUMBER, 
+      regdate DATE, 
+      update_regdate DATE,   
+    update_id VARCHAR2(50),   
+    noti_writer VARCHAR2(50),   
+    delete_YN_code VARCHAR2(3)  
 );  
  
 -- NOTICE 시퀀스
