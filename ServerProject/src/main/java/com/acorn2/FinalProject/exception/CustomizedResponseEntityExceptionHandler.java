@@ -1,4 +1,4 @@
-package com.acorn2.FinalProject.Exception;
+package com.acorn2.FinalProject.exception;
 
 import java.util.Date;
 
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.acorn2.FinalProject.common.dto.ExceptionResponse;
 import com.acorn2.FinalProject.notice.exception.NoticeNotFoundException;
 
 @RestController

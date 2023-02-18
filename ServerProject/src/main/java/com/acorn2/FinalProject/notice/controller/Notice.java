@@ -47,7 +47,7 @@ public class Notice {
 	}
 	
 	@ApiOperation(value="단일 공지사항 상세", notes = "하나의 공지사항의 상세 정보를 가져온다.")
-	@GetMapping(value = "/{noti_num}")
+	@GetMapping(value = "/{notiNum}")
 	public ComResponseEntity<NoticeReadDetailResDto> getNotice(@Parameter(hidden = true) NoticeReadReqDto noticeReadReqDto) {
 		NoticeReadDetailResDto noticeReadResDto = service.selectNoticeOne(noticeReadReqDto);
 		return new ComResponseEntity<>(new ComResponseDto<>(noticeReadResDto));
@@ -61,16 +61,16 @@ public class Notice {
 	}
 	
 	@ApiOperation(value="공지사항 수정", notes = "공지사항을 수정한다.")
-	@PutMapping(value="/{noti_num}")
+	@PutMapping(value="/{notiNum}")
 	public ComResponseEntity<Void> updateNotice(@RequestBody NoticeUpdateReqDto noticeUpdateReqDto){
 		service.updateNotice(noticeUpdateReqDto);
 		return new ComResponseEntity<Void>();
 	}
 	
 	@ApiOperation(value="공지사항 삭제", notes = "공지사항의 delete_YN_code를 'Y'로 수정한다.")
-	@PutMapping(value="/{noti_num}/delete")
-	public ComResponseEntity<Void> deleteNotice(@PathVariable("noti_num") Integer noti_num){
-		service.deleteNotice(noti_num);
+	@PutMapping(value="/{notiNum}/delete")
+	public ComResponseEntity<Void> deleteNotice(@PathVariable("notiNum") Integer notiNum){
+		service.deleteNotice(notiNum);
 		return new ComResponseEntity<Void>();
 	}
 }

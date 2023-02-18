@@ -89,5 +89,5 @@ public interface NoticeDao {
 	 * @return : Integer
 	 * @description : 공지사항 수정
 	 */
-	Integer deleteNotice(Integer noti_num);
+	Integer deleteNotice(Integer notiNum);
 }

@@ -4,15 +4,15 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("noticeDto")
 public class NoticeDto {
-	private int noti_num;
+	private int notiNum;
 	private String title;
 	private String content;
 	private int viewCount;
 	private String regdate;
-	private String noti_writer;
-	private String update_regdate;
-	private String update_id;
-	private String delete_yn_code;
+	private String notiWriter;
+	private String updateRegdate;
+	private String updateId;
+	private String deleteYNCode;
 	private int startRowNum;
 	private int endRowNum;
 	private int prevNum;
@@ -20,31 +20,31 @@ public class NoticeDto {
 	
 	public NoticeDto() {}
 
-	public NoticeDto(int noti_num, String title, String content, int viewCount, String regdate, String noti_writer,
-			String update_regdate, String update_id, String delete_yn_code, int startRowNum, int endRowNum, int prevNum,
+	public NoticeDto(int notiNum, String title, String content, int viewCount, String regdate, String notiWriter,
+			String updateRegdate, String updateId, String deleteYNCode, int startRowNum, int endRowNum, int prevNum,
 			int nextNum) {
 		super();
-		this.noti_num = noti_num;
+		this.notiNum = notiNum;
 		this.title = title;
 		this.content = content;
 		this.viewCount = viewCount;
 		this.regdate = regdate;
-		this.noti_writer = noti_writer;
-		this.update_regdate = update_regdate;
-		this.update_id = update_id;
-		this.delete_yn_code = delete_yn_code;
+		this.notiWriter = notiWriter;
+		this.updateRegdate = updateRegdate;
+		this.updateId = updateId;
+		this.deleteYNCode = deleteYNCode;
 		this.startRowNum = startRowNum;
 		this.endRowNum = endRowNum;
 		this.prevNum = prevNum;
 		this.nextNum = nextNum;
 	}
 
-	public int getNoti_num() {
-		return noti_num;
+	public int getNotiNum() {
+		return notiNum;
 	}
 
-	public void setNoti_num(int noti_num) {
-		this.noti_num = noti_num;
+	public void setNotiNum(int notiNum) {
+		this.notiNum = notiNum;
 	}
 
 	public String getTitle() {
@@ -79,36 +79,36 @@ public class NoticeDto {
 		this.regdate = regdate;
 	}
 
-	public String getNoti_writer() {
-		return noti_writer;
+	public String getNotiWriter() {
+		return notiWriter;
 	}
 
-	public void setNoti_writer(String noti_writer) {
-		this.noti_writer = noti_writer;
+	public void setNotiWriter(String notiWriter) {
+		this.notiWriter = notiWriter;
 	}
 
-	public String getUpdate_regdate() {
-		return update_regdate;
+	public String getUpdateRegdate() {
+		return updateRegdate;
 	}
 
-	public void setUpdate_regdate(String update_regdate) {
-		this.update_regdate = update_regdate;
+	public void setUpdateRegdate(String updateRegdate) {
+		this.updateRegdate = updateRegdate;
 	}
 
-	public String getUpdate_id() {
-		return update_id;
+	public String getUpdateId() {
+		return updateId;
 	}
 
-	public void setUpdate_id(String update_id) {
-		this.update_id = update_id;
+	public void setUpdateId(String updateId) {
+		this.updateId = updateId;
 	}
 
-	public String getDelete_yn_code() {
-		return delete_yn_code;
+	public String getDeleteYNCode() {
+		return deleteYNCode;
 	}
 
-	public void setDelete_yn_code(String delete_yn_code) {
-		this.delete_yn_code = delete_yn_code;
+	public void setDeleteYNCode(String deleteYNCode) {
+		this.deleteYNCode = deleteYNCode;
 	}
 
 	public int getStartRowNum() {
@@ -142,6 +142,5 @@ public class NoticeDto {
 	public void setNextNum(int nextNum) {
 		this.nextNum = nextNum;
 	}
-	
-	
+		
 }

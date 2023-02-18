@@ -21,6 +21,6 @@ public interface NoticeService {
 	NoticeReadDetailResDto selectNoticeOne(NoticeReadReqDto noticeReadReqDto);
 	void insertNotice(NoticeCreateReqDto noticeCreateReqDto);
 	void updateNotice(NoticeUpdateReqDto noticeUpdateReqDto);
-	void deleteNotice(Integer noticeUpdateReqDto);
+	void deleteNotice(Integer notiNum);
 
 }

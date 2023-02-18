@@ -57,7 +57,7 @@ public class NoticeServiceImpl implements NoticeService{
 		NoticeDto dto = new NoticeDto();
 		dto.setTitle(noticeCreateReqDto.getTitle());
 		dto.setContent(noticeCreateReqDto.getContent());
-		dto.setNoti_writer("관리자1");
+		dto.setNotiWriter("관리자1");
 		noticeDao.insertNotice(dto);
 	}
 
@@ -65,17 +65,17 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public void updateNotice(NoticeUpdateReqDto noticeUpdateReqDto) {
 		NoticeDto dto = new NoticeDto();
-		dto.setNoti_num(noticeUpdateReqDto.getNoti_num());
+		dto.setNotiNum(noticeUpdateReqDto.getNotiNum());
 		dto.setTitle(noticeUpdateReqDto.getTitle());
 		dto.setContent(noticeUpdateReqDto.getContent());
-		dto.setUpdate_id("관리자2");
+		dto.setUpdateId("관리자2");
 		noticeDao.updateNotice(dto);
 	}
 
 
 	@Override
-	public void deleteNotice(Integer noti_num) {
-		noticeDao.deleteNotice(noti_num);
+	public void deleteNotice(Integer notiNum) {
+		noticeDao.deleteNotice(notiNum);
 	}
 
 	

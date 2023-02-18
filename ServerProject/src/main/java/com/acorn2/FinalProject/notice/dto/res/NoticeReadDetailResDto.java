@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 public class NoticeReadDetailResDto {
 	@Schema(description = "공지사항 번호", example = "1", required = true, minLength = 1, maxLength = 50)
-	private int noti_num;
+	private int notiNum;
 	@Schema(description = "공지사항 제목", example = "제목", required = true, minLength = 1, maxLength = 50)
 	private String title;
 	@Schema(description = "공지사항 내용", example = "공지사항", required = true, minLength = 1, maxLength = 10000)
@@ -14,38 +14,40 @@ public class NoticeReadDetailResDto {
 	@Schema(description = "공지사항 등록일", example = "2023-02-15", required = true, minLength = 1, maxLength = 30)
 	private String regdate;
 	@Schema(description = "공지사항 등록자", example = "관리자", required = true, minLength = 1, maxLength = 50)
-	private String noti_writer;
+	private String notiWriter;
 	@Schema(description = "공지사항 수정일", example = "2023-02-15", required = true, minLength = 1, maxLength = 30)
-	private String update_regdate;
+	private String updateRegdate;
 	@Schema(description = "공지사항 수정자", example = "관리자2", required = true, minLength = 1, maxLength = 50)
-	private String update_id;
+	private String updateId;
 	@Schema(description = "공지사항 삭제여부", example = "N", required = true, minLength = 1, maxLength = 3)
-	private String delete_yn_code;
+	private String deleteYNCode;
 	@Schema(description = "다음 공지사항", example = "1", required = true, minLength = 1, maxLength = 3)
 	private int nextNum;
 	@Schema(description = "이전 공지사항", example = "3", required = true, minLength = 1, maxLength = 3)
 	private int prevNum;
-	public NoticeReadDetailResDto(int noti_num, String title, String content, Integer viewCount, String regdate,
-			String noti_writer, String update_regdate, String update_id, String delete_yn_code, int nextNum,
-			int prevNum) {
+	
+	public NoticeReadDetailResDto() {}
+	
+	public NoticeReadDetailResDto(int notiNum, String title, String content, Integer viewCount, String regdate,
+			String notiWriter, String updateRegdate, String updateId, String deleteYNCode, int nextNum, int prevNum) {
 		super();
-		this.noti_num = noti_num;
+		this.notiNum = notiNum;
 		this.title = title;
 		this.content = content;
 		this.viewCount = viewCount;
 		this.regdate = regdate;
-		this.noti_writer = noti_writer;
-		this.update_regdate = update_regdate;
-		this.update_id = update_id;
-		this.delete_yn_code = delete_yn_code;
+		this.notiWriter = notiWriter;
+		this.updateRegdate = updateRegdate;
+		this.updateId = updateId;
+		this.deleteYNCode = deleteYNCode;
 		this.nextNum = nextNum;
 		this.prevNum = prevNum;
 	}
-	public int getNoti_num() {
-		return noti_num;
+	public int getNotiNum() {
+		return notiNum;
 	}
-	public void setNoti_num(int noti_num) {
-		this.noti_num = noti_num;
+	public void setNotiNum(int notiNum) {
+		this.notiNum = notiNum;
 	}
 	public String getTitle() {
 		return title;
@@ -71,29 +73,29 @@ public class NoticeReadDetailResDto {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
-	public String getNoti_writer() {
-		return noti_writer;
+	public String getNotiWriter() {
+		return notiWriter;
 	}
-	public void setNoti_writer(String noti_writer) {
-		this.noti_writer = noti_writer;
+	public void setNotiWriter(String notiWriter) {
+		this.notiWriter = notiWriter;
 	}
-	public String getUpdate_regdate() {
-		return update_regdate;
+	public String getUpdateRegdate() {
+		return updateRegdate;
 	}
-	public void setUpdate_regdate(String update_regdate) {
-		this.update_regdate = update_regdate;
+	public void setUpdateRegdate(String updateRegdate) {
+		this.updateRegdate = updateRegdate;
 	}
-	public String getUpdate_id() {
-		return update_id;
+	public String getUpdateId() {
+		return updateId;
 	}
-	public void setUpdate_id(String update_id) {
-		this.update_id = update_id;
+	public void setUpdateId(String updateId) {
+		this.updateId = updateId;
 	}
-	public String getDelete_yn_code() {
-		return delete_yn_code;
+	public String getDeleteYNCode() {
+		return deleteYNCode;
 	}
-	public void setDelete_yn_code(String delete_yn_code) {
-		this.delete_yn_code = delete_yn_code;
+	public void setDeleteYNCode(String deleteYNCode) {
+		this.deleteYNCode = deleteYNCode;
 	}
 	public int getNextNum() {
 		return nextNum;
@@ -107,7 +109,6 @@ public class NoticeReadDetailResDto {
 	public void setPrevNum(int prevNum) {
 		this.prevNum = prevNum;
 	}
-	
 	
 	
 }

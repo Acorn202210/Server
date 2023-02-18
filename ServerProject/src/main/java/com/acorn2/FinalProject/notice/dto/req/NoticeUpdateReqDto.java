@@ -9,7 +9,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "공지사항 수정")
 public class NoticeUpdateReqDto {
-	private Integer noti_num;
+	private Integer notiNum;
 	@Schema(description = "공지사항 제목", example = "제목", required = true, minLength = 1, maxLength = 50)
 	@Size(min = 1, max = 50)
 	private String title;
@@ -34,10 +34,10 @@ public class NoticeUpdateReqDto {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Integer getNoti_num() {
-		return noti_num;
+	public Integer getNotiNum() {
+		return notiNum;
 	}
-	public void setNoti_num(Integer noti_num) {
-		this.noti_num = noti_num;
+	public void setNotiNum(Integer notiNum) {
+		this.notiNum = notiNum;
 	}
 }

@@ -3,7 +3,7 @@ package com.acorn2.FinalProject.notice.dto.req;
 import com.acorn2.FinalProject.common.dto.PagingDto;
 
 public class NoticeReadReqDto extends PagingDto {
-	private int noti_num;
+	private int notiNum;
 	private String keyword;
 	private String condition;
 	private String title;
@@ -11,21 +11,21 @@ public class NoticeReadReqDto extends PagingDto {
 	
 	public NoticeReadReqDto() {}
 
-	public NoticeReadReqDto(int noti_num, String keyword, String condition, String title, String content) {
+	public NoticeReadReqDto(int notiNum, String keyword, String condition, String title, String content) {
 		super();
-		this.noti_num = noti_num;
+		this.notiNum = notiNum;
 		this.keyword = keyword;
 		this.condition = condition;
 		this.title = title;
 		this.content = content;
 	}
 
-	public int getNoti_num() {
-		return noti_num;
+	public int getNotiNum() {
+		return notiNum;
 	}
 
-	public void setNoti_num(int noti_num) {
-		this.noti_num = noti_num;
+	public void setNotiNum(int notiNum) {
+		this.notiNum = notiNum;
 	}
 
 	public String getKeyword() {
@@ -59,6 +59,6 @@ public class NoticeReadReqDto extends PagingDto {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
+	
 	
 }
