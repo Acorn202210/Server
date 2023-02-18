@@ -99,9 +99,14 @@ CREATE SEQUENCE NOTICE_seq;
 
 -- FAQ(자주묻는질문)
 CREATE TABLE FAQ(
-    num NUMBER PRIMARY KEY, --글번호
-    question CLOB, -- 질문
-    content CLOB --글 내용
+    FAQ_NUM NUMBER PRIMARY KEY, --자주묻는질문번호
+    question CLOB, --질문
+    content CLOB, --글 내용
+    USER_REGDATE DATE, --사용자 등록일
+    UPDATE_DATE DATE, --수정 일
+    UPDATE_ID VARCHAR2(50), --수정아이디
+    FAQ_WRITER VARCHAR2(50), -- 자주묻는질문 작성자
+    DELETE_YN_CODE VARCHAR2(3) DEFAULT 'N'-- 삭제여부코드
 );
 -- FAQ 시퀀스
 CREATE SEQUENCE FAQ_seq;

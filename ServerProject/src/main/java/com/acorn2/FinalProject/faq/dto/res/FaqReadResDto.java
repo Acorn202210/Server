@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Alias("faqRes")
 @Schema(description = "자주묻는질문 정보")
 public class FaqReadResDto {
+	private int faq_num;
 	@Schema(description = "자주묻는질문 조건", example = "질문", required = true, minLength = 1, maxLength = 50)
 	private String question;
 	@Schema(description = "자주묻는질문 조건 내용", example = "자주묻는질문", required = true, minLength = 1, maxLength = 10000)
@@ -14,10 +15,12 @@ public class FaqReadResDto {
 	
 	public FaqReadResDto(){}
 
-	public FaqReadResDto(String question, String content) {
-		super();
-		this.question = question;
-		this.content = content;
+	public int getFaq_num() {
+		return faq_num;
+	}
+
+	public void setFaq_num(int faq_num) {
+		this.faq_num = faq_num;
 	}
 
 	public String getQuestion() {
