@@ -10,11 +10,11 @@ public interface FaqService {
 	
 	FaqReadListResDto selectFaqList(FaqReadReqDto faqReadReq);
 	
-	FaqDto FaqOne(int faq_num);
+	FaqDto FaqOne(int faqNum);
 	
 	void FaqInsert(FaqCreateReqDto faqCreateReqDto);
 	
 	void FaqUpdate(FaqUpdateReqDto faqUpdateReqDto);
 	
-	void FaqDelete(int faq_num);
+	void FaqDelete(int faqNum);
 }

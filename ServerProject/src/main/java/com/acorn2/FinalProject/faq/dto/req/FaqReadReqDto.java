@@ -6,25 +6,25 @@ import com.acorn2.FinalProject.common.dto.PagingDto;
 
 @Alias("faqReq")
 public class FaqReadReqDto extends PagingDto{
-	private int faq_num;
+	private int faqNum;
 	private String question;
 	private String content;
 	
 	public FaqReadReqDto() {}
 
-	public FaqReadReqDto(int faq_num, String question, String content) {
+	public FaqReadReqDto(int faqNum, String question, String content) {
 		super();
-		this.faq_num = faq_num;
+		this.faqNum = faqNum;
 		this.question = question;
 		this.content = content;
 	}
 
-	public int getFaq_num() {
-		return faq_num;
+	public int getFaqNum() {
+		return faqNum;
 	}
 
-	public void setFaq_num(int faq_num) {
-		this.faq_num = faq_num;
+	public void setFaqNum(int faqNum) {
+		this.faqNum = faqNum;
 	}
 
 	public String getQuestion() {

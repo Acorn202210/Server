@@ -43,7 +43,7 @@ public interface FaqDao {
 	 * @description : 자주묻는질문 조회
 	 */
 	
-	public FaqDto FaqOne(int faq_num);
+	public FaqDto FaqOne(int faqNum);
 	
 	/**
 	 * 
@@ -65,7 +65,7 @@ public interface FaqDao {
 	 * @return : Integer
 	 * @description : 자주묻는질문 삭제
 	 */
-	Integer deleteFaq(int faq_num);
+	Integer deleteFaq(int faqNum);
 	
 	/**
 	 * 

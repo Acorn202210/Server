@@ -5,19 +5,19 @@
 	<insert id="insertFaq" parameterType="com.acorn2.FinalProject.faq.dto.FaqDto" >
 		INSERT INTO FAQ
 		(faq_num,question,content,faq_writer, user_regdate)
-		VALUES(faq_seq.NEXTVAL, #{question}, #{content}, #{faq_writer}, SYSDATE )
+		VALUES(faq_seq.NEXTVAL, #{question}, #{content}, #{faqWriter}, SYSDATE )
 	</insert>
 	
 	<update id="deleteFaq" parameterType="int">
 		UPDATE FAQ
 		SET delete_yn_code='Y'
-		WHERE faq_num=#{faq_num}
+		WHERE faq_num=#{faqNum}
 	</update>
 	
 	<update id="updateFaq" parameterType="com.acorn2.FinalProject.faq.dto.FaqDto">
 		UPDATE FAQ
-		SET question=#{question}, content=#{content}, update_id=#{update_id}, update_date=SYSDATE
-		WHERE faq_num=#{faq_num}
+		SET question=#{question}, content=#{content}, update_id=#{updateId}, update_date=SYSDATE
+		WHERE faq_num=#{faqNum}
 	</update>
 	
 	<select id="selectFaqList" parameterType="com.acorn2.FinalProject.faq.dto.req.FaqReadReqDto" resultType="com.acorn2.FinalProject.faq.dto.res.FaqReadResDto">
@@ -37,7 +37,7 @@
 	<select id="FaqOne" parameterType="int" resultType="com.acorn2.FinalProject.faq.dto.FaqDto">
      	SELECT faq_num, question, content
 		FROM FAQ
-		WHERE faq_num=#{faq_num}
+		WHERE faq_num=#{faqNum}
    </select>
    
    	<select id="selectFaqCount" parameterType="com.acorn2.FinalProject.faq.dto.req.FaqReadReqDto" resultType="java.lang.Integer">

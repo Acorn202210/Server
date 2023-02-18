@@ -29,16 +29,16 @@ public class FaqServiceImpl implements FaqService{
 	}
 
 	@Override
-	public FaqDto FaqOne(int faq_num) {
+	public FaqDto FaqOne(int faqNum) {
 		
-		return faqDao.FaqOne(faq_num);
+		return faqDao.FaqOne(faqNum);
 	}
 	
 	@Override
 	public void FaqInsert(FaqCreateReqDto faqCreateReqDto) {
 		FaqDto dto = new FaqDto();
-		dto.setFaq_num(faqCreateReqDto.getFaq_num());
-		dto.setFaq_writer(faqCreateReqDto.getFaq_writer());
+		dto.setFaqNum(faqCreateReqDto.getFaqNum());
+		dto.setFaqWriter(faqCreateReqDto.getFaqWriter());
 		dto.setQuestion(faqCreateReqDto.getQuestion());
 		dto.setContent(faqCreateReqDto.getContent());
 		
@@ -48,8 +48,8 @@ public class FaqServiceImpl implements FaqService{
 	@Override
 	public void FaqUpdate(FaqUpdateReqDto faqUpdateReqDto) {
 		FaqDto dto = new FaqDto();
-		dto.setFaq_num(faqUpdateReqDto.getFaq_num());
-		dto.setUpdate_id(faqUpdateReqDto.getUpdate_id());
+		dto.setFaqNum(faqUpdateReqDto.getFaqNum());
+		dto.setUpdateId(faqUpdateReqDto.getUpdateId());
 		dto.setQuestion(faqUpdateReqDto.getQuestion());
 		dto.setContent(faqUpdateReqDto.getContent());
 		
@@ -57,9 +57,9 @@ public class FaqServiceImpl implements FaqService{
 	}
 
 	@Override
-	public void FaqDelete(int faq_num) {
+	public void FaqDelete(int faqNum) {
 
-		faqDao.deleteFaq(faq_num);
+		faqDao.deleteFaq(faqNum);
 	}
 	
 }

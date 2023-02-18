@@ -5,14 +5,14 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("faqDto")
 public class FaqDto{
-	private int faq_num;
+	private int faqNum;
 	private String question;
 	private String content;
-	private String user_regdate;
-	private String update_date;
-	private String update_id;
-	private String faq_writer;
-	private String delete_yn_code;
+	private String userRegdate;
+	private String updateDate;
+	private String updateId;
+	private String faqWriter;
+	private String deleteYnCode;
 	private int startRowNum;
 	private int endRowNum;
 	private int prevNum;
@@ -20,30 +20,29 @@ public class FaqDto{
 	
 	public FaqDto() {}
 
-	public FaqDto(int faq_num, String question, String content, String user_regdate, String update_date,
-			String update_id, String faq_writer, String delete_yn_code, int startRowNum, int endRowNum, int prevNum,
-			int nextNum) {
+	public FaqDto(int faqNum, String question, String content, String userRegdate, String updateDate, String updateId,
+			String faqWriter, String deleteYnCode, int startRowNum, int endRowNum, int prevNum, int nextNum) {
 		super();
-		this.faq_num = faq_num;
+		this.faqNum = faqNum;
 		this.question = question;
 		this.content = content;
-		this.user_regdate = user_regdate;
-		this.update_date = update_date;
-		this.update_id = update_id;
-		this.faq_writer = faq_writer;
-		this.delete_yn_code = delete_yn_code;
+		this.userRegdate = userRegdate;
+		this.updateDate = updateDate;
+		this.updateId = updateId;
+		this.faqWriter = faqWriter;
+		this.deleteYnCode = deleteYnCode;
 		this.startRowNum = startRowNum;
 		this.endRowNum = endRowNum;
 		this.prevNum = prevNum;
 		this.nextNum = nextNum;
 	}
 
-	public int getFaq_num() {
-		return faq_num;
+	public int getFaqNum() {
+		return faqNum;
 	}
 
-	public void setFaq_num(int faq_num) {
-		this.faq_num = faq_num;
+	public void setFaqNum(int faqNum) {
+		this.faqNum = faqNum;
 	}
 
 	public String getQuestion() {
@@ -62,44 +61,44 @@ public class FaqDto{
 		this.content = content;
 	}
 
-	public String getUser_regdate() {
-		return user_regdate;
+	public String getUserRegdate() {
+		return userRegdate;
 	}
 
-	public void setUser_regdate(String user_regdate) {
-		this.user_regdate = user_regdate;
+	public void setUserRegdate(String userRegdate) {
+		this.userRegdate = userRegdate;
 	}
 
-	public String getUpdate_date() {
-		return update_date;
+	public String getUpdateDate() {
+		return updateDate;
 	}
 
-	public void setUpdate_date(String update_date) {
-		this.update_date = update_date;
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
 	}
 
-	public String getUpdate_id() {
-		return update_id;
+	public String getUpdateId() {
+		return updateId;
 	}
 
-	public void setUpdate_id(String update_id) {
-		this.update_id = update_id;
+	public void setUpdateId(String updateId) {
+		this.updateId = updateId;
 	}
 
-	public String getFaq_writer() {
-		return faq_writer;
+	public String getFaqWriter() {
+		return faqWriter;
 	}
 
-	public void setFaq_writer(String faq_writer) {
-		this.faq_writer = faq_writer;
+	public void setFaqWriter(String faqWriter) {
+		this.faqWriter = faqWriter;
 	}
 
-	public String getDelete_yn_code() {
-		return delete_yn_code;
+	public String getDeleteYnCode() {
+		return deleteYnCode;
 	}
 
-	public void setDelete_yn_code(String delete_yn_code) {
-		this.delete_yn_code = delete_yn_code;
+	public void setDeleteYnCode(String deleteYnCode) {
+		this.deleteYnCode = deleteYnCode;
 	}
 
 	public int getStartRowNum() {

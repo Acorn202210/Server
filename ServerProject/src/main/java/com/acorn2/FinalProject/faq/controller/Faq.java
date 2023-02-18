@@ -2,6 +2,8 @@ package com.acorn2.FinalProject.faq.controller;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +22,6 @@ import com.acorn2.FinalProject.faq.dto.req.FaqReadReqDto;
 import com.acorn2.FinalProject.faq.dto.req.FaqUpdateReqDto;
 import com.acorn2.FinalProject.faq.dto.res.FaqReadListResDto;
 import com.acorn2.FinalProject.faq.service.FaqService;
-import com.acorn2.FinalProject.notice.dto.req.NoticeReadReqDto;
-import com.acorn2.FinalProject.notice.dto.res.NoticeReadListResDto;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -34,19 +34,22 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 @Api("FaqController")
 @RequestMapping("/api/faq")
 public class Faq {
+	private final Logger logger = LoggerFactory.getLogger(getClass());
+
+
 	@Autowired private FaqService service;
 	
 	@GetMapping("/Faqlist")
 	public ComResponseEntity<FaqReadListResDto> FaqList(
 			@Parameter(hidden = true) FaqReadReqDto faqReadReqDto) {
 		FaqReadListResDto faqReadListResDto = service.selectFaqList(faqReadReqDto);
-		
+		logger.debug("faqReadReqDto parameter : {}", faqReadReqDto);
 		return new ComResponseEntity<>(new ComResponseDto<>(faqReadListResDto));
 	}
 	
-	@GetMapping("/{faq_num}/faqOne")
-	public ComResponseEntity<FaqDto> FaqOne(@PathVariable int faq_num){
-		FaqDto dtoOne = service.FaqOne(faq_num);
+	@GetMapping("/{faqNum}/faqOne")
+	public ComResponseEntity<FaqDto> FaqOne(@PathVariable int faqNum){
+		FaqDto dtoOne = service.FaqOne(faqNum);
 		return new ComResponseEntity<>(new ComResponseDto<>(dtoOne));
 	}
 	
@@ -56,16 +59,16 @@ public class Faq {
 		return new ComResponseEntity<Void>();
 	}
 	
-	@PutMapping("/{faq_num}/update")
-	public ComResponseEntity<Void> FaqUpdate(@RequestParam(value = "faq_num", required = true) int faq_num,
+	@PutMapping("/{faqNum}/update")
+	public ComResponseEntity<Void> FaqUpdate(@RequestParam(value = "faqNum", required = true) int faqNum,
 								@Valid @RequestBody FaqUpdateReqDto faqUpdateReqDto){
 		service.FaqUpdate(faqUpdateReqDto);
 		return new ComResponseEntity<Void>();		
 	}
 	
-	@DeleteMapping("/{faq_num}/delete")
-	public ComResponseEntity<Void> FaqDelete(@RequestParam(value = "faq_num", required = true) int faq_num){
-		service.FaqDelete(faq_num);
+	@DeleteMapping("/{faqNum}/delete")
+	public ComResponseEntity<Void> FaqDelete(@RequestParam(value = "faqNum", required = true) int faqNum){
+		service.FaqDelete(faqNum);
 		return new ComResponseEntity<Void>();
 	}
 	
