@@ -87,13 +87,18 @@ CREATE TABLE QNA_FREE_ANSWER(
 CREATE SEQUENCE QNA_FREE_ANSWER_seq;
 
 -- NOTICE(공지사항)
-CREATE TABLE NOTICE(
-    num NUMBER PRIMARY KEY, --글번호
-    title VARCHAR2(50) NOT NULL, --제목
-    content CLOB, --글 내용
-    viewCount NUMBER, -- 조회수
-    regdate DATE --글 작성일
-);
+CREATE TABLE NOTICE(   
+	noti_num NUMBER PRIMARY KEY, 
+  	title VARCHAR2(50) NOT NULL, 
+ 	content CLOB, 
+  	viewCount NUMBER, 
+  	regdate DATE, 
+  	update_regdate DATE,   
+	update_id VARCHAR2(50),   
+	noti_writer VARCHAR2(50),   
+	delete_YN_code VARCHAR2(3)  
+);  
+ 
 -- NOTICE 시퀀스
 CREATE SEQUENCE NOTICE_seq;
 
