@@ -1,5 +1,9 @@
 package com.acorn2.FinalProject.faq.controller;
-import java.util.Map;
+
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,78 +13,63 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.acorn2.FinalProject.faq.dto.FaqReq;
-import com.acorn2.FinalProject.faq.dto.FaqRes;
+
+import com.acorn2.FinalProject.common.dto.ComResponseDto;
+import com.acorn2.FinalProject.common.dto.ComResponseEntity;
+import com.acorn2.FinalProject.faq.dto.FaqDto;
+import com.acorn2.FinalProject.faq.dto.req.FaqCreateReqDto;
+import com.acorn2.FinalProject.faq.dto.req.FaqReadReqDto;
+import com.acorn2.FinalProject.faq.dto.req.FaqUpdateReqDto;
+import com.acorn2.FinalProject.faq.dto.res.FaqReadListResDto;
 import com.acorn2.FinalProject.faq.service.FaqService;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
 @RestController
 @Api("FaqController")
 @RequestMapping("/api/faq")
 public class Faq {
+	private final Logger logger = LoggerFactory.getLogger(getClass());
+
+
 	@Autowired private FaqService service;
 	
-	@ApiOperation(value="자주묻는질문 리스트", notes = "자주묻는질문의 리스트를 출력함.")
-	@ApiImplicitParams({
-		@ApiImplicitParam(name = "pageNum", value = "페이지 번호", required = true, dataTypeClass = Integer.class ,example="0"),
-		@ApiImplicitParam(name = "question", value = "질문"),
-		@ApiImplicitParam(name = "content", value = "답변")
-	})
-	@GetMapping("/list")
-	public Map<String, Object> list(@RequestParam(value = "pageNum", required = true)int pageNum,
-			@RequestParam(value = "question", required = false)String question,
-			@RequestParam(value = "content", required = false)String content){	
-		return service.list(pageNum, question, content);
+	@GetMapping("/Faqlist")
+	public ComResponseEntity<FaqReadListResDto> FaqList(
+			@Parameter(hidden = true) FaqReadReqDto faqReadReqDto) {
+		FaqReadListResDto faqReadListResDto = service.selectFaqList(faqReadReqDto);
+		logger.debug("faqReadReqDto parameter : {}", faqReadReqDto);
+		return new ComResponseEntity<>(new ComResponseDto<>(faqReadListResDto));
 	}
 	
-	@ApiOperation(value="자주묻는질문 등록", notes = "자주묻는질문을 입력 받아 등록한다.")
-	@ApiImplicitParams({
-		@ApiImplicitParam(name = "question", value = "질문"),
-		@ApiImplicitParam(name = "content", value = "답변")
-	})
-	@PostMapping("/insert")
-	public Map<String, String> insert(@RequestBody FaqRes faqres) {
-		return service.saveContent(faqres);
+	@GetMapping("/{faqNum}/faqOne")
+	public ComResponseEntity<FaqDto> FaqOne(@PathVariable int faqNum){
+		FaqDto dtoOne = service.FaqOne(faqNum);
+		return new ComResponseEntity<>(new ComResponseDto<>(dtoOne));
 	}
 	
-	@ApiOperation(value="자주묻는질문 수정", notes = "자주묻는질문을 입력 받아 등록한다.")
-	@ApiImplicitParams({
-		@ApiImplicitParam(name = "num", value = "질문번호", required = true, example = "0", dataTypeClass = Integer.class),
-		@ApiImplicitParam(name = "question", value = "질문"),
-		@ApiImplicitParam(name = "content", value = "답변")
-	})
-	@PutMapping("/{num}/update")
-	public Map<String, String> update(@PathVariable int num, @RequestBody FaqRes faqRes){
-		
-		FaqReq dto = new FaqReq();
-		dto.setNum(num);
-		dto.setQuestion(faqRes.getQuestion());
-		dto.setContent(faqRes.getContent());
-		
-		return service.updateContent(dto);
+	@PostMapping("/Faqinsert")
+	public ComResponseEntity<Void> FaqInsert(@Valid @RequestBody FaqCreateReqDto faqCreateReqDto){
+		service.FaqInsert(faqCreateReqDto);
+		return new ComResponseEntity<Void>();
 	}
 	
-	@ApiOperation(value="자주묻는질문 업데이트 전 상세", notes = "자주묻는질문의 업데이트 전 그 상세 데이터 내용을 가져온다.")
-	@ApiImplicitParams({
-		@ApiImplicitParam(name = "num", value = "질문번호", required = true, example = "0" , dataTypeClass = Integer.class)
-	})
-	@GetMapping("/{num}/update")
-	public Map<String, Object> update(@PathVariable int num){
-		
-		return service.getData(num);
+	@PutMapping("/{faqNum}/update")
+	public ComResponseEntity<Void> FaqUpdate(@RequestParam(value = "faqNum", required = true) int faqNum,
+								@Valid @RequestBody FaqUpdateReqDto faqUpdateReqDto){
+		service.FaqUpdate(faqUpdateReqDto);
+		return new ComResponseEntity<Void>();		
 	}
 	
-	@ApiOperation(value="자주묻는질문 삭제", notes = "자주묻는질문의 데이터를 삭제한다.")
-	@ApiImplicitParams({
-		@ApiImplicitParam(name = "num", value = "질문번호", required = true, example = "0" , dataTypeClass = Integer.class)
-	})
-	@DeleteMapping("/{num}/delete")
-	public Map<String, String> delete(@PathVariable int num){
-		
-		return service.deleteContent(num);
+	@DeleteMapping("/{faqNum}/delete")
+	public ComResponseEntity<Void> FaqDelete(@RequestParam(value = "faqNum", required = true) int faqNum){
+		service.FaqDelete(faqNum);
+		return new ComResponseEntity<Void>();
 	}
 	
 }

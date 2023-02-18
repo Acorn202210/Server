@@ -29,7 +29,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 public class LectureStudent {
 	@Autowired private LectureStudentService service;
 	
-	@ApiOperation(value = "강의 리스트")	
+	@ApiOperation(value = "수강 유저 리스트")	
     @GetMapping(value = "/lectureStudent/studentlist")
     public ResponseEntity<List<LectureStudentDto>> Studentlist(@RequestParam(value = "pageNum", required = true)int pageNum,
 							@RequestParam(value = "large_category", required = false)String large_category,

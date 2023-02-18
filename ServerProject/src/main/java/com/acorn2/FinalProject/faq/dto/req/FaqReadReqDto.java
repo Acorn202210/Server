@@ -1,18 +1,30 @@
-package com.acorn2.FinalProject.faq.dto;
+package com.acorn2.FinalProject.faq.dto.req;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("faqRes")
-public class FaqRes {
+import com.acorn2.FinalProject.common.dto.PagingDto;
+
+@Alias("faqReq")
+public class FaqReadReqDto extends PagingDto{
+	private int faqNum;
 	private String question;
 	private String content;
 	
-	public FaqRes() {}
+	public FaqReadReqDto() {}
 
-	public FaqRes(String question, String content) {
+	public FaqReadReqDto(int faqNum, String question, String content) {
 		super();
+		this.faqNum = faqNum;
 		this.question = question;
 		this.content = content;
+	}
+
+	public int getFaqNum() {
+		return faqNum;
+	}
+
+	public void setFaqNum(int faqNum) {
+		this.faqNum = faqNum;
 	}
 
 	public String getQuestion() {

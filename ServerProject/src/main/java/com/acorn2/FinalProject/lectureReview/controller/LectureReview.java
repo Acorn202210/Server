@@ -1,69 +1,75 @@
 package com.acorn2.FinalProject.lectureReview.controller;
 
-import java.util.List;
-import java.util.Map;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.acorn2.FinalProject.common.dto.ComResponseDto;
+import com.acorn2.FinalProject.common.dto.ComResponseEntity;
 import com.acorn2.FinalProject.lectureReview.dto.LectureReviewDto;
-import com.acorn2.FinalProject.lectureReview.dto.LectureReviewReadListRes;
-import com.acorn2.FinalProject.lectureReview.dto.LectureReviewReadReq;
-import com.acorn2.FinalProject.lectureReview.dto.LectureReviewRes;
+import com.acorn2.FinalProject.lectureReview.dto.req.LectureReviewCreateReqDto;
+import com.acorn2.FinalProject.lectureReview.dto.req.LectureReviewReadReqDto;
+import com.acorn2.FinalProject.lectureReview.dto.req.LectureReviewUpdateReqDto;
+import com.acorn2.FinalProject.lectureReview.dto.res.LectureReviewReadListResDto;
 import com.acorn2.FinalProject.lectureReview.service.LectureReviewService;
-import com.acorn2.FinalProject.notice.exception.NoticeNotFoundException;
+
 
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 
 @Api(value = "LectureReview")
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping("/api/lectureReview")
 public class LectureReview {
 	@Autowired
 	private LectureReviewService service;
 
-	@Operation(summary = "리뷰 목록 조회")
-	@Parameters({
-		@Parameter(name = "cd", description = "코드 아이디", required = false, in = ParameterIn.QUERY, schema = @Schema(type = "string")),
-		@Parameter(name = "cdNm", description = "코드 명", required = false, in = ParameterIn.QUERY, schema = @Schema(type = "string")),
-		@Parameter(name = "cdGrp", description = "코드그룹 아이디", required = false, in = ParameterIn.QUERY, schema = @Schema(type = "string")),
-		@Parameter(name = "useYn", description = "사용여부(옵션)", required = false, in = ParameterIn.QUERY, schema = @Schema(type = "string")),
-		@Parameter(name = "searchFromDate", description = "날짜검색 시작(YYYY-MM-DD)(옵션)", required = false, in = ParameterIn.QUERY, schema = @Schema(type = "date")),
-		@Parameter(name = "searchToDate", description = "날짜검색 끝(YYYY-MM-DD)(옵션)", required = false, in = ParameterIn.QUERY, schema = @Schema(type = "date")),
-		@Parameter(name = "currentPage", description = "현재 페이지(옵션, 빈값일 경우 1 기본세팅)", required = false, in = ParameterIn.QUERY, schema = @Schema(type = "integer")),
-		@Parameter(name = "limit", description = "페이지 사이즈(옵션, 빈값일 경우 20 기본세팅)", required = false, in = ParameterIn.QUERY, schema = @Schema(type = "integer"))
-	})
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "성공", content = {
-					@Content(mediaType = "application/json" )})
-	})
-	@GetMapping("/lecture/lectureList")
-	public ResponseEntity<LectureReviewReadListRes> getReviewList(
-			@Parameter(hidden = true) LectureReviewReadReq reviewReq) {
-		LectureReviewReadListRes revicewReadListRes = service.LectureReviewList(reviewReq);
+	@GetMapping("/LectureReviewList")
+	public ComResponseEntity<LectureReviewReadListResDto> getReviewList(@RequestParam(value = "lec_re_stu_ref_group",required = true ,defaultValue = "1") int lec_re_stu_ref_group, 
+					@Parameter(hidden = true) LectureReviewReadReqDto reviewReadReqDto) {
+		LectureReviewReadListResDto revicewReadListRes = service.LectureReviewList(reviewReadReqDto);
 		
-		return null;
+		return new ComResponseEntity<>(new ComResponseDto<>(revicewReadListRes));
 	}
-
-
+	
+	@GetMapping("/{lec_re_num}/lectureReviewOne")
+	public ComResponseEntity<LectureReviewDto> LectureReviewOne(@PathVariable int lec_re_num){
+		LectureReviewDto dtoOne =  service.LectureReviewOne(lec_re_num);
+		return new ComResponseEntity<>(new ComResponseDto<>(dtoOne));	
+	}
+	
+	@PostMapping("/LectureReviewinsert")
+	public ComResponseEntity<Void> LectureReviewInsert(@Valid @RequestBody LectureReviewCreateReqDto reviewCreateReqDto ){
+		service.LectureReviewInsert(reviewCreateReqDto);
+		return new ComResponseEntity<Void>();
+	}
+	
+	@PutMapping("/{lec_re_num}/update")
+	public ComResponseEntity<Void> LectureReviewUpdate(@RequestParam(value = "lec_re_num", required = true) int lec_re_num,
+											@Valid @RequestBody LectureReviewUpdateReqDto reviewUpdateReqDto){
+		service.LectureReviewUpdate(reviewUpdateReqDto);
+		return new ComResponseEntity<Void>();	
+	}
+	
+	@DeleteMapping("/{lec_re_num}")
+	public ComResponseEntity<Void> LectureReviewDelete(@RequestParam(value = "lec_re_num", required = true) int lec_re_num){
+		service.LectureReviewDelete(lec_re_num);
+		return new ComResponseEntity<Void>();
+	}
 
 	
 
