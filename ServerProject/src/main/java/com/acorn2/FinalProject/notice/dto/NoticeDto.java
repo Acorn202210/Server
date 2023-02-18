@@ -13,15 +13,13 @@ public class NoticeDto {
 	private String updateRegdate;
 	private String updateId;
 	private String deleteYNCode;
-	private int startRowNum;
-	private int endRowNum;
 	private int prevNum;
 	private int nextNum;
 	
 	public NoticeDto() {}
 
 	public NoticeDto(int notiNum, String title, String content, int viewCount, String regdate, String notiWriter,
-			String updateRegdate, String updateId, String deleteYNCode, int startRowNum, int endRowNum, int prevNum,
+			String updateRegdate, String updateId, String deleteYNCode, int prevNum,
 			int nextNum) {
 		super();
 		this.notiNum = notiNum;
@@ -33,8 +31,6 @@ public class NoticeDto {
 		this.updateRegdate = updateRegdate;
 		this.updateId = updateId;
 		this.deleteYNCode = deleteYNCode;
-		this.startRowNum = startRowNum;
-		this.endRowNum = endRowNum;
 		this.prevNum = prevNum;
 		this.nextNum = nextNum;
 	}
@@ -109,22 +105,6 @@ public class NoticeDto {
 
 	public void setDeleteYNCode(String deleteYNCode) {
 		this.deleteYNCode = deleteYNCode;
-	}
-
-	public int getStartRowNum() {
-		return startRowNum;
-	}
-
-	public void setStartRowNum(int startRowNum) {
-		this.startRowNum = startRowNum;
-	}
-
-	public int getEndRowNum() {
-		return endRowNum;
-	}
-
-	public void setEndRowNum(int endRowNum) {
-		this.endRowNum = endRowNum;
 	}
 
 	public int getPrevNum() {

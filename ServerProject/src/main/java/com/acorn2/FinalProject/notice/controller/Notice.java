@@ -4,11 +4,9 @@ package com.acorn2.FinalProject.notice.controller;
 
 import java.util.Map;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,15 +32,18 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
-@Api("NoticeController")
+@Api("Notice")
 @RequestMapping("/api/notice")
 public class Notice {
-	@Autowired private NoticeService service;
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
+	@Autowired private NoticeService service;
+
 	@ApiOperation(value="공지사항 목록", notes = "모든 공지사항의 목록을 가져온다.")
 	@GetMapping
 	public ComResponseEntity<NoticeReadListResDto> getNoticeList(@Parameter(hidden = true) NoticeReadReqDto noticeReadReqDto) {
 		NoticeReadListResDto noticeReadListResDto = service.selectNoticeList(noticeReadReqDto);
+		logger.debug("noticeReadReqDto parameter:{}", noticeReadReqDto.getNotiNum());
 		return new ComResponseEntity<>(new ComResponseDto<>(noticeReadListResDto));
 	}
 	
