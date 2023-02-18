@@ -27,11 +27,13 @@ mybatis:
   type-aliases-package: com.acorn2.FinalProject.**
   configuration:
     map-underscore-to-camel-case: true
-    
-logging:
-  config: classpath:log4j/log4j2_local.xml
+    call-setters-on-nulls: true
+    jdbc-type-for-null: NULL
 
 file:
   location: C:\data
+  
+logging:
+  config: classpath:log4j/log4j2_local.xml
   
   

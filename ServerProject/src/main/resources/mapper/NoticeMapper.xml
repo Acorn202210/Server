@@ -3,20 +3,17 @@
 <mapper namespace="com.acorn2.FinalProject.notice.dao.NoticeDao">
 
 	<sql id="searchCondition">
-      <choose>
-         <when test="title != null and content != null">
-            WHERE title LIKE '%'||#{title}||'%' OR content LIKE '%'||#{content}||'%'
-         </when>
-         <when test="title != null">
-            WHERE title LIKE '%'||#{title}||'%'
-         </when>
-      </choose>
+        <if test="title != null and content != null">AND (title LIKE '%'||#{title}||'%' OR content LIKE '%'||#{content}||'%')</if>
+		<if test="title != null and content == null">AND title LIKE '%'||#{title}||'%'</if>
    </sql>
    
 	<select id="selectNoticeCount" parameterType="com.acorn2.FinalProject.notice.dto.req.NoticeReadReqDto" resultType="java.lang.Integer">
 		 SELECT NVL(MAX(ROWNUM), 0)
       	 FROM NOTICE
-        <include refid="searchCondition"/>
+        <where>
+        	delete_YN_code = 'N'
+			<include refid="searchCondition"/>
+         </where>
 	</select>
 	
 	<select id="selectNoticeList" parameterType="com.acorn2.FinalProject.notice.dto.req.NoticeReadReqDto" resultType="com.acorn2.FinalProject.notice.dto.res.NoticeReadResDto">
@@ -24,14 +21,59 @@
       	FROM
          (SELECT result1.*, ROWNUM AS rnum
           FROM
-            (SELECT num,title,content,viewCount,regdate
+            (SELECT noti_num, title, viewCount, regdate, noti_writer, delete_YN_code
              FROM NOTICE
-             <include refid="searchCondition"/>
-             ORDER BY num DESC) result1)
+             <where>
+                delete_YN_code = 'N'
+                <include refid="searchCondition"/>               
+			 </where>
+             ORDER BY noti_num DESC) result1)
         WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
-		
 	</select>
 	
+	<select id="selectNotice" parameterType="com.acorn2.FinalProject.notice.dto.req.NoticeReadReqDto" resultType="com.acorn2.FinalProject.notice.dto.res.NoticeReadDetailResDto">
+		SELECT result1.*
+		FROM
+			(SELECT noti_num, title, content, viewCount, regdate, noti_writer, update_regdate, update_id, delete_YN_code,
+			   LAG(noti_num, 1, 0) OVER (ORDER BY noti_num DESC) nextNum,
+	   		   LEAD(noti_num, 1, 0) OVER (ORDER BY noti_num DESC) prevNum
+			 FROM NOTICE
+			 <where>
+			 	<include refid="searchCondition"/>
+			 </where>
+			 ) result1
+		WHERE noti_num=#{notiNum}
+	</select>
+	
+	
+	<insert id="insertNotice" parameterType="com.acorn2.FinalProject.notice.dto.NoticeDto">
+      INSERT INTO NOTICE
+      (noti_num, title, content, viewCount, regdate, noti_writer, delete_YN_code)
+      VALUES(NOTICE_seq.NEXTVAL, #{title},#{content}, 0, SYSDATE, #{notiWriter}, 'N')
+   </insert>
+
+   <update id="updateNotice" parameterType="com.acorn2.FinalProject.notice.dto.NoticeDto">
+      UPDATE NOTICE
+      <set>
+      	<if test="title != null">
+      		title = #{title},
+      	</if>
+      	<if test="content != null">
+      		content=#{content},
+      	</if>
+      	update_regdate = SYSDATE,
+      	update_id = #{updateId}
+      </set>
+      WHERE noti_num=#{notiNum}
+   </update>
+	
+	<update id="deleteNotice" parameterType="Integer">
+      UPDATE NOTICE
+      <set>
+      	delete_YN_code = 'Y'
+      </set>
+      WHERE noti_num=#{notiNum}
+   </update>
 </mapper>
 
 
