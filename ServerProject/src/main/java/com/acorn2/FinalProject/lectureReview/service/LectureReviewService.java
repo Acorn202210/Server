@@ -12,11 +12,11 @@ public interface LectureReviewService {
 
 	LectureReviewReadListResDto LectureReviewList(LectureReviewReadReqDto reviewReq);
 	
-	LectureReviewDto LectureReviewOne(int lec_re_num);
+	LectureReviewDto LectureReviewOne(int lecReNum);
 	
 	void LectureReviewInsert(LectureReviewCreateReqDto ReviewCreateReqDto);
 	
-	void LectureReviewDelete(int lec_re_num);
+	void LectureReviewDelete(int lecReNum);
 	
 	void LectureReviewUpdate(LectureReviewUpdateReqDto reviewUpdateReqDto);
 }

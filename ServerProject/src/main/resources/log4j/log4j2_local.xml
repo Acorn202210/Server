@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30" packages="com.acorn2">
+	<Properties>
+		<Property name="LOG_PATTERN" value="[%5p] [%d{yyyy-MM-dd HH:mm:ss}] [%C{6}] - %m%n"></Property>
+		<Property name="APP_NAME" value="ltmg"></Property>
+	</Properties>
+	<Appenders>
+		<WebSocketAppender name="WebSocketAppender" appName="${APP_NAME}">
+			<PatternLayout pattern="${LOG_PATTERN}" />
+		</WebSocketAppender>
+		<Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+			<PatternLayout pattern="${LOG_PATTERN}" />
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Logger name="com.acorn2" level="DEBUG" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</Logger>
+		<logger name="log4jdbc.log4j2" level="error" additivity="false">
+			<appender-ref ref="ConsoleAppender" />
+		</logger>
+​
+		<Logger name="jdbc.sqltiming" level="DEBUG" />
+		<Logger name="jdbc.resultsettable" level="DEBUG" />
+		<Logger name="jdbc.sqlonly" level="OFF" />
+		<Logger name="jdbc.audit" level="OFF" />
+		<Logger name="jdbc.resultset" level="OFF" />
+		<Logger name="jdbc.connection" level="OFF" />
+		<Root level="INFO">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="WebSocketAppender" />
+		</Root>
+	</Loggers>
+</Configuration>

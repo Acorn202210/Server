@@ -11,7 +11,7 @@ public interface LectureStudentService {
 
 	LectureStudentReadListResDto LectureStudentList(LectureStudentReadReqDto studentReadReqDto);
 
-	LectureStudentOneReadReqDto LectureStudentOne(int lec_Stu_Num);
+	LectureStudentOneReadReqDto LectureStudentOne(int lecStuNum);
 	
 	void LectureSignup (LectureStudentCreateReqDto studentCreateReqDto);
 	

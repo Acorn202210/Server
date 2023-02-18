@@ -20,13 +20,13 @@
 					on LECTURE.lec_Num=LECTURE_STUDENT.lec_Stu_Ref_Group
 					
 					<where>
-						<if test="lec_Stu_User_Id != null">AND lec_Stu_User_Id LIKE '%'||#{lec_Stu_User_Id}||'%'</if>
+						<if test="lecStuUserId != null">AND lec_Stu_User_Id LIKE '%'||#{lecStuUserId}||'%'</if>
 						<if test="birth != null">AND birth LIKE '%'||#{birth}||'%'</if>
 						<if test="phone != null">AND phone LIKE '%'||#{phone}||'%'</if>
 						<if test="email != null">AND email LIKE '%'||#{email}||'%'</if>
-						<if test="User_Regdate != null">AND User_Regdate LIKE '%'||#{User_Regdate}||'%'</if>
-						<if test='small_category=="0"'>AND large_category=#{large_category}</if>
-						<if test="small_category!=null">AND large_category=#{large_category} AND small_category=#{small_category}</if>
+						<if test="userRegdate != null">AND userRegdate LIKE '%'||#{userRegdate}||'%'</if>
+						<if test='smallCategory=="0"'>AND large_category=#{largeCategory}</if>
+						<if test="smallCategory!=null">AND large_category=#{largeCategory} AND small_category=#{smallCategory}</if>
 					</where>
 					ORDER BY users.id DESC) result1)				
 			<![CDATA[		
@@ -37,25 +37,25 @@
     <select id="studentDataOne" parameterType="int" resultType="com.acorn2.FinalProject.lectureStudent.dto.req.LectureStudentOneReadReqDto">
 		SELECT lec_Stu_Num,lec_Stu_User_Id,lec_Stu_Ref_Group,Complete_Yn,User_Regdate,Update_Date 
 		FROM LECTURE_STUDENT
-		WHERE lec_Stu_Num=#{lec_Stu_Num}
+		WHERE lec_Stu_Num=#{lecStuNum}
 	</select>
 	
 	<update id="LectureCompleteYn" parameterType="lectureStudentDto">
 		UPDATE LECTURE_STUDENT
-		SET Complete_Yn=#{Complete_Yn}, Update_Date=SYSDATE
-		WHERE lec_Stu_Ref_Group=#{lec_Stu_Ref_Group} AND lec_Stu_User_Id=#{lec_Stu_User_Id}
+		SET Complete_Yn=#{completeYn}, Update_Date=SYSDATE
+		WHERE lec_Stu_Num=#{lecStuNum}
 	</update>
 	
 	<insert id="LectureSignup" parameterType="lectureStudentDto">
 	  INSERT INTO LECTURE_STUDENT
 			(lec_Stu_Num, lec_Stu_User_Id, lec_Stu_Ref_Group, User_Regdate)
-			VALUES(#{lec_Stu_Num}, #{lec_Stu_User_Id}, #{lec_Stu_Ref_Group}, SYSDATE)
-   </insert>
+			VALUES(LECTURE_STUDENT_seq.NEXTVAL, #{lecStuUserId}, #{lecStuRefGroup}, SYSDATE)
+    </insert>
 	
 	
 	<select id="getSequence" resultType="int">
       SELECT LECTURE_STUDENT_seq.NEXTVAL
       FROM DUAL
-   </select>
+    </select>
    
 </mapper>

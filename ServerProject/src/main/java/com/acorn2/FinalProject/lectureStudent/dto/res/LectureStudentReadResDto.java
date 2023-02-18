@@ -8,12 +8,12 @@ public class LectureStudentReadResDto {
 	private String birth;
 	private String phone;
 	private String email;
-	private String User_Regdate;
-	public String getLec_Stu_User_Id() {
+	private String userRegdate;
+	public String getId() {
 		return id;
 	}
-	public void setLec_Stu_User_Id(String lec_Stu_User_Id) {
-		this.id = lec_Stu_User_Id;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getBirth() {
 		return birth;
@@ -33,12 +33,14 @@ public class LectureStudentReadResDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getUser_Regdate() {
-		return User_Regdate;
+	public String getUserRegdate() {
+		return userRegdate;
 	}
-	public void setUser_Regdate(String user_Regdate) {
-		User_Regdate = user_Regdate;
+	public void setUserRegdate(String userRegdate) {
+		this.userRegdate = userRegdate;
 	}
+	
+	
 
 	
 	

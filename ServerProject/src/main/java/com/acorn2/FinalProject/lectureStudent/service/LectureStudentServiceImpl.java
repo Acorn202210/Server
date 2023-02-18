@@ -28,16 +28,16 @@ public class LectureStudentServiceImpl implements LectureStudentService{
 	}
 
 	@Override
-	public LectureStudentOneReadReqDto LectureStudentOne(int lec_Stu_Num) {
-		return studentDao.studentDataOne(lec_Stu_Num);
+	public LectureStudentOneReadReqDto LectureStudentOne(int lecStuNum) {
+		return studentDao.studentDataOne(lecStuNum);
 	}
 
 	@Override
 	public void LectureSignup(LectureStudentCreateReqDto studentCreateReqDto) {
 		LectureStudentDto dto = new LectureStudentDto();
-		dto.setLec_Stu_Num(studentCreateReqDto.getLec_Stu_Num());
-		dto.setLec_Stu_User_Id(studentCreateReqDto.getLec_Stu_User_Id());
-		dto.setLec_Stu_Ref_Group(studentCreateReqDto.getLec_Stu_Ref_Group());
+		dto.setLecStuNum(studentCreateReqDto.getLecStuNum());
+		dto.setLecStuUserId(studentCreateReqDto.getLecStuUserId());
+		dto.setLecStuRefGroup(studentCreateReqDto.getLecStuRefGroup());
 		
 		studentDao.LectureSignup(dto);
 	}
@@ -45,9 +45,8 @@ public class LectureStudentServiceImpl implements LectureStudentService{
 	@Override
 	public void LectureCompleteYn(LectureStudentUpdateReqDto studentUpdateReqDto) {
 		LectureStudentDto dto = new LectureStudentDto();
-		dto.setLec_Stu_User_Id(studentUpdateReqDto.getLec_Stu_User_Id());
-		dto.setLec_Stu_Ref_Group(studentUpdateReqDto.getLec_Stu_Ref_Group());
-		dto.setComplete_Yn(studentUpdateReqDto.getComplete_Yn());
+		dto.setLecStuNum(studentUpdateReqDto.getLecStuNum());
+		dto.setCompleteYn(studentUpdateReqDto.getCompleteYn());
 		
 		studentDao.LectureCompleteYn(dto);
 	}

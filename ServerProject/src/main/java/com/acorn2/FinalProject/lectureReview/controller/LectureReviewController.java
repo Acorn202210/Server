@@ -31,21 +31,21 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 @Api(value = "LectureReview")
 @RestController
 @RequestMapping("/api/lectureReview")
-public class LectureReview {
+public class LectureReviewController {
 	@Autowired
 	private LectureReviewService service;
 
 	@GetMapping("/LectureReviewList")
-	public ComResponseEntity<LectureReviewReadListResDto> getReviewList(@RequestParam(value = "lec_re_stu_ref_group",required = true ,defaultValue = "1") int lec_re_stu_ref_group, 
+	public ComResponseEntity<LectureReviewReadListResDto> getReviewList(@RequestParam(value = "lecReStuRefGroup",required = true ,defaultValue = "1") int lecReStuRefGroup, 
 					@Parameter(hidden = true) LectureReviewReadReqDto reviewReadReqDto) {
 		LectureReviewReadListResDto revicewReadListResDto = service.LectureReviewList(reviewReadReqDto);
 		
 		return new ComResponseEntity<>(new ComResponseDto<>(revicewReadListResDto));
 	}
 	
-	@GetMapping("/{lec_re_num}/lectureReviewOne")
-	public ComResponseEntity<LectureReviewDto> LectureReviewOne(@PathVariable int lec_re_num){
-		LectureReviewDto dtoOne =  service.LectureReviewOne(lec_re_num);
+	@GetMapping("/{lecReNum}/lectureReviewOne")
+	public ComResponseEntity<LectureReviewDto> LectureReviewOne(@PathVariable int lecReNum){
+		LectureReviewDto dtoOne =  service.LectureReviewOne(lecReNum);
 		return new ComResponseEntity<>(new ComResponseDto<>(dtoOne));	
 	}
 	
@@ -55,16 +55,16 @@ public class LectureReview {
 		return new ComResponseEntity<Void>();
 	}
 	
-	@PutMapping("/{lec_re_num}/update")
-	public ComResponseEntity<Void> LectureReviewUpdate(@RequestParam(value = "lec_re_num", required = true) int lec_re_num,
+	@PutMapping("/{lecReNum}/update")
+	public ComResponseEntity<Void> LectureReviewUpdate(@RequestParam(value = "lecReNum", required = true) int lecReNum,
 											@Valid @RequestBody LectureReviewUpdateReqDto reviewUpdateReqDto){
 		service.LectureReviewUpdate(reviewUpdateReqDto);
 		return new ComResponseEntity<Void>();	
 	}
 	
-	@DeleteMapping("/{lec_re_num}")
-	public ComResponseEntity<Void> LectureReviewDelete(@RequestParam(value = "lec_re_num", required = true) int lec_re_num){
-		service.LectureReviewDelete(lec_re_num);
+	@DeleteMapping("/{lecReNum}")
+	public ComResponseEntity<Void> LectureReviewDelete(@RequestParam(value = "lecReNum", required = true) int lecReNum){
+		service.LectureReviewDelete(lecReNum);
 		return new ComResponseEntity<Void>();
 	}
 

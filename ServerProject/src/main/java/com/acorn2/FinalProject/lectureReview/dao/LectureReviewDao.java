@@ -18,11 +18,11 @@ public interface LectureReviewDao {
 	
 	public Integer selectLectureReivewCount(LectureReviewReadReqDto reviewReq);
 	
-	public LectureReviewDto LectureReviewOne(int lec_re_num);
+	public LectureReviewDto LectureReviewOne(int lecReNum);
 	
 	Integer insertLectureReview(LectureReviewDto dto);
 	
-	Integer deleteLectureReview(int lec_re_num);
+	Integer deleteLectureReview(int lecReNum);
 	
 	Integer updateLectureReview(LectureReviewDto dto);
 }
