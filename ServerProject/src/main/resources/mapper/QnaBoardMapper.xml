@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.acorn2.FinalProject.qnaboard.dao.QnaBoardDao">
+
+	<sql id="searchCondition">
+      <choose>
+         <when test="title != null and content != null">
+            WHERE title LIKE '%'||#{title}||'%' 
+            OR content LIKE '%'||#{content}||'%'
+         </when>
+         <when test="title != null">
+            WHERE title LIKE '%'||#{title}||'%'
+         </when>
+         <when test="board_question_writer != null">
+            WHERE board_question_writer LIKE '%'||#{board_question_writer}||'%'
+         </when>
+      </choose>
+	</sql>
+	<select id="selectQnaBoardCount" parameterType="com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardReadReqDto" resultType="java.lang.Integer">
+		SELECT NVL(MAX(ROWNUM), 0)
+		FROM qna_board_question
+		<include refid="searchCondition"/>
+	</select>
+	
+	<select id="selectQnaBoardList" parameterType="com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardReadReqDto" resultType="com.acorn2.FinalProject.qnaboard.dto.res.QnaBoardReadResDto">
+		SELECT *
+      	FROM
+         (SELECT result1.*, ROWNUM AS rnum
+          FROM
+            (SELECT board_question_num,board_question_writer,title,content,viewCount,user_regdate
+             FROM qna_board_question
+             <include refid="searchCondition"/>
+             ORDER BY board_question_num DESC) result1)
+        WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
+		
+	</select>
+		
+	<insert id="insertQnaBoard" parameterType="com.acorn2.FinalProject.qnaboard.dto.QnaBoardDto">
+		INSERT INTO qna_board_question
+		(board_question_num,board_question_writer,title,content,viewCount,user_regdate,UPDATE_DATE)
+		VALUES(QNA_BOARD_QUESTION_seq.NEXTVAL, #{board_question_writer}, #{title}, #{content}, 0, SYSDATE, SYSDATE)
+	</insert>
+	
+	<!-- 게시물 수정 -->
+	<update id="updateQnaBoard" parameterType="com.acorn2.FinalProject.qnaboard.dto.QnaBoardDto">
+		UPDATE qna_board_question
+		SET title=#{title}, content=#{content}, update_date=SYSDATE
+		WHERE board_question_num=#{board_question_num}
+	</update>
+		
+	<!-- 게시물 삭제 처리 -->
+	<update id="deleteQnABoard" parameterType="int">
+		UPDATE qna_board_question
+		SET delete_Yn='Y'
+		WHERE board_question_num=#{board_question_num}
+	</update>
+	
+	
+	<!-- 
+	
+	 <select id="getList" parameterType="QnaBoardDto" resultType="QnaBoardDto">
+	      SELECT *
+	      FROM
+	         (SELECT result1.*, ROWNUM AS rnum
+	         FROM
+	            (SELECT num,writer,title,content,viewCount,TO_CHAR(regdate, 'YY.MM.DD') AS regdate,answered
+	            FROM QNA_BOARD_QUESTION
+	            <include refid="searchCondition"/>
+	            ORDER BY num DESC) result1)
+	      <![CDATA[ 
+	      WHERE rnum >= #{startRowNum} AND rnum <= #{endRowNum}
+	      ]]>
+	</select>
+   
+   <select id="getCount" parameterType="QnaBoardDto" resultType="int">
+      SELECT NVL(MAX(ROWNUM), 0)
+      FROM QNA_BOARD_QUESTION
+      <include refid="searchCondition"/>
+   </select>   
+
+	<insert id="insert" parameterType="QnaBoardRes">
+		INSERT INTO QNA_BOARD_QUESTION
+		(num, writer, title, content, viewCount, regdate)
+	   	VALUES(QNA_BOARD_QUESTION_seq.NEXTVAL, #{writer}, #{title}, 
+	   		#{content}, 0, SYSDATE)   	
+	</insert>
+	
+	<select id="getData" parameterType="int" resultType="QnaBoardDto">
+		SELECT result1.*
+      	FROM
+        		(SELECT num,writer,title,content,viewCount,TO_CHAR(regdate, 'YY.MM.DD HH24:MI') AS regdate,answered,
+            		LAG(num, 1, 0) OVER (ORDER BY num DESC) nextNum,
+               	LEAD(num, 1, 0) OVER (ORDER BY num DESC) prevNum
+          	FROM QNA_BOARD_QUESTION) result1
+      	WHERE num=#{num}
+	</select>
+	
+	<select id="getData2" parameterType="QnaBoardDto" resultType="QnaBoardDto">
+		SELECT result1.*
+      	FROM
+        		(SELECT num,writer,title,content,viewCount,TO_CHAR(regdate, 'YY.MM.DD HH24:MI') AS regdate,answered,
+            		LAG(num, 1, 0) OVER (ORDER BY num DESC) nextNum,
+               	LEAD(num, 1, 0) OVER (ORDER BY num DESC) prevNum
+          	FROM QNA_BOARD_QUESTION
+          	<include refid="searchCondition"></include>
+          	) result1
+      	WHERE num=#{num}
+	</select>
+	
+	<update id="addViewCount" parameterType="int">
+		UPDATE QNA_BOARD_QUESTION
+		SET viewCount=viewCount+1
+		WHERE num=#{num}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM QNA_BOARD_QUESTION
+		WHERE num=#{num}				
+	</delete>
+	
+	<update id="update" parameterType="QnaBoardReq">
+		UPDATE QNA_BOARD_QUESTION
+		SET title=#{title}, content='${content}'
+		WHERE num=#{num}
+	</update>
+	
+	<update id="answered" parameterType="QnaBoardDto">
+		UPDATE QNA_BOARD_QUESTION
+		SET answered=#{answered}
+		WHERE num=#{num}
+	</update> -->
+</mapper>
