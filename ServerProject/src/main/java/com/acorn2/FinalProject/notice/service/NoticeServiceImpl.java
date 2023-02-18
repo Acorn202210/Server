@@ -19,6 +19,7 @@ import com.acorn2.FinalProject.notice.dto.req.NoticeUpdateReqDto;
 import com.acorn2.FinalProject.notice.dto.res.NoticeReadDetailResDto;
 import com.acorn2.FinalProject.notice.dto.res.NoticeReadListResDto;
 import com.acorn2.FinalProject.notice.dto.res.NoticeReadResDto;
+import com.acorn2.FinalProject.notice.exception.NoticeNotFoundException;
 
 
 @Service
@@ -27,7 +28,7 @@ public class NoticeServiceImpl implements NoticeService{
 	private NoticeDao noticeDao;
 
 	@Override
-	public NoticeReadListResDto selectNoticeList(NoticeReadReqDto noticeReadReqDto) {
+	public NoticeReadListResDto selectNoticeList(NoticeReadReqDto noticeReadReqDto) {		
 		if(noticeReadReqDto.getKeyword() != null){
 			if(noticeReadReqDto.getCondition().equals("title_content")){
 				noticeReadReqDto.setTitle(noticeReadReqDto.getKeyword());
@@ -49,6 +50,9 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public NoticeReadDetailResDto selectNoticeOne(NoticeReadReqDto noticeReadReqDto) {
+		if(noticeDao.selectNotice(noticeReadReqDto)== null) {
+			throw new NoticeNotFoundException("공지사항이 없습니다.");
+		}
 		return noticeDao.selectNotice(noticeReadReqDto);
 	}
 
