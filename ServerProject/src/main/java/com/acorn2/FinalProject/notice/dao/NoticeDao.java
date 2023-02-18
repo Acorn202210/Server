@@ -9,9 +9,6 @@ import com.acorn2.FinalProject.notice.dto.req.NoticeReadReqDto;
 import com.acorn2.FinalProject.notice.dto.res.NoticeReadDetailResDto;
 import com.acorn2.FinalProject.notice.dto.res.NoticeReadResDto;
 
-
-
-
 @Mapper
 public interface NoticeDao {
 //	public List<NoticeDto> getList(NoticeDto dto);
@@ -73,4 +70,24 @@ public interface NoticeDao {
 	 * @description : 공지사항 등록
 	 */
 	Integer insertNotice(NoticeDto dto);
+	/**
+	 *
+	 * @methodName : updateNotice
+	 * @author : cheon
+	 * @param NoticeDto
+	 * @return
+	 * @return : Integer
+	 * @description : 공지사항 수정
+	 */
+	Integer updateNotice(NoticeDto dto);
+	/**
+	 *
+	 * @methodName : updateNotice
+	 * @author : cheon
+	 * @param NoticeDto
+	 * @return
+	 * @return : Integer
+	 * @description : 공지사항 수정
+	 */
+	Integer deleteNotice(Integer noti_num);
 }

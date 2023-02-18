@@ -15,6 +15,7 @@ import com.acorn2.FinalProject.notice.dao.NoticeDao;
 import com.acorn2.FinalProject.notice.dto.NoticeDto;
 import com.acorn2.FinalProject.notice.dto.req.NoticeCreateReqDto;
 import com.acorn2.FinalProject.notice.dto.req.NoticeReadReqDto;
+import com.acorn2.FinalProject.notice.dto.req.NoticeUpdateReqDto;
 import com.acorn2.FinalProject.notice.dto.res.NoticeReadDetailResDto;
 import com.acorn2.FinalProject.notice.dto.res.NoticeReadListResDto;
 import com.acorn2.FinalProject.notice.dto.res.NoticeReadResDto;
@@ -27,6 +28,17 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public NoticeReadListResDto selectNoticeList(NoticeReadReqDto noticeReadReqDto) {
+		if(noticeReadReqDto.getKeyword() != null){
+			if(noticeReadReqDto.getCondition().equals("title_content")){
+				noticeReadReqDto.setTitle(noticeReadReqDto.getKeyword());
+				noticeReadReqDto.setContent(noticeReadReqDto.getKeyword());
+			}else if(noticeReadReqDto.getCondition().equals("title")){ 
+				noticeReadReqDto.setTitle(noticeReadReqDto.getKeyword());
+			}else if(noticeReadReqDto.getCondition().equals("content")){ 
+				noticeReadReqDto.setContent(noticeReadReqDto.getKeyword());
+			}
+		}
+		
 		Integer totalCount = noticeDao.selectNoticeCount(noticeReadReqDto);
 		List<NoticeReadResDto> noticeReadResDtoList = noticeDao.selectNoticeList(noticeReadReqDto);
 		NoticeReadListResDto noticeReadListResDto = new NoticeReadListResDto(totalCount, noticeReadReqDto);
@@ -47,6 +59,23 @@ public class NoticeServiceImpl implements NoticeService{
 		dto.setContent(noticeCreateReqDto.getContent());
 		dto.setNoti_writer("관리자1");
 		noticeDao.insertNotice(dto);
+	}
+
+
+	@Override
+	public void updateNotice(NoticeUpdateReqDto noticeUpdateReqDto) {
+		NoticeDto dto = new NoticeDto();
+		dto.setNoti_num(noticeUpdateReqDto.getNoti_num());
+		dto.setTitle(noticeUpdateReqDto.getTitle());
+		dto.setContent(noticeUpdateReqDto.getContent());
+		dto.setUpdate_id("관리자2");
+		noticeDao.updateNotice(dto);
+	}
+
+
+	@Override
+	public void deleteNotice(Integer noti_num) {
+		noticeDao.deleteNotice(noti_num);
 	}
 
 	

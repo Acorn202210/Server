@@ -16,7 +16,11 @@
 	<select id="selectNoticeCount" parameterType="com.acorn2.FinalProject.notice.dto.req.NoticeReadReqDto" resultType="java.lang.Integer">
 		 SELECT NVL(MAX(ROWNUM), 0)
       	 FROM NOTICE
-        <include refid="searchCondition"/>
+        <where>
+        	delete_yn_code = 'N'
+			<if test="title != null and content != null">AND (title LIKE '%'||#{title}||'%' OR content LIKE '%'||#{content}||'%')</if>
+			<if test="title != null">AND title LIKE '%'||#{title}||'%'</if>
+         </where>
 	</select>
 	
 	<select id="selectNoticeList" parameterType="com.acorn2.FinalProject.notice.dto.req.NoticeReadReqDto" resultType="com.acorn2.FinalProject.notice.dto.res.NoticeReadResDto">
@@ -24,10 +28,13 @@
       	FROM
          (SELECT result1.*, ROWNUM AS rnum
           FROM
-            (SELECT noti_num, title, content, viewCount, regdate, noti_writer, update_regdate, update_id, delete_yn_code
+            (SELECT noti_num, title, viewCount, regdate, noti_writer, delete_yn_code
              FROM NOTICE
-             <include refid="searchCondition"/>
-             WHERE delete_yn_code = 'N'
+             <where>
+                delete_yn_code = 'N'
+				<if test="title != null and content != null">AND (title LIKE '%'||#{title}||'%' OR content LIKE '%'||#{content}||'%')</if>
+				<if test="title != null">AND title LIKE '%'||#{title}||'%'</if>
+             </where>
              ORDER BY noti_num DESC) result1)
         WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
 	</select>
@@ -51,8 +58,28 @@
       VALUES(NOTICE_seq.NEXTVAL, #{title},#{content}, 0, SYSDATE, #{noti_writer}, 'N')
    </insert>
 
-   
+   <update id="updateNotice" parameterType="com.acorn2.FinalProject.notice.dto.NoticeDto">
+      UPDATE NOTICE
+      <set>
+      	<if test="title != null">
+      		title = #{title},
+      	</if>
+      	<if test="content != null">
+      		content=#{content},
+      	</if>
+      	update_regdate = SYSDATE,
+      	update_id = #{update_id}
+      </set>
+      WHERE noti_num=#{noti_num}
+   </update>
 	
+	<update id="deleteNotice" parameterType="Integer">
+      UPDATE NOTICE
+      <set>
+      	delete_yn_code = "Y"
+      </set>
+      WHERE noti_num=#{noti_num}
+   </update>
 </mapper>
 
 

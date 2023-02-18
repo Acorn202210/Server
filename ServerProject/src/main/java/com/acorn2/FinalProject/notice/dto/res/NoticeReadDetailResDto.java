@@ -2,7 +2,7 @@ package com.acorn2.FinalProject.notice.dto.res;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-public class NoticeReadDetailResDto{
+public class NoticeReadDetailResDto {
 	@Schema(description = "공지사항 번호", example = "1", required = true, minLength = 1, maxLength = 50)
 	private int noti_num;
 	@Schema(description = "공지사항 제목", example = "제목", required = true, minLength = 1, maxLength = 50)
