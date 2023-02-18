@@ -3,6 +3,7 @@ package com.acorn2.FinalProject.faq.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.acorn2.FinalProject.faq.dao.FaqDao;
@@ -20,6 +21,7 @@ public class FaqServiceImpl implements FaqService{
 	private FaqDao faqDao;
 
 	@Override
+	@Cacheable(value = "faq")
 	public FaqReadListResDto selectFaqList(FaqReadReqDto faqReadReqDto) {
 		Integer totalCount = faqDao.selectFaqCount(faqReadReqDto);
 		List<FaqReadResDto> faqReadResDtoList = faqDao.selectFaqList(faqReadReqDto);
