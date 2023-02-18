@@ -35,5 +35,4 @@ file:
 
 logging:
   config: classpath:log4j/log4j2_local.xml
-
   

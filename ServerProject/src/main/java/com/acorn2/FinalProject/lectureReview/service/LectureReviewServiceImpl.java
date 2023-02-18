@@ -1,22 +1,19 @@
 package com.acorn2.FinalProject.lectureReview.service;
 
-import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.acorn2.FinalProject.lectureReview.dao.LectureReviewDao;
 import com.acorn2.FinalProject.lectureReview.dto.LectureReviewDto;
-import com.acorn2.FinalProject.lectureReview.dto.LectureReviewReadListRes;
-import com.acorn2.FinalProject.lectureReview.dto.LectureReviewReadReq;
-import com.acorn2.FinalProject.lectureReview.dto.LectureReviewReadRes;
-import com.acorn2.FinalProject.lectureReview.dto.LectureReviewRes;
+import com.acorn2.FinalProject.lectureReview.dto.req.LectureReviewCreateReqDto;
+import com.acorn2.FinalProject.lectureReview.dto.req.LectureReviewReadReqDto;
+import com.acorn2.FinalProject.lectureReview.dto.req.LectureReviewUpdateReqDto;
+import com.acorn2.FinalProject.lectureReview.dto.res.LectureReviewReadListResDto;
+import com.acorn2.FinalProject.lectureReview.dto.res.LectureReviewReadResDto;
 
 
 @Service
@@ -24,42 +21,50 @@ public class LectureReviewServiceImpl implements LectureReviewService{
 	@Autowired LectureReviewDao reviewDao;
 	
 	@Override
-	public LectureReviewReadListRes LectureReviewList(LectureReviewReadReq reviewReq) {
-		Integer totalCount = reviewDao.getCount(0);
-
-		
-		return null;
+	public LectureReviewReadListResDto LectureReviewList(LectureReviewReadReqDto reviewReq) {
+		Integer totalCount = reviewDao.selectLectureReivewCount(reviewReq); 
+		List<LectureReviewReadResDto> ReviewReadList = reviewDao.LectureReviewList(reviewReq);
+		LectureReviewReadListResDto ReviewListRes = new LectureReviewReadListResDto(totalCount, reviewReq);
+		ReviewListRes.setData(ReviewReadList);
+		return ReviewListRes;
 	}
 	
+	@Override
+	public LectureReviewDto LectureReviewOne(int lecReNum) {
+		return reviewDao.LectureReviewOne(lecReNum);
+	}
+
+	@Override
+	public void LectureReviewInsert(LectureReviewCreateReqDto ReviewCreateReqDto) {
+		LectureReviewDto dto = new LectureReviewDto();
+		dto.setLecReNum(ReviewCreateReqDto.getLecReNum());
+		dto.setLecReWriter(ReviewCreateReqDto.getLecReWriter());
+		dto.setLecReStuRefGroup(ReviewCreateReqDto.getLecReStuRefGroup());
+		dto.setStar(ReviewCreateReqDto.getStar());
+		dto.setContent(ReviewCreateReqDto.getContent());
+		
+		reviewDao.insertLectureReview(dto);
+	}
 	
-
 	@Override
-	public ResponseEntity<Object> saveReview(LectureReviewRes res) {
-		reviewDao.insert(res);
-		return ResponseEntity.ok("Success");
-		
+	public void LectureReviewUpdate(LectureReviewUpdateReqDto reviewUpdateReqDto) {
+		LectureReviewDto dto = new LectureReviewDto();
+		dto.setLecReNum(reviewUpdateReqDto.getLecReNum());
+		dto.setContent(reviewUpdateReqDto.getContent());
+		dto.setStar(reviewUpdateReqDto.getStar());
+		reviewDao.updateLectureReview(dto);	
 	}
 
 	@Override
-	public ResponseEntity<Object> deleteReview(int num) {    
-	    reviewDao.delete(num);
-	    return ResponseEntity.ok("Success");
+	public void LectureReviewDelete(int lecReNum) {
+		reviewDao.deleteLectureReview(lecReNum);
 		
 	}
 
-	@Override
-	public ResponseEntity<Object> updateReview(LectureReviewReadReq req) {
-		reviewDao.update(req);
-		return ResponseEntity.ok("Success");
+
+
 	
-		
-	}
-
-	@Override
-	public ResponseEntity<LectureReviewDto> getData(int num) {
-		LectureReviewDto data =reviewDao.getData(num);
-		return ResponseEntity.ok(data);
-		}
+	
 
 	
 

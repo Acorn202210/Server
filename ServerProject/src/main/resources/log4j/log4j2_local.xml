@@ -5,9 +5,6 @@
 		<Property name="APP_NAME" value="ltmg"></Property>
 	</Properties>
 	<Appenders>
-		<WebSocketAppender name="WebSocketAppender" appName="${APP_NAME}">
-			<PatternLayout pattern="${LOG_PATTERN}" />
-		</WebSocketAppender>
 		<Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
 			<PatternLayout pattern="${LOG_PATTERN}" />
 		</Console>
