@@ -1,5 +1,6 @@
 package com.acorn2.FinalProject.faq.controller;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 @RequestMapping("/api/faq")
 public class Faq {
 	@Autowired private FaqService service;
-	
+		
 	@ApiOperation(value="자주묻는질문 리스트", notes = "자주묻는질문의 리스트를 출력함.")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = "pageNum", value = "페이지 번호", required = true, dataTypeClass = Integer.class ,example="0"),
@@ -32,7 +33,7 @@ public class Faq {
 	@GetMapping("/list")
 	public Map<String, Object> list(@RequestParam(value = "pageNum", required = true)int pageNum,
 			@RequestParam(value = "question", required = false)String question,
-			@RequestParam(value = "content", required = false)String content){	
+			@RequestParam(value = "content", required = false)String content){		
 		return service.list(pageNum, question, content);
 	}
 	

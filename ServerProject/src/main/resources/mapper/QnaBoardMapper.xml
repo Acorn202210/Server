@@ -40,6 +40,22 @@
 		(board_question_num,board_question_writer,title,content,viewCount,user_regdate,UPDATE_DATE)
 		VALUES(QNA_BOARD_QUESTION_seq.NEXTVAL, #{board_question_writer}, #{title}, #{content}, 0, SYSDATE, SYSDATE)
 	</insert>
+	
+	<!-- 게시물 수정 -->
+	<update id="updateQnaBoard" parameterType="com.acorn2.FinalProject.qnaboard.dto.QnaBoardDto">
+		UPDATE qna_board_question
+		SET title=#{title}, content=#{content}, update_date=SYSDATE
+		WHERE board_question_num=#{board_question_num}
+	</update>
+		
+	<!-- 게시물 삭제 처리 -->
+	<update id="deleteQnABoard" parameterType="int">
+		UPDATE qna_board_question
+		SET delete_Yn='Y'
+		WHERE board_question_num=#{board_question_num}
+	</update>
+	
+	
 	<!-- 
 	
 	 <select id="getList" parameterType="QnaBoardDto" resultType="QnaBoardDto">

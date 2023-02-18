@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +24,7 @@ import com.acorn2.FinalProject.common.dto.ComResponseDto;
 import com.acorn2.FinalProject.common.dto.ComResponseEntity;
 import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardCreateReqDto;
 import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardReadReqDto;
+import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardUpdateReqDto;
 import com.acorn2.FinalProject.qnaboard.dto.res.QnaBoardReadListResDto;
 //import com.acorn2.FinalProject.qnaboard.dto.QnaBoardRes;
 import com.acorn2.FinalProject.qnaboard.service.QnaBoardService;
@@ -35,7 +38,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 @Api(value = "QnaBoardController")
 @RequestMapping("/api/qna_board")
 public class QnaBoard {
-
+	
+	private final Logger logger = LoggerFactory.getLogger(getClass());
+	
 	@Autowired
 	private QnaBoardService service;
 	
@@ -46,6 +51,7 @@ public class QnaBoard {
 	public com.acorn2.FinalProject.common.dto.ComResponseEntity<QnaBoardReadListResDto> getCdList(
 			@Parameter(hidden = true) QnaBoardReadReqDto qnaBoardReqDto){
 		QnaBoardReadListResDto qnaBoardReadListResDto = service.selectQnaBoardList(qnaBoardReqDto);
+		logger.debug("qnaBoardReqDto parameter : {}", qnaBoardReqDto);
 		return new com.acorn2.FinalProject.common.dto.ComResponseEntity<>(new ComResponseDto<>(qnaBoardReadListResDto));
 	}
 	
@@ -54,6 +60,23 @@ public class QnaBoard {
 		service.QnaBoardInsert(qnaBoardCreateReqDto);
 		return new ComResponseEntity<Void>();
 	}
+	
+	//수정
+	@PutMapping("/{board_question_num}/update")
+	public ComResponseEntity<Void> QnaBoardUpdate(@RequestParam(value = "board_question_num", required = true) int board_question_num, 
+											@Valid @RequestBody QnaBoardUpdateReqDto qnaBoardUpdateReqDto){
+		service.QnaBoardUpdate(qnaBoardUpdateReqDto);
+		return new ComResponseEntity<Void>();
+	}
+	
+	//삭제(deleted N) 처리
+//	@PutMapping("/{board_question_num}/delete")
+//	public ComResponseEntity<Void> QnaBoardDelete(@RequestParam(value = "board_question_num", required = true) int board_question_num, 
+//											@Valid @RequestBody QnaBoardUpdateReqDto qnaBoardUpdateReqDto){
+//		service.QnaBoardUpdate(qnaBoardUpdateReqDto);
+//		return new ComResponseEntity<Void>();
+//	}	
+	
 	
 	/*
 	@GetMapping("/list")

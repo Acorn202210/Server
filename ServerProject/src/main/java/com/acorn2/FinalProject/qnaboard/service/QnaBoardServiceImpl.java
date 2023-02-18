@@ -14,6 +14,7 @@ import com.acorn2.FinalProject.qnaboard.dto.QnaBoardAnswerDto;
 import com.acorn2.FinalProject.qnaboard.dto.QnaBoardDto;
 import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardCreateReqDto;
 import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardReadReqDto;
+import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardUpdateReqDto;
 //import com.acorn2.FinalProject.qnaboard.dto.QnaBoardRes;
 import com.acorn2.FinalProject.qnaboard.dto.res.QnaBoardReadListResDto;
 import com.acorn2.FinalProject.qnaboard.dto.res.QnaBoardReadResDto;
@@ -42,6 +43,22 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 		dto.setContent(qnaBoardCreateReqDto.getContent());
 		
 		qnaDao.insertQnaBoard(dto);
+	}
+
+	//글 수정
+	@Override
+	public void QnaBoardUpdate(QnaBoardUpdateReqDto qnaBoardUpdateReqDto) {
+		QnaBoardDto dto=new QnaBoardDto();
+		dto.setBoard_question_num(qnaBoardUpdateReqDto.getBoard_question_num());
+		dto.setTitle(qnaBoardUpdateReqDto.getTitle());
+		dto.setContent(qnaBoardUpdateReqDto.getContent());
+		qnaDao.updateQnaBoard(dto);
+	}
+
+	//글 삭제(삭제 칼럼 Y 변경)
+	@Override
+	public void QnaBoardDelete(int board_question_num) {
+		qnaDao.deleteQnaBoard(board_question_num);		
 	}
 	
 	

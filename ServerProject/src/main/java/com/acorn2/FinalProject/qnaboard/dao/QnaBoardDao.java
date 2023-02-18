@@ -55,5 +55,9 @@ public interface QnaBoardDao {
 	public List<QnaBoardReadResDto> selectQnaBoardList(QnaBoardReadReqDto qnaBoardReadReqDto);
 	
 	
-	Integer insertQnaBoard(QnaBoardDto dto); 
+	Integer insertQnaBoard(QnaBoardDto dto);
+	
+	Integer updateQnaBoard(QnaBoardDto dto);
+	
+	Integer deleteQnaBoard(int board_question_num);
 }
