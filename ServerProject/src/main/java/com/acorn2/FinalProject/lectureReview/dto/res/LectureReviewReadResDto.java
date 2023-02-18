@@ -4,37 +4,37 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "후기 정보")
 public class LectureReviewReadResDto {
-	private int lec_re_num;
-    private String lec_re_writer;
-    private int lec_re_stu_ref_group;
-    private String delete_Yn;
+	private int lecReNum;
+    private String lecReWriter;
+    private int lecReStuRefGroup;
+    private String deleteYn;
     private int star;
-    private String user_regdate;
+    private String userRegdate;
     private String content;
-    private String update_date;
-	public int getlec_re_num() {
-		return lec_re_num;
+    private String updateDate;
+	public int getLecReNum() {
+		return lecReNum;
 	}
-	public void setlec_re_num(int lec_re_num) {
-		this.lec_re_num = lec_re_num;
+	public void setLecReNum(int lecReNum) {
+		this.lecReNum = lecReNum;
 	}
-	public String getLec_re_writer() {
-		return lec_re_writer;
+	public String getLecReWriter() {
+		return lecReWriter;
 	}
-	public void setLec_re_writer(String lec_re_writer) {
-		this.lec_re_writer = lec_re_writer;
+	public void setLecReWriter(String lecReWriter) {
+		this.lecReWriter = lecReWriter;
 	}
-	public int getLec_re_stu_ref_group() {
-		return lec_re_stu_ref_group;
+	public int getLecReStuRefGroup() {
+		return lecReStuRefGroup;
 	}
-	public void setLec_re_stu_ref_group(int lec_re_stu_ref_group) {
-		this.lec_re_stu_ref_group = lec_re_stu_ref_group;
+	public void setLecReStuRefGroup(int lecReStuRefGroup) {
+		this.lecReStuRefGroup = lecReStuRefGroup;
 	}
-	public String getDelete_Yn() {
-		return delete_Yn;
+	public String getDeleteYn() {
+		return deleteYn;
 	}
-	public void setDelete_Yn(String delete_Yn) {
-		this.delete_Yn = delete_Yn;
+	public void setDeleteYn(String deleteYn) {
+		this.deleteYn = deleteYn;
 	}
 	public int getStar() {
 		return star;
@@ -42,11 +42,11 @@ public class LectureReviewReadResDto {
 	public void setStar(int star) {
 		this.star = star;
 	}
-	public String getUser_regdate() {
-		return user_regdate;
+	public String getUserRegdate() {
+		return userRegdate;
 	}
-	public void setUser_regdate(String user_regdate) {
-		this.user_regdate = user_regdate;
+	public void setUserRegdate(String userRegdate) {
+		this.userRegdate = userRegdate;
 	}
 	public String getContent() {
 		return content;
@@ -54,15 +54,14 @@ public class LectureReviewReadResDto {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getUpdate_date() {
-		return update_date;
+	public String getUpdateDate() {
+		return updateDate;
 	}
-	public void setUpdate_date(String update_date) {
-		this.update_date = update_date;
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
 	}
     
 	
-
 	
 	
 	

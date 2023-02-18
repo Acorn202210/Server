@@ -24,22 +24,22 @@ public class LectureReviewServiceImpl implements LectureReviewService{
 	public LectureReviewReadListResDto LectureReviewList(LectureReviewReadReqDto reviewReq) {
 		Integer totalCount = reviewDao.selectLectureReivewCount(reviewReq); 
 		List<LectureReviewReadResDto> ReviewReadList = reviewDao.LectureReviewList(reviewReq);
-		LectureReviewReadListResDto ReviewListRes = new LectureReviewReadListResDto(totalCount,reviewReq);
+		LectureReviewReadListResDto ReviewListRes = new LectureReviewReadListResDto(totalCount, reviewReq);
 		ReviewListRes.setData(ReviewReadList);
 		return ReviewListRes;
 	}
 	
 	@Override
-	public LectureReviewDto LectureReviewOne(int lec_re_num) {
-		return reviewDao.LectureReviewOne(lec_re_num);
+	public LectureReviewDto LectureReviewOne(int lecReNum) {
+		return reviewDao.LectureReviewOne(lecReNum);
 	}
 
 	@Override
 	public void LectureReviewInsert(LectureReviewCreateReqDto ReviewCreateReqDto) {
 		LectureReviewDto dto = new LectureReviewDto();
-		dto.setLec_re_num(ReviewCreateReqDto.getLec_re_num());
-		dto.setLec_re_writer(ReviewCreateReqDto.getLec_re_writer());
-		dto.setLec_re_stu_ref_group(ReviewCreateReqDto.getLec_re_stu_ref_group());
+		dto.setLecReNum(ReviewCreateReqDto.getLecReNum());
+		dto.setLecReWriter(ReviewCreateReqDto.getLecReWriter());
+		dto.setLecReStuRefGroup(ReviewCreateReqDto.getLecReStuRefGroup());
 		dto.setStar(ReviewCreateReqDto.getStar());
 		dto.setContent(ReviewCreateReqDto.getContent());
 		
@@ -49,16 +49,15 @@ public class LectureReviewServiceImpl implements LectureReviewService{
 	@Override
 	public void LectureReviewUpdate(LectureReviewUpdateReqDto reviewUpdateReqDto) {
 		LectureReviewDto dto = new LectureReviewDto();
+		dto.setLecReNum(reviewUpdateReqDto.getLecReNum());
 		dto.setContent(reviewUpdateReqDto.getContent());
 		dto.setStar(reviewUpdateReqDto.getStar());
-		reviewDao.updateLectureReview(dto);
-		
-		
+		reviewDao.updateLectureReview(dto);	
 	}
 
 	@Override
-	public void LectureReviewDelete(int lec_re_num) {
-		reviewDao.deleteLectureReview(lec_re_num);
+	public void LectureReviewDelete(int lecReNum) {
+		reviewDao.deleteLectureReview(lecReNum);
 		
 	}
 

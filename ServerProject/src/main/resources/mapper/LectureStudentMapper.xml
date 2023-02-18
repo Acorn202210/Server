@@ -1,74 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="lectureStudent">
-	<sql id="searchCondition">
-		<choose>
-			<when test="id != null">
-				WHERE id LIKE '%'||#{id}||'%'
-			</when>
-			<when test="birth != null">
-				WHERE birth LIKE '%'||#{birth}||'%'
-			</when>
-			<when test="phone != null">
-				WHERE phone LIKE '%'||#{phone}||'%'
-			</when>
-			<when test="email != null">
-				WHERE email LIKE '%'||#{email}||'%'
-			</when>
-			<when test="regdate != null">
-				WHERE regdate LIKE '%'||#{regdate}||'%'
-			</when>
-		</choose>
-	</sql>
+<mapper namespace="com.acorn2.FinalProject.lectureStudent.dao.LectureStudentDao">
 
-	<select id="studentData" parameterType="lectureStudentDto" resultType="lectureStudentDto">
-		SELECT * FROM LECTURE_STUDENT
-		WHERE id=#{id, jdbcType=VARCHAR} AND ref_group=#{ref_group}
+	<select id="SelectLectureStudentCount" parameterType="com.acorn2.FinalProject.lectureStudent.dto.req.LectureStudentReadReqDto" resultType="java.lang.Integer">
+		SELECT NVL(MAX(ROWNUM), 0)
+		FROM LECTURE_STUDENT
 	</select>
-
-	<update id="lectureComplete" parameterType="lectureStudentReq">
-		UPDATE LECTURE_STUDENT
-		SET complete=#{complete}
-		WHERE ref_group=#{ref_group} AND id=#{id}
-	</update>
-
-	<select id="studentList" parameterType="lectureStudentDto" resultType="lectureStudentDto">
+	
+	<select id="LectureStudentList" parameterType="com.acorn2.FinalProject.lectureStudent.dto.req.LectureStudentReadReqDto" resultType="com.acorn2.FinalProject.lectureStudent.dto.res.LectureStudentReadResDto">
 	  SELECT *
 			FROM	
 				(SELECT result1.*, ROWNUM as rnum
 				FROM
-					(SELECT users.id,TO_CHAR(birth,'YYYY-MM-DD') birth, phone, email, regdate, large_category, small_category
+					(SELECT users.id,TO_CHAR(birth,'YYYY-MM-DD') birth, phone, email, User_Regdate, large_category, small_category
 					FROM users 
 					JOIN LECTURE_STUDENT
-					ON users.id=LECTURE_STUDENT.id
+					ON users.id=LECTURE_STUDENT.lec_Stu_User_Id
 					JOIN LECTURE 
-					on LECTURE.num=LECTURE_STUDENT.ref_group
-					<choose>
-						<when test='small_category=="0"'>
-							WHERE large_category=#{large_category}
-						</when>
-						<when test="small_category!=null">
-							WHERE large_category=#{large_category} AND small_category=#{small_category}
-						</when>
-					</choose>
-					ORDER BY users.id DESC) result1)
-			WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
-	</select>   
-  
-  <insert id="lectureSignup" parameterType="lectureStudentDto">
+					on LECTURE.lec_Num=LECTURE_STUDENT.lec_Stu_Ref_Group
+					
+					<where>
+						<if test="lecStuUserId != null">AND lec_Stu_User_Id LIKE '%'||#{lecStuUserId}||'%'</if>
+						<if test="birth != null">AND birth LIKE '%'||#{birth}||'%'</if>
+						<if test="phone != null">AND phone LIKE '%'||#{phone}||'%'</if>
+						<if test="email != null">AND email LIKE '%'||#{email}||'%'</if>
+						<if test="userRegdate != null">AND userRegdate LIKE '%'||#{userRegdate}||'%'</if>
+						<if test='smallCategory=="0"'>AND large_category=#{largeCategory}</if>
+						<if test="smallCategory!=null">AND large_category=#{largeCategory} AND small_category=#{smallCategory}</if>
+					</where>
+					ORDER BY users.id DESC) result1)				
+			<![CDATA[		
+			WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
+			]]>
+	</select>
+	
+    <select id="studentDataOne" parameterType="int" resultType="com.acorn2.FinalProject.lectureStudent.dto.req.LectureStudentOneReadReqDto">
+		SELECT lec_Stu_Num,lec_Stu_User_Id,lec_Stu_Ref_Group,Complete_Yn,User_Regdate,Update_Date 
+		FROM LECTURE_STUDENT
+		WHERE lec_Stu_Num=#{lecStuNum}
+	</select>
+	
+	<update id="LectureCompleteYn" parameterType="lectureStudentDto">
+		UPDATE LECTURE_STUDENT
+		SET Complete_Yn=#{completeYn}, Update_Date=SYSDATE
+		WHERE lec_Stu_Num=#{lecStuNum}
+	</update>
+	
+	<insert id="LectureSignup" parameterType="lectureStudentDto">
 	  INSERT INTO LECTURE_STUDENT
-			(num, id, ref_group)
-			VALUES(#{num}, #{id}, #{ref_group})
-   </insert>
-   
-   
-   <select id="getSequence" resultType="int">
+			(lec_Stu_Num, lec_Stu_User_Id, lec_Stu_Ref_Group, User_Regdate)
+			VALUES(LECTURE_STUDENT_seq.NEXTVAL, #{lecStuUserId}, #{lecStuRefGroup}, SYSDATE)
+    </insert>
+	
+	
+	<select id="getSequence" resultType="int">
       SELECT LECTURE_STUDENT_seq.NEXTVAL
       FROM DUAL
-   </select>
+    </select>
    
-   	<select id="getCount" resultType="int">
-		SELECT NVL(MAX(ROWNUM), 0)
-		FROM LECTURE_STUDENT
-	</select>
 </mapper>

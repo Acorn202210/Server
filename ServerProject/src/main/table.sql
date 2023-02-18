@@ -113,17 +113,20 @@ CREATE SEQUENCE FAQ_seq;
 
 -- LECTURE 테이블 
 CREATE TABLE LECTURE(
-    num NUMBER PRIMARY KEY, --글번호
-    writer VARCHAR2(50) NOT NULL,
-    teacher VARCHAR2(50) NOT NULL, --선생님
-    title VARCHAR2(50) NOT NULL, --제목
-    describe CLOB, --강의 설명
-    imagePath VARCHAR2(100), -- 이미지 업로드
-    videoPath VARCHAR2(300), --영상 링크
-    viewCount NUMBER, -- 조회수
-    regdate DATE, --등록일
-    large_category NUMBER, -- 강의 대분류
-    small_category NUMBER -- 강의 소분류
+    LEC_NUM NUMBER PRIMARY KEY, --글번호
+    LEC_WRITER VARCHAR2(50) NOT NULL,
+    TEACHER VARCHAR2(50) NOT NULL, --선생님
+    TITLE VARCHAR2(50) NOT NULL, --제목
+    DESCRIBE CLOB, --강의 설명
+    IMAGEPATH VARCHAR2(100), -- 이미지 업로드
+    VIDEOPATH VARCHAR2(300), --영상 링크
+    VIEWCOUNT NUMBER, -- 조회수
+    USER_REGDATE DATE, --등록일
+    UPDATE_DATE DATE,
+    LARGE_CATEGORY VARCHAR2(15), -- 강의 대분류
+    SMALL_CATEGORY VARCHAR2(15), -- 강의 소분류
+    UPDATE_ID VARCHAR2(50),
+    SERVICE_YN_CODE VARCHAR2(3) DEFAULT 'Y'
 );
 -- LECTURE 시퀀스
 CREATE SEQUENCE LECTURE_seq;
@@ -145,10 +148,12 @@ CREATE SEQUENCE LECTURE_REVIEW_seq;
 
 -- 강의 수강생
 CREATE TABLE LECTURE_STUDENT(
-    num NUMBER PRIMARY KEY,
-    id VARCHAR2(50),
-    ref_group NUMBER,
-    complete VARCHAR2(3) DEFAULT 'no'
+    LEC_STU_NUM NUMBER PRIMARY KEY,
+    LEC_STU_USER_ID VARCHAR2(50),
+    LEC_STU_REF_GROUP NUMBER,
+    COMPLETE_YN VARCHAR2(3) DEFAULT 'N',
+    USER_REGDATE DATE,
+    UPDATE_DATE DATE
 );
 
 CREATE SEQUENCE LECTURE_STUDENT_seq;
