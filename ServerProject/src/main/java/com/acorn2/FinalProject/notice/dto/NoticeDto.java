@@ -4,47 +4,43 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("noticeDto")
 public class NoticeDto {
-	private int num;
+	private int notiNum;
 	private String title;
 	private String content;
 	private int viewCount;
 	private String regdate;
-	private int startRowNum;
-	private int endRowNum;
+	private String notiWriter;
+	private String updateRegdate;
+	private String updateId;
+	private String deleteYNCode;
 	private int prevNum;
 	private int nextNum;
 	
 	public NoticeDto() {}
 
-	public NoticeDto(int num, String title, String content, int viewCount, String regdate, int startRowNum,
-			int endRowNum, int prevNum, int nextNum) {
+	public NoticeDto(int notiNum, String title, String content, int viewCount, String regdate, String notiWriter,
+			String updateRegdate, String updateId, String deleteYNCode, int prevNum,
+			int nextNum) {
 		super();
-		this.num = num;
+		this.notiNum = notiNum;
 		this.title = title;
 		this.content = content;
 		this.viewCount = viewCount;
 		this.regdate = regdate;
-		this.startRowNum = startRowNum;
-		this.endRowNum = endRowNum;
+		this.notiWriter = notiWriter;
+		this.updateRegdate = updateRegdate;
+		this.updateId = updateId;
+		this.deleteYNCode = deleteYNCode;
 		this.prevNum = prevNum;
 		this.nextNum = nextNum;
 	}
-	
-	public void patch(NoticeDto dto) {
-		if(dto.title != null) {
-			this.title = dto.title;
-		}
-		if(dto.content != null) {
-			this.content = dto.content;
-		}
+
+	public int getNotiNum() {
+		return notiNum;
 	}
 
-	public int getNum() {
-		return num;
-	}
-
-	public void setNum(int num) {
-		this.num = num;
+	public void setNotiNum(int notiNum) {
+		this.notiNum = notiNum;
 	}
 
 	public String getTitle() {
@@ -79,20 +75,36 @@ public class NoticeDto {
 		this.regdate = regdate;
 	}
 
-	public int getStartRowNum() {
-		return startRowNum;
+	public String getNotiWriter() {
+		return notiWriter;
 	}
 
-	public void setStartRowNum(int startRowNum) {
-		this.startRowNum = startRowNum;
+	public void setNotiWriter(String notiWriter) {
+		this.notiWriter = notiWriter;
 	}
 
-	public int getEndRowNum() {
-		return endRowNum;
+	public String getUpdateRegdate() {
+		return updateRegdate;
 	}
 
-	public void setEndRowNum(int endRowNum) {
-		this.endRowNum = endRowNum;
+	public void setUpdateRegdate(String updateRegdate) {
+		this.updateRegdate = updateRegdate;
+	}
+
+	public String getUpdateId() {
+		return updateId;
+	}
+
+	public void setUpdateId(String updateId) {
+		this.updateId = updateId;
+	}
+
+	public String getDeleteYNCode() {
+		return deleteYNCode;
+	}
+
+	public void setDeleteYNCode(String deleteYNCode) {
+		this.deleteYNCode = deleteYNCode;
 	}
 
 	public int getPrevNum() {
@@ -110,8 +122,5 @@ public class NoticeDto {
 	public void setNextNum(int nextNum) {
 		this.nextNum = nextNum;
 	}
-
-	
-	
-	
+		
 }

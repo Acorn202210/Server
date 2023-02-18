@@ -1,39 +1,61 @@
 package com.acorn2.FinalProject.notice.dto.req;
 
-import org.apache.ibatis.type.Alias;
-
 import com.acorn2.FinalProject.common.dto.PagingDto;
 
-@Alias("noticeReq")
 public class NoticeReadReqDto extends PagingDto {
-	private int num;
+	private int notiNum;
+	private String keyword;
+	private String condition;
 	private String title;
 	private String content;
 	
 	public NoticeReadReqDto() {}
-	
-	public NoticeReadReqDto(int num, String title, String content) {
+
+	public NoticeReadReqDto(int notiNum, String keyword, String condition, String title, String content) {
 		super();
-		this.num = num;
+		this.notiNum = notiNum;
+		this.keyword = keyword;
+		this.condition = condition;
 		this.title = title;
 		this.content = content;
 	}
-	
-	public int getNum() {
-		return num;
+
+	public int getNotiNum() {
+		return notiNum;
 	}
-	public void setNum(int num) {
-		this.num = num;
+
+	public void setNotiNum(int notiNum) {
+		this.notiNum = notiNum;
 	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public String getCondition() {
+		return condition;
+	}
+
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getContent() {
 		return content;
 	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}

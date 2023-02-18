@@ -1,4 +1,4 @@
-package com.acorn2.FinalProject.Exception;
+package com.acorn2.FinalProject.common.dto;
 
 import java.util.Date;
 
