@@ -7,6 +7,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,6 +43,7 @@ public class Notice {
 
 	@ApiOperation(value="공지사항 목록", notes = "모든 공지사항의 목록을 가져온다.")
 	@GetMapping
+	@Cacheable(key = "NoticeReadReqDto")
 	public ComResponseEntity<NoticeReadListResDto> getNoticeList(@Parameter(hidden = true) NoticeReadReqDto noticeReadReqDto) {
 		NoticeReadListResDto noticeReadListResDto = service.selectNoticeList(noticeReadReqDto);
 		logger.debug("noticeReadReqDto parameter:{}", noticeReadReqDto.getNotiNum());
@@ -55,6 +58,7 @@ public class Notice {
 	}
 	
 	@ApiOperation(value="공지사항 등록", notes = "공지사항을 등록한다.")
+	@Transactional
 	@PostMapping
 	public ComResponseEntity<Void> insertNotice(@RequestBody NoticeCreateReqDto noticeCreateReqDto){
 		service.insertNotice(noticeCreateReqDto);
@@ -62,6 +66,7 @@ public class Notice {
 	}
 	
 	@ApiOperation(value="공지사항 수정", notes = "공지사항을 수정한다.")
+	@Transactional
 	@PutMapping(value="/{notiNum}")
 	public ComResponseEntity<Void> updateNotice(@RequestBody NoticeUpdateReqDto noticeUpdateReqDto){
 		service.updateNotice(noticeUpdateReqDto);
@@ -69,6 +74,7 @@ public class Notice {
 	}
 	
 	@ApiOperation(value="공지사항 삭제", notes = "공지사항의 delete_YN_code를 'Y'로 수정한다.")
+	@Transactional
 	@PutMapping(value="/{notiNum}/delete")
 	public ComResponseEntity<Void> deleteNotice(@PathVariable("notiNum") Integer notiNum){
 		service.deleteNotice(notiNum);

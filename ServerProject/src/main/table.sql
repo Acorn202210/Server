@@ -1,12 +1,14 @@
 -- 사용자(회원) 정보를 저장할 테이블
 CREATE TABLE users(
-    id VARCHAR2(100) PRIMARY KEY,
-    pwd VARCHAR2(100) NOT NULL,
-    email VARCHAR2(100),
-    profile VARCHAR2(100), --프로필 이미지 경로를 저장할 칼럼
-    regdate DATE,
-    phone VARCHAR2(32),
-    birth DATE
+    LEC_USER_ID VARCHAR2(50) PRIMARY KEY,
+    USER_PWD VARCHAR2(100) NOT NULL,
+    USER_EMAIL VARCHAR2(100),
+    USER_REGDATE DATE,
+    USER_PHONE VARCHAR2(32),
+    USER_BIRTH DATE,
+    MAANAGER_YN DEFAULT 'N',
+    USER_NICKNAME,
+    
 );
 
 -- QNA_BOARD_QUESTION
@@ -88,15 +90,15 @@ CREATE SEQUENCE QNA_FREE_ANSWER_seq;
 
 -- NOTICE(공지사항)
 CREATE TABLE NOTICE(   
-	noti_num NUMBER PRIMARY KEY, 
-  	title VARCHAR2(50) NOT NULL, 
- 	content CLOB, 
-  	viewCount NUMBER, 
-  	regdate DATE, 
-  	update_regdate DATE,   
-	update_id VARCHAR2(50),   
-	noti_writer VARCHAR2(50),   
-	delete_YN_code VARCHAR2(3)  
+    noti_num NUMBER PRIMARY KEY, 
+      title VARCHAR2(50) NOT NULL, 
+     content CLOB, 
+      viewCount NUMBER, 
+      regdate DATE, 
+      update_regdate DATE,   
+    update_id VARCHAR2(50),   
+    noti_writer VARCHAR2(50),   
+    delete_YN_code VARCHAR2(3) DEFAULT 'N'  
 );  
  
 -- NOTICE 시퀀스
