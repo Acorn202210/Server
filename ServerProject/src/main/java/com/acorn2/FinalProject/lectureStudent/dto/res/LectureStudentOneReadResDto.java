@@ -1,6 +1,6 @@
-package com.acorn2.FinalProject.lectureStudent.dto.req;
+package com.acorn2.FinalProject.lectureStudent.dto.res;
 
-public class LectureStudentOneReadReqDto {
+public class LectureStudentOneReadResDto {
 	private int lecStuNum;
 	private String lecStuUserId;
 	private int lecStuRefGroup;

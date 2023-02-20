@@ -25,8 +25,8 @@
 						<if test="phone != null">AND phone LIKE '%'||#{phone}||'%'</if>
 						<if test="email != null">AND email LIKE '%'||#{email}||'%'</if>
 						<if test="userRegdate != null">AND userRegdate LIKE '%'||#{userRegdate}||'%'</if>
-						<if test='smallCategory=="0"'>AND large_category=#{largeCategory}</if>
-						<if test="smallCategory!=null">AND large_category=#{largeCategory} AND small_category=#{smallCategory}</if>
+						<if test='smallCategory == "0"'>AND large_category=#{largeCategory}</if>
+						<if test="smallCategory != null">AND large_category=#{largeCategory} AND small_category=#{smallCategory}</if>
 					</where>
 					ORDER BY users.id DESC) result1)				
 			<![CDATA[		
@@ -34,7 +34,7 @@
 			]]>
 	</select>
 	
-    <select id="studentDataOne" parameterType="int" resultType="com.acorn2.FinalProject.lectureStudent.dto.req.LectureStudentOneReadReqDto">
+    <select id="studentDataOne" parameterType="int" resultType="com.acorn2.FinalProject.lectureStudent.dto.res.LectureStudentOneReadResDto">
 		SELECT lec_Stu_Num,lec_Stu_User_Id,lec_Stu_Ref_Group,Complete_Yn,User_Regdate,Update_Date 
 		FROM LECTURE_STUDENT
 		WHERE lec_Stu_Num=#{lecStuNum}

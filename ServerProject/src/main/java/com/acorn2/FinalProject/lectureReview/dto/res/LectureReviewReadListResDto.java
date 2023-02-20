@@ -28,5 +28,12 @@ public class LectureReviewReadListResDto extends PagingResponseDto{
 	public void setData(List<LectureReviewReadResDto> data) {
 		this.data = data;
 	}
+	
+	@Override
+	public String toString() {
+	    return "LectureReviewReadListResDto{" +
+	            "data=" + data +
+	            '}';
+	}
 
 }
