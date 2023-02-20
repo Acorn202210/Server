@@ -28,4 +28,11 @@ public class QnaBoardReadListResDto extends PagingResponseDto {
 	public void setData(List<QnaBoardReadResDto> data) {
 		this.data = data;
 	}
+	
+	@Override
+	public String toString() {
+	    return "QnaBoardReadListResDto{" +
+	            "data=" + data +
+	            '}';
+	}
 }

@@ -5,8 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.acorn2.FinalProject.qnaboard.dao.QnaBoardAnswerDao;
 import com.acorn2.FinalProject.qnaboard.dao.QnaBoardDao;
@@ -19,22 +24,30 @@ import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardUpdateReqDto;
 import com.acorn2.FinalProject.qnaboard.dto.res.QnaBoardReadListResDto;
 import com.acorn2.FinalProject.qnaboard.dto.res.QnaBoardReadResDto;
 
+@EnableCaching
 @Service
 public class QnaBoardServiceImpl implements QnaBoardService {
 	
 	@Autowired private QnaBoardDao qnaDao;
 //	@Autowired private QnaBoardAnswerDao qnaAnswerDao;
 
+	private final org.slf4j.Logger logger = LoggerFactory.getLogger(getClass());
+	
+	
 	@Override
+	@Cacheable(value = "qnaBoard")
 	public QnaBoardReadListResDto selectQnaBoardList(QnaBoardReadReqDto qnaBoardReadReqDto) {
+		logger.debug("QnaBoard List Start");
 		Integer totalCount = qnaDao.selectQnaBoardCount(qnaBoardReadReqDto);
 		List<QnaBoardReadResDto> qnaBoardReadResDtoList = qnaDao.selectQnaBoardList(qnaBoardReadReqDto);
 		QnaBoardReadListResDto qnaBoardReadListResDto = new QnaBoardReadListResDto(totalCount, qnaBoardReadReqDto);
 		qnaBoardReadListResDto.setData(qnaBoardReadResDtoList);
+		logger.debug("Cached value for key {} is {}", qnaBoardReadReqDto.hashCode(), qnaBoardReadListResDto.toString());
 		return qnaBoardReadListResDto;
 	}
 
 	//글 추가하는 메소드
+	@Transactional
 	@Override
 	public void QnaBoardInsert(QnaBoardCreateReqDto qnaBoardCreateReqDto) {
 		QnaBoardDto dto = new QnaBoardDto();		
@@ -46,6 +59,7 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	}
 
 	//글 수정
+	@Transactional
 	@Override
 	public void QnaBoardUpdate(QnaBoardUpdateReqDto qnaBoardUpdateReqDto) {
 		QnaBoardDto dto=new QnaBoardDto();

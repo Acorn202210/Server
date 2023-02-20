@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,10 +34,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @Api(value = "QnaBoardController")
 @RequestMapping("/api/qna_board")
+@RequiredArgsConstructor
 public class QnaBoard {
 	
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -47,6 +50,7 @@ public class QnaBoard {
 	@ApiOperation(value = "QnaBoard")
 	@ApiResponse(responseCode = "200", description = "성공!")
 	
+	@Cacheable(cacheNames = "qnaBoard")
 	@GetMapping("/list")
 	public com.acorn2.FinalProject.common.dto.ComResponseEntity<QnaBoardReadListResDto> getCdList(
 			@Parameter(hidden = true) QnaBoardReadReqDto qnaBoardReqDto){
