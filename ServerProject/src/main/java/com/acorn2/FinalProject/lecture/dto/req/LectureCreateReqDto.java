@@ -1,10 +1,8 @@
-package com.acorn2.FinalProject.lecture.dto;
+package com.acorn2.FinalProject.lecture.dto.req;
 
-import org.apache.ibatis.type.Alias;
 import org.springframework.web.multipart.MultipartFile;
 
-@Alias("lectureDto")
-public class LectureDto {
+public class LectureCreateReqDto {
 	private int lecNum;
 	private String teacher;
 	private String lecWriter;
@@ -12,20 +10,14 @@ public class LectureDto {
 	private String describe;
 	private String videoPath;
 	private String imagePath;
-	private String usersRegdate;
-	private String updateDate;
 	private int viewCount;
 	private String largeCategory;
 	private String smallCategory;
-	private String updateId;
-	private String serviceYnCode;
-	private MultipartFile image;	
+	private MultipartFile image;
 	
-	public LectureDto() {}
-
-	public LectureDto(int lecNum, String teacher, String lecWriter, String title, String describe, String videoPath,
-			String imagePath, String usersRegdate, String updateDate, int viewCount, String largeCategory,
-			String smallCategory, String updateId, String serviceYnCode, MultipartFile image) {
+	public LectureCreateReqDto(int lecNum, String teacher, String lecWriter, String title, String describe,
+			String videoPath, String imagePath, int viewCount, String largeCategory, String smallCategory,
+			MultipartFile image) {
 		super();
 		this.lecNum = lecNum;
 		this.teacher = teacher;
@@ -34,16 +26,12 @@ public class LectureDto {
 		this.describe = describe;
 		this.videoPath = videoPath;
 		this.imagePath = imagePath;
-		this.usersRegdate = usersRegdate;
-		this.updateDate = updateDate;
 		this.viewCount = viewCount;
 		this.largeCategory = largeCategory;
 		this.smallCategory = smallCategory;
-		this.updateId = updateId;
-		this.serviceYnCode = serviceYnCode;
 		this.image = image;
 	}
-
+	
 	public int getLecNum() {
 		return lecNum;
 	}
@@ -100,22 +88,6 @@ public class LectureDto {
 		this.imagePath = imagePath;
 	}
 
-	public String getUsersRegdate() {
-		return usersRegdate;
-	}
-
-	public void setUsersRegdate(String usersRegdate) {
-		this.usersRegdate = usersRegdate;
-	}
-
-	public String getUpdateDate() {
-		return updateDate;
-	}
-
-	public void setUpdateDate(String updateDate) {
-		this.updateDate = updateDate;
-	}
-
 	public int getViewCount() {
 		return viewCount;
 	}
@@ -140,22 +112,6 @@ public class LectureDto {
 		this.smallCategory = smallCategory;
 	}
 
-	public String getUpdateId() {
-		return updateId;
-	}
-
-	public void setUpdateId(String updateId) {
-		this.updateId = updateId;
-	}
-
-	public String getServiceYnCode() {
-		return serviceYnCode;
-	}
-
-	public void setServiceYnCode(String serviceYnCode) {
-		this.serviceYnCode = serviceYnCode;
-	}
-
 	public MultipartFile getImage() {
 		return image;
 	}
@@ -165,9 +121,7 @@ public class LectureDto {
 	}
 
 	
-
 	
-
 	
 	
 }

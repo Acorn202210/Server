@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.acorn2.FinalProject.lectureStudent.dao.LectureStudentDao;
 import com.acorn2.FinalProject.lectureStudent.dto.LectureStudentDto;
 import com.acorn2.FinalProject.lectureStudent.dto.req.LectureStudentCreateReqDto;
-import com.acorn2.FinalProject.lectureStudent.dto.req.LectureStudentOneReadReqDto;
 import com.acorn2.FinalProject.lectureStudent.dto.req.LectureStudentReadReqDto;
 import com.acorn2.FinalProject.lectureStudent.dto.req.LectureStudentUpdateReqDto;
+import com.acorn2.FinalProject.lectureStudent.dto.res.LectureStudentOneReadResDto;
 import com.acorn2.FinalProject.lectureStudent.dto.res.LectureStudentReadListResDto;
 import com.acorn2.FinalProject.lectureStudent.dto.res.LectureStudentReadResDto;
 
@@ -28,10 +29,11 @@ public class LectureStudentServiceImpl implements LectureStudentService{
 	}
 
 	@Override
-	public LectureStudentOneReadReqDto LectureStudentOne(int lecStuNum) {
+	public LectureStudentOneReadResDto LectureStudentOne(int lecStuNum) {
 		return studentDao.studentDataOne(lecStuNum);
 	}
 
+	@Transactional
 	@Override
 	public void LectureSignup(LectureStudentCreateReqDto studentCreateReqDto) {
 		LectureStudentDto dto = new LectureStudentDto();
@@ -42,6 +44,7 @@ public class LectureStudentServiceImpl implements LectureStudentService{
 		studentDao.LectureSignup(dto);
 	}
 
+	@Transactional
 	@Override
 	public void LectureCompleteYn(LectureStudentUpdateReqDto studentUpdateReqDto) {
 		LectureStudentDto dto = new LectureStudentDto();

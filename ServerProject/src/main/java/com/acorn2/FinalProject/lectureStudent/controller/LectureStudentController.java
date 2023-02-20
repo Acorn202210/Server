@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.acorn2.FinalProject.common.dto.ComResponseDto;
 import com.acorn2.FinalProject.common.dto.ComResponseEntity;
 import com.acorn2.FinalProject.lectureStudent.dto.req.LectureStudentCreateReqDto;
-import com.acorn2.FinalProject.lectureStudent.dto.req.LectureStudentOneReadReqDto;
 import com.acorn2.FinalProject.lectureStudent.dto.req.LectureStudentReadReqDto;
 import com.acorn2.FinalProject.lectureStudent.dto.req.LectureStudentUpdateReqDto;
+import com.acorn2.FinalProject.lectureStudent.dto.res.LectureStudentOneReadResDto;
 import com.acorn2.FinalProject.lectureStudent.dto.res.LectureStudentReadListResDto;
 import com.acorn2.FinalProject.lectureStudent.service.LectureStudentService;
 
@@ -31,7 +31,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 @RestController
 @RequestMapping(value = "/api/lectureStudent")
 public class LectureStudentController {
-	private final Logger logger = LoggerFactory.getLogger(getClass());
+
 	@Autowired private LectureStudentService service;
 	
 	@GetMapping("/LectureStudentList")
@@ -44,8 +44,8 @@ public class LectureStudentController {
 	
 	//한 명의 정보
 	@GetMapping("/{lecStuNum}/lectureStudentOne")
-	public ComResponseEntity<LectureStudentOneReadReqDto> LectureStudentOne(@RequestParam int lecStuNum){
-		LectureStudentOneReadReqDto dtoOne = service.LectureStudentOne(lecStuNum);
+	public ComResponseEntity<LectureStudentOneReadResDto> LectureStudentOne(@RequestParam int lecStuNum){
+		LectureStudentOneReadResDto dtoOne = service.LectureStudentOne(lecStuNum);
 		return new ComResponseEntity<>(new ComResponseDto<>(dtoOne));
 		
 	}
