@@ -7,6 +7,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +41,7 @@ public class Notice {
 	@Autowired private NoticeService service;
 
 	@ApiOperation(value="공지사항 목록", notes = "모든 공지사항의 목록을 가져온다.")
+	@Cacheable(cacheNames = "notice")
 	@GetMapping
 	public ComResponseEntity<NoticeReadListResDto> getNoticeList(@Parameter(hidden = true) NoticeReadReqDto noticeReadReqDto) {
 		NoticeReadListResDto noticeReadListResDto = service.selectNoticeList(noticeReadReqDto);
@@ -71,7 +73,7 @@ public class Notice {
 	@ApiOperation(value="공지사항 삭제", notes = "공지사항의 delete_YN_code를 'Y'로 수정한다.")
 	@PutMapping(value="/{notiNum}/delete")
 	public ComResponseEntity<Void> deleteNotice(@PathVariable("notiNum") Integer notiNum){
-		service.deleteNotice(notiNum);
+		service.deleteUpdateNotice(notiNum);
 		return new ComResponseEntity<Void>();
 	}
 }
