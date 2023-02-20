@@ -89,5 +89,16 @@ public interface NoticeDao {
 	 * @return : Integer
 	 * @description : 공지사항 수정
 	 */
-	Integer deleteNotice(Integer notiNum);
+	Integer deleteUpdateNotice(Integer notiNum);
+	
+	/**
+	 *
+	 * @methodName : updateNotice
+	 * @author : cheon
+	 * @param NoticeDto
+	 * @return
+	 * @return : Integer
+	 * @description : 공지사항 수정
+	 */
+	Integer deleteNotice();
 }
