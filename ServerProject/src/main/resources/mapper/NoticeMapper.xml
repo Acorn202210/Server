@@ -67,13 +67,19 @@
       WHERE noti_num=#{notiNum}
    </update>
 	
-	<update id="deleteNotice" parameterType="Integer">
+	<update id="deleteUpdateNotice" parameterType="Integer">
       UPDATE NOTICE
       <set>
       	delete_YN_code = 'Y'
       </set>
       WHERE noti_num=#{notiNum}
    </update>
+   
+    <delete id="deleteNotice" >
+      DELETE FROM NOTICE
+      WHERE delete_YN_code='Y'
+   </delete>
+   
 </mapper>
 
 

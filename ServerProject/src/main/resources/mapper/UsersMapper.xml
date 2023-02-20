@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.acorn2.FinalProject.users.dao.UsersDao">
+	<select id="selectUsersCount">
+		SELECT NVL(MAX(ROWNUM), 0)
+      	 FROM USERS
+        <where>
+            manager_yn = 'N'
+        	AND general_user_code = 'Y'
+         </where>
+	</select>
+	
+	<select id="selectUsersList">
+		SELECT *
+      	FROM
+         (SELECT result1.*, ROWNUM AS rnum
+          FROM
+            (SELECT lec_user_id, user_email, user_regdate, user_phone, user_birth, user_nickname
+             FROM USERS
+             <where>
+                manager_yn = 'N'
+                AND general_user_code = 'Y'             
+			 </where>
+             ORDER BY user_regdate DESC) result1)
+        WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
+	</select>
+	
+	<select id="selectUser">
+		
+	</select>
+	
+	<insert id="insertUser" parameterType="com.acorn2.FinalProject.users.dto.req.UsersCreateReqDto">
+      INSERT INTO USERS
+      (lec_user_id, user_pwd, user_email, user_regdate, user_phone, user_birth, manager_yn, user_nickname, general_user_code)
+      VALUES(#{lecUserId}, #{userPwd}, #{userEmail}, SYSDATE, #{userPhone}, #{userBirth}, #{managerYn}, #{userNickname}, 'Y')
+   	</insert>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+

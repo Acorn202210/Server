@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -77,7 +78,7 @@ public class Notice {
 	@Transactional
 	@PutMapping(value="/{notiNum}/delete")
 	public ComResponseEntity<Void> deleteNotice(@PathVariable("notiNum") Integer notiNum){
-		service.deleteNotice(notiNum);
+		service.deleteUpdateNotice(notiNum);
 		return new ComResponseEntity<Void>();
 	}
 }

@@ -12,6 +12,7 @@ public class LectureReviewReadResDto {
     private String userRegdate;
     private String content;
     private String updateDate;
+    
 	public int getLecReNum() {
 		return lecReNum;
 	}
@@ -61,7 +62,15 @@ public class LectureReviewReadResDto {
 		this.updateDate = updateDate;
 	}
     
-	
+	 @Override
+	 public String toString() {
+		 return "LectureReviewReadResDto{" +
+	                "lecReWriter=" + lecReWriter +
+	                ", content='" + content + '\'' +
+	                ", star='" + star + '\'' +
+	                '}';
+		 
+	 }
 	
 	
 	

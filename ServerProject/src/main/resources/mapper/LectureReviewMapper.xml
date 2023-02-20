@@ -12,37 +12,37 @@
 	      FROM
 	         (SELECT result1.*, ROWNUM AS rnum
 	         FROM
-	            (SELECT lec_re_num, lec_re_writer, content, lec_re_stu_ref_group, star,
-	               delete_yn, LECTURE_REVIEW.user_regdate, profile
+	            (SELECT LEC_RE_NUM, LEC_RE_WRITER, CONTENT, LEC_RE_STU_REF_GROUP, STAR,
+	               DELETE_YN, LECTURE_REVIEW.USER_REGDATE, PROFILE
 	            FROM LECTURE_REVIEW
 	            INNER JOIN users
 	            ON LECTURE_REVIEW.lec_re_writer=users.id
-	            WHERE lec_re_stu_ref_group=#{lecReStuRefGroup} AND delete_yn='N'
-	            ORDER BY lec_re_num ASC) result1)
+	            WHERE LEC_RE_STU_REF_GROUP=#{lecReStuRefGroup} AND DELETE_YN='N'
+	            ORDER BY LEC_RE_NUM ASC) result1)
 	     WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}   
    </select>   
    
 	<insert id="insertLectureReview" parameterType="com.acorn2.FinalProject.lectureReview.dto.LectureReviewDto">
 		INSERT INTO LECTURE_REVIEW
-		(lec_re_num, lec_re_writer, content, lec_re_stu_ref_group, star,user_regdate)
+		(LEC_RE_NUM, LEC_RE_WRITER, CONTENT, LEC_RE_STU_REF_GROUP, STAR,USER_REGDATE)
 		VALUES(#{lecReNum},#{lecReWriter},#{content},#{lecReStuRefGroup},#{star},SYSDATE)
 	</insert> 
 	
 	<update id="deleteLectureReview" parameterType="int">
 	    UPDATE LECTURE_REVIEW
-	    SET delete_yn='Y'
-	    WHERE lec_re_num=#{lecReNum}
+	    SET DELETE_YN='Y'
+	    WHERE LEC_RE_NUM=#{lecReNum}
 	</update>
 	
 	<update id="updateLectureReview" parameterType="com.acorn2.FinalProject.lectureReview.dto.LectureReviewDto">
 		UPDATE LECTURE_REVIEW
-     	SET content=#{content}, star=#{star}, update_date=SYSDATE
-     	WHERE lec_re_num=#{lecReNum}
+     	SET CONTENT=#{content}, STAR=#{star}, UPDATE_DATE=SYSDATE
+     	WHERE LEC_RE_NUM=#{lecReNum}
 	</update>
 	
 	<select id="LectureReviewOne" parameterType="int" resultType="com.acorn2.FinalProject.lectureReview.dto.LectureReviewDto">
-		SELECT lec_re_num,lec_re_writer,content,lec_re_stu_ref_group,delete_yn,user_regdate,star
+		SELECT LEC_RE_NUM,LEC_RE_WRITER,CONTENT,LEC_RE_STU_REF_GROUP,DELETE_YN,USER_REGDATE,star
 		FROM LECTURE_REVIEW
-		WHERE lec_re_num=#{lecReNum}
+		WHERE LEC_RE_NUM=#{lecReNum}
 	</select>
 </mapper>

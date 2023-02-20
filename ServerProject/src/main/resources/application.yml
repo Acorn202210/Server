@@ -5,6 +5,7 @@ server:
   error:
     path: /error
 
+
 spring:
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
@@ -21,6 +22,7 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 20MB
+     
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
@@ -32,7 +34,8 @@ mybatis:
 
 file:
   location: C:\data
-  
+
 logging:
   config: classpath:log4j/log4j2_local.xml
-  
+  level:
+    org.springframework.cache: debug
