@@ -2,35 +2,47 @@ package com.acorn2.FinalProject.faq.dto;
 
 import org.apache.ibatis.type.Alias;
 
+
 @Alias("faqDto")
-public class FaqDto {
-	private int num;
+public class FaqDto{
+	private int faqNum;
 	private String question;
 	private String content;
+	private String userRegdate;
+	private String updateDate;
+	private String updateId;
+	private String faqWriter;
+	private String deleteYnCode;
 	private int startRowNum;
 	private int endRowNum;
-	private int prevNum;	//이전글의 글번호
-	private int nextNum;	//다음글의 글번호
+	private int prevNum;
+	private int nextNum;	
 	
 	public FaqDto() {}
 
-	public FaqDto(int num, String question, String content, int startRowNum, int endRowNum, int prevNum, int nextNum) {
+	public FaqDto(int faqNum, String question, String content, String userRegdate, String updateDate, String updateId,
+			String faqWriter, String deleteYnCode, int startRowNum, int endRowNum, int prevNum, int nextNum) {
 		super();
-		this.num = num;
+		this.faqNum = faqNum;
 		this.question = question;
 		this.content = content;
+		this.userRegdate = userRegdate;
+		this.updateDate = updateDate;
+		this.updateId = updateId;
+		this.faqWriter = faqWriter;
+		this.deleteYnCode = deleteYnCode;
 		this.startRowNum = startRowNum;
 		this.endRowNum = endRowNum;
 		this.prevNum = prevNum;
 		this.nextNum = nextNum;
 	}
 
-	public int getNum() {
-		return num;
+	public int getFaqNum() {
+		return faqNum;
 	}
 
-	public void setNum(int num) {
-		this.num = num;
+	public void setFaqNum(int faqNum) {
+		this.faqNum = faqNum;
 	}
 
 	public String getQuestion() {
@@ -47,6 +59,46 @@ public class FaqDto {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getUserRegdate() {
+		return userRegdate;
+	}
+
+	public void setUserRegdate(String userRegdate) {
+		this.userRegdate = userRegdate;
+	}
+
+	public String getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	public String getUpdateId() {
+		return updateId;
+	}
+
+	public void setUpdateId(String updateId) {
+		this.updateId = updateId;
+	}
+
+	public String getFaqWriter() {
+		return faqWriter;
+	}
+
+	public void setFaqWriter(String faqWriter) {
+		this.faqWriter = faqWriter;
+	}
+
+	public String getDeleteYnCode() {
+		return deleteYnCode;
+	}
+
+	public void setDeleteYnCode(String deleteYnCode) {
+		this.deleteYnCode = deleteYnCode;
 	}
 
 	public int getStartRowNum() {

@@ -34,8 +34,8 @@ mybatis:
 
 file:
   location: C:\data
-  
+
 logging:
   config: classpath:log4j/log4j2_local.xml
-  
-  
+  level:
+    org.springframework.cache: debug

@@ -5,53 +5,51 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Alias("lectureDto")
 public class LectureDto {
-	private int num;
+	private int lecNum;
 	private String teacher;
-	private String writer;
+	private String lecWriter;
 	private String title;
 	private String describe;
 	private String videoPath;
 	private String imagePath;
-	private String regdate;
+	private String usersRegdate;
+	private String updateDate;
 	private int viewCount;
-	private String large_category;
-	private String small_category;
-	private int startRowNum;
-	private int endRowNum;
-	private int prevNum; 
-	private int nextNum; 
+	private String largeCategory;
+	private String smallCategory;
+	private String updateId;
+	private String serviceYnCode;
 	private MultipartFile image;	
 	
 	public LectureDto() {}
 
-	public LectureDto(int num, String teacher, String writer, String title, String describe, String videoPath,
-			String imagePath, String regdate, int viewCount, String large_category, String small_category,
-			int startRowNum, int endRowNum, int prevNum, int nextNum, MultipartFile image) {
+	public LectureDto(int lecNum, String teacher, String lecWriter, String title, String describe, String videoPath,
+			String imagePath, String usersRegdate, String updateDate, int viewCount, String largeCategory,
+			String smallCategory, String updateId, String serviceYnCode, MultipartFile image) {
 		super();
-		this.num = num;
+		this.lecNum = lecNum;
 		this.teacher = teacher;
-		this.writer = writer;
+		this.lecWriter = lecWriter;
 		this.title = title;
 		this.describe = describe;
 		this.videoPath = videoPath;
 		this.imagePath = imagePath;
-		this.regdate = regdate;
+		this.usersRegdate = usersRegdate;
+		this.updateDate = updateDate;
 		this.viewCount = viewCount;
-		this.large_category = large_category;
-		this.small_category = small_category;
-		this.startRowNum = startRowNum;
-		this.endRowNum = endRowNum;
-		this.prevNum = prevNum;
-		this.nextNum = nextNum;
+		this.largeCategory = largeCategory;
+		this.smallCategory = smallCategory;
+		this.updateId = updateId;
+		this.serviceYnCode = serviceYnCode;
 		this.image = image;
 	}
 
-	public int getNum() {
-		return num;
+	public int getLecNum() {
+		return lecNum;
 	}
 
-	public void setNum(int num) {
-		this.num = num;
+	public void setLecNum(int lecNum) {
+		this.lecNum = lecNum;
 	}
 
 	public String getTeacher() {
@@ -62,12 +60,12 @@ public class LectureDto {
 		this.teacher = teacher;
 	}
 
-	public String getWriter() {
-		return writer;
+	public String getLecWriter() {
+		return lecWriter;
 	}
 
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setLecWriter(String lecWriter) {
+		this.lecWriter = lecWriter;
 	}
 
 	public String getTitle() {
@@ -102,12 +100,20 @@ public class LectureDto {
 		this.imagePath = imagePath;
 	}
 
-	public String getRegdate() {
-		return regdate;
+	public String getUsersRegdate() {
+		return usersRegdate;
 	}
 
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
+	public void setUsersRegdate(String usersRegdate) {
+		this.usersRegdate = usersRegdate;
+	}
+
+	public String getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
 	}
 
 	public int getViewCount() {
@@ -118,52 +124,36 @@ public class LectureDto {
 		this.viewCount = viewCount;
 	}
 
-	public String getLarge_category() {
-		return large_category;
+	public String getLargeCategory() {
+		return largeCategory;
 	}
 
-	public void setLarge_category(String large_category) {
-		this.large_category = large_category;
+	public void setLargeCategory(String largeCategory) {
+		this.largeCategory = largeCategory;
 	}
 
-	public String getSmall_category() {
-		return small_category;
+	public String getSmallCategory() {
+		return smallCategory;
 	}
 
-	public void setSmall_category(String small_category) {
-		this.small_category = small_category;
+	public void setSmallCategory(String smallCategory) {
+		this.smallCategory = smallCategory;
 	}
 
-	public int getStartRowNum() {
-		return startRowNum;
+	public String getUpdateId() {
+		return updateId;
 	}
 
-	public void setStartRowNum(int startRowNum) {
-		this.startRowNum = startRowNum;
+	public void setUpdateId(String updateId) {
+		this.updateId = updateId;
 	}
 
-	public int getEndRowNum() {
-		return endRowNum;
+	public String getServiceYnCode() {
+		return serviceYnCode;
 	}
 
-	public void setEndRowNum(int endRowNum) {
-		this.endRowNum = endRowNum;
-	}
-
-	public int getPrevNum() {
-		return prevNum;
-	}
-
-	public void setPrevNum(int prevNum) {
-		this.prevNum = prevNum;
-	}
-
-	public int getNextNum() {
-		return nextNum;
-	}
-
-	public void setNextNum(int nextNum) {
-		this.nextNum = nextNum;
+	public void setServiceYnCode(String serviceYnCode) {
+		this.serviceYnCode = serviceYnCode;
 	}
 
 	public MultipartFile getImage() {
@@ -173,6 +163,10 @@ public class LectureDto {
 	public void setImage(MultipartFile image) {
 		this.image = image;
 	}
+
+	
+
+	
 
 	
 	

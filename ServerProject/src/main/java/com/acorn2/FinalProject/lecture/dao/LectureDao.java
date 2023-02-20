@@ -2,29 +2,23 @@ package com.acorn2.FinalProject.lecture.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.acorn2.FinalProject.lecture.dto.LectureDto;
-import com.acorn2.FinalProject.lecture.dto.LectureReq;
-import com.acorn2.FinalProject.lecture.dto.LectureRes;
+import com.acorn2.FinalProject.lecture.dto.req.LectureReadReqDto;
+import com.acorn2.FinalProject.lecture.dto.res.LectureReadResDto;
 
-
-
+@Mapper
 public interface LectureDao {
-	//강의 리스트
-	public List<LectureDto> LectureList(LectureDto dto);
-	
-	//모든 ROW 의 개수
-	public int getCount();
-	//강의 업로드
-	public void insert(LectureRes lectureRes);
-	//게시글 하나의 data 가져오기
-	public LectureDto getData(int num);
-	//게시글 삭제
-	public void delete(int num);
-	
-	//게시글 수정
-	public void update(LectureReq lectureReq);
-	
-	public void addViewCount(int num);
-	
+	public List<LectureReadResDto> lectureList(LectureReadReqDto lectureReadReqDto);
 
+	public Integer selectLectureCount(LectureReadReqDto lectureReadReqDto);
+	
+	public LectureDto lectureOne(int lecNum);
+	
+	Integer lectureInsert(LectureDto dto);
+	
+	Integer lectureDelete(int lecNum);
+	
+	Integer lectureUpdate(LectureDto dto);
 }

@@ -1,159 +1,152 @@
 package com.acorn2.FinalProject.lectureStudent.dto;
 
-import org.apache.ibatis.type.Alias;
-
-@Alias("lectureStudentDto")
 public class LectureStudentDto {
-	private int num;
-	private String id;
-	private int ref_group;
-	private String complete;
+	private int lecStuNum;
+	private String lecStuUserId;
+	private int lecStuRefGroup;
+	private String completeYn;
+	private String userRegdate;
+	private String updateDate;
 	private String email;
 	private String phone;
 	private String birth;
-	private String regdate;
-	private String large_category;
-	private String small_category;
-	private int startRowNum;
-	private int endRowNum;
-	private int prevNum; 
-	private int nextNum; 
+	private String largeCategory;
+	private String smallCategory;
+ 
 	
 	public LectureStudentDto() {}
 
-	public LectureStudentDto(int num, String id, int ref_group, String complete, String email, String phone,
-			String birth, String regdate, String large_category, String small_category, int startRowNum, int endRowNum,
-			int prevNum, int nextNum) {
+
+	public LectureStudentDto(int lecStuNum, String lecStuUserId, int lecStuRefGroup, String completeYn,
+			String userRegdate, String updateDate, String email, String phone, String birth, String largeCategory,
+			String smallCategory) {
 		super();
-		this.num = num;
-		this.id = id;
-		this.ref_group = ref_group;
-		this.complete = complete;
+		this.lecStuNum = lecStuNum;
+		this.lecStuUserId = lecStuUserId;
+		this.lecStuRefGroup = lecStuRefGroup;
+		this.completeYn = completeYn;
+		this.userRegdate = userRegdate;
+		this.updateDate = updateDate;
 		this.email = email;
 		this.phone = phone;
 		this.birth = birth;
-		this.regdate = regdate;
-		this.large_category = large_category;
-		this.small_category = small_category;
-		this.startRowNum = startRowNum;
-		this.endRowNum = endRowNum;
-		this.prevNum = prevNum;
-		this.nextNum = nextNum;
+		this.largeCategory = largeCategory;
+		this.smallCategory = smallCategory;
 	}
 
-	public int getNum() {
-		return num;
+
+	public int getLecStuNum() {
+		return lecStuNum;
 	}
 
-	public void setNum(int num) {
-		this.num = num;
+
+	public void setLecStuNum(int lecStuNum) {
+		this.lecStuNum = lecStuNum;
 	}
 
-	public String getId() {
-		return id;
+
+	public String getLecStuUserId() {
+		return lecStuUserId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+
+	public void setLecStuUserId(String lecStuUserId) {
+		this.lecStuUserId = lecStuUserId;
 	}
 
-	public int getRef_group() {
-		return ref_group;
+
+	public int getLecStuRefGroup() {
+		return lecStuRefGroup;
 	}
 
-	public void setRef_group(int ref_group) {
-		this.ref_group = ref_group;
+
+	public void setLecStuRefGroup(int lecStuRefGroup) {
+		this.lecStuRefGroup = lecStuRefGroup;
 	}
 
-	public String getComplete() {
-		return complete;
+
+	public String getCompleteYn() {
+		return completeYn;
 	}
 
-	public void setComplete(String complete) {
-		this.complete = complete;
+
+	public void setCompleteYn(String completeYn) {
+		this.completeYn = completeYn;
 	}
+
+
+	public String getUserRegdate() {
+		return userRegdate;
+	}
+
+
+	public void setUserRegdate(String userRegdate) {
+		this.userRegdate = userRegdate;
+	}
+
+
+	public String getUpdateDate() {
+		return updateDate;
+	}
+
+
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
+	}
+
 
 	public String getEmail() {
 		return email;
 	}
 
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 
 	public String getPhone() {
 		return phone;
 	}
 
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
 
 	public String getBirth() {
 		return birth;
 	}
 
+
 	public void setBirth(String birth) {
 		this.birth = birth;
 	}
 
-	public String getRegdate() {
-		return regdate;
+
+	public String getLargeCategory() {
+		return largeCategory;
 	}
 
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
+
+	public void setLargeCategory(String largeCategory) {
+		this.largeCategory = largeCategory;
 	}
 
-	public String getLarge_category() {
-		return large_category;
+
+	public String getSmallCategory() {
+		return smallCategory;
 	}
 
-	public void setLarge_category(String large_category) {
-		this.large_category = large_category;
+
+	public void setSmallCategory(String smallCategory) {
+		this.smallCategory = smallCategory;
 	}
 
-	public String getSmall_category() {
-		return small_category;
-	}
-
-	public void setSmall_category(String small_category) {
-		this.small_category = small_category;
-	}
-
-	public int getStartRowNum() {
-		return startRowNum;
-	}
-
-	public void setStartRowNum(int startRowNum) {
-		this.startRowNum = startRowNum;
-	}
-
-	public int getEndRowNum() {
-		return endRowNum;
-	}
-
-	public void setEndRowNum(int endRowNum) {
-		this.endRowNum = endRowNum;
-	}
-
-	public int getPrevNum() {
-		return prevNum;
-	}
-
-	public void setPrevNum(int prevNum) {
-		this.prevNum = prevNum;
-	}
-
-	public int getNextNum() {
-		return nextNum;
-	}
-
-	public void setNextNum(int nextNum) {
-		this.nextNum = nextNum;
-	}
 
 	
+
 	
 	
 	
