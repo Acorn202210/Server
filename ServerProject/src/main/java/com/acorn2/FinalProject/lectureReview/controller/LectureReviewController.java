@@ -38,6 +38,7 @@ public class LectureReviewController {
 	@GetMapping("/LectureReviewList")
 	public ComResponseEntity<LectureReviewReadListResDto> getReviewList(@RequestParam(value = "lecReStuRefGroup",required = true ,defaultValue = "1") int lecReStuRefGroup, 
 					@Parameter(hidden = true) LectureReviewReadReqDto reviewReadReqDto) {
+		
 		LectureReviewReadListResDto revicewReadListResDto = service.LectureReviewList(reviewReadReqDto);
 		
 		return new ComResponseEntity<>(new ComResponseDto<>(revicewReadListResDto));
