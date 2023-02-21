@@ -91,4 +91,11 @@ public class UsersController {
 		service.updateUserPwd(usersUpdatePwdReqDto, session);
 		return new ComResponseEntity<Void>();
 	}
+	
+	@ApiOperation(value="회원 탈퇴", notes = "회원 탈퇴 ")
+	@PutMapping(value="/{lecUserId}/delete")
+	public ComResponseEntity<Void> deleteUser(HttpSession session){
+		service.deleteUpdateUser(session);
+		return new ComResponseEntity<Void>();
+	}
 }

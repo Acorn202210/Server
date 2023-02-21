@@ -19,4 +19,6 @@ public interface UsersDao {
 	Integer insertUser(UsersCreateReqDto usersCreateReqDto);
 	Integer updateUser(UsersUpdateReqDto usersUpdateReqDto);
 	Integer updateUserPwd(UsersUpdatePwdReqDto usersUpdatePwdReqDto);
+	Integer deleteUpdateUser(String lecUserId);
+
 }

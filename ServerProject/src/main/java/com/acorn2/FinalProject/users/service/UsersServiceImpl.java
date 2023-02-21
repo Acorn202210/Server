@@ -96,4 +96,10 @@ public class UsersServiceImpl implements UsersService{
 		}
 	}
 
+	@Override
+	public void deleteUpdateUser(HttpSession session) {
+		usersDao.deleteUpdateUser(session.getAttribute("id").toString());
+		session.removeAttribute("id");
+	}
+
 }

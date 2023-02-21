@@ -17,5 +17,6 @@ public interface UsersService {
 	void login(UsersLoginReqDto usersLoginReqDto, HttpSession session);
 	void updateUser(UsersUpdateReqDto usersUpdateReqDto, HttpSession session);
 	void updateUserPwd(UsersUpdatePwdReqDto usersUpdatePwdReqDto, HttpSession session);
+	void deleteUpdateUser(HttpSession session);
 
 }

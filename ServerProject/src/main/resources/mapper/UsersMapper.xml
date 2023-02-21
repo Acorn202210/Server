@@ -73,6 +73,12 @@
   		SET user_pwd=#{newPwd}
   	    WHERE lec_user_id=#{lecUserId}
    	</update>
+   	
+   	<update id="deleteUpdateUser" parameterType="String">
+  		UPDATE USERS
+  		SET withdrewal_user_code='Y', general_user_code = 'N'
+  	    WHERE lec_user_id=#{lecUserId}
+   	</update>
 
 </mapper>
 
