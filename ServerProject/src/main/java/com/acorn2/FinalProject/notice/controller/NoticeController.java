@@ -4,10 +4,14 @@ package com.acorn2.FinalProject.notice.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,13 +39,12 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 @RestController
 @Api("Notice")
 @RequestMapping("/api/notice")
-public class Notice {
+public class NoticeController {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired private NoticeService service;
 
 	@ApiOperation(value="공지사항 목록", notes = "모든 공지사항의 목록을 가져온다.")
-	@Cacheable(cacheNames = "notice")
 	@GetMapping
 	public ComResponseEntity<NoticeReadListResDto> getNoticeList(@Parameter(hidden = true) NoticeReadReqDto noticeReadReqDto) {
 		NoticeReadListResDto noticeReadListResDto = service.selectNoticeList(noticeReadReqDto);
@@ -57,20 +60,23 @@ public class Notice {
 	}
 	
 	@ApiOperation(value="공지사항 등록", notes = "공지사항을 등록한다.")
+	@Transactional
 	@PostMapping
-	public ComResponseEntity<Void> insertNotice(@RequestBody NoticeCreateReqDto noticeCreateReqDto){
-		service.insertNotice(noticeCreateReqDto);
+	public ComResponseEntity<Void> insertNotice(@RequestBody NoticeCreateReqDto noticeCreateReqDto, HttpSession session){
+		service.insertNotice(noticeCreateReqDto, session);
 		return new ComResponseEntity<Void>();
 	}
 	
 	@ApiOperation(value="공지사항 수정", notes = "공지사항을 수정한다.")
+	@Transactional
 	@PutMapping(value="/{notiNum}")
-	public ComResponseEntity<Void> updateNotice(@RequestBody NoticeUpdateReqDto noticeUpdateReqDto){
-		service.updateNotice(noticeUpdateReqDto);
+	public ComResponseEntity<Void> updateNotice(@RequestBody NoticeUpdateReqDto noticeUpdateReqDto, HttpSession session){
+		service.updateNotice(noticeUpdateReqDto, session);
 		return new ComResponseEntity<Void>();
 	}
 	
 	@ApiOperation(value="공지사항 삭제", notes = "공지사항의 delete_YN_code를 'Y'로 수정한다.")
+	@Transactional
 	@PutMapping(value="/{notiNum}/delete")
 	public ComResponseEntity<Void> deleteNotice(@PathVariable("notiNum") Integer notiNum){
 		service.deleteUpdateNotice(notiNum);

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -60,22 +61,22 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Transactional
 	@Override
-	public void insertNotice(NoticeCreateReqDto noticeCreateReqDto) {
+	public void insertNotice(NoticeCreateReqDto noticeCreateReqDto, HttpSession session) {
 		NoticeDto dto = new NoticeDto();
 		dto.setTitle(noticeCreateReqDto.getTitle());
 		dto.setContent(noticeCreateReqDto.getContent());
-		dto.setNotiWriter("관리자1");
+		dto.setNotiWriter(session.getAttribute("id").toString());
 		noticeDao.insertNotice(dto);
 	}
 
 	@Transactional
 	@Override
-	public void updateNotice(NoticeUpdateReqDto noticeUpdateReqDto) {
+	public void updateNotice(NoticeUpdateReqDto noticeUpdateReqDto, HttpSession session) {
 		NoticeDto dto = new NoticeDto();
 		dto.setNotiNum(noticeUpdateReqDto.getNotiNum());
 		dto.setTitle(noticeUpdateReqDto.getTitle());
 		dto.setContent(noticeUpdateReqDto.getContent());
-		dto.setUpdateId("관리자2");
+		dto.setUpdateId(session.getAttribute("id").toString());
 		noticeDao.updateNotice(dto);
 	}
 
