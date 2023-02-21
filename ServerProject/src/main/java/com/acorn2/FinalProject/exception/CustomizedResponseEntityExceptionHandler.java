@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import com.acorn2.FinalProject.common.dto.ExceptionResponse;
 import com.acorn2.FinalProject.notice.exception.NoticeNotFoundException;
+import com.acorn2.FinalProject.users.exception.UsersNotLoginException;
 
 @RestController
 //전역에 발생할 수 있는 예외를 처리해줌. 이게 @ExcptionalHandler와 차이점
@@ -35,6 +36,14 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 	     ExceptionResponse exceptionResponse =
 	             new ExceptionResponse("failed", new Date(), ExceptionUtils.getStackTrace(ex), request.getDescription(false));
 	     return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
+	 }
+ 
+	//사용자가 존재하지 않았을 때 처리하는 메소드
+	 @ExceptionHandler(UsersNotLoginException.class)
+	 public final ResponseEntity<Object> handleUsersNotLoginException(Exception ex, WebRequest request){
+	     ExceptionResponse exceptionResponse =
+	             new ExceptionResponse("failed", new Date(), ExceptionUtils.getStackTrace(ex), request.getDescription(false));
+	     return new ResponseEntity(exceptionResponse, HttpStatus.UNAUTHORIZED);
 	 }
  
 }

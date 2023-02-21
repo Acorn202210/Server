@@ -15,7 +15,7 @@ public class BatchSecheduler {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired private NoticeService service;
 
-	@Scheduled(cron = "10 * * * * *")
+	@Scheduled(cron = "0 5 0 * * *")
 	public void testSchedule() {
 		service.deleteNotice();
 		logger.info("[Mytest] Notice delete {}", LocalDateTime.now());;
