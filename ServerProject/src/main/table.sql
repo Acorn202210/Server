@@ -16,6 +16,18 @@ CREATE TABLE users(
     REST_USER_CODE VARCHAR2(3) DEFAULT 'N'
 );
 
+--  프로필 이미지 저장 테이블
+CREATE TABLE profile_image(
+profile_id NUMBER PRIMARY key,
+mimetype varchar(100),
+data CLOB,
+original_name varchar(100),
+created timestamp
+);
+
+-- 프로필 이미지 시퀀스
+CREATE SEQUENCE profile_image_seq; 
+
 -- QNA_BOARD_QUESTION
 CREATE TABLE QNA_BOARD_QUESTION(
     BOARD_QUESTION_NUM NUMBER PRIMARY KEY,
