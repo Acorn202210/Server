@@ -20,5 +20,5 @@ public interface UsersDao {
 	Integer updateUser(UsersUpdateReqDto usersUpdateReqDto);
 	Integer updateUserPwd(UsersUpdatePwdReqDto usersUpdatePwdReqDto);
 	Integer deleteUpdateUser(String lecUserId);
-
+	Integer deleteUser();
 }

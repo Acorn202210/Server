@@ -9,16 +9,21 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.acorn2.FinalProject.notice.service.NoticeService;
+import com.acorn2.FinalProject.users.service.UsersService;
 
 @Component
 public class BatchSecheduler {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
-	@Autowired private NoticeService service;
+	@Autowired private NoticeService noticeService;
+	@Autowired private UsersService usersService;
+
 
 	@Scheduled(cron = "0 5 0 * * *")
 	public void testSchedule() {
-		service.deleteNotice();
-		logger.info("[Mytest] Notice delete {}", LocalDateTime.now());;
+		noticeService.deleteNotice();
+		usersService.deleteUser();
+		
+		logger.info("[Mytest] Notice delete {}", LocalDateTime.now());
 	}
 
 }

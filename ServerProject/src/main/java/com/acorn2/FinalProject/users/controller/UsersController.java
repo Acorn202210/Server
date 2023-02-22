@@ -41,7 +41,7 @@ public class UsersController {
 	@Autowired private UsersService service;
 	
 	@ApiOperation(value="회원 목록", notes = "모든 회원의 목록을 가져온다.")
-	@GetMapping
+	@GetMapping(value = "/list")
 	public ComResponseEntity<UsersReadListResDto> getUsersList(@Parameter(hidden = true) UsersReadReqDto usersReadReqDto) {
 		UsersReadListResDto usersReadListResDto = service.selectUsersList(usersReadReqDto);
 		logger.debug("usersReadReqDto parameter:{}", usersReadReqDto.getLecUserId());

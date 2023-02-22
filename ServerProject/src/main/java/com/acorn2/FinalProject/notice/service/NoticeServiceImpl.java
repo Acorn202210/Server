@@ -56,6 +56,7 @@ public class NoticeServiceImpl implements NoticeService{
 		if(noticeDao.selectNotice(noticeReadReqDto)== null) {
 			throw new NoticeNotFoundException("공지사항이 없습니다.");
 		}
+		noticeDao.addViewCount(noticeReadReqDto.getNotiNum());
 		return noticeDao.selectNotice(noticeReadReqDto);
 	}
 

@@ -16,12 +16,11 @@ public class ApiConfig implements WebMvcConfigurer{
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginInterceptor)
-		.addPathPatterns("/api/users/*", "/api/notice/*/*", "/api/notice")
-		.excludePathPatterns("/api/users/*/login","/api/users/*/login", "/api/users");
+		.addPathPatterns("/api/users/**", "/api/notice/*/*", "/api/notice")
+		.excludePathPatterns("/api/users/*/login");
 		
 		registry.addInterceptor(managerInterceptor)
-		.addPathPatterns("/api/notice/*/*", "/api/notice")
-		.excludePathPatterns("/api/users/*/login","/api/users/*/login", "/api/users");
+		.addPathPatterns("/api/notice/*/*", "/api/notice", "/api/users/list");
 	}
 
 }
