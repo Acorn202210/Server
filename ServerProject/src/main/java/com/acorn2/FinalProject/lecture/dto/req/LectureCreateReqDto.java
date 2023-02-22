@@ -10,13 +10,12 @@ public class LectureCreateReqDto {
 	private String describe;
 	private String videoPath;
 	private String imagePath;
-	private int viewCount;
 	private String largeCategory;
 	private String smallCategory;
 	private MultipartFile image;
 	
 	public LectureCreateReqDto(int lecNum, String teacher, String lecWriter, String title, String describe,
-			String videoPath, String imagePath, int viewCount, String largeCategory, String smallCategory,
+			String videoPath, String imagePath, String largeCategory, String smallCategory,
 			MultipartFile image) {
 		super();
 		this.lecNum = lecNum;
@@ -26,11 +25,14 @@ public class LectureCreateReqDto {
 		this.describe = describe;
 		this.videoPath = videoPath;
 		this.imagePath = imagePath;
-		this.viewCount = viewCount;
 		this.largeCategory = largeCategory;
 		this.smallCategory = smallCategory;
 		this.image = image;
 	}
+	
+	public LectureCreateReqDto() {
+        this.imagePath = "";
+    }
 	
 	public int getLecNum() {
 		return lecNum;
@@ -86,14 +88,6 @@ public class LectureCreateReqDto {
 
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
-	}
-
-	public int getViewCount() {
-		return viewCount;
-	}
-
-	public void setViewCount(int viewCount) {
-		this.viewCount = viewCount;
 	}
 
 	public String getLargeCategory() {

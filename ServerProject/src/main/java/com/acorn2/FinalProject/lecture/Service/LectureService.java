@@ -14,7 +14,7 @@ public interface LectureService {
 	
 	LectureDto LectureOne(int lecNum);
 	
-	void LectureInsert(MultipartFile image, int lecNum,LectureCreateReqDto lectureCreateReqDto);
+	void LectureInsert(LectureCreateReqDto lectureCreateReqDto);
 	
 	void LectureDelete(int lecNum);
 	

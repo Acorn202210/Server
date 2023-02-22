@@ -37,16 +37,8 @@ public class LectureServiceImpl implements LectureService{
 	}
 
 	@Override
-	public void LectureInsert(MultipartFile image, int lecNum, LectureCreateReqDto lectureCreateReqDto) {
-		LectureDto dto = new LectureDto();
-		
-		
-		String filename = StringUtils.cleanPath(image.getOriginalFilename());
-        //lecture.setImagePath(filename);
-        //lectureRepository.save(lecture);
-        String uploadDir = "lecture-images/" + lecNum;
-       // FileUploadUtil.saveImage(uploadDir, filename, image);	
-		
+	public void LectureInsert(LectureCreateReqDto lectureCreateReqDto) {
+		LectureDto dto = new LectureDto();		
 
 		dto.setLecNum(lectureCreateReqDto.getLecNum());
 		dto.setTeacher(lectureCreateReqDto.getTeacher());
@@ -58,6 +50,7 @@ public class LectureServiceImpl implements LectureService{
 		dto.setLargeCategory(lectureCreateReqDto.getLargeCategory());
 		dto.setSmallCategory(lectureCreateReqDto.getSmallCategory());
 		
+		lectureDao.lectureInsert(dto);
 	}
 
 	@Override

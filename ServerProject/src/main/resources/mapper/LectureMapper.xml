@@ -34,6 +34,13 @@
 		WHERE LEC_NUM = #{lecNum}
 	</select>
 	
+	<insert id="lectureInsert" parameterType="com.acorn2.FinalProject.lecture.dto.LectureDto">
+		INSERT INTO LECTURE
+		(LEC_NUM, TEACHER, LEC_WRITER, TITLE, DESCRIBE, IMAGEPATH,
+		VIDEOPATH, VIEWCOUNT, USER_REGDATE, LARGE_CATEGORY,SMALL_CATEGORY)
+		VALUES(LECTURE_seq.NEXTVAL, #{teacher}, #{lecWriter}, #{title}, #{describe},#{imagePath,jdbcType=VARCHAR}, #{videoPath}, #{viewCount}, SYSDATE, #{largeCategory}, #{smallCategory} )
+	</insert>
+	
 	<update id="addViewCount" parameterType="int">
 		UPDATE LECTURE
 		SET VIEWCOUNT=VIEWCOUNT+1
