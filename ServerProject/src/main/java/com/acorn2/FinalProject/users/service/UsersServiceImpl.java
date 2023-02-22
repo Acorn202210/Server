@@ -1,6 +1,8 @@
 package com.acorn2.FinalProject.users.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +29,21 @@ import com.acorn2.FinalProject.users.exception.UsersNotLoginException;
 public class UsersServiceImpl implements UsersService{
 
 	@Autowired private UsersDao usersDao;
+	
+	@Override
+	public Map<String, Object> isValidId(String lecUserId) {
+		Map<String, Object> isValid = new HashMap<>();
+		
+		UsersReadDetailResDto dto = usersDao.selectUser(lecUserId);
+		
+		if(dto == null) {
+			isValid.put("isValid", true);
+		}else {
+			isValid.put("isValid", false);
+		}
+		return isValid;
+	}
+	
 
 	@Override
 	public UsersReadListResDto selectUsersList(UsersReadReqDto usersReadReqDto) {
@@ -114,7 +131,4 @@ public class UsersServiceImpl implements UsersService{
 	public void deleteUser() {
 		usersDao.deleteUser();
 	}
-	
-	
-
 }

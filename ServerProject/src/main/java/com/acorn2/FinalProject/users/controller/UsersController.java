@@ -1,5 +1,7 @@
 package com.acorn2.FinalProject.users.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -39,6 +41,13 @@ public class UsersController {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired private UsersService service;
+	
+	@ApiOperation(value="아이디 중복 확인", notes = "아이디 중복을 확인한다.")
+	@GetMapping(value = "/checkid")
+	public ComResponseEntity<Map<String, Object>> checkid(String lecUserId) {
+		
+		return new ComResponseEntity<>(new ComResponseDto<>(service.isValidId(lecUserId)));
+	}
 	
 	@ApiOperation(value="회원 목록", notes = "모든 회원의 목록을 가져온다.")
 	@GetMapping(value = "/list")

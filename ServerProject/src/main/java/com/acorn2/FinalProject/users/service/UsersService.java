@@ -1,5 +1,7 @@
 package com.acorn2.FinalProject.users.service;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +14,7 @@ import com.acorn2.FinalProject.users.dto.res.UsersReadDetailResDto;
 import com.acorn2.FinalProject.users.dto.res.UsersReadListResDto;
 
 public interface UsersService {
+	Map<String, Object> isValidId(String lecUserId);
 	UsersReadListResDto selectUsersList(UsersReadReqDto usersReadReqDto);
 	UsersReadDetailResDto selectUser(HttpServletRequest request);
 	void insertUser(UsersCreateReqDto usersCreateReqDto);
@@ -20,5 +23,4 @@ public interface UsersService {
 	void updateUserPwd(UsersUpdatePwdReqDto usersUpdatePwdReqDto, HttpServletRequest request);
 	void deleteUpdateUser(HttpServletRequest request);
 	void deleteUser();
-
 }
