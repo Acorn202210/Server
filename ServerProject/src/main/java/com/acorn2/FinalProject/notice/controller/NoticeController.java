@@ -4,6 +4,7 @@ package com.acorn2.FinalProject.notice.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -45,7 +46,7 @@ public class NoticeController {
 	@Autowired private NoticeService service;
 
 	@ApiOperation(value="공지사항 목록", notes = "모든 공지사항의 목록을 가져온다.")
-	@GetMapping
+	@GetMapping(value = "/list")
 	public ComResponseEntity<NoticeReadListResDto> getNoticeList(@Parameter(hidden = true) NoticeReadReqDto noticeReadReqDto) {
 		NoticeReadListResDto noticeReadListResDto = service.selectNoticeList(noticeReadReqDto);
 		logger.debug("noticeReadReqDto parameter:{}", noticeReadReqDto.getNotiNum());
@@ -62,16 +63,16 @@ public class NoticeController {
 	@ApiOperation(value="공지사항 등록", notes = "공지사항을 등록한다.")
 	@Transactional
 	@PostMapping
-	public ComResponseEntity<Void> insertNotice(@RequestBody NoticeCreateReqDto noticeCreateReqDto, HttpSession session){
-		service.insertNotice(noticeCreateReqDto, session);
+	public ComResponseEntity<Void> insertNotice(@RequestBody NoticeCreateReqDto noticeCreateReqDto, HttpServletRequest request){
+		service.insertNotice(noticeCreateReqDto, request);
 		return new ComResponseEntity<Void>();
 	}
 	
 	@ApiOperation(value="공지사항 수정", notes = "공지사항을 수정한다.")
 	@Transactional
-	@PutMapping(value="/{notiNum}")
-	public ComResponseEntity<Void> updateNotice(@RequestBody NoticeUpdateReqDto noticeUpdateReqDto, HttpSession session){
-		service.updateNotice(noticeUpdateReqDto, session);
+	@PutMapping(value="/{notiNum}/update")
+	public ComResponseEntity<Void> updateNotice(@RequestBody NoticeUpdateReqDto noticeUpdateReqDto, HttpServletRequest request){
+		service.updateNotice(noticeUpdateReqDto, request);
 		return new ComResponseEntity<Void>();
 	}
 	

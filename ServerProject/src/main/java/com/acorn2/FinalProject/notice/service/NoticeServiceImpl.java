@@ -61,7 +61,9 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Transactional
 	@Override
-	public void insertNotice(NoticeCreateReqDto noticeCreateReqDto, HttpSession session) {
+	public void insertNotice(NoticeCreateReqDto noticeCreateReqDto, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
 		NoticeDto dto = new NoticeDto();
 		dto.setTitle(noticeCreateReqDto.getTitle());
 		dto.setContent(noticeCreateReqDto.getContent());
@@ -71,7 +73,10 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Transactional
 	@Override
-	public void updateNotice(NoticeUpdateReqDto noticeUpdateReqDto, HttpSession session) {
+	public void updateNotice(NoticeUpdateReqDto noticeUpdateReqDto, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+
+		
 		NoticeDto dto = new NoticeDto();
 		dto.setNotiNum(noticeUpdateReqDto.getNotiNum());
 		dto.setTitle(noticeUpdateReqDto.getTitle());
