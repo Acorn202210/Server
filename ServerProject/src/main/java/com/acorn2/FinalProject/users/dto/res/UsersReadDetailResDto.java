@@ -19,11 +19,15 @@ public class UsersReadDetailResDto {
 	private String userBirth;
 	@Schema(description = "닉네임", example = "에이콘", required = true, minLength = 1, maxLength = 50)
 	private String userNickname;
+	@Schema(description = "매니저 여부", example = "Y", required = true, minLength = 1, maxLength = 3)
+	private String managerYn;
+	
 	
 	public UsersReadDetailResDto() {}
 
+
 	public UsersReadDetailResDto(String lecUserId, String userPwd, String userProfile, String userEmail,
-			String userRegdate, String userPhone, String userBirth, String userNickname) {
+			String userRegdate, String userPhone, String userBirth, String userNickname, String managerYn) {
 		super();
 		this.lecUserId = lecUserId;
 		this.userPwd = userPwd;
@@ -33,72 +37,99 @@ public class UsersReadDetailResDto {
 		this.userPhone = userPhone;
 		this.userBirth = userBirth;
 		this.userNickname = userNickname;
+		this.managerYn = managerYn;
 	}
+
 
 	public String getLecUserId() {
 		return lecUserId;
 	}
 
+
 	public void setLecUserId(String lecUserId) {
 		this.lecUserId = lecUserId;
 	}
+
 
 	public String getUserPwd() {
 		return userPwd;
 	}
 
+
 	public void setUserPwd(String userPwd) {
 		this.userPwd = userPwd;
 	}
+
 
 	public String getUserProfile() {
 		return userProfile;
 	}
 
+
 	public void setUserProfile(String userProfile) {
 		this.userProfile = userProfile;
 	}
+
 
 	public String getUserEmail() {
 		return userEmail;
 	}
 
+
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
+
 
 	public String getUserRegdate() {
 		return userRegdate;
 	}
 
+
 	public void setUserRegdate(String userRegdate) {
 		this.userRegdate = userRegdate;
 	}
+
 
 	public String getUserPhone() {
 		return userPhone;
 	}
 
+
 	public void setUserPhone(String userPhone) {
 		this.userPhone = userPhone;
 	}
+
 
 	public String getUserBirth() {
 		return userBirth;
 	}
 
+
 	public void setUserBirth(String userBirth) {
 		this.userBirth = userBirth;
 	}
+
 
 	public String getUserNickname() {
 		return userNickname;
 	}
 
+
 	public void setUserNickname(String userNickname) {
 		this.userNickname = userNickname;
 	}
 
+
+	public String getManagerYn() {
+		return managerYn;
+	}
+
+
+	public void setManagerYn(String managerYn) {
+		this.managerYn = managerYn;
+	}
+	
 	
 	
 }

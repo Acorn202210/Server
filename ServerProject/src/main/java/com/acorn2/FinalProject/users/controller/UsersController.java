@@ -1,5 +1,8 @@
 package com.acorn2.FinalProject.users.controller;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -39,8 +42,15 @@ public class UsersController {
 
 	@Autowired private UsersService service;
 	
+	@ApiOperation(value="아이디 중복 확인", notes = "아이디 중복을 확인한다.")
+	@GetMapping(value = "/checkid")
+	public ComResponseEntity<Map<String, Object>> checkid(String lecUserId) {
+		
+		return new ComResponseEntity<>(new ComResponseDto<>(service.isValidId(lecUserId)));
+	}
+	
 	@ApiOperation(value="회원 목록", notes = "모든 회원의 목록을 가져온다.")
-	@GetMapping
+	@GetMapping(value = "/list")
 	public ComResponseEntity<UsersReadListResDto> getUsersList(@Parameter(hidden = true) UsersReadReqDto usersReadReqDto) {
 		UsersReadListResDto usersReadListResDto = service.selectUsersList(usersReadReqDto);
 		logger.debug("usersReadReqDto parameter:{}", usersReadReqDto.getLecUserId());
@@ -49,8 +59,8 @@ public class UsersController {
 	
 	@ApiOperation(value="마이페이지", notes = "마이페이지의 회원 정보를 가져온다.")
 	@GetMapping(value = "/{lecUserId}")
-	public ComResponseEntity<UsersReadDetailResDto> getNotice(HttpSession session) {
-		UsersReadDetailResDto usersReadResDto = service.selectUser(session);
+	public ComResponseEntity<UsersReadDetailResDto> getNotice(HttpServletRequest request) {
+		UsersReadDetailResDto usersReadResDto = service.selectUser(request);
 		return new ComResponseEntity<>(new ComResponseDto<>(usersReadResDto));
 	}
 	
@@ -65,14 +75,15 @@ public class UsersController {
 	
 	@ApiOperation(value="로그인", notes = "로그인")
 	@PostMapping(value="/{lecUserId}/login")
-	public ComResponseEntity<Void> login(@RequestBody UsersLoginReqDto usersLoginReqDto, HttpSession session){
-		service.login(usersLoginReqDto, session);
+	public ComResponseEntity<Void> login(@RequestBody UsersLoginReqDto usersLoginReqDto, HttpServletRequest request){
+		service.login(usersLoginReqDto, request);
 		return new ComResponseEntity<Void>();
 	}
 	
 	@ApiOperation(value="로그아웃", notes = "로그아웃")
 	@PostMapping(value="/{lecUserId}/logout")
-	public ComResponseEntity<Void> logout(HttpSession session){
+	public ComResponseEntity<Void> logout(HttpServletRequest request){
+		HttpSession session = request.getSession();
 		session.removeAttribute("id");
 		return new ComResponseEntity<Void>();
 	}
@@ -80,15 +91,22 @@ public class UsersController {
 	
 	@ApiOperation(value="개인정보 수정", notes = "개인정보 수정하기")
 	@PutMapping(value="/{lecUserId}")
-	public ComResponseEntity<Void> update(@RequestBody UsersUpdateReqDto usersUpdateReqDto, HttpSession session){
-		service.updateUser(usersUpdateReqDto, session);
+	public ComResponseEntity<Void> update(@RequestBody UsersUpdateReqDto usersUpdateReqDto, HttpServletRequest request){
+		service.updateUser(usersUpdateReqDto, request);
 		return new ComResponseEntity<Void>();
 	}
 	
 	@ApiOperation(value="비밀번호 수정", notes = "비밀번호 수정하기")
 	@PutMapping(value="/{lecUserId}/pwdUpdate")
-	public ComResponseEntity<Void> updatePwd(@RequestBody UsersUpdatePwdReqDto usersUpdatePwdReqDto, HttpSession session){
-		service.updateUserPwd(usersUpdatePwdReqDto, session);
+	public ComResponseEntity<Void> updatePwd(@RequestBody UsersUpdatePwdReqDto usersUpdatePwdReqDto, HttpServletRequest request){
+		service.updateUserPwd(usersUpdatePwdReqDto, request);
+		return new ComResponseEntity<Void>();
+	}
+	
+	@ApiOperation(value="회원 탈퇴", notes = "회원 탈퇴 ")
+	@PutMapping(value="/{lecUserId}/delete")
+	public ComResponseEntity<Void> deleteUser(HttpServletRequest request){
+		service.deleteUpdateUser(request);
 		return new ComResponseEntity<Void>();
 	}
 }
