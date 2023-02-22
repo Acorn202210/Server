@@ -17,4 +17,6 @@ public interface FaqService {
 	void FaqUpdate(FaqUpdateReqDto faqUpdateReqDto);
 	
 	void FaqDelete(int faqNum);
+	
+	void deleteFaq();
 }

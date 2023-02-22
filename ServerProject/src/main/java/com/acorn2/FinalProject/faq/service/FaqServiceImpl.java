@@ -69,5 +69,11 @@ public class FaqServiceImpl implements FaqService{
 
 		faqDao.deleteFaq(faqNum);
 	}
+
+	@Override
+	public void deleteFaq() {
+	
+		faqDao.Faqdelete();
+	}
 	
 }
