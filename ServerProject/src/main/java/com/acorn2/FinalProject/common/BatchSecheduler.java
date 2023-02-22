@@ -1,4 +1,4 @@
-package com.acorn2.FinalProject.common.dto;
+package com.acorn2.FinalProject.common;
 
 import java.time.LocalDateTime;
 
@@ -10,18 +10,22 @@ import org.springframework.stereotype.Component;
 
 import com.acorn2.FinalProject.faq.service.FaqService;
 import com.acorn2.FinalProject.notice.service.NoticeService;
+import com.acorn2.FinalProject.users.service.UsersService;
 
 @Component
 public class BatchSecheduler {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
-	@Autowired private NoticeService service;
+	@Autowired private NoticeService noticeService;
+	@Autowired private UsersService usersService;
 	@Autowired private FaqService faqservice;
-	
-	@Scheduled(cron = "10 * * * * *")
+
+	@Scheduled(cron = "0 5 0 * * *")
 	public void testSchedule() {
-		service.deleteNotice();
+		noticeService.deleteNotice();
+		usersService.deleteUser();
 		faqservice.deleteFaq();
-		logger.info("[Mytest] Notice delete {}", "[Mytest] Faq delete {}", LocalDateTime.now());;
+		
+		logger.info("[Mytest] Notice delete {}", "[Mytest] Faq delete {}", LocalDateTime.now());
 	}
-	
+
 }

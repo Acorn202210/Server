@@ -17,6 +17,7 @@ public class NoticeCreateReqDto {
 	@Size(min = 1, max = 10000)
 	@Schema(description = "공지사항 내용", example = "공지사항", required = true, minLength = 1, maxLength = 10000)
 	private String content;
+	
 	public NoticeCreateReqDto(@NotEmpty @Size(min = 1, max = 50) String title,
 			@NotEmpty @Size(min = 1, max = 10000) String content) {
 		super();
