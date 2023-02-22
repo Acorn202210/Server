@@ -1,6 +1,9 @@
 package com.acorn2.FinalProject.notice.service;
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import com.acorn2.FinalProject.notice.dto.req.NoticeCreateReqDto;
 import com.acorn2.FinalProject.notice.dto.req.NoticeReadReqDto;
 import com.acorn2.FinalProject.notice.dto.req.NoticeUpdateReqDto;
@@ -10,17 +13,10 @@ import com.acorn2.FinalProject.notice.dto.res.NoticeReadResDto;
 
 
 public interface NoticeService {
-//	public ResponseEntity<Map<String, Object>> getList(int pageNum, String keyword, String condition);
-//	public Map<String, String> saveContent(NoticeResDto dto);
-//	public Map<String, String> updateContent(NoticeReq dto);
-//	public Map<String, String> deleteContent(int num);
-//	public Map<String, Object> getData(int num);
-//	public Map<String, Object> getDetail(int num, String keyword, String condition);
-	
 	NoticeReadListResDto selectNoticeList(NoticeReadReqDto noticeReadReqDto);
 	NoticeReadDetailResDto selectNoticeOne(NoticeReadReqDto noticeReadReqDto);
-	void insertNotice(NoticeCreateReqDto noticeCreateReqDto);
-	void updateNotice(NoticeUpdateReqDto noticeUpdateReqDto);
-	void deleteNotice(Integer notiNum);
-
+	void insertNotice(NoticeCreateReqDto noticeCreateReqDto, HttpServletRequest request);
+	void updateNotice(NoticeUpdateReqDto noticeUpdateReqDto, HttpServletRequest request);
+	void deleteUpdateNotice(Integer notiNum);
+	void deleteNotice();
 }
