@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.acorn2.FinalProject.qnaboard.dto.QnaBoardDto;
 import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardCreateReqDto;
 import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardReadReqDto;
+import com.acorn2.FinalProject.qnaboard.dto.res.QnaBoardReadDetailResDto;
 // import com.acorn2.FinalProject.qnaboard.dto.QnaBoardRes;
 import com.acorn2.FinalProject.qnaboard.dto.res.QnaBoardReadResDto;
 
@@ -33,7 +34,7 @@ public interface QnaBoardDao {
 	
 	/**
 	 *
-	 * @methodName : selectNoticeCount
+	 * @methodName : selectQnaBoardCount
 	 * @author : syChoi
 	 * @param qnaBoardReadReqDto
 	 * @return
@@ -45,7 +46,7 @@ public interface QnaBoardDao {
 	
 	/**
 	 *
-	 * @methodName : selectNoticeList
+	 * @methodName : selectQnaBoardList
 	 * @author : syChoi
 	 * @param qnaBoardReadReqDto
 	 * @return
@@ -59,5 +60,10 @@ public interface QnaBoardDao {
 	
 	Integer updateQnaBoard(QnaBoardDto dto);
 	
-	Integer deleteQnaBoard(int board_question_num);
+	Integer deleteUpdateQnaBoard(int board_question_num);
+	
+	Integer deleteQnaBoard();
+	
+	//detail 보기
+	public QnaBoardReadDetailResDto selectQnaBoard(QnaBoardReadReqDto qnaBoardReadReqDto);
 }

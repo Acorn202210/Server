@@ -20,6 +20,7 @@ import com.acorn2.FinalProject.qnaboard.dto.QnaBoardDto;
 import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardCreateReqDto;
 import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardReadReqDto;
 import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardUpdateReqDto;
+import com.acorn2.FinalProject.qnaboard.dto.res.QnaBoardReadDetailResDto;
 //import com.acorn2.FinalProject.qnaboard.dto.QnaBoardRes;
 import com.acorn2.FinalProject.qnaboard.dto.res.QnaBoardReadListResDto;
 import com.acorn2.FinalProject.qnaboard.dto.res.QnaBoardReadResDto;
@@ -37,6 +38,17 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	@Override
 	@Cacheable(value = "qnaBoard")
 	public QnaBoardReadListResDto selectQnaBoardList(QnaBoardReadReqDto qnaBoardReadReqDto) {
+		if(qnaBoardReadReqDto.getKeyword() !=null) {
+			if(qnaBoardReadReqDto.getCondition().equals("title_content")) {
+				qnaBoardReadReqDto.setTitle(qnaBoardReadReqDto.getKeyword());
+				qnaBoardReadReqDto.setContent(qnaBoardReadReqDto.getKeyword());
+			}else if(qnaBoardReadReqDto.getCondition().equals("title")) {
+				qnaBoardReadReqDto.setTitle(qnaBoardReadReqDto.getKeyword());
+			}else if(qnaBoardReadReqDto.getCondition().equals("writer")) {
+				qnaBoardReadReqDto.setContent(qnaBoardReadReqDto.getKeyword());
+			}
+		}
+		
 		logger.debug("QnaBoard List Start");
 		Integer totalCount = qnaDao.selectQnaBoardCount(qnaBoardReadReqDto);
 		List<QnaBoardReadResDto> qnaBoardReadResDtoList = qnaDao.selectQnaBoardList(qnaBoardReadReqDto);
@@ -45,13 +57,21 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 		logger.debug("Cached value for key {} is {}", qnaBoardReadReqDto.hashCode(), qnaBoardReadListResDto.toString());
 		return qnaBoardReadListResDto;
 	}
+	
+	//상세보기
+	@Override
+	public QnaBoardReadDetailResDto selectOne(QnaBoardReadReqDto qnaBoardReadReqDto) {
+		
+		return qnaDao.selectQnaBoard(qnaBoardReadReqDto);
+	}
+	
 
 	//글 추가하는 메소드
 	@Transactional
 	@Override
 	public void QnaBoardInsert(QnaBoardCreateReqDto qnaBoardCreateReqDto) {
 		QnaBoardDto dto = new QnaBoardDto();		
-		dto.setBoard_question_writer(qnaBoardCreateReqDto.getBoard_question_writer());
+		dto.setBoardQuestionWriter(qnaBoardCreateReqDto.getBoardQuestionWriter());
 		dto.setTitle(qnaBoardCreateReqDto.getTitle());
 		dto.setContent(qnaBoardCreateReqDto.getContent());
 		
@@ -63,18 +83,25 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	@Override
 	public void QnaBoardUpdate(QnaBoardUpdateReqDto qnaBoardUpdateReqDto) {
 		QnaBoardDto dto=new QnaBoardDto();
-		dto.setBoard_question_num(qnaBoardUpdateReqDto.getBoard_question_num());
+		dto.setBoardQuestionNum(qnaBoardUpdateReqDto.getBoardQuestionNum());
 		dto.setTitle(qnaBoardUpdateReqDto.getTitle());
 		dto.setContent(qnaBoardUpdateReqDto.getContent());
 		qnaDao.updateQnaBoard(dto);
 	}
 
 	//글 삭제(삭제 칼럼 Y 변경)
+	@Transactional
 	@Override
-	public void QnaBoardDelete(int board_question_num) {
-		qnaDao.deleteQnaBoard(board_question_num);		
+	public void QnaBoardUpdateDelete(int boardQuestionNum) {
+		qnaDao.deleteUpdateQnaBoard(boardQuestionNum);		
 	}
 	
+	//글 삭제(batch)
+	@Transactional
+	@Override
+	public void QnaBoardDelete() {
+		qnaDao.deleteQnaBoard();
+	}
 	
 	
 //	@Override

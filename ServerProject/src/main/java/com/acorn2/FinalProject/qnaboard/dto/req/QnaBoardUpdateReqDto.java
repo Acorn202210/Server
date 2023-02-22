@@ -1,15 +1,15 @@
 package com.acorn2.FinalProject.qnaboard.dto.req;
 
 public class QnaBoardUpdateReqDto {
-	private int board_question_num;
+	private int boardQuestionNum;
 	private String title;	
 	private String content;
 	
-	public int getBoard_question_num() {
-		return board_question_num;
+	public int getBoardQuestionNum() {
+		return boardQuestionNum;
 	}
-	public void setBoard_question_num(int board_question_num) {
-		this.board_question_num = board_question_num;
+	public void setBoardQuestionNum(int boardQuestionNum) {
+		this.boardQuestionNum = boardQuestionNum;
 	}
 	public String getTitle() {
 		return title;
@@ -22,7 +22,6 @@ public class QnaBoardUpdateReqDto {
 	}
 	public void setContent(String content) {
 		this.content = content;
-	}
-	
+	}	
 	
 }

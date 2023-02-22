@@ -6,35 +6,40 @@ import com.acorn2.FinalProject.common.dto.PagingDto;
 
 @Alias("qnaBoardReq")
 public class QnaBoardReadReqDto extends PagingDto {
-	private int board_question_num;
-	private String board_question_writer;
+	private int boardQuestionNum;
+	private String boardQuestionWriter;
 	private String title;
 	private String content;
+	private String keyword;
+	private String condition;
 	
 	public QnaBoardReadReqDto () {}
 
-	public QnaBoardReadReqDto(int board_question_num, String board_question_writer, String title, String content) {
+	public QnaBoardReadReqDto(int boardQuestionNum, String boardQuestionWriter, String title, String content,
+			String keyword, String condition) {
 		super();
-		this.board_question_num = board_question_num;
-		this.board_question_writer = board_question_writer;
+		this.boardQuestionNum = boardQuestionNum;
+		this.boardQuestionWriter = boardQuestionWriter;
 		this.title = title;
 		this.content = content;
+		this.keyword = keyword;
+		this.condition = condition;
 	}
 
-	public int getBoard_question_num() {
-		return board_question_num;
+	public int getBoardQuestionNum() {
+		return boardQuestionNum;
 	}
 
-	public void setBoard_question_num(int board_question_num) {
-		this.board_question_num = board_question_num;
+	public void setBoardQuestionNum(int boardQuestionNum) {
+		this.boardQuestionNum = boardQuestionNum;
 	}
 
-	public String getBoard_question_writer() {
-		return board_question_writer;
+	public String getBoardQuestionWriter() {
+		return boardQuestionWriter;
 	}
 
-	public void setBoard_question_writer(String board_question_writer) {
-		this.board_question_writer = board_question_writer;
+	public void setBoardQuestionWriter(String boardQuestionWriter) {
+		this.boardQuestionWriter = boardQuestionWriter;
 	}
 
 	public String getTitle() {
@@ -53,5 +58,20 @@ public class QnaBoardReadReqDto extends PagingDto {
 		this.content = content;
 	}
 
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public String getCondition() {
+		return condition;
+	}
+
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}	
 	
 }
