@@ -79,6 +79,13 @@
   		SET withdrewal_user_code='Y', general_user_code = 'N'
   	    WHERE lec_user_id=#{lecUserId}
    	</update>
+   	
+   	<delete id="deleteUser">
+   		DELETE FROM USERS
+   		WHERE withdrewal_user_code ='Y'
+   	</delete>
+   	
+   	
 
 </mapper>
 

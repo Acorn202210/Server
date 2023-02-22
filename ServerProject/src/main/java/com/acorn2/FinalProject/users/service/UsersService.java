@@ -1,5 +1,6 @@
 package com.acorn2.FinalProject.users.service;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.acorn2.FinalProject.users.dto.req.UsersCreateReqDto;
@@ -12,11 +13,11 @@ import com.acorn2.FinalProject.users.dto.res.UsersReadListResDto;
 
 public interface UsersService {
 	UsersReadListResDto selectUsersList(UsersReadReqDto usersReadReqDto);
-	UsersReadDetailResDto selectUser(HttpSession session);
+	UsersReadDetailResDto selectUser(HttpServletRequest request);
 	void insertUser(UsersCreateReqDto usersCreateReqDto);
-	void login(UsersLoginReqDto usersLoginReqDto, HttpSession session);
-	void updateUser(UsersUpdateReqDto usersUpdateReqDto, HttpSession session);
-	void updateUserPwd(UsersUpdatePwdReqDto usersUpdatePwdReqDto, HttpSession session);
-	void deleteUpdateUser(HttpSession session);
+	void login(UsersLoginReqDto usersLoginReqDto, HttpServletRequest request);
+	void updateUser(UsersUpdateReqDto usersUpdateReqDto, HttpServletRequest request);
+	void updateUserPwd(UsersUpdatePwdReqDto usersUpdatePwdReqDto, HttpServletRequest request);
+	void deleteUpdateUser(HttpServletRequest request);
 
 }

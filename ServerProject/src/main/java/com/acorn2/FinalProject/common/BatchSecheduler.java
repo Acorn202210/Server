@@ -1,4 +1,4 @@
-package com.acorn2.FinalProject.common.dto;
+package com.acorn2.FinalProject.common;
 
 import java.time.LocalDateTime;
 

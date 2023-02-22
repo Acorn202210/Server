@@ -38,7 +38,8 @@ public class UsersServiceImpl implements UsersService{
 	}
 
 	@Override
-	public UsersReadDetailResDto selectUser(HttpSession session) {
+	public UsersReadDetailResDto selectUser(HttpServletRequest request) {
+		HttpSession session = request.getSession();
 		return usersDao.selectUser(session.getAttribute("id").toString());
 	}
 
@@ -55,7 +56,9 @@ public class UsersServiceImpl implements UsersService{
 	}
 
 	@Override
-	public void login(UsersLoginReqDto usersLoginReqDto, HttpSession session) {
+	public void login(UsersLoginReqDto usersLoginReqDto, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+
 		boolean isValid = false;
 		UsersReadDetailResDto resultDto = usersDao.selectUser(usersLoginReqDto.getLecUserId());
 		if(resultDto != null) {
@@ -70,15 +73,18 @@ public class UsersServiceImpl implements UsersService{
 	}
 
 	@Override
-	public void updateUser(UsersUpdateReqDto usersUpdateReqDto, HttpSession session) {
-		
+	public void updateUser(UsersUpdateReqDto usersUpdateReqDto, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+
 		usersUpdateReqDto.setLecUserId(session.getAttribute("id").toString());
 		usersDao.updateUser(usersUpdateReqDto);
 		
 	}
 
 	@Override
-	public void updateUserPwd(UsersUpdatePwdReqDto usersUpdatePwdReqDto, HttpSession session) {
+	public void updateUserPwd(UsersUpdatePwdReqDto usersUpdatePwdReqDto, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+
 		String id = session.getAttribute("id").toString();
 		
 		UsersReadDetailResDto resultDto = usersDao.selectUser(id);
@@ -97,9 +103,13 @@ public class UsersServiceImpl implements UsersService{
 	}
 
 	@Override
-	public void deleteUpdateUser(HttpSession session) {
+	public void deleteUpdateUser(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+
 		usersDao.deleteUpdateUser(session.getAttribute("id").toString());
 		session.removeAttribute("id");
 	}
+	
+	
 
 }
