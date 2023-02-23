@@ -73,10 +73,23 @@
   	    WHERE lec_user_id=#{lecUserId}
    	</update>
    	
+   	<update id="updateUserLastDate" parameterType="String">
+  		UPDATE USERS
+  		SET user_last_date = SYSDATE, REST_USER_CODE='N', general_user_code = 'Y'
+  	    WHERE lec_user_id=#{lecUserId}
+   	</update>
+   	
    	<update id="deleteUpdateUser" parameterType="String">
   		UPDATE USERS
   		SET withdrewal_user_code='Y', general_user_code = 'N'
   	    WHERE lec_user_id=#{lecUserId}
+   	</update>
+   
+   	<update id="updateRestUser">
+  		UPDATE USERS
+		SET REST_USER_CODE='Y', general_user_code = 'N'
+		WHERE USER_LAST_DATE <![CDATA[ <= ]]> (SELECT to_char(add_months(sysdate,-12),'YYYY-MM-DD') YearAgo
+								FROM DUAL);
    	</update>
    	
    	<delete id="deleteUser">
