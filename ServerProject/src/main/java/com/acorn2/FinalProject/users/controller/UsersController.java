@@ -1,6 +1,7 @@
 package com.acorn2.FinalProject.users.controller;
 
 import java.io.IOException;
+import java.net.http.HttpRequest;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -13,10 +14,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +40,7 @@ import com.acorn2.FinalProject.users.dto.req.UsersUpdatePwdReqDto;
 import com.acorn2.FinalProject.users.dto.req.UsersUpdateReqDto;
 import com.acorn2.FinalProject.users.dto.res.UsersReadDetailResDto;
 import com.acorn2.FinalProject.users.dto.res.UsersReadListResDto;
+import com.acorn2.FinalProject.users.profile.dto.ProfileDto;
 import com.acorn2.FinalProject.users.profile.service.ProfileService;
 import com.acorn2.FinalProject.users.service.UsersService;
 
@@ -104,8 +109,11 @@ public class UsersController {
 	
 	@ApiOperation(value="개인정보 수정", notes = "개인정보 수정하기")
 	@PutMapping(value="/{lecUserId}")
-	public ComResponseEntity<Void> update(@RequestBody UsersUpdateReqDto usersUpdateReqDto, HttpServletRequest request){
-		userService.updateUser(usersUpdateReqDto, request);
+	public ComResponseEntity<Void> update(@Parameter(
+            description = "multipart/form-data 형식의 이미지 리스트를 input으로 받습니다. 이때 key 값은 multipartFile 입니다.",
+            content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE))
+			@RequestPart(value = "multipartFile", required = false) MultipartFile file, @RequestBody UsersUpdateReqDto usersUpdateReqDto, HttpServletRequest request){
+		userService.updateUser(usersUpdateReqDto, file, request);
 		return new ComResponseEntity<Void>();
 	}
 	
@@ -123,12 +131,13 @@ public class UsersController {
 		return new ComResponseEntity<Void>();
 	}
 	
-	@PostMapping(value="/upload/profile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ComResponseEntity<Void> uploadFile(@Parameter(
-            description = "multipart/form-data 형식의 이미지 리스트를 input으로 받습니다. 이때 key 값은 multipartFile 입니다.",
-            content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE))
-			@RequestPart("multipartFile") MultipartFile file){
-	    profileService.insertProfile(file);
-	    return new ComResponseEntity<Void>();
+	@ApiOperation(value="프로필 가져오기", notes = "프로필 가져오기 ")
+	@GetMapping("/{lecUserId}/profile")
+	public ResponseEntity<byte[]> getProfile(HttpServletRequest request){
+		Map<String, Object> map = profileService.selectProfile(request);
+		ProfileDto profileDto = (ProfileDto) map.get("profileDto");
+		HttpHeaders headers = (HttpHeaders) map.get("headers");
+		
+		return new ResponseEntity<byte[]>(profileDto.getData(), headers, HttpStatus.OK);
 	}
 }

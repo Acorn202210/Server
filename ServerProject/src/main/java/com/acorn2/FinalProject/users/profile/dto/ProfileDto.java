@@ -1,29 +1,32 @@
 package com.acorn2.FinalProject.users.profile.dto;
 
 public class ProfileDto {
-	private Integer profileId;
+	private String lecUserId;
     private String mimetype;
     private String originalName;
     private byte[] data;
-    private String created;
+    private String regdate;
+    private String updateRegdate;
     
     public ProfileDto(){}
 
-	public ProfileDto(Integer profileId, String mimetype, String originalName, byte[] data, String created) {
+	public ProfileDto(String lecUserId, String mimetype, String originalName, byte[] data, String regdate,
+			String updateRegdate) {
 		super();
-		this.profileId = profileId;
+		this.lecUserId = lecUserId;
 		this.mimetype = mimetype;
 		this.originalName = originalName;
 		this.data = data;
-		this.created = created;
+		this.regdate = regdate;
+		this.updateRegdate = updateRegdate;
 	}
 
-	public Integer getProfileId() {
-		return profileId;
+	public String getLecUserId() {
+		return lecUserId;
 	}
 
-	public void setProfileId(Integer profileId) {
-		this.profileId = profileId;
+	public void setLecUserId(String lecUserId) {
+		this.lecUserId = lecUserId;
 	}
 
 	public String getMimetype() {
@@ -50,13 +53,19 @@ public class ProfileDto {
 		this.data = data;
 	}
 
-	public String getCreated() {
-		return created;
+	public String getRegdate() {
+		return regdate;
 	}
 
-	public void setCreated(String created) {
-		this.created = created;
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
 	}
-    
-    
+
+	public String getUpdateRegdate() {
+		return updateRegdate;
+	}
+
+	public void setUpdateRegdate(String updateRegdate) {
+		this.updateRegdate = updateRegdate;
+	}    
 }

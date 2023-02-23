@@ -8,7 +8,6 @@ CREATE TABLE users(
     USER_BIRTH DATE,
     MANAGER_YN VARCHAR2(3) DEFAULT 'N',
     USER_NICKNAME VARCHAR2(50),
-    USER_PROFILE VARCHAR2(100),
     USER_LAST_DATE DATE,
     LOGIN_STATUS_CODE VARCHAR2(3) DEFAULT 'N',
     GENERAL_USER_CODE VARCHAR2(3) DEFAULT 'N',
@@ -16,17 +15,16 @@ CREATE TABLE users(
     REST_USER_CODE VARCHAR2(3) DEFAULT 'N'
 );
 
---  프로필 이미지 저장 테이블
 CREATE TABLE profile_image(
-profile_id NUMBER PRIMARY key,
-mimetype varchar(100),
-data CLOB,
-original_name varchar(100),
-created timestamp
+    LEC_USER_ID VARCHAR2(50) PRIMARY KEY,
+    mimetype varchar(100),
+    data BLOB,
+    original_name varchar(100),
+    regdate DATE,
+    update_regdate DATE
+    delete_YN_code VARCHAR2(3) DEFAULT 'N'
 );
 
--- 프로필 이미지 시퀀스
-CREATE SEQUENCE profile_image_seq; 
 
 -- QNA_BOARD_QUESTION
 CREATE TABLE QNA_BOARD_QUESTION(

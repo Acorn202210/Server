@@ -4,9 +4,32 @@
 	
 	 <insert id="insertProfile" parameterType="com.acorn2.FinalProject.users.profile.dto.ProfileDto">
 	 	INSERT INTO profile_image
-      	(profile_id, mimetype, original_name, data, created)
-      	VALUES(profile_image_seq.NEXTVAL, #{mimetype}, #{originalName}, #{data,jdbcType=CLOB}, SYSDATE)
+      	(lec_user_id, mimetype, original_name, data, regdate)
+      	VALUES(#{lecUserId}, #{mimetype}, #{originalName}, #{data}, SYSDATE)
 	 </insert>
+	 
+	 <select id="selectProfile" parameterType="String" resultType="com.acorn2.FinalProject.users.profile.dto.ProfileDto">
+	 	SELECT lec_user_id, mimetype, original_name, data, regdate, update_regdate
+	 	FROM profile_image
+	 	WHERE lec_user_id = #{lecUserId}
+	 </select>
+	 
+	 <update id="updateProfile" parameterType="com.acorn2.FinalProject.users.profile.dto.ProfileDto">
+	 	UPDATE profile_image
+	 	SET mimetype = #{mimetype}, original_name = #{originalName}, data = #{data}, update_regdate = SYSDATE
+	 	WHERE lec_user_id = #{lecUserId}
+	 </update>
+	 
+	  <update id="deleteUpdateProfile" parameterType="String">
+	 	UPDATE profile_image
+	 	SET delete_YN_code = 'Y'
+	 	WHERE lec_user_id = #{lecUserId}
+	 </update>
+	 
+	 <delete id="deleteProfile">
+	 	DELETE profile_image
+	 	WHERE delete_YN_code = 'Y'
+	 </delete>
 
 </mapper>
 
