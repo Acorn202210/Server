@@ -24,5 +24,5 @@ public interface UsersService {
 	void updateUser(UsersUpdateReqDto usersUpdateReqDto, MultipartFile file, HttpServletRequest request);
 	void updateUserPwd(UsersUpdatePwdReqDto usersUpdatePwdReqDto, HttpServletRequest request);
 	void deleteUpdateUser(HttpServletRequest request);
-	void deleteUser();
+	void batchUser();
 }

@@ -88,6 +88,7 @@ public class UsersServiceImpl implements UsersService{
 	
 		if(isValid) {
 			session.setAttribute("id", resultDto.getLecUserId());
+			usersDao.updateUserLastDate(resultDto.getLecUserId());
 		}else {
 			throw new UsersNotLoginException("비밀번호가 잘못되었습니다!");
 		}
@@ -159,8 +160,10 @@ public class UsersServiceImpl implements UsersService{
 	}
 
 	@Override
-	public void deleteUser() {
+	public void batchUser() {
 		usersDao.deleteUser();
 		profileDao.deleteProfile();
+		
+		usersDao.updateRestUser();
 	}
 }
