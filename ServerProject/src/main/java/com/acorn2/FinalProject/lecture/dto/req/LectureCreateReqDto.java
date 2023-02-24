@@ -5,34 +5,25 @@ import org.springframework.web.multipart.MultipartFile;
 public class LectureCreateReqDto {
 	private int lecNum;
 	private String teacher;
-	private String lecWriter;
 	private String title;
 	private String describe;
 	private String videoPath;
-	private String imagePath;
 	private String largeCategory;
 	private String smallCategory;
-	private MultipartFile image;
 	
-	public LectureCreateReqDto(int lecNum, String teacher, String lecWriter, String title, String describe,
-			String videoPath, String imagePath, String largeCategory, String smallCategory,
-			MultipartFile image) {
+	public LectureCreateReqDto(int lecNum, String teacher, String title, String describe,
+			String videoPath, String largeCategory, String smallCategory) {
 		super();
 		this.lecNum = lecNum;
 		this.teacher = teacher;
-		this.lecWriter = lecWriter;
 		this.title = title;
 		this.describe = describe;
 		this.videoPath = videoPath;
-		this.imagePath = imagePath;
 		this.largeCategory = largeCategory;
 		this.smallCategory = smallCategory;
-		this.image = image;
 	}
 	
-	public LectureCreateReqDto() {
-        this.imagePath = "";
-    }
+	
 	
 	public int getLecNum() {
 		return lecNum;
@@ -48,14 +39,6 @@ public class LectureCreateReqDto {
 
 	public void setTeacher(String teacher) {
 		this.teacher = teacher;
-	}
-
-	public String getLecWriter() {
-		return lecWriter;
-	}
-
-	public void setLecWriter(String lecWriter) {
-		this.lecWriter = lecWriter;
 	}
 
 	public String getTitle() {
@@ -82,13 +65,6 @@ public class LectureCreateReqDto {
 		this.videoPath = videoPath;
 	}
 
-	public String getImagePath() {
-		return imagePath;
-	}
-
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
-	}
 
 	public String getLargeCategory() {
 		return largeCategory;
@@ -104,14 +80,6 @@ public class LectureCreateReqDto {
 
 	public void setSmallCategory(String smallCategory) {
 		this.smallCategory = smallCategory;
-	}
-
-	public MultipartFile getImage() {
-		return image;
-	}
-
-	public void setImage(MultipartFile image) {
-		this.image = image;
 	}
 
 	

@@ -4,21 +4,28 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,17 +37,22 @@ import com.acorn2.FinalProject.lecture.dto.LectureDto;
 import com.acorn2.FinalProject.lecture.dto.req.LectureCreateReqDto;
 import com.acorn2.FinalProject.lecture.dto.req.LectureReadReqDto;
 import com.acorn2.FinalProject.lecture.dto.res.LectureReadListResDto;
+import com.acorn2.FinalProject.lecture.image.dto.ImageDto;
+import com.acorn2.FinalProject.lecture.image.service.ImageService;
+import com.acorn2.FinalProject.users.profile.dto.ProfileDto;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @Api(value = "Lecture")
 @RestController
 @RequestMapping("/api/lecture")
 public class LectureController {
-	@Autowired
-	private LectureService service;
+	@Autowired private LectureService service;
+	@Autowired private ImageService imageService;
 	
 	@GetMapping("/LectureList")
 	public ComResponseEntity<LectureReadListResDto> getLectureList(@RequestParam String largeCategory,
@@ -60,41 +72,26 @@ public class LectureController {
 		return new ComResponseEntity<>(new ComResponseDto<>(dtoOne));
 	}
 	
-	
-	@PostMapping("LectureInsert")
-	public ComResponseEntity<Void> LectureInsert(@Valid @ModelAttribute LectureCreateReqDto lectureCreateReqDto){
-		String imagePath = null;
-		MultipartFile image = lectureCreateReqDto.getImage();
-		if (image == null) {
-		    // handle the error
-		} else {
-		    imagePath = "/C:/data/" + image.getOriginalFilename();
-		    lectureCreateReqDto.setImagePath(imagePath);
-		    // rest of your code
-		}
-		
-		try {
-		    File file = new File(imagePath);
-		    if (file.exists()) {  // 파일이 이미 존재하는지 확인합니다.
-		        boolean deleted = file.delete();  // 파일을 삭제합니다.
-		        if (!deleted) {
-		            System.out.println("파일 삭제에 실패하였습니다.");
-		        }
-		    }
-		    boolean created = file.createNewFile();  // 파일을 생성합니다.
-		    if (created) {
-		        System.out.println("파일이 성공적으로 생성되었습니다.");
-		    } else {
-		        System.out.println("파일 생성에 실패하였습니다.");
-		    }
-		} catch (IOException e) {
-		    e.printStackTrace();
-		}
-		
-		service.LectureInsert(lectureCreateReqDto);
-		
+	@ApiOperation(value="강의 등록", notes = "강의 등록하기")
+	@PutMapping(value="/lectureInsert")
+	public ComResponseEntity<Void> update(@Parameter(
+            description = "multipart/form-data 형식의 이미지 리스트를 input으로 받습니다. 이때 key 값은 multipartFile 입니다.",
+            content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE))
+			@RequestPart(value = "multipartFile", required = false) MultipartFile file, @RequestBody LectureCreateReqDto lectureCreateReqDto, HttpServletRequest request, int lecNum){
+		service.LectureInsert(lectureCreateReqDto, file, request, lecNum);
 		return new ComResponseEntity<Void>();
 	}
+	
+	@ApiOperation(value="강의 이미지 가져오기", notes = "이미지 가져오기 ")
+	@GetMapping("/{lecNum}/Image")
+	public ResponseEntity<byte[]> getImage(int lecNum){
+		Map<String, Object> map = imageService.selectImage(lecNum);
+		ImageDto imageDto = (ImageDto) map.get("imageDto");
+		HttpHeaders headers = (HttpHeaders) map.get("headers");
+		
+		return new ResponseEntity<byte[]>(imageDto.getData(), headers, HttpStatus.OK);
+	}
+	
 	
     
     @DeleteMapping("/{lecNum}")

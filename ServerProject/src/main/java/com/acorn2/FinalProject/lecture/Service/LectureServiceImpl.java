@@ -1,6 +1,10 @@
 package com.acorn2.FinalProject.lecture.Service;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,13 +17,15 @@ import com.acorn2.FinalProject.lecture.dto.req.LectureReadReqDto;
 import com.acorn2.FinalProject.lecture.dto.req.LectureUpdateReqDto;
 import com.acorn2.FinalProject.lecture.dto.res.LectureReadListResDto;
 import com.acorn2.FinalProject.lecture.dto.res.LectureReadResDto;
+import com.acorn2.FinalProject.lecture.image.dao.ImageDao;
+import com.acorn2.FinalProject.lecture.image.dto.ImageDto;
 import com.acorn2.FinalProject.utils.FileUploadUtil;
 import org.springframework.util.StringUtils;
 
 @Service
 public class LectureServiceImpl implements LectureService{
-	@Autowired
-	private LectureDao lectureDao;
+	@Autowired private LectureDao lectureDao;
+	@Autowired private ImageDao imageDao;
 
 	@Override
 	public LectureReadListResDto LectureList(LectureReadReqDto lectureReadReqDto) {	
@@ -37,16 +43,38 @@ public class LectureServiceImpl implements LectureService{
 	}
 
 	@Override
-	public void LectureInsert(LectureCreateReqDto lectureCreateReqDto) {
+	public void LectureInsert(LectureCreateReqDto lectureCreateReqDto,MultipartFile file, HttpServletRequest request,int lecNum) {
+		ImageDto imageSelectDto= imageDao.selectImage(lecNum);
+		
+		ImageDto imageDto = new ImageDto();
+		if(file != null) {
+			try {
+				imageDto.setLecNum(lecNum);
+				imageDto.setMimetype(file.getContentType());
+				imageDto.setOriginalName(file.getOriginalFilename());
+				imageDto.setData(file.getBytes());
+				if(imageSelectDto == null) {
+					imageDao.insertImage(imageDto);
+				}else {
+					imageDao.updateImage(imageDto);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+
+		HttpSession session = request.getSession();
+		String id = session.getAttribute("id").toString();
+		
 		LectureDto dto = new LectureDto();		
 
 		dto.setLecNum(lectureCreateReqDto.getLecNum());
 		dto.setTeacher(lectureCreateReqDto.getTeacher());
-		dto.setLecWriter(lectureCreateReqDto.getLecWriter());
+		dto.setLecWriter(id);
 		dto.setTitle(lectureCreateReqDto.getTitle());
 		dto.setDescribe(lectureCreateReqDto.getDescribe());
 		dto.setVideoPath(lectureCreateReqDto.getVideoPath());
-		dto.setImagePath(lectureCreateReqDto.getImagePath());
 		dto.setLargeCategory(lectureCreateReqDto.getLargeCategory());
 		dto.setSmallCategory(lectureCreateReqDto.getSmallCategory());
 		

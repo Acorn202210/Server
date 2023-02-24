@@ -14,7 +14,6 @@ public class LectureReviewDto extends PagingDto{
     private String deleteYn;
     private int star;
     private String userRegdate;
-    private String profile;
     private String content;
     private String updateDate;
     private String UpdateId;
@@ -67,14 +66,6 @@ public class LectureReviewDto extends PagingDto{
 
 	public void setUserRegdate(String userRegdate) {
 		this.userRegdate = userRegdate;
-	}
-
-	public String getProfile() {
-		return profile;
-	}
-
-	public void setProfile(String profile) {
-		this.profile = profile;
 	}
 
 	public String getContent() {

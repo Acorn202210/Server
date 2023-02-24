@@ -11,7 +11,6 @@ public class LectureDto {
 	private String title;
 	private String describe;
 	private String videoPath;
-	private String imagePath;
 	private String usersRegdate;
 	private String updateDate;
 	private int viewCount;
@@ -19,13 +18,12 @@ public class LectureDto {
 	private String smallCategory;
 	private String updateId;
 	private String serviceYnCode;
-	private MultipartFile image;	
 	
 	public LectureDto() {}
 
 	public LectureDto(int lecNum, String teacher, String lecWriter, String title, String describe, String videoPath,
-			String imagePath, String usersRegdate, String updateDate, int viewCount, String largeCategory,
-			String smallCategory, String updateId, String serviceYnCode, MultipartFile image) {
+			String usersRegdate, String updateDate, int viewCount, String largeCategory, String smallCategory,
+			String updateId, String serviceYnCode) {
 		super();
 		this.lecNum = lecNum;
 		this.teacher = teacher;
@@ -33,7 +31,6 @@ public class LectureDto {
 		this.title = title;
 		this.describe = describe;
 		this.videoPath = videoPath;
-		this.imagePath = imagePath;
 		this.usersRegdate = usersRegdate;
 		this.updateDate = updateDate;
 		this.viewCount = viewCount;
@@ -41,7 +38,6 @@ public class LectureDto {
 		this.smallCategory = smallCategory;
 		this.updateId = updateId;
 		this.serviceYnCode = serviceYnCode;
-		this.image = image;
 	}
 
 	public int getLecNum() {
@@ -90,14 +86,6 @@ public class LectureDto {
 
 	public void setVideoPath(String videoPath) {
 		this.videoPath = videoPath;
-	}
-
-	public String getImagePath() {
-		return imagePath;
-	}
-
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
 	}
 
 	public String getUsersRegdate() {
@@ -155,16 +143,6 @@ public class LectureDto {
 	public void setServiceYnCode(String serviceYnCode) {
 		this.serviceYnCode = serviceYnCode;
 	}
-
-	public MultipartFile getImage() {
-		return image;
-	}
-
-	public void setImage(MultipartFile image) {
-		this.image = image;
-	}
-
-	
 
 	
 

@@ -7,7 +7,7 @@
 		FROM	
 			(SELECT result1.*, ROWNUM as rnum
 			FROM
-				(SELECT LEC_NUM, TEACHER, LEC_WRITER, TITLE, DESCRIBE, IMAGEPATH ,VIDEOPATH, VIEWCOUNT, 
+				(SELECT LEC_NUM, TEACHER, LEC_WRITER, TITLE, DESCRIBE ,VIDEOPATH, VIEWCOUNT, 
 					USER_REGDATE, LARGE_CATEGORY, SMALL_CATEGORY
 				FROM LECTURE
 				<choose>
@@ -28,7 +28,7 @@
 	</select>
 	
 	<select id="lectureOne" parameterType="int" resultType="com.acorn2.FinalProject.lecture.dto.LectureDto">
-		SELECT LEC_NUM, TEACHER, LEC_WRITER, TITLE, DESCRIBE, IMAGEPATH ,VIDEOPATH, VIEWCOUNT, 
+		SELECT LEC_NUM, TEACHER, LEC_WRITER, TITLE, DESCRIBE ,VIDEOPATH, VIEWCOUNT, 
 					USER_REGDATE, LARGE_CATEGORY, SMALL_CATEGORY
 		FROM LECTURE
 		WHERE LEC_NUM = #{lecNum}
@@ -36,9 +36,9 @@
 	
 	<insert id="lectureInsert" parameterType="com.acorn2.FinalProject.lecture.dto.LectureDto">
 		INSERT INTO LECTURE
-		(LEC_NUM, TEACHER, LEC_WRITER, TITLE, DESCRIBE, IMAGEPATH,
+		(LEC_NUM, TEACHER, LEC_WRITER, TITLE, DESCRIBE,
 		VIDEOPATH, VIEWCOUNT, USER_REGDATE, LARGE_CATEGORY,SMALL_CATEGORY)
-		VALUES(LECTURE_seq.NEXTVAL, #{teacher}, #{lecWriter}, #{title}, #{describe},#{imagePath,jdbcType=VARCHAR}, #{videoPath}, #{viewCount}, SYSDATE, #{largeCategory}, #{smallCategory} )
+		VALUES(LECTURE_seq.NEXTVAL, #{teacher}, #{lecWriter}, #{title}, #{describe}, #{videoPath}, #{viewCount}, SYSDATE, #{largeCategory}, #{smallCategory} )
 	</insert>
 	
 	<update id="addViewCount" parameterType="int">
@@ -49,7 +49,7 @@
 	
 	<update id="update" parameterType="com.acorn2.FinalProject.lecture.dto.LectureDto">
 		UPDATE LECTURE
-		SET TITLE= #{TITLE}, TEACHER=#{TEACHER},IMAGEPATH=#{IMAGEPATH},DESCRIBE=#{DESCRIBE}, VIDEOPATH=#{VIDEOPATH}, LARGE_CATEGORY=#{largeCategory},SMALL_CATEGORY=#{smallCategory}
+		SET TITLE= #{TITLE}, TEACHER=#{TEACHER},DESCRIBE=#{DESCRIBE}, VIDEOPATH=#{VIDEOPATH}, LARGE_CATEGORY=#{largeCategory},SMALL_CATEGORY=#{smallCategory}
 		WHERE LEC_NUM = #{lecNum}
 	</update>
 	

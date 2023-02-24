@@ -8,11 +8,12 @@ public class LectureStudentReadReqDto extends PagingDto{
 	private int lecStuRefGroup;
 	private String largeCategory;
 	private String smallCategory;
-	private String id;
-	private String birth;
-	private String phone;
-	private String email;
+	private String lecUserId;
+	private String userBirth;
+	private String userPhone;
+	private String userEmail;
 	private String userRegdate;
+	private String generalUserCode;
 
 	
 	public LectureStudentReadReqDto() {}
@@ -58,43 +59,43 @@ public class LectureStudentReadReqDto extends PagingDto{
 	}
 
 
-	public String getId() {
-		return id;
+	public String getLecUserId() {
+		return lecUserId;
 	}
 
 
-	public void setId(String id) {
-		this.id = id;
+	public void setLecUserId(String lecUserId) {
+		this.lecUserId = lecUserId;
 	}
 
 
-	public String getBirth() {
-		return birth;
+	public String getUserBirth() {
+		return userBirth;
 	}
 
 
-	public void setBirth(String birth) {
-		this.birth = birth;
+	public void setUserBirth(String userBirth) {
+		this.userBirth = userBirth;
 	}
 
 
-	public String getPhone() {
-		return phone;
+	public String getUserPhone() {
+		return userPhone;
 	}
 
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
 	}
 
 
-	public String getEmail() {
-		return email;
+	public String getUserEmail() {
+		return userEmail;
 	}
 
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 
 
@@ -108,7 +109,14 @@ public class LectureStudentReadReqDto extends PagingDto{
 	}
 
 
-	
+	public String getGeneralUserCode() {
+		return generalUserCode;
+	}
+
+
+	public void setGeneralUserCode(String generalUserCode) {
+		this.generalUserCode = generalUserCode;
+	}
 
 
 	

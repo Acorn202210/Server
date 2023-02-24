@@ -12,21 +12,21 @@
 			FROM	
 				(SELECT result1.*, ROWNUM as rnum
 				FROM
-					(SELECT users.LEC_USER_ID,TO_CHAR(birth,'YYYY-MM-DD') birth, phone, email, User_Regdate, large_category, small_category
+					(SELECT users.LEC_USER_ID,TO_CHAR(USER_BIRTH,'YYYY-MM-DD') USER_BIRTH, USER_PHONE, USER_EMAIL, User_Regdate, large_category, small_category
 					FROM users 
 					JOIN LECTURE_STUDENT
 					ON users.LEC_USER_ID=LECTURE_STUDENT.lec_Stu_User_Id
 					JOIN LECTURE 
 					on LECTURE.lec_Num=LECTURE_STUDENT.lec_Stu_Ref_Group
-					
 					<where>
 						<if test="lecStuUserId != null">AND lec_Stu_User_Id LIKE '%'||#{lecStuUserId}||'%'</if>
-						<if test="birth != null">AND birth LIKE '%'||#{birth}||'%'</if>
-						<if test="phone != null">AND phone LIKE '%'||#{phone}||'%'</if>
-						<if test="email != null">AND email LIKE '%'||#{email}||'%'</if>
-						<if test="userRegdate != null">AND userRegdate LIKE '%'||#{userRegdate}||'%'</if>
+						<if test="userBirth != null">AND USER_BIRTH LIKE '%'||#{userBirth}||'%'</if>
+						<if test="userPhone != null">AND USER_PHONE LIKE '%'||#{userPhone}||'%'</if>
+						<if test="userEmail != null">AND USER_EMAIL LIKE '%'||#{userEmail}||'%'</if>
+						<if test="userRegdate != null">AND USER_REGDATE LIKE '%'||#{userRegdate}||'%'</if>
 						<if test='smallCategory == "0"'>AND large_category=#{largeCategory}</if>
 						<if test="smallCategory != null">AND large_category=#{largeCategory} AND small_category=#{smallCategory}</if>
+						<if test="generalUserCode == 'Y'">AND general_user_code = 'Y'</if>
 					</where>
 					ORDER BY users.LEC_USER_ID DESC) result1)				
 			<![CDATA[		

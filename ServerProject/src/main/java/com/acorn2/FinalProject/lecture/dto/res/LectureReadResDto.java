@@ -7,7 +7,6 @@ public class LectureReadResDto {
 	private String title;
 	private String describe;
 	private String videoPath;
-	private String imagePath;
 	private int viewCount;
 	private String largeCategory;
 	private String smallCategory;
@@ -49,13 +48,6 @@ public class LectureReadResDto {
 	public void setVideoPath(String videoPath) {
 		this.videoPath = videoPath;
 	}
-	public String getImagePath() {
-		return imagePath;
-	}
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
-	}
-
 	public int getViewCount() {
 		return viewCount;
 	}

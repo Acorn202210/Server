@@ -13,7 +13,7 @@
 	         (SELECT result1.*, ROWNUM AS rnum
 	         FROM
 	            (SELECT LEC_RE_NUM, LEC_RE_WRITER, CONTENT, LEC_RE_STU_REF_GROUP, STAR,
-	               DELETE_YN, LECTURE_REVIEW.USER_REGDATE, PROFILE
+	               DELETE_YN, LECTURE_REVIEW.USER_REGDATE
 	            FROM LECTURE_REVIEW
 	            INNER JOIN users
 	            ON LECTURE_REVIEW.lec_re_writer=users.LEC_USER_ID
