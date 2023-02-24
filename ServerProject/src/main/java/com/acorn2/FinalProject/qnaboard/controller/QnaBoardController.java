@@ -3,6 +3,7 @@ package com.acorn2.FinalProject.qnaboard.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -41,7 +42,7 @@ import lombok.RequiredArgsConstructor;
 @Api(value = "QnaBoardController")
 @RequestMapping("/api/qna_board")
 @RequiredArgsConstructor
-public class QnaBoard {
+public class QnaBoardController {
 	
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
@@ -67,19 +68,19 @@ public class QnaBoard {
 		return new ComResponseEntity<QnaBoardReadDetailResDto>(new ComResponseDto<>(qnaBoardReadDetailResDto));
 	}
 	
+	//문의 등록
 	@ApiOperation(value = "1:1 문의 등록", notes = "1:1문의를 등록한다.")
-	@PostMapping
-	public ComResponseEntity<Void> QnaBoardInsert(@Valid @RequestBody QnaBoardCreateReqDto qnaBoardCreateReqDto){
-		service.QnaBoardInsert(qnaBoardCreateReqDto);
+	@PostMapping("/insert")
+	public ComResponseEntity<Void> QnaBoardInsert(@Valid @RequestBody QnaBoardCreateReqDto qnaBoardCreateReqDto, HttpServletRequest request){
+		service.QnaBoardInsert(qnaBoardCreateReqDto, request);
 		return new ComResponseEntity<Void>();
 	}
 	
 	//수정
 	@ApiOperation(value = "1:1 문의 수정", notes = "1:1문의를 수정한다.")
 	@PutMapping("/{boardQuestionNum}/update")
-	public ComResponseEntity<Void> QnaBoardUpdate(@RequestParam(value = "boardQuestionNum", required = true) int boardQuestionNum, 
-											@RequestBody QnaBoardUpdateReqDto qnaBoardUpdateReqDto){
-		service.QnaBoardUpdate(qnaBoardUpdateReqDto);
+	public ComResponseEntity<Void> QnaBoardUpdate(@RequestBody QnaBoardUpdateReqDto qnaBoardUpdateReqDto, HttpServletRequest request){
+		service.QnaBoardUpdate(qnaBoardUpdateReqDto, request);
 		return new ComResponseEntity<Void>();
 	}
 	

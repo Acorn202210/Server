@@ -16,6 +16,7 @@
          </when>
       </choose>
 	</sql>
+	
 	<select id="selectQnaBoardCount" parameterType="com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardReadReqDto" resultType="java.lang.Integer">
 		SELECT NVL(MAX(ROWNUM), 0)
 		FROM qna_board_question
@@ -61,7 +62,15 @@
 	<!-- 게시물 수정 -->
 	<update id="updateQnaBoard" parameterType="com.acorn2.FinalProject.qnaboard.dto.QnaBoardDto">
 		UPDATE qna_board_question
-		SET title=#{title}, content=#{content}, update_date=SYSDATE
+		<set>
+      	<if test="title != null">
+      		title = #{title},
+      	</if>
+      	<if test="content != null">
+      		content=#{content},
+      	</if>
+		update_date=SYSDATE
+		</set>
 		WHERE board_question_num=#{boardQuestionNum}
 	</update>
 		

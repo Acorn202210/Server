@@ -3,6 +3,8 @@ package com.acorn2.FinalProject.qnaboard.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.acorn2.FinalProject.notice.dto.res.NoticeReadDetailResDto;
 import com.acorn2.FinalProject.qnaboard.dto.QnaBoardDto;
 import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardCreateReqDto;
@@ -18,9 +20,9 @@ public interface QnaBoardService {
 	
 	QnaBoardReadDetailResDto selectOne(QnaBoardReadReqDto QnaBoardReadReqDto);
 	
-	void QnaBoardInsert(QnaBoardCreateReqDto qnaBoardCreateReqDto);
+	void QnaBoardInsert(QnaBoardCreateReqDto qnaBoardCreateReqDto, HttpServletRequest request);
 	
-	void QnaBoardUpdate(QnaBoardUpdateReqDto qnaBoardUpdateReqDto);
+	void QnaBoardUpdate(QnaBoardUpdateReqDto qnaBoardUpdateReqDto, HttpServletRequest request);
 	
 	void QnaBoardUpdateDelete(int boardQuestionNum);
 	

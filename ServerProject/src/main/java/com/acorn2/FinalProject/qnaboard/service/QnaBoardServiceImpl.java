@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.logging.log4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,11 +72,13 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	//글 추가하는 메소드
 	@Transactional
 	@Override
-	public void QnaBoardInsert(QnaBoardCreateReqDto qnaBoardCreateReqDto) {
+	public void QnaBoardInsert(QnaBoardCreateReqDto qnaBoardCreateReqDto, HttpServletRequest request) {
+		HttpSession session=request.getSession();
+		
 		QnaBoardDto dto = new QnaBoardDto();		
-		dto.setBoardQuestionWriter(qnaBoardCreateReqDto.getBoardQuestionWriter());
 		dto.setTitle(qnaBoardCreateReqDto.getTitle());
 		dto.setContent(qnaBoardCreateReqDto.getContent());
+		dto.setBoardQuestionWriter(session.getAttribute("id").toString());
 		
 		qnaDao.insertQnaBoard(dto);
 	}
@@ -81,11 +86,14 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	//글 수정
 	@Transactional
 	@Override
-	public void QnaBoardUpdate(QnaBoardUpdateReqDto qnaBoardUpdateReqDto) {
+	public void QnaBoardUpdate(QnaBoardUpdateReqDto qnaBoardUpdateReqDto, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
 		QnaBoardDto dto=new QnaBoardDto();
 		dto.setBoardQuestionNum(qnaBoardUpdateReqDto.getBoardQuestionNum());
 		dto.setTitle(qnaBoardUpdateReqDto.getTitle());
-		dto.setContent(qnaBoardUpdateReqDto.getContent());
+		dto.setContent(qnaBoardUpdateReqDto.getContent());		
+		
 		qnaDao.updateQnaBoard(dto);
 	}
 
