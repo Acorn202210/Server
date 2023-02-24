@@ -12,10 +12,10 @@
 			FROM	
 				(SELECT result1.*, ROWNUM as rnum
 				FROM
-					(SELECT users.id,TO_CHAR(birth,'YYYY-MM-DD') birth, phone, email, User_Regdate, large_category, small_category
+					(SELECT users.LEC_USER_ID,TO_CHAR(birth,'YYYY-MM-DD') birth, phone, email, User_Regdate, large_category, small_category
 					FROM users 
 					JOIN LECTURE_STUDENT
-					ON users.id=LECTURE_STUDENT.lec_Stu_User_Id
+					ON users.LEC_USER_ID=LECTURE_STUDENT.lec_Stu_User_Id
 					JOIN LECTURE 
 					on LECTURE.lec_Num=LECTURE_STUDENT.lec_Stu_Ref_Group
 					
@@ -28,7 +28,7 @@
 						<if test='smallCategory == "0"'>AND large_category=#{largeCategory}</if>
 						<if test="smallCategory != null">AND large_category=#{largeCategory} AND small_category=#{smallCategory}</if>
 					</where>
-					ORDER BY users.id DESC) result1)				
+					ORDER BY users.LEC_USER_ID DESC) result1)				
 			<![CDATA[		
 			WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
 			]]>

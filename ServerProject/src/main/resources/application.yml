@@ -38,4 +38,9 @@ file:
 logging:
   config: classpath:log4j/log4j2_local.xml
   level:
+<<<<<<< HEAD
     org.springframework.cache: debug
+=======
+    org.springframework.cache: debug
+   
+>>>>>>> branch 'master' of https://github.com/Acorn202210/Server.git

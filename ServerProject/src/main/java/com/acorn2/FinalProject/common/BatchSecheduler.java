@@ -21,7 +21,7 @@ public class BatchSecheduler {
 	@Scheduled(cron = "0 5 0 * * *")
 	public void testSchedule() {
 		noticeService.deleteNotice();
-		usersService.deleteUser();
+		usersService.batchUser();
 		
 		logger.info("[Mytest] Notice delete {}", LocalDateTime.now());
 	}

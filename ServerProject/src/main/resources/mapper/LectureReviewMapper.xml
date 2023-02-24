@@ -16,7 +16,7 @@
 	               DELETE_YN, LECTURE_REVIEW.USER_REGDATE, PROFILE
 	            FROM LECTURE_REVIEW
 	            INNER JOIN users
-	            ON LECTURE_REVIEW.lec_re_writer=users.id
+	            ON LECTURE_REVIEW.lec_re_writer=users.LEC_USER_ID
 	            WHERE LEC_RE_STU_REF_GROUP=#{lecReStuRefGroup} AND DELETE_YN='N'
 	            ORDER BY LEC_RE_NUM ASC) result1)
 	     WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}   
