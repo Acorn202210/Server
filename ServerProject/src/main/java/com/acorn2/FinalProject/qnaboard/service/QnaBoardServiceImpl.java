@@ -33,7 +33,7 @@ import com.acorn2.FinalProject.qnaboard.dto.res.QnaBoardReadResDto;
 public class QnaBoardServiceImpl implements QnaBoardService {
 	
 	@Autowired private QnaBoardDao qnaDao;
-//	@Autowired private QnaBoardAnswerDao qnaAnswerDao;
+	@Autowired private QnaBoardAnswerDao qnaAnswerDao;
 
 	private final org.slf4j.Logger logger = LoggerFactory.getLogger(getClass());
 	
@@ -110,7 +110,44 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	public void QnaBoardDelete() {
 		qnaDao.deleteQnaBoard();
 	}
+
+	//댓글 한개 보기 (selectOne)
+	@Override
+	public void selectComment(int refGroup) {
+		qnaAnswerDao.selectQnaAnswer(refGroup);
+	}
 	
+	//댓글 저장
+	@Override
+	public void saveComment(QnaBoardAnswerDto dto, HttpServletRequest request) {
+		int ref_group=Integer.parseInt(request.getParameter("ref_group"));
+		int seq=qnaAnswerDao.getSequence();
+		String content=request.getParameter("content");
+		dto.setBoardCommentNum(seq);
+	    dto.setBoardCommentWriter((String)request.getAttribute("id")); 
+	    dto.setContent(content);
+	    dto.setBoardCommentRefGroup(ref_group);
+		qnaAnswerDao.insertQnaAnswer(dto, request);		
+	}
+
+	//댓글 수정
+	@Override
+	public void updateComment(QnaBoardAnswerDto dto, HttpServletRequest request) {
+		qnaAnswerDao.updateQnaAnswer(dto, request);		
+	}
+
+	//댓글 삭제(삭제 칼럼 Y 변경)
+	@Override
+	public void updateDeleteComment(int boardCommentNum) {
+		qnaAnswerDao.deleteUpdateQnaAnswer(boardCommentNum);		
+	}
+
+	//댓글 삭제(batch)
+	@Override
+	public void deleteComment() {
+		qnaAnswerDao.deleteQnaBoard();		
+	}
+		
 	
 //	@Override
 //	public List<QnaBoardDto> getList(int pageNum, String keyword, String condition) {

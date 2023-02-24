@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.acorn2.FinalProject.common.dto.ComResponseDto;
 import com.acorn2.FinalProject.common.dto.ComResponseEntity;
+import com.acorn2.FinalProject.qnaboard.dto.QnaBoardAnswerDto;
 import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardCreateReqDto;
 import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardReadReqDto;
 import com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardUpdateReqDto;
@@ -90,7 +91,16 @@ public class QnaBoardController {
 	public ComResponseEntity<Void> QnaBoardDelete(@PathVariable("boardQuestionNum") int boardQuestionNum){
 		service.QnaBoardUpdateDelete(boardQuestionNum);
 		return new ComResponseEntity<Void>();
-	}		
+	}
+	
+	//1:1문의 답변 출력
+//	@ApiOperation(value = "1:1문의 상세보기", notes = "1:1문의 글 한개 자세히 보기")
+//	@GetMapping(value = "/{boardQuestionNum}/answer")
+//	public ComResponseEntity<QnaBoardReadAnswerResDto> getAnswerData(@Parameter(hidden = true) QnaBoardAnswerDto qnaBoardAnswerDto) {
+//		QnaBoardReadAnswerResDto qnaBoardReadAnswerResDto=service.selectComment(refGroup);;
+//		return new ComResponseEntity<QnaBoardReadDetailResDto>(new ComResponseDto<>(qnaBoardReadAnswerResDto));
+//	}
+	
 	
 	/*
 	@GetMapping("/list")
