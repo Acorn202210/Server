@@ -77,8 +77,8 @@ public class LectureController {
 	public ComResponseEntity<Void> update(@Parameter(
             description = "multipart/form-data 형식의 이미지 리스트를 input으로 받습니다. 이때 key 값은 multipartFile 입니다.",
             content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE))
-			@RequestPart(value = "multipartFile", required = false) MultipartFile file, @RequestBody LectureCreateReqDto lectureCreateReqDto, HttpServletRequest request, int lecNum){
-		service.LectureInsert(lectureCreateReqDto, file, request, lecNum);
+			@RequestPart(value = "multipartFile", required = false) MultipartFile file, @RequestBody LectureCreateReqDto lectureCreateReqDto, HttpServletRequest request){
+		service.LectureInsert(lectureCreateReqDto, file, request);
 		return new ComResponseEntity<Void>();
 	}
 	

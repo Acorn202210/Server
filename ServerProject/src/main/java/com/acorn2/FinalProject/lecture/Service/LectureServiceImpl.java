@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.acorn2.FinalProject.lecture.dao.LectureDao;
@@ -42,8 +43,25 @@ public class LectureServiceImpl implements LectureService{
 		return lectureDao.lectureOne(lecNum);
 	}
 
+	@Transactional
 	@Override
-	public void LectureInsert(LectureCreateReqDto lectureCreateReqDto,MultipartFile file, HttpServletRequest request,int lecNum) {
+	public void LectureInsert(LectureCreateReqDto lectureCreateReqDto,MultipartFile file, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String id = session.getAttribute("id").toString();
+		
+		LectureDto dto = new LectureDto();		
+		dto.setTeacher(lectureCreateReqDto.getTeacher());
+		dto.setLecWriter(id);
+		dto.setTitle(lectureCreateReqDto.getTitle());
+		dto.setDescribe(lectureCreateReqDto.getDescribe());
+		dto.setVideoPath(lectureCreateReqDto.getVideoPath());
+		dto.setLargeCategory(lectureCreateReqDto.getLargeCategory());
+		dto.setSmallCategory(lectureCreateReqDto.getSmallCategory());
+		
+		lectureDao.lectureInsert(dto);
+		
+		Integer lecNum = lectureDao.currentLecNum();
+		
 		ImageDto imageSelectDto= imageDao.selectImage(lecNum);
 		
 		ImageDto imageDto = new ImageDto();
@@ -62,25 +80,8 @@ public class LectureServiceImpl implements LectureService{
 				e.printStackTrace();
 			}
 		}
-		
-
-		HttpSession session = request.getSession();
-		String id = session.getAttribute("id").toString();
-		
-		LectureDto dto = new LectureDto();		
-
-		dto.setLecNum(lectureCreateReqDto.getLecNum());
-		dto.setTeacher(lectureCreateReqDto.getTeacher());
-		dto.setLecWriter(id);
-		dto.setTitle(lectureCreateReqDto.getTitle());
-		dto.setDescribe(lectureCreateReqDto.getDescribe());
-		dto.setVideoPath(lectureCreateReqDto.getVideoPath());
-		dto.setLargeCategory(lectureCreateReqDto.getLargeCategory());
-		dto.setSmallCategory(lectureCreateReqDto.getSmallCategory());
-		
-		lectureDao.lectureInsert(dto);
 	}
-
+	
 	@Override
 	public void LectureDelete(int lecNum) {
 		lectureDao.lectureDelete(lecNum);

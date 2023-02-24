@@ -21,4 +21,6 @@ public interface LectureDao {
 	Integer lectureDelete(int lecNum);
 	
 	Integer lectureUpdate(LectureDto dto);
+	
+	Integer currentLecNum();
 }

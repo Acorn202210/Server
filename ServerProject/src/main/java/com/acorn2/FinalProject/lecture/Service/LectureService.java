@@ -16,7 +16,7 @@ public interface LectureService {
 	
 	LectureDto LectureOne(int lecNum);
 	
-	void LectureInsert(LectureCreateReqDto lectureCreateReqDto,MultipartFile file, HttpServletRequest request,int lecNum);
+	void LectureInsert(LectureCreateReqDto lectureCreateReqDto,MultipartFile file, HttpServletRequest request);
 	
 	void LectureDelete(int lecNum);
 	

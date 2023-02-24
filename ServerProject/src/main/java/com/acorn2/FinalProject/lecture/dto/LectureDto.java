@@ -5,7 +5,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Alias("lectureDto")
 public class LectureDto {
-	private int lecNum;
 	private String teacher;
 	private String lecWriter;
 	private String title;
@@ -21,11 +20,10 @@ public class LectureDto {
 	
 	public LectureDto() {}
 
-	public LectureDto(int lecNum, String teacher, String lecWriter, String title, String describe, String videoPath,
+	public LectureDto( String teacher, String lecWriter, String title, String describe, String videoPath,
 			String usersRegdate, String updateDate, int viewCount, String largeCategory, String smallCategory,
 			String updateId, String serviceYnCode) {
 		super();
-		this.lecNum = lecNum;
 		this.teacher = teacher;
 		this.lecWriter = lecWriter;
 		this.title = title;
@@ -38,14 +36,6 @@ public class LectureDto {
 		this.smallCategory = smallCategory;
 		this.updateId = updateId;
 		this.serviceYnCode = serviceYnCode;
-	}
-
-	public int getLecNum() {
-		return lecNum;
-	}
-
-	public void setLecNum(int lecNum) {
-		this.lecNum = lecNum;
 	}
 
 	public String getTeacher() {
