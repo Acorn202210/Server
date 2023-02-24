@@ -1,10 +1,10 @@
 package com.acorn2.FinalProject.users.service;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.acorn2.FinalProject.users.dao.UsersDao;
 import com.acorn2.FinalProject.users.dto.req.UsersCreateReqDto;
@@ -24,12 +25,15 @@ import com.acorn2.FinalProject.users.dto.res.UsersReadDetailResDto;
 import com.acorn2.FinalProject.users.dto.res.UsersReadListResDto;
 import com.acorn2.FinalProject.users.dto.res.UsersReadResDto;
 import com.acorn2.FinalProject.users.exception.UsersNotLoginException;
+import com.acorn2.FinalProject.users.profile.dao.ProflieDao;
+import com.acorn2.FinalProject.users.profile.dto.ProfileDto;
 
 @Service
 public class UsersServiceImpl implements UsersService{
 
 	@Autowired private UsersDao usersDao;
-	
+	@Autowired private ProflieDao profileDao;
+
 	@Override
 	public Map<String, Object> isValidId(String lecUserId) {
 		Map<String, Object> isValid = new HashMap<>();
@@ -84,17 +88,42 @@ public class UsersServiceImpl implements UsersService{
 	
 		if(isValid) {
 			session.setAttribute("id", resultDto.getLecUserId());
+			usersDao.updateUserLastDate(resultDto.getLecUserId());
 		}else {
 			throw new UsersNotLoginException("비밀번호가 잘못되었습니다!");
 		}
 	}
 
 	@Override
-	public void updateUser(UsersUpdateReqDto usersUpdateReqDto, HttpServletRequest request) {
+	public void updateUser(UsersUpdateReqDto usersUpdateReqDto, MultipartFile file, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-
-		usersUpdateReqDto.setLecUserId(session.getAttribute("id").toString());
-		usersDao.updateUser(usersUpdateReqDto);
+		String id = session.getAttribute("id").toString();
+		
+		ProfileDto dto= profileDao.selectProfile(id);
+		
+		ProfileDto profileDto = new ProfileDto();
+		if(file != null) {
+			try {
+				profileDto.setLecUserId(session.getAttribute("id").toString());
+				profileDto.setMimetype(file.getContentType());
+				profileDto.setOriginalName(file.getOriginalFilename());
+				profileDto.setData(file.getBytes());
+				if(dto == null) {
+					profileDao.insertProfile(profileDto);
+				}else {
+					profileDao.updateProfile(profileDto);
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		if(usersUpdateReqDto.getUserEmail() != null || usersUpdateReqDto.getUserPhone() != null || usersUpdateReqDto.getUserPhone() != null) {
+			System.out.println("null아님");
+			usersUpdateReqDto.setLecUserId(id);
+			usersDao.updateUser(usersUpdateReqDto);
+		}
 		
 	}
 
@@ -122,13 +151,19 @@ public class UsersServiceImpl implements UsersService{
 	@Override
 	public void deleteUpdateUser(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-
-		usersDao.deleteUpdateUser(session.getAttribute("id").toString());
+		String id = session.getAttribute("id").toString();
+		
+		usersDao.deleteUpdateUser(id);
+		profileDao.deleteUpdateProfile(id);
+		
 		session.removeAttribute("id");
 	}
 
 	@Override
-	public void deleteUser() {
+	public void batchUser() {
 		usersDao.deleteUser();
+		profileDao.deleteProfile();
+		
+		usersDao.updateRestUser();
 	}
 }

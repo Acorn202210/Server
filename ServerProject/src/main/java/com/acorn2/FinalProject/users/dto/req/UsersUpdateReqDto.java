@@ -5,18 +5,15 @@ public class UsersUpdateReqDto {
 	private String userEmail;
 	private String userPhone;
 	private String userNickname;
-	private String userProfile;
 
 	public UsersUpdateReqDto() {}
 
-	public UsersUpdateReqDto(String lecUserId, String userEmail, String userPhone, String userNickname,
-			String userProfile) {
+	public UsersUpdateReqDto(String lecUserId, String userEmail, String userPhone, String userNickname) {
 		super();
 		this.lecUserId = lecUserId;
 		this.userEmail = userEmail;
 		this.userPhone = userPhone;
 		this.userNickname = userNickname;
-		this.userProfile = userProfile;
 	}
 
 	public String getLecUserId() {
@@ -50,14 +47,4 @@ public class UsersUpdateReqDto {
 	public void setUserNickname(String userNickname) {
 		this.userNickname = userNickname;
 	}
-
-	public String getUserProfile() {
-		return userProfile;
-	}
-
-	public void setUserProfile(String userProfile) {
-		this.userProfile = userProfile;
-	}
-
-	
 }

@@ -22,8 +22,12 @@ public class BatchSecheduler {
 	@Scheduled(cron = "0 5 0 * * *")
 	public void testSchedule() {
 		noticeService.deleteNotice();
+<<<<<<< HEAD
 		usersService.deleteUser();
 		faqservice.deleteFaq();
+=======
+		usersService.batchUser();
+>>>>>>> refs/remotes/origin/master
 		
 		logger.info("[Mytest] Notice delete {}", "[Mytest] Faq delete {}", LocalDateTime.now());
 	}

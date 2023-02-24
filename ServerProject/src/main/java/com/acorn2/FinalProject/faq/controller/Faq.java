@@ -67,7 +67,7 @@ public class Faq {
 		return new ComResponseEntity<Void>();		
 	}
 	
-	@DeleteMapping("/{faqNum}/delete")
+	@PutMapping("/{faqNum}/delete")
 	public ComResponseEntity<Void> FaqDelete(@RequestParam(value = "faqNum", required = true) int faqNum){
 		service.FaqDelete(faqNum);
 		return new ComResponseEntity<Void>();

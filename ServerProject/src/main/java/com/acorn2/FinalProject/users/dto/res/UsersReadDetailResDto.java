@@ -7,8 +7,6 @@ public class UsersReadDetailResDto {
 	private String lecUserId;
 	@Schema(description = "비밀번호", example = "xxxx", required = true, minLength = 1, maxLength = 100)
 	private String userPwd;
-	@Schema(description = "프로필", example = "xxx.png", required = true, minLength = 1, maxLength = 100)
-	private String userProfile;
 	@Schema(description = "이메일", example = "aaa@google.com", required = true, minLength = 1, maxLength = 100)
 	private String userEmail;
 	@Schema(description = "회원 등록일", example = "2023.02.20", required = true, minLength = 1, maxLength = 50)
@@ -26,12 +24,11 @@ public class UsersReadDetailResDto {
 	public UsersReadDetailResDto() {}
 
 
-	public UsersReadDetailResDto(String lecUserId, String userPwd, String userProfile, String userEmail,
-			String userRegdate, String userPhone, String userBirth, String userNickname, String managerYn) {
+	public UsersReadDetailResDto(String lecUserId, String userPwd, String userEmail, String userRegdate,
+			String userPhone, String userBirth, String userNickname, String managerYn) {
 		super();
 		this.lecUserId = lecUserId;
 		this.userPwd = userPwd;
-		this.userProfile = userProfile;
 		this.userEmail = userEmail;
 		this.userRegdate = userRegdate;
 		this.userPhone = userPhone;
@@ -58,16 +55,6 @@ public class UsersReadDetailResDto {
 
 	public void setUserPwd(String userPwd) {
 		this.userPwd = userPwd;
-	}
-
-
-	public String getUserProfile() {
-		return userProfile;
-	}
-
-
-	public void setUserProfile(String userProfile) {
-		this.userProfile = userProfile;
 	}
 
 
@@ -129,7 +116,6 @@ public class UsersReadDetailResDto {
 	public void setManagerYn(String managerYn) {
 		this.managerYn = managerYn;
 	}
-	
-	
+
 	
 }
