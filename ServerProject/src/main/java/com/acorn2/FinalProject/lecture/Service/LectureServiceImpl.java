@@ -20,8 +20,6 @@ import com.acorn2.FinalProject.lecture.dto.res.LectureReadListResDto;
 import com.acorn2.FinalProject.lecture.dto.res.LectureReadResDto;
 import com.acorn2.FinalProject.lecture.image.dao.ImageDao;
 import com.acorn2.FinalProject.lecture.image.dto.ImageDto;
-import com.acorn2.FinalProject.utils.FileUploadUtil;
-import org.springframework.util.StringUtils;
 
 @Service
 public class LectureServiceImpl implements LectureService{
@@ -82,17 +80,60 @@ public class LectureServiceImpl implements LectureService{
 		}
 	}
 	
+	@Transactional
 	@Override
 	public void LectureDelete(int lecNum) {
 		lectureDao.lectureDelete(lecNum);
 		
 	}
 
+	@Transactional
 	@Override
-	public void LectureUpdate(LectureUpdateReqDto lectureUpdateReqDto) {
-		// TODO Auto-generated method stub
+	public void LectureUpdate(LectureUpdateReqDto lectureUpdateReqDto, MultipartFile file,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String id = session.getAttribute("id").toString();
+		
+		LectureDto dto = new LectureDto();
+		dto.setLecNum(lectureUpdateReqDto.getLecNum());
+		dto.setTitle(lectureUpdateReqDto.getTitle());
+		dto.setTeacher(lectureUpdateReqDto.getTeacher());
+		dto.setUpdateId(id);
+		dto.setDescribe(lectureUpdateReqDto.getDescribe());
+		dto.setVideoPath(lectureUpdateReqDto.getVideoPath());
+		dto.setLargeCategory(lectureUpdateReqDto.getLargeCategory());
+		dto.setSmallCategory(lectureUpdateReqDto.getSmallCategory());
+		lectureDao.lectureUpdate(dto);
+		
+		Integer lecNum = lectureDao.currentLecNum();
+		ImageDto imageDto= new ImageDto();
+		ImageDto imageSelectDto= imageDao.selectImage(lecNum);
+		if(file != null) {
+			try {
+				imageDto.setLecNum(lecNum);
+				imageDto.setMimetype(file.getContentType());
+				imageDto.setOriginalName(file.getOriginalFilename());
+				imageDto.setData(file.getBytes());
+				if(imageSelectDto == null) {
+					imageDao.insertImage(imageDto);
+				}else {
+					imageDao.updateImage(imageDto);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		
 	}
+	
+	@Transactional
+	@Override
+	public void batchLectureDelete() {
+		lectureDao.batchLectureDelete();
+		
+	}
+
+
+	
 	
 	
 }

@@ -4,6 +4,9 @@ package com.acorn2.FinalProject.lectureReview.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +38,7 @@ public class LectureReviewServiceImpl implements LectureReviewService{
 		List<LectureReviewReadResDto> ReviewReadList = reviewDao.LectureReviewList(reviewReq);
 		LectureReviewReadListResDto ReviewListRes = new LectureReviewReadListResDto(totalCount, reviewReq);
 		ReviewListRes.setData(ReviewReadList);
-		logger.debug("Cached value for key {} is {}", reviewReq.hashCode(), ReviewListRes.toString());
+		logger.debug("lecture Reivew cache", reviewReq.hashCode(), ReviewListRes.toString());
 		return ReviewListRes;
 	}
 	
@@ -46,10 +49,12 @@ public class LectureReviewServiceImpl implements LectureReviewService{
 
 	@Transactional
 	@Override
-	public void LectureReviewInsert(LectureReviewCreateReqDto ReviewCreateReqDto) {
+	public void LectureReviewInsert(LectureReviewCreateReqDto ReviewCreateReqDto, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String id = session.getAttribute("id").toString();
+		
 		LectureReviewDto dto = new LectureReviewDto();
-		dto.setLecReNum(ReviewCreateReqDto.getLecReNum());
-		dto.setLecReWriter(ReviewCreateReqDto.getLecReWriter());
+		dto.setLecReWriter(id);
 		dto.setLecReStuRefGroup(ReviewCreateReqDto.getLecReStuRefGroup());
 		dto.setStar(ReviewCreateReqDto.getStar());
 		dto.setContent(ReviewCreateReqDto.getContent());
@@ -71,6 +76,13 @@ public class LectureReviewServiceImpl implements LectureReviewService{
 	@Override
 	public void LectureReviewDelete(int lecReNum) {
 		reviewDao.deleteLectureReview(lecReNum);
+		
+	}
+
+	@Transactional
+	@Override
+	public void batchDeleteLectureReview() {
+		reviewDao.batchDeleteLectureReview();
 		
 	}
 

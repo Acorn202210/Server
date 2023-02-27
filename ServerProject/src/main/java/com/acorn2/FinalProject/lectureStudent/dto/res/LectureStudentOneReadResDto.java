@@ -1,11 +1,19 @@
 package com.acorn2.FinalProject.lectureStudent.dto.res;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 public class LectureStudentOneReadResDto {
+	@Schema(description = "수강생 번호", example = "1", required = true, minLength = 1, maxLength = 50)
 	private int lecStuNum;
+	@Schema(description = "수강생 아이디", example = "admin", required = true, minLength = 1, maxLength = 50)
 	private String lecStuUserId;
+	@Schema(description = "강의의 번호", example = "1", required = true, minLength = 1, maxLength = 50)
 	private int lecStuRefGroup;
+	@Schema(description = "강의 완료 여부", example = "N", required = true, minLength = 1, maxLength = 3)
 	private String completeYn;
+	@Schema(description = "수강 시작 날짜", example = "2022-01-01", required = true, minLength = 1, maxLength = 30)
 	private String userRegdate;
+	@Schema(description = "수강 변경 날짜", example = "2022-01-02", required = true, minLength = 1, maxLength = 30)
 	private String updateDate;
 	public int getLecStuNum() {
 		return lecStuNum;

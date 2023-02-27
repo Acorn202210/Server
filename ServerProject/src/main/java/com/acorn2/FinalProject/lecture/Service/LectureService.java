@@ -19,6 +19,8 @@ public interface LectureService {
 	void LectureInsert(LectureCreateReqDto lectureCreateReqDto,MultipartFile file, HttpServletRequest request);
 	
 	void LectureDelete(int lecNum);
-	
-	void LectureUpdate(LectureUpdateReqDto lectureUpdateReqDto);
+
+	void LectureUpdate(LectureUpdateReqDto lectureUpdateReqDto, MultipartFile file, HttpServletRequest request);
+
+	void batchLectureDelete();
 }

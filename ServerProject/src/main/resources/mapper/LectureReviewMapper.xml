@@ -45,4 +45,9 @@
 		FROM LECTURE_REVIEW
 		WHERE LEC_RE_NUM=#{lecReNum}
 	</select>
+	
+	<delete id="batchDeleteLectureReview" >
+      DELETE FROM LECTURE_REVIEW
+      WHERE DELETE_YN='Y'
+   </delete>
 </mapper>

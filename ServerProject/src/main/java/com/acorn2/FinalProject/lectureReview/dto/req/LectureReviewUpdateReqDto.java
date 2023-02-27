@@ -1,8 +1,17 @@
 package com.acorn2.FinalProject.lectureReview.dto.req;
 
+import javax.validation.constraints.Size;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(description = "강의 후기 수정")
 public class LectureReviewUpdateReqDto {
 	private int lecReNum;
+	@Schema(description = "강의 후기 내용", example = "good", required = true, minLength = 1, maxLength = 10000)
+	@Size(min = 1, max = 10000)
 	private String content;
+	@Schema(description = "강의 후기 별점", example = "5", required = true, minLength = 1, maxLength = 5)
+	@Size(min = 1, max = 5)
 	private int star;
 	
 	public int getLecReNum() {

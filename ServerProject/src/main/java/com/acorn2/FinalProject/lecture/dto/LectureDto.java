@@ -5,12 +5,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Alias("lectureDto")
 public class LectureDto {
+	private int lecNum;
 	private String teacher;
 	private String lecWriter;
 	private String title;
 	private String describe;
 	private String videoPath;
-	private String usersRegdate;
+	private String userRegdate;
 	private String updateDate;
 	private int viewCount;
 	private String largeCategory;
@@ -20,22 +21,31 @@ public class LectureDto {
 	
 	public LectureDto() {}
 
-	public LectureDto( String teacher, String lecWriter, String title, String describe, String videoPath,
-			String usersRegdate, String updateDate, int viewCount, String largeCategory, String smallCategory,
+	public LectureDto(int lecNum, String teacher, String lecWriter, String title, String describe, String videoPath,
+			String userRegdate, String updateDate, int viewCount, String largeCategory, String smallCategory,
 			String updateId, String serviceYnCode) {
 		super();
+		this.lecNum = lecNum;
 		this.teacher = teacher;
 		this.lecWriter = lecWriter;
 		this.title = title;
 		this.describe = describe;
 		this.videoPath = videoPath;
-		this.usersRegdate = usersRegdate;
+		this.userRegdate = userRegdate;
 		this.updateDate = updateDate;
 		this.viewCount = viewCount;
 		this.largeCategory = largeCategory;
 		this.smallCategory = smallCategory;
 		this.updateId = updateId;
 		this.serviceYnCode = serviceYnCode;
+	}
+
+	public int getLecNum() {
+		return lecNum;
+	}
+
+	public void setLecNum(int lecNum) {
+		this.lecNum = lecNum;
 	}
 
 	public String getTeacher() {
@@ -78,12 +88,12 @@ public class LectureDto {
 		this.videoPath = videoPath;
 	}
 
-	public String getUsersRegdate() {
-		return usersRegdate;
+	public String getuserRegdate() {
+		return userRegdate;
 	}
 
-	public void setUsersRegdate(String usersRegdate) {
-		this.usersRegdate = usersRegdate;
+	public void setuserRegdate(String userRegdate) {
+		this.userRegdate = userRegdate;
 	}
 
 	public String getUpdateDate() {
@@ -135,7 +145,6 @@ public class LectureDto {
 	}
 
 	
-
 	
 	
 }

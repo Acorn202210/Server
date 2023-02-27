@@ -23,4 +23,6 @@ public interface LectureDao {
 	Integer lectureUpdate(LectureDto dto);
 	
 	Integer currentLecNum();
+	
+	Integer batchLectureDelete();
 }

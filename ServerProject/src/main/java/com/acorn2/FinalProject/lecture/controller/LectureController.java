@@ -36,10 +36,10 @@ import com.acorn2.FinalProject.lecture.Service.LectureService;
 import com.acorn2.FinalProject.lecture.dto.LectureDto;
 import com.acorn2.FinalProject.lecture.dto.req.LectureCreateReqDto;
 import com.acorn2.FinalProject.lecture.dto.req.LectureReadReqDto;
+import com.acorn2.FinalProject.lecture.dto.req.LectureUpdateReqDto;
 import com.acorn2.FinalProject.lecture.dto.res.LectureReadListResDto;
 import com.acorn2.FinalProject.lecture.image.dto.ImageDto;
 import com.acorn2.FinalProject.lecture.image.service.ImageService;
-import com.acorn2.FinalProject.users.profile.dto.ProfileDto;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -54,7 +54,8 @@ public class LectureController {
 	@Autowired private LectureService service;
 	@Autowired private ImageService imageService;
 	
-	@GetMapping("/LectureList")
+	@ApiOperation(value="강의 목록", notes = "강의 목록을 가져온다.")
+	@GetMapping("/lectureList")
 	public ComResponseEntity<LectureReadListResDto> getLectureList(@RequestParam String largeCategory,
 												@RequestParam String smallCategory,
 												@Parameter(hidden = true) LectureReadReqDto lectureReadReqDto){
@@ -63,8 +64,8 @@ public class LectureController {
 		
 		return new ComResponseEntity<>(new ComResponseDto<>(lectureReadListResDto));
 	}
-	 
-	@GetMapping("/{lecNum}/LectureOne")
+	@ApiOperation(value="강의 하나의 정보", notes = "강의 하나의 정보를 가져온다.") 
+	@GetMapping("/{lecNum}/lectureOne")
 	public ComResponseEntity<LectureDto> LectureOne(@PathVariable int lecNum){
 		
 		LectureDto dtoOne = service.LectureOne(lecNum);
@@ -92,9 +93,18 @@ public class LectureController {
 		return new ResponseEntity<byte[]>(imageDto.getData(), headers, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="강의 수정", notes = "강의 수정하기")
+	@PutMapping(value="/{lecNum}")
+	public ComResponseEntity<Void> lectureUpdate(@Parameter(
+            description = "multipart/form-data 형식의 이미지 리스트를 input으로 받습니다. 이때 key 값은 multipartFile 입니다.",
+            content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE))
+			@RequestPart(value = "multipartFile", required = false) MultipartFile file, @RequestBody LectureUpdateReqDto lectureUpdateReqDto, HttpServletRequest request){
+		service.LectureUpdate(lectureUpdateReqDto, file, request);
+		return new ComResponseEntity<Void>();
+	}
 	
-    
-    @DeleteMapping("/{lecNum}")
+	@ApiOperation(value="강의 삭제", notes = "강의 삭제하기")
+    @DeleteMapping("/{lecNum}/lectureDelete")
     public ComResponseEntity<Void> LectureDelete(@RequestParam(value = "lecNum", required = true) int lecNum){
 	   
 	    service.LectureDelete(lecNum);

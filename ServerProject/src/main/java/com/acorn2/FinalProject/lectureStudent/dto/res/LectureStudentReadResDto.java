@@ -9,6 +9,7 @@ public class LectureStudentReadResDto {
 	private String userPhone;
 	private String userEmail;
 	private String userRegdate;
+	
 	public String getLecUserId() {
 		return lecUserId;
 	}

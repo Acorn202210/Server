@@ -14,9 +14,30 @@ public class LectureStudentReadReqDto extends PagingDto{
 	private String userEmail;
 	private String userRegdate;
 	private String generalUserCode;
+	private String keyword;
+	private String condition;
 
 	
 	public LectureStudentReadReqDto() {}
+
+
+	public LectureStudentReadReqDto(String lecStuUserId, int lecStuRefGroup, String largeCategory, String smallCategory,
+			String lecUserId, String userBirth, String userPhone, String userEmail, String userRegdate,
+			String generalUserCode, String keyword, String condition) {
+		super();
+		this.lecStuUserId = lecStuUserId;
+		this.lecStuRefGroup = lecStuRefGroup;
+		this.largeCategory = largeCategory;
+		this.smallCategory = smallCategory;
+		this.lecUserId = lecUserId;
+		this.userBirth = userBirth;
+		this.userPhone = userPhone;
+		this.userEmail = userEmail;
+		this.userRegdate = userRegdate;
+		this.generalUserCode = generalUserCode;
+		this.keyword = keyword;
+		this.condition = condition;
+	}
 
 
 	public String getLecStuUserId() {
@@ -50,7 +71,7 @@ public class LectureStudentReadReqDto extends PagingDto{
 
 
 	public String getSmallCategory() {
-		return smallCategory;
+	    return smallCategory;
 	}
 
 
@@ -119,7 +140,27 @@ public class LectureStudentReadReqDto extends PagingDto{
 	}
 
 
+	public String getKeyword() {
+		return keyword;
+	}
+
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+
+	public String getCondition() {
+		return condition;
+	}
+
+
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
 	
+	
+
 	
 	
 }

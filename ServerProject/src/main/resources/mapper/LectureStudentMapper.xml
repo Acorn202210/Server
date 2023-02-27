@@ -2,6 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.acorn2.FinalProject.lectureStudent.dao.LectureStudentDao">
 
+	<sql id="searchCondition">
+        <if test="lecUserId != null">AND lec_User_Id LIKE '%'||#{lecUserId}||'%'</if>
+		<if test="userBirth != null">AND USER_BIRTH LIKE '%'||#{userBirth}||'%'</if>
+		<if test="userPhone != null">AND USER_PHONE LIKE '%'||#{userPhone}||'%'</if>
+		<if test="userEmail != null">AND USER_EMAIL LIKE '%'||#{userEmail}||'%'</if>
+		<if test="userRegdate != null">AND USER_REGDATE LIKE '%'||#{userRegdate}||'%'</if>
+   	</sql>
+
 	<select id="SelectLectureStudentCount" parameterType="com.acorn2.FinalProject.lectureStudent.dto.req.LectureStudentReadReqDto" resultType="java.lang.Integer">
 		SELECT NVL(MAX(ROWNUM), 0)
 		FROM LECTURE_STUDENT
@@ -18,16 +26,29 @@
 					ON users.LEC_USER_ID=LECTURE_STUDENT.lec_Stu_User_Id
 					JOIN LECTURE 
 					on LECTURE.lec_Num=LECTURE_STUDENT.lec_Stu_Ref_Group
-					<where>
-						<if test="lecStuUserId != null">AND lec_Stu_User_Id LIKE '%'||#{lecStuUserId}||'%'</if>
-						<if test="userBirth != null">AND USER_BIRTH LIKE '%'||#{userBirth}||'%'</if>
-						<if test="userPhone != null">AND USER_PHONE LIKE '%'||#{userPhone}||'%'</if>
-						<if test="userEmail != null">AND USER_EMAIL LIKE '%'||#{userEmail}||'%'</if>
-						<if test="userRegdate != null">AND USER_REGDATE LIKE '%'||#{userRegdate}||'%'</if>
-						<if test='smallCategory == "0"'>AND large_category=#{largeCategory}</if>
-						<if test="smallCategory != null">AND large_category=#{largeCategory} AND small_category=#{smallCategory}</if>
-						<if test="generalUserCode == 'Y'">AND general_user_code = 'Y'</if>
-					</where>
+					 <where>
+				        <if test='largeCategory != null and smallCategory == "all"'>
+				          LARGE_CATEGORY=#{largeCategory}
+				        </if>
+				        <if test="smallCategory != null">
+				          AND LARGE_CATEGORY=#{largeCategory} AND SMALL_CATEGORY=#{smallCategory}
+				        </if>
+				        <if test="lecUserId != null">
+				          AND users.LEC_USER_ID LIKE '%'||#{lecUserId}||'%'
+				        </if>
+				        <if test="userBirth != null">
+				          AND TO_CHAR(USER_BIRTH, 'YYYY') = #{userBirth}
+				        </if>
+				        <if test="userPhone != null">
+				          AND USER_PHONE LIKE '%'||#{userPhone}||'%'
+				        </if>
+				        <if test="userEmail != null">
+				          AND USER_EMAIL LIKE '%'||#{userEmail}||'%'
+				        </if>
+				        <if test="userRegdate != null">
+				          AND TO_CHAR(USER_REGDATE, 'YYYY') = #{userRegdate}
+				        </if>
+				      </where>
 					ORDER BY users.LEC_USER_ID DESC) result1)				
 			<![CDATA[		
 			WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
@@ -42,7 +63,7 @@
 	
 	<update id="LectureCompleteYn" parameterType="lectureStudentDto">
 		UPDATE LECTURE_STUDENT
-		SET Complete_Yn=#{completeYn}, Update_Date=SYSDATE
+		SET Complete_Yn='Y', Update_Date=SYSDATE
 		WHERE lec_Stu_Num=#{lecStuNum}
 	</update>
 	
@@ -50,12 +71,16 @@
 	  INSERT INTO LECTURE_STUDENT
 			(lec_Stu_Num, lec_Stu_User_Id, lec_Stu_Ref_Group, User_Regdate)
 			VALUES(LECTURE_STUDENT_seq.NEXTVAL, #{lecStuUserId}, #{lecStuRefGroup}, SYSDATE)
-    </insert>
-	
+    </insert>	
 	
 	<select id="getSequence" resultType="int">
       SELECT LECTURE_STUDENT_seq.NEXTVAL
       FROM DUAL
     </select>
+    
+    <delete id="LectureStudentDelete" >
+      DELETE FROM LECTURE_STUDENT
+      WHERE Complete_Yn='Y'
+   </delete>
    
 </mapper>

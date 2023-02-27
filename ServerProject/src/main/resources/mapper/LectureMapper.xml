@@ -2,20 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.acorn2.FinalProject.lecture.dao.LectureDao">
 	
-	<select id="lectureList" parameterType="com.acorn2.FinalProject.lecture.dto.LectureDto" resultType="com.acorn2.FinalProject.lecture.dto.LectureDto">
+	<select id="lectureList" parameterType="com.acorn2.FinalProject.lecture.dto.req.LectureReadReqDto" resultType="com.acorn2.FinalProject.lecture.dto.res.LectureReadResDto">
 		SELECT *
 		FROM	
 			(SELECT result1.*, ROWNUM as rnum
 			FROM
 				(SELECT LEC_NUM, TEACHER, LEC_WRITER, TITLE, DESCRIBE ,VIDEOPATH, VIEWCOUNT, 
-					USER_REGDATE, LARGE_CATEGORY, SMALL_CATEGORY
+					USER_REGDATE, LARGE_CATEGORY, SMALL_CATEGORY, UPDATE_ID, SERVICE_YN_CODE
 				FROM LECTURE
 				<choose>
-						<when test='smallCategory=="0"'>
-							WHERE LARGE_CATEGORY=#{largeCategory}
+						<when test='smallCategory=="all"'>
+							WHERE LARGE_CATEGORY=#{largeCategory} AND SERVICE_YN_CODE = 'N'
 						</when>
 						<when test="smallCategory!=null">
-							WHERE LARGE_CATEGORY=#{largeCategory} AND SMALL_CATEGORY=#{smallCategory}
+							WHERE LARGE_CATEGORY=#{largeCategory} AND SMALL_CATEGORY=#{smallCategory} AND SERVICE_YN_CODE = 'N'
 						</when>
 				</choose>
 				ORDER BY LEC_NUM DESC) result1)
@@ -52,9 +52,9 @@
 		WHERE LEC_NUM=#{lecNum}
 	</update>
 	
-	<update id="update" parameterType="com.acorn2.FinalProject.lecture.dto.LectureDto">
+	<update id="lectureUpdate" parameterType="com.acorn2.FinalProject.lecture.dto.LectureDto">
 		UPDATE LECTURE
-		SET TITLE= #{TITLE}, TEACHER=#{TEACHER},DESCRIBE=#{DESCRIBE}, VIDEOPATH=#{VIDEOPATH}, LARGE_CATEGORY=#{largeCategory},SMALL_CATEGORY=#{smallCategory}
+		SET TITLE= #{title},UPDATE_ID=#{updateId} ,TEACHER=#{teacher},DESCRIBE=#{describe}, VIDEOPATH=#{videoPath}, UPDATE_DATE=SYSDATE, LARGE_CATEGORY=#{largeCategory},SMALL_CATEGORY=#{smallCategory}
 		WHERE LEC_NUM = #{lecNum}
 	</update>
 	
@@ -63,4 +63,9 @@
 	    SET SERVICE_YN_CODE='N'
 	    WHERE LEC_NUM=#{lecNum}
 	</update>
+	
+	<delete id="batchLectureDelete" >
+      DELETE FROM LECTURE
+      WHERE SERVICE_YN_CODE='N'
+   </delete>
 </mapper>
