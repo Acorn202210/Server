@@ -112,8 +112,8 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 
 	//댓글 한개 보기 (selectOne)
 	@Override
-	public void selectComment(int refGroup) {
-		qnaAnswerDao.selectQnaAnswer(refGroup);
+	public QnaBoardAnswerDto selectComment(int refGroup) {
+		return qnaAnswerDao.selectQnaAnswer(refGroup);
 	}
 	
 	//댓글 저장

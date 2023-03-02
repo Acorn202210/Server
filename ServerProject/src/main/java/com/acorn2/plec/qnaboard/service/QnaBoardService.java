@@ -27,7 +27,7 @@ public interface QnaBoardService {
 	void QnaBoardDelete();
 		
 	//댓글 관련 메소드
-	void selectComment(int refGroup);
+	QnaBoardAnswerDto selectComment(int refGroup);
 	
 	void saveComment(QnaBoardAnswerDto dto, HttpServletRequest request);
 	

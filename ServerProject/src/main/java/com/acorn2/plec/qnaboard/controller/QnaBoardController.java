@@ -83,12 +83,12 @@ public class QnaBoardController {
 	}
 	
 	//1:1문의 답변 출력
-//	@ApiOperation(value = "1:1문의 상세보기", notes = "1:1문의 글 한개 자세히 보기")
-//	@GetMapping(value = "/{boardQuestionNum}/answer")
-//	public ComResponseEntity<QnaBoardReadAnswerResDto> getAnswerData(@Parameter(hidden = true) QnaBoardAnswerDto qnaBoardAnswerDto) {
-//		QnaBoardReadAnswerResDto qnaBoardReadAnswerResDto=service.selectComment(refGroup);;
-//		return new ComResponseEntity<QnaBoardReadDetailResDto>(new ComResponseDto<>(qnaBoardReadAnswerResDto));
-//	}
+	@ApiOperation(value = "1:1문의 답변", notes = "1:1문의 답변 한개 보기")
+	@GetMapping("/{refGroup}/answer")
+	public ComResponseEntity<QnaBoardAnswerDto> getAnswerData(@PathVariable int refGroup) {
+		QnaBoardAnswerDto qnaBoardReadAnswerResDto=service.selectComment(refGroup);
+		return new ComResponseEntity<>(new ComResponseDto<>(qnaBoardReadAnswerResDto));
+	}
 	
 	
 	/*

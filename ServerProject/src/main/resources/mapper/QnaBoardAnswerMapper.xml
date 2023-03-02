@@ -22,12 +22,12 @@
       WHERE BOARD_COMMENT_NUM=#{boardCommentNum}
    </update>-->
    
-   <!-- 글 하나 가져오기
-   <select id="getData" parameterType="int" resultType="com.acorn2.FinalProject.qnaboard.dto.qnaBoardAnswerDto">
+   
+   <select id="selectQnaAnswer" parameterType="int" resultType="com.acorn2.plec.qnaboard.dto.QnaBoardAnswerDto">
       SELECT BOARD_COMMENT_NUM, BOARD_COMMENT_WRITER, content, BOARD_COMMENT_REF_GROUP, USER_REGDATE
       FROM qna_board_answer
-      WHERE BOARD_COMMENT_NUM=#{boardCommentNum}
-   </select> -->
+      WHERE BOARD_COMMENT_REF_GROUP=#{refGroup}
+   </select>
       
    <!-- 댓글 삭제(DB Y로 변경) -->   
    
