@@ -39,4 +39,14 @@ public class FaqReadResDto {
 		this.content = content;
 	}
 	
+	@Override
+	 public String toString() {
+		 return "FaqReadResDto{" +
+	                "faqNum=" + faqNum +
+	                ", question='" + question + '\'' +
+	                ", content='" + content + '\'' +
+	                '}';
+		 
+	 }
+	
 }

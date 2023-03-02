@@ -1,5 +1,7 @@
 package com.acorn2.FinalProject.lectureReview.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.acorn2.FinalProject.lectureReview.dto.LectureReviewDto;
 import com.acorn2.FinalProject.lectureReview.dto.req.LectureReviewCreateReqDto;
 import com.acorn2.FinalProject.lectureReview.dto.req.LectureReviewReadReqDto;
@@ -14,9 +16,11 @@ public interface LectureReviewService {
 	
 	LectureReviewDto LectureReviewOne(int lecReNum);
 	
-	void LectureReviewInsert(LectureReviewCreateReqDto ReviewCreateReqDto);
+	void LectureReviewInsert(LectureReviewCreateReqDto ReviewCreateReqDto, HttpServletRequest request);
 	
 	void LectureReviewDelete(int lecReNum);
 	
 	void LectureReviewUpdate(LectureReviewUpdateReqDto reviewUpdateReqDto);
+	
+	void batchDeleteLectureReview();
 }

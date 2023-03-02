@@ -27,4 +27,11 @@ public class FaqReadListResDto extends PagingResponseDto {
 	public void setData(List<FaqReadResDto> data) {
 		this.data = data;
 	}
+	
+	@Override
+	public String toString() {
+	    return "FaqReadListResDto{" +
+	            "data=" + data +
+	            '}';
+	}
 }

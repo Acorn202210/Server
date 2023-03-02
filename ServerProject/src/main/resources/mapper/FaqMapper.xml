@@ -44,4 +44,9 @@
    		SELECT NVL(MAX(ROWNUM), 0)
 		FROM FAQ
 	</select>
+	
+	<delete id="Faqdelete" >
+      DELETE FROM FAQ
+      WHERE delete_YN_code='Y'
+   </delete>
 </mapper>

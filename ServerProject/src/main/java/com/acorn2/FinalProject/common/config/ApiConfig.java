@@ -16,12 +16,19 @@ public class ApiConfig implements WebMvcConfigurer{
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginInterceptor)
-		.addPathPatterns("/api/users/**", "/api/notice/*/*", "/api/notice", 
-				"/api/qnaboard/*", "/api/qnaboard/*/*")
-		.excludePathPatterns("/api/users/*/login", "/api/users", "/api/users/checkid");
+		.addPathPatterns("/api/users/**", "/api/notice/*/*", "/api/notice", "/api/faq/*", "/api/faq/**", "/api/qnaboard/*", "/api/qnaboard/*/*")
+		.excludePathPatterns("/api/users/*/login", "/api/users", "/api/users/checkid", "/api/faq/Faqlist", "/api/faq/*/faqOne");
 		
 		registry.addInterceptor(managerInterceptor)
-		.addPathPatterns("/api/notice/*/*", "/api/notice", "/api/users/list");
+		.addPathPatterns("/api/notice/*/*", "/api/notice", "/api/users/list", "/api/faq/*/*");
+		.addPathPatterns("/api/users/**", "/api/notice/*/*", "/api/notice", "/api/lecture/*/*","/api/lectureReview/*/*","/api/lectureStudent/*/*")
+		.excludePathPatterns("/api/users/*/login", "/api/users", "/api/users/checkid",
+							"/api/lecture/lectureList","/api/lecture/{lecNum}/lectureOne",
+							"/api/lectureReview/lectureReviewList");
+		
+		registry.addInterceptor(managerInterceptor)
+		.addPathPatterns("/api/notice/*/*", "/api/notice", "/api/users/list",
+						"/api/lecture/lecutureInsert", "/api/lecture/{lecNum}","/api/lecture/{lecNum}/lectureDelete");
 	}
 
 }
