@@ -87,6 +87,12 @@
       WHERE delete_YN_code='Y'
    </delete>
 	
+	<update id="answered" parameterType="com.acorn2.plec.qnaboard.dto.QnaBoardDto">
+		UPDATE QNA_BOARD_QUESTION
+		SET answered_YN='Y'
+		WHERE board_question_num=#{boardQuestionNum}
+	</update>
+	
 	<!-- 
 	
 	 <select id="getList" parameterType="QnaBoardDto" resultType="QnaBoardDto">

@@ -2,6 +2,8 @@ package com.acorn2.plec.qnaboard.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.acorn2.plec.qnaboard.dto.QnaBoardDto;
@@ -65,4 +67,7 @@ public interface QnaBoardDao {
 	
 	//detail 보기
 	public QnaBoardReadDetailResDto selectQnaBoard(QnaBoardReadReqDto qnaBoardReadReqDto);
+	
+	//답변완료 추가
+	public void answered(QnaBoardDto dto);
 }
