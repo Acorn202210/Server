@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.acorn2.FinalProject.lecture.dao.LectureDao">
+<mapper namespace="com.acorn2.plec.lecture.dao.LectureDao">
 	
-	<select id="lectureList" parameterType="com.acorn2.FinalProject.lecture.dto.req.LectureReadReqDto" resultType="com.acorn2.FinalProject.lecture.dto.res.LectureReadResDto">
+	<select id="lectureList" parameterType="com.acorn2.plec.lecture.dto.req.LectureReadReqDto" resultType="com.acorn2.plec.lecture.dto.res.LectureReadResDto">
 		SELECT *
 		FROM	
 			(SELECT result1.*, ROWNUM as rnum
@@ -22,12 +22,12 @@
 		WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
 	</select>
 	
-	<select id="selectLectureCount" parameterType="com.acorn2.FinalProject.lecture.dto.req.LectureReadReqDto" resultType="java.lang.Integer">
+	<select id="selectLectureCount" parameterType="com.acorn2.plec.lecture.dto.req.LectureReadReqDto" resultType="java.lang.Integer">
 		SELECT NVL(MAX(ROWNUM), 0)
 		FROM LECTURE
 	</select>
 	
-	<select id="lectureOne" parameterType="int" resultType="com.acorn2.FinalProject.lecture.dto.LectureDto">
+	<select id="lectureOne" parameterType="int" resultType="com.acorn2.plec.lecture.dto.LectureDto">
 		SELECT LEC_NUM, TEACHER, LEC_WRITER, TITLE, DESCRIBE ,VIDEOPATH, VIEWCOUNT, 
 					USER_REGDATE, LARGE_CATEGORY, SMALL_CATEGORY
 		FROM LECTURE
@@ -39,7 +39,7 @@
 		FROM LECTURE
 	</select>
 	
-	<insert id="lectureInsert" parameterType="com.acorn2.FinalProject.lecture.dto.LectureDto">
+	<insert id="lectureInsert" parameterType="com.acorn2.plec.lecture.dto.LectureDto">
 		INSERT INTO LECTURE
 		(LEC_NUM, TEACHER, LEC_WRITER, TITLE, DESCRIBE,
 		VIDEOPATH, VIEWCOUNT, USER_REGDATE, LARGE_CATEGORY,SMALL_CATEGORY)
@@ -52,7 +52,7 @@
 		WHERE LEC_NUM=#{lecNum}
 	</update>
 	
-	<update id="lectureUpdate" parameterType="com.acorn2.FinalProject.lecture.dto.LectureDto">
+	<update id="lectureUpdate" parameterType="com.acorn2.plec.lecture.dto.LectureDto">
 		UPDATE LECTURE
 		SET TITLE= #{title},UPDATE_ID=#{updateId} ,TEACHER=#{teacher},DESCRIBE=#{describe}, VIDEOPATH=#{videoPath}, UPDATE_DATE=SYSDATE, LARGE_CATEGORY=#{largeCategory},SMALL_CATEGORY=#{smallCategory}
 		WHERE LEC_NUM = #{lecNum}

@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.acorn2.FinalProject.lectureReview.dao.LectureReviewDao">
 
-	<select id="selectLectureReivewCount" parameterType="com.acorn2.FinalProject.lectureReview.dto.req.LectureReviewReadReqDto" resultType="java.lang.Integer">
+	<select id="selectLectureReivewCount" parameterType="com.acorn2.plec.lectureReview.dto.req.LectureReviewReadReqDto" resultType="java.lang.Integer">
 		SELECT NVL(MAX(ROWNUM), 0)
 		FROM LECTURE_REVIEW
 	</select>
 
-	<select id="LectureReviewList" parameterType="com.acorn2.FinalProject.lectureReview.dto.req.LectureReviewReadReqDto" resultType="com.acorn2.FinalProject.lectureReview.dto.res.LectureReviewReadResDto">
+	<select id="LectureReviewList" parameterType="com.acorn2.plec.lectureReview.dto.req.LectureReviewReadReqDto" resultType="com.acorn2.plec.lectureReview.dto.res.LectureReviewReadResDto">
 	     SELECT *
 	      FROM
 	         (SELECT result1.*, ROWNUM AS rnum
@@ -22,7 +22,7 @@
 	     WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}   
    </select>   
    
-	<insert id="insertLectureReview" parameterType="com.acorn2.FinalProject.lectureReview.dto.LectureReviewDto">
+	<insert id="insertLectureReview" parameterType="com.acorn2.plec.lectureReview.dto.LectureReviewDto">
 		INSERT INTO LECTURE_REVIEW
 		(LEC_RE_NUM, LEC_RE_WRITER, CONTENT, LEC_RE_STU_REF_GROUP, STAR,USER_REGDATE)
 		VALUES(#{lecReNum},#{lecReWriter},#{content},#{lecReStuRefGroup},#{star},SYSDATE)
@@ -34,13 +34,13 @@
 	    WHERE LEC_RE_NUM=#{lecReNum}
 	</update>
 	
-	<update id="updateLectureReview" parameterType="com.acorn2.FinalProject.lectureReview.dto.LectureReviewDto">
+	<update id="updateLectureReview" parameterType="com.acorn2.plec.lectureReview.dto.LectureReviewDto">
 		UPDATE LECTURE_REVIEW
      	SET CONTENT=#{content}, STAR=#{star}, UPDATE_DATE=SYSDATE
      	WHERE LEC_RE_NUM=#{lecReNum}
 	</update>
 	
-	<select id="LectureReviewOne" parameterType="int" resultType="com.acorn2.FinalProject.lectureReview.dto.LectureReviewDto">
+	<select id="LectureReviewOne" parameterType="int" resultType="com.acorn2.plec.lectureReview.dto.LectureReviewDto">
 		SELECT LEC_RE_NUM,LEC_RE_WRITER,CONTENT,LEC_RE_STU_REF_GROUP,DELETE_YN,USER_REGDATE,star
 		FROM LECTURE_REVIEW
 		WHERE LEC_RE_NUM=#{lecReNum}

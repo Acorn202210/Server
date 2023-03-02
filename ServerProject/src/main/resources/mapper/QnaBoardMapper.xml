@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.acorn2.FinalProject.qnaboard.dao.QnaBoardDao">
+<mapper namespace="com.acorn2.plec.qnaboard.dao.QnaBoardDao">
 
 	<sql id="searchCondition">
       <choose>
@@ -17,13 +17,13 @@
       </choose>
 	</sql>
 	
-	<select id="selectQnaBoardCount" parameterType="com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardReadReqDto" resultType="java.lang.Integer">
+	<select id="selectQnaBoardCount" parameterType="com.acorn2.plec.qnaboard.dto.req.QnaBoardReadReqDto" resultType="java.lang.Integer">
 		SELECT NVL(MAX(ROWNUM), 0)
 		FROM qna_board_question
 		<include refid="searchCondition"/>
 	</select>
 	
-	<select id="selectQnaBoardList" parameterType="com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardReadReqDto" resultType="com.acorn2.FinalProject.qnaboard.dto.res.QnaBoardReadResDto">
+	<select id="selectQnaBoardList" parameterType="com.acorn2.plec.qnaboard.dto.req.QnaBoardReadReqDto" resultType="com.acorn2.plec.qnaboard.dto.res.QnaBoardReadResDto">
 		SELECT *
       	FROM
          (SELECT result1.*, ROWNUM AS rnum
@@ -39,7 +39,7 @@
 		
 	</select>
 	
-	<select id="selectQnaBoard" parameterType="com.acorn2.FinalProject.qnaboard.dto.req.QnaBoardReadReqDto" resultType="com.acorn2.FinalProject.qnaboard.dto.res.QnaBoardReadDetailResDto">
+	<select id="selectQnaBoard" parameterType="com.acorn2.plec.qnaboard.dto.req.QnaBoardReadReqDto" resultType="com.acorn2.plec.qnaboard.dto.res.QnaBoardReadDetailResDto">
 		SELECT result1.*
 		FROM
 			(SELECT board_question_num, title, content, viewCount, user_regdate, board_question_writer, delete_YN_code, update_date,
@@ -53,14 +53,14 @@
 		WHERE board_question_num=#{boardQuestionNum}
 	</select>
 		
-	<insert id="insertQnaBoard" parameterType="com.acorn2.FinalProject.qnaboard.dto.QnaBoardDto">
+	<insert id="insertQnaBoard" parameterType="com.acorn2.plec.qnaboard.dto.QnaBoardDto">
 		INSERT INTO qna_board_question
 		(board_question_num,board_question_writer,title,content,viewCount,user_regdate,UPDATE_DATE)
 		VALUES(QNA_BOARD_QUESTION_seq.NEXTVAL, #{boardQuestionWriter}, #{title}, #{content}, 0, SYSDATE, SYSDATE)
 	</insert>
 	
 	<!-- 게시물 수정 -->
-	<update id="updateQnaBoard" parameterType="com.acorn2.FinalProject.qnaboard.dto.QnaBoardDto">
+	<update id="updateQnaBoard" parameterType="com.acorn2.plec.qnaboard.dto.QnaBoardDto">
 		UPDATE qna_board_question
 		<set>
       	<if test="title != null">

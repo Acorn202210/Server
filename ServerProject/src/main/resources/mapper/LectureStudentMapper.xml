@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.acorn2.FinalProject.lectureStudent.dao.LectureStudentDao">
+<mapper namespace="com.acorn2.plec.lectureStudent.dao.LectureStudentDao">
 
 	<sql id="searchCondition">
         <if test="lecUserId != null">AND lec_User_Id LIKE '%'||#{lecUserId}||'%'</if>
@@ -10,12 +10,12 @@
 		<if test="userRegdate != null">AND USER_REGDATE LIKE '%'||#{userRegdate}||'%'</if>
    	</sql>
 
-	<select id="SelectLectureStudentCount" parameterType="com.acorn2.FinalProject.lectureStudent.dto.req.LectureStudentReadReqDto" resultType="java.lang.Integer">
+	<select id="SelectLectureStudentCount" parameterType="com.acorn2.plec.lectureStudent.dto.req.LectureStudentReadReqDto" resultType="java.lang.Integer">
 		SELECT NVL(MAX(ROWNUM), 0)
 		FROM LECTURE_STUDENT
 	</select>
 	
-	<select id="LectureStudentList" parameterType="com.acorn2.FinalProject.lectureStudent.dto.req.LectureStudentReadReqDto" resultType="com.acorn2.FinalProject.lectureStudent.dto.res.LectureStudentReadResDto">
+	<select id="LectureStudentList" parameterType="com.acorn2.plec.lectureStudent.dto.req.LectureStudentReadReqDto" resultType="com.acorn2.plec.lectureStudent.dto.res.LectureStudentReadResDto">
 	  SELECT *
 			FROM	
 				(SELECT result1.*, ROWNUM as rnum
@@ -55,19 +55,19 @@
 			]]>
 	</select>
 	
-    <select id="studentDataOne" parameterType="int" resultType="com.acorn2.FinalProject.lectureStudent.dto.res.LectureStudentOneReadResDto">
+    <select id="studentDataOne" parameterType="int" resultType="com.acorn2.plec.lectureStudent.dto.res.LectureStudentOneReadResDto">
 		SELECT lec_Stu_Num,lec_Stu_User_Id,lec_Stu_Ref_Group,Complete_Yn,User_Regdate,Update_Date 
 		FROM LECTURE_STUDENT
 		WHERE lec_Stu_Num=#{lecStuNum}
 	</select>
 	
-	<update id="LectureCompleteYn" parameterType="lectureStudentDto">
+	<update id="LectureCompleteYn" parameterType="com.acorn2.plec.lectureStudent.dto.LectureStudentDto">
 		UPDATE LECTURE_STUDENT
 		SET Complete_Yn='Y', Update_Date=SYSDATE
 		WHERE lec_Stu_Num=#{lecStuNum}
 	</update>
 	
-	<insert id="LectureSignup" parameterType="lectureStudentDto">
+	<insert id="LectureSignup" parameterType="com.acorn2.plec.lectureStudent.dto.LectureStudentDto">
 	  INSERT INTO LECTURE_STUDENT
 			(lec_Stu_Num, lec_Stu_User_Id, lec_Stu_Ref_Group, User_Regdate)
 			VALUES(LECTURE_STUDENT_seq.NEXTVAL, #{lecStuUserId}, #{lecStuRefGroup}, SYSDATE)
