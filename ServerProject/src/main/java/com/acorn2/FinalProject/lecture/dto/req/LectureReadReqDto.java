@@ -8,19 +8,17 @@ public class LectureReadReqDto extends PagingDto{
 	private String title;
 	private String describe;
 	private String videoPath;
-	private String imagePath;
 	private String largeCategory;
 	private String smallCategory;
 	
 	public LectureReadReqDto(Integer lecNum, String teacher, String title, String describe, String videoPath,
-			String imagePath, String largeCategory, String smallCategory) {
+			String largeCategory, String smallCategory) {
 		super();
 		this.lecNum = lecNum;
 		this.teacher = teacher;
 		this.title = title;
 		this.describe = describe;
 		this.videoPath = videoPath;
-		this.imagePath = imagePath;
 		this.largeCategory = largeCategory;
 		this.smallCategory = smallCategory;
 	}
@@ -63,14 +61,6 @@ public class LectureReadReqDto extends PagingDto{
 
 	public void setVideoPath(String videoPath) {
 		this.videoPath = videoPath;
-	}
-
-	public String getImagePath() {
-		return imagePath;
-	}
-
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
 	}
 
 	public String getLargeCategory() {

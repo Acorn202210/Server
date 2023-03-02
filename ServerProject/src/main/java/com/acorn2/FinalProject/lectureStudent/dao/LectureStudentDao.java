@@ -20,5 +20,7 @@ public interface LectureStudentDao {
 	Integer LectureSignup(LectureStudentDto dto);
 	
 	Integer LectureCompleteYn(LectureStudentDto dto);
+	
+	Integer LectureStudentDelete();
 
 }

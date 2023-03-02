@@ -8,14 +8,36 @@ public class LectureStudentReadReqDto extends PagingDto{
 	private int lecStuRefGroup;
 	private String largeCategory;
 	private String smallCategory;
-	private String id;
-	private String birth;
-	private String phone;
-	private String email;
+	private String lecUserId;
+	private String userBirth;
+	private String userPhone;
+	private String userEmail;
 	private String userRegdate;
+	private String generalUserCode;
+	private String keyword;
+	private String condition;
 
 	
 	public LectureStudentReadReqDto() {}
+
+
+	public LectureStudentReadReqDto(String lecStuUserId, int lecStuRefGroup, String largeCategory, String smallCategory,
+			String lecUserId, String userBirth, String userPhone, String userEmail, String userRegdate,
+			String generalUserCode, String keyword, String condition) {
+		super();
+		this.lecStuUserId = lecStuUserId;
+		this.lecStuRefGroup = lecStuRefGroup;
+		this.largeCategory = largeCategory;
+		this.smallCategory = smallCategory;
+		this.lecUserId = lecUserId;
+		this.userBirth = userBirth;
+		this.userPhone = userPhone;
+		this.userEmail = userEmail;
+		this.userRegdate = userRegdate;
+		this.generalUserCode = generalUserCode;
+		this.keyword = keyword;
+		this.condition = condition;
+	}
 
 
 	public String getLecStuUserId() {
@@ -49,7 +71,7 @@ public class LectureStudentReadReqDto extends PagingDto{
 
 
 	public String getSmallCategory() {
-		return smallCategory;
+	    return smallCategory;
 	}
 
 
@@ -58,43 +80,43 @@ public class LectureStudentReadReqDto extends PagingDto{
 	}
 
 
-	public String getId() {
-		return id;
+	public String getLecUserId() {
+		return lecUserId;
 	}
 
 
-	public void setId(String id) {
-		this.id = id;
+	public void setLecUserId(String lecUserId) {
+		this.lecUserId = lecUserId;
 	}
 
 
-	public String getBirth() {
-		return birth;
+	public String getUserBirth() {
+		return userBirth;
 	}
 
 
-	public void setBirth(String birth) {
-		this.birth = birth;
+	public void setUserBirth(String userBirth) {
+		this.userBirth = userBirth;
 	}
 
 
-	public String getPhone() {
-		return phone;
+	public String getUserPhone() {
+		return userPhone;
 	}
 
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
 	}
 
 
-	public String getEmail() {
-		return email;
+	public String getUserEmail() {
+		return userEmail;
 	}
 
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 
 
@@ -108,10 +130,37 @@ public class LectureStudentReadReqDto extends PagingDto{
 	}
 
 
-	
+	public String getGeneralUserCode() {
+		return generalUserCode;
+	}
 
 
+	public void setGeneralUserCode(String generalUserCode) {
+		this.generalUserCode = generalUserCode;
+	}
+
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+
+	public String getCondition() {
+		return condition;
+	}
+
+
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
 	
+	
+
 	
 	
 }

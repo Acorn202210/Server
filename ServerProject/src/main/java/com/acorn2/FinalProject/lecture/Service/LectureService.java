@@ -1,5 +1,7 @@
 package com.acorn2.FinalProject.lecture.Service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.acorn2.FinalProject.lecture.dto.LectureDto;
@@ -14,9 +16,11 @@ public interface LectureService {
 	
 	LectureDto LectureOne(int lecNum);
 	
-	void LectureInsert(MultipartFile image, int lecNum,LectureCreateReqDto lectureCreateReqDto);
+	void LectureInsert(LectureCreateReqDto lectureCreateReqDto,MultipartFile file, HttpServletRequest request);
 	
 	void LectureDelete(int lecNum);
-	
-	void LectureUpdate(LectureUpdateReqDto lectureUpdateReqDto);
+
+	void LectureUpdate(LectureUpdateReqDto lectureUpdateReqDto, MultipartFile file, HttpServletRequest request);
+
+	void batchLectureDelete();
 }
