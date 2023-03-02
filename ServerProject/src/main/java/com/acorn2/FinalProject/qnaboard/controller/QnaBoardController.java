@@ -42,7 +42,6 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @Api(value = "QnaBoardController")
 @RequestMapping("/api/qna_board")
-@RequiredArgsConstructor
 public class QnaBoardController {
 	
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -72,7 +71,7 @@ public class QnaBoardController {
 	//문의 등록
 	@ApiOperation(value = "1:1 문의 등록", notes = "1:1문의를 등록한다.")
 	@PostMapping("/insert")
-	public ComResponseEntity<Void> QnaBoardInsert(@Valid @RequestBody QnaBoardCreateReqDto qnaBoardCreateReqDto, HttpServletRequest request){
+	public ComResponseEntity<Void> QnaBoardInsert(@RequestBody QnaBoardCreateReqDto qnaBoardCreateReqDto, HttpServletRequest request){
 		service.QnaBoardInsert(qnaBoardCreateReqDto, request);
 		return new ComResponseEntity<Void>();
 	}

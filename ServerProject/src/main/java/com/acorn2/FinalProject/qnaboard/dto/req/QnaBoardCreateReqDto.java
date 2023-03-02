@@ -5,6 +5,7 @@ import javax.validation.constraints.Size;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+@Schema(description = "1:1문의 입력")
 public class QnaBoardCreateReqDto {
 		
 	@Schema(description = "1:1문의 제목", example = "제목", required = true, minLength = 1, maxLength = 50)
