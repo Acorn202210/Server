@@ -25,4 +25,6 @@ public interface LectureReviewDao {
 	Integer deleteLectureReview(int lecReNum);
 	
 	Integer updateLectureReview(LectureReviewDto dto);
+	
+	Integer batchDeleteLectureReview();
 }

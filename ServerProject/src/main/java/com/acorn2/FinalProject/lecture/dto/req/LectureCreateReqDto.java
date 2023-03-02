@@ -1,43 +1,48 @@
 package com.acorn2.FinalProject.lecture.dto.req;
 
-import org.springframework.web.multipart.MultipartFile;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(description = "강의 등록")
 public class LectureCreateReqDto {
-	private int lecNum;
-	private String teacher;
-	private String lecWriter;
+	@Schema(description = "강의 제목", example = "제목", required = true, minLength = 1, maxLength = 50)
+	@NotEmpty
+	@Size(min = 1, max = 50)
 	private String title;
+	@Schema(description = "강의 선생님", example = "서동민", required = true, minLength = 1, maxLength = 10)
+	@NotEmpty
+	@Size(min = 1, max = 10)
+	private String teacher;
+	@Schema(description = "강의 설명", example = "강의 설명~", required = true, minLength = 1, maxLength = 10000)
+	@NotEmpty
+	@Size(min = 1, max = 10000)
 	private String describe;
+	@Schema(description = "강의 링크", example = "naver.com", required = true, minLength = 1, maxLength = 500)
+	@NotEmpty
+	@Size(min = 1, max = 500)
 	private String videoPath;
-	private String imagePath;
-	private int viewCount;
-	private String largeCategory;
-	private String smallCategory;
-	private MultipartFile image;
 	
-	public LectureCreateReqDto(int lecNum, String teacher, String lecWriter, String title, String describe,
-			String videoPath, String imagePath, int viewCount, String largeCategory, String smallCategory,
-			MultipartFile image) {
+	@Schema(description = "강의 대분류", example = "front", required = true, minLength = 1, maxLength = 10)
+	@NotEmpty
+	@Size(min = 1, max = 10)
+	private String largeCategory;
+	
+	@Schema(description = "강의 소분류", example = "js", required = true, minLength = 1, maxLength = 10)
+	@NotEmpty
+	@Size(min = 1, max = 10)
+	private String smallCategory;
+	
+	public LectureCreateReqDto( String teacher, String title, String describe,
+			String videoPath, String largeCategory, String smallCategory) {
 		super();
-		this.lecNum = lecNum;
 		this.teacher = teacher;
-		this.lecWriter = lecWriter;
 		this.title = title;
 		this.describe = describe;
 		this.videoPath = videoPath;
-		this.imagePath = imagePath;
-		this.viewCount = viewCount;
 		this.largeCategory = largeCategory;
 		this.smallCategory = smallCategory;
-		this.image = image;
-	}
-	
-	public int getLecNum() {
-		return lecNum;
-	}
-
-	public void setLecNum(int lecNum) {
-		this.lecNum = lecNum;
 	}
 
 	public String getTeacher() {
@@ -46,14 +51,6 @@ public class LectureCreateReqDto {
 
 	public void setTeacher(String teacher) {
 		this.teacher = teacher;
-	}
-
-	public String getLecWriter() {
-		return lecWriter;
-	}
-
-	public void setLecWriter(String lecWriter) {
-		this.lecWriter = lecWriter;
 	}
 
 	public String getTitle() {
@@ -80,21 +77,6 @@ public class LectureCreateReqDto {
 		this.videoPath = videoPath;
 	}
 
-	public String getImagePath() {
-		return imagePath;
-	}
-
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
-	}
-
-	public int getViewCount() {
-		return viewCount;
-	}
-
-	public void setViewCount(int viewCount) {
-		this.viewCount = viewCount;
-	}
 
 	public String getLargeCategory() {
 		return largeCategory;
@@ -110,14 +92,6 @@ public class LectureCreateReqDto {
 
 	public void setSmallCategory(String smallCategory) {
 		this.smallCategory = smallCategory;
-	}
-
-	public MultipartFile getImage() {
-		return image;
-	}
-
-	public void setImage(MultipartFile image) {
-		this.image = image;
 	}
 
 	

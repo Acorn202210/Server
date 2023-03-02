@@ -11,21 +11,19 @@ public class LectureDto {
 	private String title;
 	private String describe;
 	private String videoPath;
-	private String imagePath;
-	private String usersRegdate;
+	private String userRegdate;
 	private String updateDate;
 	private int viewCount;
 	private String largeCategory;
 	private String smallCategory;
 	private String updateId;
 	private String serviceYnCode;
-	private MultipartFile image;	
 	
 	public LectureDto() {}
 
 	public LectureDto(int lecNum, String teacher, String lecWriter, String title, String describe, String videoPath,
-			String imagePath, String usersRegdate, String updateDate, int viewCount, String largeCategory,
-			String smallCategory, String updateId, String serviceYnCode, MultipartFile image) {
+			String userRegdate, String updateDate, int viewCount, String largeCategory, String smallCategory,
+			String updateId, String serviceYnCode) {
 		super();
 		this.lecNum = lecNum;
 		this.teacher = teacher;
@@ -33,15 +31,13 @@ public class LectureDto {
 		this.title = title;
 		this.describe = describe;
 		this.videoPath = videoPath;
-		this.imagePath = imagePath;
-		this.usersRegdate = usersRegdate;
+		this.userRegdate = userRegdate;
 		this.updateDate = updateDate;
 		this.viewCount = viewCount;
 		this.largeCategory = largeCategory;
 		this.smallCategory = smallCategory;
 		this.updateId = updateId;
 		this.serviceYnCode = serviceYnCode;
-		this.image = image;
 	}
 
 	public int getLecNum() {
@@ -92,20 +88,12 @@ public class LectureDto {
 		this.videoPath = videoPath;
 	}
 
-	public String getImagePath() {
-		return imagePath;
+	public String getuserRegdate() {
+		return userRegdate;
 	}
 
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
-	}
-
-	public String getUsersRegdate() {
-		return usersRegdate;
-	}
-
-	public void setUsersRegdate(String usersRegdate) {
-		this.usersRegdate = usersRegdate;
+	public void setuserRegdate(String userRegdate) {
+		this.userRegdate = userRegdate;
 	}
 
 	public String getUpdateDate() {
@@ -156,18 +144,7 @@ public class LectureDto {
 		this.serviceYnCode = serviceYnCode;
 	}
 
-	public MultipartFile getImage() {
-		return image;
-	}
-
-	public void setImage(MultipartFile image) {
-		this.image = image;
-	}
-
 	
-
-	
-
 	
 	
 }

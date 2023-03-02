@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.acorn2.FinalProject.lecture.image.dao.ImageDao">
+	
+	 <insert id="insertImage" parameterType="com.acorn2.FinalProject.lecture.image.dto.ImageDto">
+	 	INSERT INTO lecture_image
+      	(LEC_NUM, mimetype, original_name, data, regdate)
+      	VALUES(#{lecNum}, #{mimetype}, #{originalName}, #{data}, SYSDATE)
+	 </insert>
+	 
+	 <select id="selectImage" parameterType="int" resultType="com.acorn2.FinalProject.lecture.image.dto.ImageDto">
+	 	SELECT LEC_NUM, mimetype, original_name, data, regdate, update_regdate
+	 	FROM lecture_image
+	 	WHERE LEC_NUM = #{lecNum}
+	 </select>
+	 
+	 <update id="updateImage" parameterType="com.acorn2.FinalProject.lecture.image.dto.ImageDto">
+	 	UPDATE lecture_image
+	 	SET mimetype = #{mimetype}, original_name = #{originalName}, data = #{data}, update_regdate = SYSDATE
+	 	WHERE LEC_NUM = #{lecNum}
+	 </update>
+	 
+	  <update id="deleteUpdateImage" parameterType="int">
+	 	UPDATE lecture_image
+	 	SET delete_YN_code = 'Y'
+	 	WHERE LEC_NUM = #{lecNum}
+	 </update>
+	 
+	 <delete id="deleteImage">
+	 	DELETE lecture_image
+	 	WHERE delete_YN_code = 'Y'
+	 </delete>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+

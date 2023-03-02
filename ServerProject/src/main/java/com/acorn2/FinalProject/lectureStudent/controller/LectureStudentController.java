@@ -1,5 +1,6 @@
 package com.acorn2.FinalProject.lectureStudent.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -23,6 +24,7 @@ import com.acorn2.FinalProject.lectureStudent.dto.res.LectureStudentReadListResD
 import com.acorn2.FinalProject.lectureStudent.service.LectureStudentService;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
@@ -34,15 +36,16 @@ public class LectureStudentController {
 
 	@Autowired private LectureStudentService service;
 	
+	@ApiOperation(value="강의 수강생 목록", notes = "강의 수강생 목록 가져오기")
 	@GetMapping("/LectureStudentList")
 	public ComResponseEntity<LectureStudentReadListResDto> getStudentList(@RequestParam String largeCategory,	
-												@RequestParam String smallCategory,				
+												@RequestParam(required = false) String smallCategory,				
 												@Parameter(hidden=true)LectureStudentReadReqDto studentReadReqDto){
 		LectureStudentReadListResDto studentReadListResDto = service.LectureStudentList(studentReadReqDto);
 		return new ComResponseEntity<>(new ComResponseDto<>(studentReadListResDto));
 	}
 	
-	//한 명의 정보
+	@ApiOperation(value="강의 수강생 한 명의 정보", notes = "강의 수강생 한 명의 정보 가져오기")
 	@GetMapping("/{lecStuNum}/lectureStudentOne")
 	public ComResponseEntity<LectureStudentOneReadResDto> LectureStudentOne(@RequestParam int lecStuNum){
 		LectureStudentOneReadResDto dtoOne = service.LectureStudentOne(lecStuNum);
@@ -50,21 +53,18 @@ public class LectureStudentController {
 		
 	}
 	
-	//수강 신청
+	@ApiOperation(value="강의 수강 신청", notes = "강의 수강 신청하기")
 	@PostMapping("/LectureSignup")
-	public ComResponseEntity<Void> LectureSignup(@RequestParam int lecStuNum,
-												@RequestParam String lecStuUserId,
-												@RequestParam int lecStuRefGroup,
-												@Valid @RequestBody LectureStudentCreateReqDto studentCreateReqDto){
-		service.LectureSignup(studentCreateReqDto);
+	public ComResponseEntity<Void> LectureSignup(@RequestParam int lecStuRefGroup,
+												@Valid @RequestBody LectureStudentCreateReqDto studentCreateReqDto, HttpServletRequest request){
+		service.LectureSignup(studentCreateReqDto, request);
 		return new ComResponseEntity<Void>();
 	}
-	//수강 완료 or 취소
+	@ApiOperation(value="강의 수강 완료", notes = "강의 수강 완료하기")
 	@PutMapping("/lectureCompleteYn")
-	public ComResponseEntity<Void> LectureCompleteYn (@RequestParam String completeYn,
-												@RequestParam int lecStuNum,
-												@Valid @RequestBody LectureStudentUpdateReqDto studentUpdateReqDto){
-		service.LectureCompleteYn(studentUpdateReqDto);
+	public ComResponseEntity<Void> LectureCompleteYn (@RequestParam int lecStuNum,
+												@Valid @RequestBody LectureStudentUpdateReqDto studentUpdateReqDto, HttpServletRequest request){
+		service.LectureCompleteYn(studentUpdateReqDto, request);
 		return new ComResponseEntity<Void>();
 	}
 

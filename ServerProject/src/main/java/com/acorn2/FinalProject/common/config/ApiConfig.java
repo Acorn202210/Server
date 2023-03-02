@@ -21,6 +21,14 @@ public class ApiConfig implements WebMvcConfigurer{
 		
 		registry.addInterceptor(managerInterceptor)
 		.addPathPatterns("/api/notice/*/*", "/api/notice", "/api/users/list", "/api/faq/*/*");
+		.addPathPatterns("/api/users/**", "/api/notice/*/*", "/api/notice", "/api/lecture/*/*","/api/lectureReview/*/*","/api/lectureStudent/*/*")
+		.excludePathPatterns("/api/users/*/login", "/api/users", "/api/users/checkid",
+							"/api/lecture/lectureList","/api/lecture/{lecNum}/lectureOne",
+							"/api/lectureReview/lectureReviewList");
+		
+		registry.addInterceptor(managerInterceptor)
+		.addPathPatterns("/api/notice/*/*", "/api/notice", "/api/users/list",
+						"/api/lecture/lecutureInsert", "/api/lecture/{lecNum}","/api/lecture/{lecNum}/lectureDelete");
 	}
 
 }

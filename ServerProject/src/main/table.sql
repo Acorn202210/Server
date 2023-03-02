@@ -146,7 +146,6 @@ CREATE TABLE LECTURE(
     TEACHER VARCHAR2(50) NOT NULL, --선생님
     TITLE VARCHAR2(50) NOT NULL, --제목
     DESCRIBE CLOB, --강의 설명
-    IMAGEPATH VARCHAR2(100), -- 이미지 업로드
     VIDEOPATH VARCHAR2(300), --영상 링크
     VIEWCOUNT NUMBER, -- 조회수
     USER_REGDATE DATE, --등록일
@@ -185,3 +184,14 @@ CREATE TABLE LECTURE_STUDENT(
 );
 
 CREATE SEQUENCE LECTURE_STUDENT_seq;
+
+-- 강의 이미지
+CREATE TABLE lecture_image(
+    LEC_NUM NUMBER VARCHAR2(50) PRIMARY KEY,
+    mimetype varchar(100),
+    data BLOB,
+    original_name varchar(100),
+    regdate DATE,
+    update_regdate DATE
+    delete_YN_code VARCHAR2(3) DEFAULT 'N'
+);
