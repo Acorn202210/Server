@@ -6,46 +6,46 @@ import com.acorn2.FinalProject.common.dto.PagingDto;
 
 @Alias("QnaBoardDto")
 public class QnaBoardDto extends PagingDto {	
-		private int board_question_num;
-		private String board_question_writer;
+		private int boardQuestionNum;
+		private String boardQuestionWriter;
 		private String title;		
 		private int viewCount;
-		private String user_regdate;
-		private String answered_yn;
+		private String userRegdate;
+		private String answeredYn;
 		private String content;
-		private String update_date;
-		private String delete_yn_code;		
+		private String updateDate;
+		private String deleteYnCode;		
 		
 		public QnaBoardDto() {}
 
-		public QnaBoardDto(int board_question_num, String board_question_writer, String title, int viewCount,
-				String user_regdate, String answered_yn, String content, String update_date, String delete_yn_code) {
+		public QnaBoardDto(int boardQuestionNum, String boardQuestionWriter, String title, int viewCount,
+				String userRegdate, String answeredYn, String content, String updateDate, String deleteYnCode) {
 			super();
-			this.board_question_num = board_question_num;
-			this.board_question_writer = board_question_writer;
+			this.boardQuestionNum = boardQuestionNum;
+			this.boardQuestionWriter = boardQuestionWriter;
 			this.title = title;
 			this.viewCount = viewCount;
-			this.user_regdate = user_regdate;
-			this.answered_yn = answered_yn;
+			this.userRegdate = userRegdate;
+			this.answeredYn = answeredYn;
 			this.content = content;
-			this.update_date = update_date;
-			this.delete_yn_code = delete_yn_code;
+			this.updateDate = updateDate;
+			this.deleteYnCode = deleteYnCode;
 		}
 
-		public int getBoard_question_num() {
-			return board_question_num;
+		public int getBoardQuestionNum() {
+			return boardQuestionNum;
 		}
 
-		public void setBoard_question_num(int board_question_num) {
-			this.board_question_num = board_question_num;
+		public void setBoardQuestionNum(int boardQuestionNum) {
+			this.boardQuestionNum = boardQuestionNum;
 		}
 
-		public String getBoard_question_writer() {
-			return board_question_writer;
+		public String getBoardQuestionWriter() {
+			return boardQuestionWriter;
 		}
 
-		public void setBoard_question_writer(String board_question_writer) {
-			this.board_question_writer = board_question_writer;
+		public void setBoardQuestionWriter(String boardQuestionWriter) {
+			this.boardQuestionWriter = boardQuestionWriter;
 		}
 
 		public String getTitle() {
@@ -64,20 +64,20 @@ public class QnaBoardDto extends PagingDto {
 			this.viewCount = viewCount;
 		}
 
-		public String getUser_regdate() {
-			return user_regdate;
+		public String getUserRegdate() {
+			return userRegdate;
 		}
 
-		public void setUser_regdate(String user_regdate) {
-			this.user_regdate = user_regdate;
+		public void setUserRegdate(String userRegdate) {
+			this.userRegdate = userRegdate;
 		}
 
-		public String getAnswered_yn() {
-			return answered_yn;
+		public String getAnsweredYn() {
+			return answeredYn;
 		}
 
-		public void setAnswered_yn(String answered_yn) {
-			this.answered_yn = answered_yn;
+		public void setAnsweredYn(String answeredYn) {
+			this.answeredYn = answeredYn;
 		}
 
 		public String getContent() {
@@ -88,20 +88,20 @@ public class QnaBoardDto extends PagingDto {
 			this.content = content;
 		}
 
-		public String getUpdate_date() {
-			return update_date;
+		public String getUpdateDate() {
+			return updateDate;
 		}
 
-		public void setUpdate_date(String update_date) {
-			this.update_date = update_date;
+		public void setUpdateDate(String updateDate) {
+			this.updateDate = updateDate;
 		}
 
-		public String getDelete_yn_code() {
-			return delete_yn_code;
+		public String getDeleteYnCode() {
+			return deleteYnCode;
 		}
 
-		public void setDelete_yn_code(String delete_yn_code) {
-			this.delete_yn_code = delete_yn_code;
+		public void setDeleteYnCode(String deleteYnCode) {
+			this.deleteYnCode = deleteYnCode;
 		}
 		
 }

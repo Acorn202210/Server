@@ -4,44 +4,44 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("qnaBoardAnswerDto")
 public class QnaBoardAnswerDto {
-	private int num;
-	private String writer;
+	private int boardCommentNum;
+	private String boardCommentWriter;
 	private String content;	
-	private int ref_group;	
-	private String regdate;
-	private String profile;
-	private int startRowNum;
-	private int endRowNum;
+	private int boardCommentRefGroup;	
+	private String userRegdate;
+	private String updateDate;
+	private String updateId;
+	private String deleteYnCode;
 	
 	public QnaBoardAnswerDto () {}
 
-	public QnaBoardAnswerDto(int num, String writer, String content, int ref_group, String regdate,
-			String profile, int startRowNum, int endRowNum) {
+	public QnaBoardAnswerDto(int boardCommentNum, String boardCommentWriter, String content, int boardCommentRefGroup,
+			String userRegdate, String updateDate, String updateId, String deleteYnCode) {
 		super();
-		this.num = num;
-		this.writer = writer;
+		this.boardCommentNum = boardCommentNum;
+		this.boardCommentWriter = boardCommentWriter;
 		this.content = content;
-		this.ref_group = ref_group;		
-		this.regdate = regdate;
-		this.profile = profile;
-		this.startRowNum = startRowNum;
-		this.endRowNum = endRowNum;
+		this.boardCommentRefGroup = boardCommentRefGroup;
+		this.userRegdate = userRegdate;
+		this.updateDate = updateDate;
+		this.updateId = updateId;
+		this.deleteYnCode = deleteYnCode;
 	}
 
-	public int getNum() {
-		return num;
+	public int getBoardCommentNum() {
+		return boardCommentNum;
 	}
 
-	public void setNum(int num) {
-		this.num = num;
+	public void setBoardCommentNum(int boardCommentNum) {
+		this.boardCommentNum = boardCommentNum;
 	}
 
-	public String getWriter() {
-		return writer;
+	public String getBoardCommentWriter() {
+		return boardCommentWriter;
 	}
 
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setBoardCommentWriter(String boardCommentWriter) {
+		this.boardCommentWriter = boardCommentWriter;
 	}
 
 	public String getContent() {
@@ -52,43 +52,45 @@ public class QnaBoardAnswerDto {
 		this.content = content;
 	}
 
-	public int getRef_group() {
-		return ref_group;
+	public int getBoardCommentRefGroup() {
+		return boardCommentRefGroup;
 	}
 
-	public void setRef_group(int ref_group) {
-		this.ref_group = ref_group;
+	public void setBoardCommentRefGroup(int boardCommentRefGroup) {
+		this.boardCommentRefGroup = boardCommentRefGroup;
+	}
+
+	public String getUserRegdate() {
+		return userRegdate;
+	}
+
+	public void setUserRegdate(String userRegdate) {
+		this.userRegdate = userRegdate;
+	}
+
+	public String getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	public String getUpdateId() {
+		return updateId;
+	}
+
+	public void setUpdateId(String updateId) {
+		this.updateId = updateId;
+	}
+
+	public String getDeleteYnCode() {
+		return deleteYnCode;
+	}
+
+	public void setDeleteYnCode(String deleteYnCode) {
+		this.deleteYnCode = deleteYnCode;
 	}
 	
-	public String getRegdate() {
-		return regdate;
-	}
-
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
-	}
-
-	public String getProfile() {
-		return profile;
-	}
-
-	public void setProfile(String profile) {
-		this.profile = profile;
-	}
-
-	public int getStartRowNum() {
-		return startRowNum;
-	}
-
-	public void setStartRowNum(int startRowNum) {
-		this.startRowNum = startRowNum;
-	}
-
-	public int getEndRowNum() {
-		return endRowNum;
-	}
-
-	public void setEndRowNum(int endRowNum) {
-		this.endRowNum = endRowNum;
-	};
 }
+	
