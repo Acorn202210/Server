@@ -1,12 +1,12 @@
 package com.acorn2.FinalProject.faq.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,7 +34,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 @RestController
 @Api("FaqController")
 @RequestMapping("/api/faq")
-public class Faq {
+public class FaqController {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 
@@ -55,19 +55,18 @@ public class Faq {
 	}
 	
 	@PostMapping("/Faqinsert")
-	public ComResponseEntity<Void> FaqInsert(@Valid @RequestBody FaqCreateReqDto faqCreateReqDto){
-		service.FaqInsert(faqCreateReqDto);
+	public ComResponseEntity<Void> FaqInsert(@Valid @RequestBody FaqCreateReqDto faqCreateReqDto, HttpServletRequest request){
+		service.FaqInsert(faqCreateReqDto, request);
 		return new ComResponseEntity<Void>();
 	}
 	
 	@PutMapping("/{faqNum}/update")
-	public ComResponseEntity<Void> FaqUpdate(@RequestParam(value = "faqNum", required = true) int faqNum,
-								@Valid @RequestBody FaqUpdateReqDto faqUpdateReqDto){
-		service.FaqUpdate(faqUpdateReqDto);
+	public ComResponseEntity<Void> FaqUpdate(@Valid @RequestBody FaqUpdateReqDto faqUpdateReqDto, HttpServletRequest request){
+		service.FaqUpdate(faqUpdateReqDto, request);
 		return new ComResponseEntity<Void>();		
 	}
 	
-	@DeleteMapping("/{faqNum}/delete")
+	@PutMapping("/{faqNum}/delete")
 	public ComResponseEntity<Void> FaqDelete(@RequestParam(value = "faqNum", required = true) int faqNum){
 		service.FaqDelete(faqNum);
 		return new ComResponseEntity<Void>();

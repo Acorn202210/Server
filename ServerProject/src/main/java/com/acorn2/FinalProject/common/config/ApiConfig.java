@@ -16,6 +16,11 @@ public class ApiConfig implements WebMvcConfigurer{
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginInterceptor)
+		.addPathPatterns("/api/users/**", "/api/notice/*/*", "/api/notice", "/api/faq/*", "/api/faq/**")
+		.excludePathPatterns("/api/users/*/login", "/api/users", "/api/users/checkid", "/api/faq/Faqlist", "/api/faq/*/faqOne");
+		
+		registry.addInterceptor(managerInterceptor)
+		.addPathPatterns("/api/notice/*/*", "/api/notice", "/api/users/list", "/api/faq/*/*");
 		.addPathPatterns("/api/users/**", "/api/notice/*/*", "/api/notice", "/api/lecture/*/*","/api/lectureReview/*/*","/api/lectureStudent/*/*")
 		.excludePathPatterns("/api/users/*/login", "/api/users", "/api/users/checkid",
 							"/api/lecture/lectureList","/api/lecture/{lecNum}/lectureOne",

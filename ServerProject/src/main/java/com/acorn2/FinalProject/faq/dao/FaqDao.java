@@ -77,4 +77,6 @@ public interface FaqDao {
 	 * @description : 자주묻는질문 수정
 	 */
 	Integer updateFaq(FaqDto dto);
+
+	Integer Faqdelete();
 }
