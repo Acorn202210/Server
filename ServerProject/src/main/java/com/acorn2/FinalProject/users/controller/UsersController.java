@@ -1,7 +1,6 @@
 package com.acorn2.FinalProject.users.controller;
 
 import java.io.IOException;
-import java.net.http.HttpRequest;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
