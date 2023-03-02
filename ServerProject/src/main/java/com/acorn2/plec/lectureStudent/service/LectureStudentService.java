@@ -15,7 +15,7 @@ public interface LectureStudentService {
 
 	LectureStudentOneReadResDto LectureStudentOne(int lecStuNum);
 	
-	void LectureSignup (LectureStudentCreateReqDto studentCreateReqDto, HttpServletRequest request);
+	void LectureSignup (Integer lecStuRefGroup, HttpServletRequest request);
 	
 	void LectureCompleteYn (LectureStudentUpdateReqDto studentUpdateReqDto, HttpServletRequest request);
 	

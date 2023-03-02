@@ -61,12 +61,12 @@ public class LectureStudentServiceImpl implements LectureStudentService{
 
 	@Transactional
 	@Override
-	public void LectureSignup(LectureStudentCreateReqDto studentCreateReqDto, HttpServletRequest request) {
+	public void LectureSignup(Integer lecStuRefGroup, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String id = session.getAttribute("id").toString();
 		LectureStudentDto dto = new LectureStudentDto();
 		dto.setLecStuUserId(id);
-		dto.setLecStuRefGroup(studentCreateReqDto.getLecStuRefGroup());
+		dto.setLecStuRefGroup(lecStuRefGroup);
 		
 		studentDao.LectureSignup(dto);
 	}

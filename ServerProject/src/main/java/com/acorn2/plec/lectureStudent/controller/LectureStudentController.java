@@ -55,9 +55,8 @@ public class LectureStudentController {
 	
 	@ApiOperation(value="강의 수강 신청", notes = "강의 수강 신청하기")
 	@PostMapping("/LectureSignup")
-	public ComResponseEntity<Void> LectureSignup(@RequestParam int lecStuRefGroup,
-												@Valid @RequestBody LectureStudentCreateReqDto studentCreateReqDto, HttpServletRequest request){
-		service.LectureSignup(studentCreateReqDto, request);
+	public ComResponseEntity<Void> LectureSignup(@RequestParam int lecStuRefGroup, HttpServletRequest request){
+		service.LectureSignup(lecStuRefGroup, request);
 		return new ComResponseEntity<Void>();
 	}
 	@ApiOperation(value="강의 수강 완료", notes = "강의 수강 완료하기")
