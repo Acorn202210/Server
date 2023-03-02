@@ -12,10 +12,10 @@
 				FROM LECTURE
 				<choose>
 						<when test='smallCategory=="all"'>
-							WHERE LARGE_CATEGORY=#{largeCategory} AND SERVICE_YN_CODE = 'N'
+							WHERE LARGE_CATEGORY=#{largeCategory} AND SERVICE_YN_CODE = 'Y'
 						</when>
 						<when test="smallCategory!=null">
-							WHERE LARGE_CATEGORY=#{largeCategory} AND SMALL_CATEGORY=#{smallCategory} AND SERVICE_YN_CODE = 'N'
+							WHERE LARGE_CATEGORY=#{largeCategory} AND SMALL_CATEGORY=#{smallCategory} AND SERVICE_YN_CODE = 'Y'
 						</when>
 				</choose>
 				ORDER BY LEC_NUM DESC) result1)

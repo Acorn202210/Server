@@ -57,7 +57,7 @@ public class LectureController {
 	@ApiOperation(value="강의 목록", notes = "강의 목록을 가져온다.")
 	@GetMapping("/lectureList")
 	public ComResponseEntity<LectureReadListResDto> getLectureList(@RequestParam String largeCategory,
-												@RequestParam String smallCategory,
+												@RequestParam(required = false) String smallCategory,
 												@Parameter(hidden = true) LectureReadReqDto lectureReadReqDto){
 		
 		LectureReadListResDto lectureReadListResDto = service.LectureList(lectureReadReqDto);
