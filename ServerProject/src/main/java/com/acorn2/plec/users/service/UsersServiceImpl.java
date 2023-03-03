@@ -164,5 +164,5 @@ public class UsersServiceImpl implements UsersService{
 		profileDao.deleteProfile();
 		
 		usersDao.updateRestUser();
-	}
+	}	
 }

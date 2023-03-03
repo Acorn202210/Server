@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import com.acorn2.plec.common.ExceptionResponse;
 import com.acorn2.plec.notice.exception.NoticeNotFoundException;
+import com.acorn2.plec.users.exception.ManagerException;
 import com.acorn2.plec.users.exception.UsersNotLoginException;
 
 @RestController
@@ -24,26 +25,34 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 	 // 모든 예외를 처리하는 메소드
 	 // Bean 내에서 발생하는 예외를 처리
 	 @ExceptionHandler(Exception.class)
-	 public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request){
+	 public final ResponseEntity<Object> handleAllExceptions(Exception ex){
 	     ExceptionResponse exceptionResponse =
-	             new ExceptionResponse("failed", new Date(), ExceptionUtils.getStackTrace(ex), request.getDescription(false));
+	             new ExceptionResponse( HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR.toString(), new Date(), ExceptionUtils.getMessage(ex), ExceptionUtils.getStackTrace(ex));
 	     return new ResponseEntity(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	 }
 	 
-	//사용자가 존재하지 않았을 때 처리하는 메소드
+	//공지사항이 존재하지 않았을 때 처리하는 메소드
 	 @ExceptionHandler(NoticeNotFoundException.class)
-	 public final ResponseEntity<Object> handleNoticeNotFoundException(Exception ex, WebRequest request){
+	 public final ResponseEntity<Object> handleNoticeNotFoundException(Exception ex){
 	     ExceptionResponse exceptionResponse =
-	             new ExceptionResponse("failed", new Date(), ExceptionUtils.getStackTrace(ex), request.getDescription(false));
+	             new ExceptionResponse(HttpStatus.NOT_FOUND, "40000000", new Date(), ExceptionUtils.getMessage(ex), ExceptionUtils.getStackTrace(ex));
 	     return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
 	 }
  
 	//사용자가 존재하지 않았을 때 처리하는 메소드
 	 @ExceptionHandler(UsersNotLoginException.class)
-	 public final ResponseEntity<Object> handleUsersNotLoginException(Exception ex, WebRequest request){
+	 public final ResponseEntity<Object> handleUsersNotLoginException(Exception ex){
 	     ExceptionResponse exceptionResponse =
-	             new ExceptionResponse("failed", new Date(), ExceptionUtils.getStackTrace(ex), request.getDescription(false));
+	             new ExceptionResponse(HttpStatus.UNAUTHORIZED, "40000001", new Date(), ExceptionUtils.getMessage(ex), ExceptionUtils.getStackTrace(ex));
 	     return new ResponseEntity(exceptionResponse, HttpStatus.UNAUTHORIZED);
+	 }
+	 
+	//사용자가 존재하지 않았을 때 처리하는 메소드
+	 @ExceptionHandler(ManagerException.class)
+	 public final ResponseEntity<Object> handleManagerException(Exception ex){
+	     ExceptionResponse exceptionResponse =
+	             new ExceptionResponse(HttpStatus.FORBIDDEN, "40000003", new Date(), ExceptionUtils.getMessage(ex), ExceptionUtils.getStackTrace(ex));
+	     return new ResponseEntity(exceptionResponse, HttpStatus.FORBIDDEN);
 	 }
  
 }

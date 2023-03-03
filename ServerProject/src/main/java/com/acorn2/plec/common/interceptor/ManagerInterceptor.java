@@ -10,6 +10,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.acorn2.plec.users.dao.UsersDao;
 import com.acorn2.plec.users.dto.res.UsersReadDetailResDto;
+import com.acorn2.plec.users.exception.ManagerException;
 import com.acorn2.plec.users.exception.UsersNotLoginException;
 
 @Component
@@ -24,7 +25,7 @@ public class ManagerInterceptor implements HandlerInterceptor{
 		UsersReadDetailResDto usersReadDetailResDto = usersDao.selectUser(id);
 		
 		if(usersReadDetailResDto.getManagerYn().toString().equals("N")) {
-			throw new UsersNotLoginException("관리자가 아닙니다.");
+			throw new ManagerException("권한이 없습니다.");
 		}
 		return true;
 	}
