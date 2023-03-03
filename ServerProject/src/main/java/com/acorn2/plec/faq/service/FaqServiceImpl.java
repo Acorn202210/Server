@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.acorn2.plec.faq.dao.FaqDao;
 import com.acorn2.plec.faq.dto.FaqDto;
@@ -45,6 +46,7 @@ public class FaqServiceImpl implements FaqService{
 		return faqDao.FaqOne(faqNum);
 	}
 	
+	@Transactional
 	@Override
 	public void FaqInsert(FaqCreateReqDto faqCreateReqDto, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -57,6 +59,7 @@ public class FaqServiceImpl implements FaqService{
 		faqDao.insertFaq(dto);
 	}
 
+	@Transactional
 	@Override
 	public void FaqUpdate(FaqUpdateReqDto faqUpdateReqDto, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -70,12 +73,14 @@ public class FaqServiceImpl implements FaqService{
 		faqDao.updateFaq(dto);
 	}
 
+	@Transactional
 	@Override
 	public void FaqDelete(int faqNum) {
 
 		faqDao.deleteFaq(faqNum);
 	}
 
+	@Transactional
 	@Override
 	public void deleteFaq() {
 	
