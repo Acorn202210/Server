@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.acorn2.plec.common.ComResponseEntity;
 import com.acorn2.plec.common.dto.ComResponseDto;
-import com.acorn2.plec.lectureStudent.dto.req.LectureStudentCreateReqDto;
 import com.acorn2.plec.lectureStudent.dto.req.LectureStudentReadReqDto;
 import com.acorn2.plec.lectureStudent.dto.req.LectureStudentUpdateReqDto;
 import com.acorn2.plec.lectureStudent.dto.res.LectureStudentOneReadResDto;
@@ -26,7 +26,6 @@ import com.acorn2.plec.lectureStudent.service.LectureStudentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 
 @Api(value = "LectureStudent")

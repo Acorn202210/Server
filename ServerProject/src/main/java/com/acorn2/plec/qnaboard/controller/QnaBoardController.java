@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.acorn2.plec.common.ComResponseEntity;
 import com.acorn2.plec.common.dto.ComResponseDto;
-import com.acorn2.plec.qnaboard.dto.QnaBoardAnswerDto;
 import com.acorn2.plec.qnaboard.dto.req.QnaBoardCreateReqDto;
 import com.acorn2.plec.qnaboard.dto.req.QnaBoardReadReqDto;
 import com.acorn2.plec.qnaboard.dto.req.QnaBoardUpdateReqDto;
@@ -26,7 +26,6 @@ import com.acorn2.plec.qnaboard.service.QnaBoardService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
