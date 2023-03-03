@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.acorn2.FinalProject.notice.dao.NoticeDao">
+<mapper namespace="com.acorn2.plec.notice.dao.NoticeDao">
 
 	<sql id="searchCondition">
         <if test="title != null and content != null">AND (title LIKE '%'||#{title}||'%' OR content LIKE '%'||#{content}||'%')</if>
 		<if test="title != null and content == null">AND title LIKE '%'||#{title}||'%'</if>
    </sql>
    
-	<select id="selectNoticeCount" parameterType="com.acorn2.FinalProject.notice.dto.req.NoticeReadReqDto" resultType="java.lang.Integer">
+	<select id="selectNoticeCount" parameterType="com.acorn2.plec.notice.dto.req.NoticeReadReqDto" resultType="java.lang.Integer">
 		 SELECT NVL(MAX(ROWNUM), 0)
       	 FROM NOTICE
         <where>
@@ -16,7 +16,7 @@
          </where>
 	</select>
 	
-	<select id="selectNoticeList" parameterType="com.acorn2.FinalProject.notice.dto.req.NoticeReadReqDto" resultType="com.acorn2.FinalProject.notice.dto.res.NoticeReadResDto">
+	<select id="selectNoticeList" parameterType="com.acorn2.plec.notice.dto.req.NoticeReadReqDto" resultType="com.acorn2.plec.notice.dto.res.NoticeReadResDto">
 		SELECT *
       	FROM
          (SELECT result1.*, ROWNUM AS rnum
@@ -31,7 +31,7 @@
         WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
 	</select>
 	
-	<select id="selectNotice" parameterType="com.acorn2.FinalProject.notice.dto.req.NoticeReadReqDto" resultType="com.acorn2.FinalProject.notice.dto.res.NoticeReadDetailResDto">
+	<select id="selectNotice" parameterType="com.acorn2.plec.notice.dto.req.NoticeReadReqDto" resultType="com.acorn2.plec.notice.dto.res.NoticeReadDetailResDto">
 		SELECT result1.*
 		FROM
 			(SELECT noti_num, title, content, viewCount, regdate, noti_writer, update_regdate, update_id, delete_YN_code,
@@ -46,13 +46,13 @@
 	</select>
 	
 	
-	<insert id="insertNotice" parameterType="com.acorn2.FinalProject.notice.dto.NoticeDto">
+	<insert id="insertNotice" parameterType="com.acorn2.plec.notice.dto.NoticeDto">
       INSERT INTO NOTICE
       (noti_num, title, content, viewCount, regdate, noti_writer, delete_YN_code)
       VALUES(NOTICE_seq.NEXTVAL, #{title},#{content}, 0, SYSDATE, #{notiWriter}, 'N')
    </insert>
 
-   <update id="updateNotice" parameterType="com.acorn2.FinalProject.notice.dto.NoticeDto">
+   <update id="updateNotice" parameterType="com.acorn2.plec.notice.dto.NoticeDto">
       UPDATE NOTICE
       <set>
       	<if test="title != null">
