@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.acorn2.plec.api.notice.exception.NoticeNotFoundException;
+import com.acorn2.plec.api.users.exception.ManagerException;
+import com.acorn2.plec.api.users.exception.UsersNotLoginException;
 import com.acorn2.plec.common.ExceptionResponse;
-import com.acorn2.plec.notice.exception.NoticeNotFoundException;
-import com.acorn2.plec.users.exception.ManagerException;
-import com.acorn2.plec.users.exception.UsersNotLoginException;
 
 @RestController
 //전역에 발생할 수 있는 예외를 처리해줌. 이게 @ExcptionalHandler와 차이점

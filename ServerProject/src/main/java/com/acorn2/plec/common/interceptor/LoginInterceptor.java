@@ -7,7 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import com.acorn2.plec.users.exception.UsersNotLoginException;
+import com.acorn2.plec.api.users.exception.UsersNotLoginException;
+
 
 
 @Component
