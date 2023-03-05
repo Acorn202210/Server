@@ -1,4 +1,4 @@
-package com.acorn2.plec.common.springswagger;
+package com.acorn2.plec.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

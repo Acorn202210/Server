@@ -31,12 +31,15 @@ mybatis:
     map-underscore-to-camel-case: true
     call-setters-on-nulls: true
     jdbc-type-for-null: NULL
-
+    
 file:
   location: C:\data
-
+  
 logging:
   config: classpath:log4j/log4j2_local.xml
   level:
     org.springframework.cache: debug
 
+add-patterns:
+  - /api/users/**
+  - /api/notice/*/*

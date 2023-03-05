@@ -29,6 +29,8 @@ public class BatchSecheduler {
 
 	@Scheduled(cron = "0 5 0 * * *")
 	public void testSchedule() {
+//		logger로 기록하고, 위에것이 실패했을경우 넘겨서 다음것을 삭제하기 위한작업추가
+//		schedulerLock은 두개에서 한쪽이하면 한쪽은 멈추고하는 작업, 시작시간, 끝나는시간 보이게끔작업
 		noticeService.deleteNotice();
 		faqservice.deleteFaq();
 		usersService.batchUser();

@@ -20,7 +20,7 @@ import com.acorn2.plec.faq.dto.req.FaqReadReqDto;
 import com.acorn2.plec.faq.dto.req.FaqUpdateReqDto;
 import com.acorn2.plec.faq.dto.res.FaqReadListResDto;
 import com.acorn2.plec.faq.dto.res.FaqReadResDto;
-
+//메소드앞에 소문자로 사용하기
 @EnableCaching
 @Service
 public class FaqServiceImpl implements FaqService{
@@ -28,12 +28,12 @@ public class FaqServiceImpl implements FaqService{
 	
 	@Autowired
 	private FaqDao faqDao;
-
+	
 	@Override
 	@Cacheable(value = "faq", key = "#faqReadReqDto.hashCode()")
 	public FaqReadListResDto selectFaqList(FaqReadReqDto faqReadReqDto) {
 		Integer totalCount = faqDao.selectFaqCount(faqReadReqDto);
-		List<FaqReadResDto> faqReadResDtoList = faqDao.selectFaqList(faqReadReqDto);
+		List<FaqReadResDto> faqReadResDtoList = faqDao.selectFaqList(faqReadReqDto); //selectFaqlist 말고 faqOne으로 가져오면 null포인트 가져올수있음
 		FaqReadListResDto faqReadListResDto = new FaqReadListResDto(totalCount, faqReadReqDto);
 		faqReadListResDto.setData(faqReadResDtoList);
 		logger.debug("Cached value for key {} is {}", faqReadReqDto.hashCode(), faqReadListResDto.toString());

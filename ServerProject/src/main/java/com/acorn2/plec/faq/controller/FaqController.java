@@ -38,9 +38,9 @@ public class FaqController {
 
 
 	@Autowired private FaqService service;
-	
+	//목록은 엑셀로 받아보기 아파치poi이용해서 엑셀만들어서 다운로드하게끔. db조회하고 엑셀만들고 다운로드.
 	@ApiOperation(value="자주묻는질문 목록", notes = "모든 자주묻는질문의 목록을 가져온다.")
-	@GetMapping("/Faqlist")
+	@GetMapping("/faqlist")
 	public ComResponseEntity<FaqReadListResDto> FaqList(
 			@Parameter(hidden = true) FaqReadReqDto faqReadReqDto) {
 		FaqReadListResDto faqReadListResDto = service.selectFaqList(faqReadReqDto);
@@ -50,14 +50,14 @@ public class FaqController {
 	
 	@ApiOperation(value="단일 자주묻는질문 상세", notes = "하나의 자주묻는질문의 상세 정보를 가져온다.")
 	@GetMapping("/{faqNum}/faqOne")
-	public ComResponseEntity<FaqDto> FaqOne(@PathVariable int faqNum){
+	public ComResponseEntity<FaqDto> FaqOne(@PathVariable Integer faqNum){
 		FaqDto dtoOne = service.FaqOne(faqNum);
 		return new ComResponseEntity<>(new ComResponseDto<>(dtoOne));
 	}
 	
 	@ApiOperation(value="자주묻는질문 등록", notes = "자주묻는질문을 등록한다.")
 	@Transactional
-	@PostMapping("/Faqinsert")
+	@PostMapping("/faqinsert")
 	public ComResponseEntity<Void> FaqInsert(@Valid @RequestBody FaqCreateReqDto faqCreateReqDto, HttpServletRequest request){
 		service.FaqInsert(faqCreateReqDto, request);
 		return new ComResponseEntity<Void>();

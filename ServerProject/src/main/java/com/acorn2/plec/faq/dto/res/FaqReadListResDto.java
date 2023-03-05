@@ -12,7 +12,7 @@ public class FaqReadListResDto extends PagingResponseDto {
 	public FaqReadListResDto() {
 		super(0, new PagingDto());
 	}
-
+	
 	public FaqReadListResDto(Integer totalCount, PagingDto comPageDto) {
 		super(totalCount, comPageDto);
 	}
