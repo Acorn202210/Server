@@ -31,15 +31,48 @@ mybatis:
     map-underscore-to-camel-case: true
     call-setters-on-nulls: true
     jdbc-type-for-null: NULL
-    
-file:
-  location: C:\data
-  
+
+
 logging:
   config: classpath:log4j/log4j2_local.xml
   level:
     org.springframework.cache: debug
 
-add-patterns:
+login-add-patterns:
   - /api/users/**
   - /api/notice/*/*
+  - /api/notice
+  - /api/faq/**
+  - /api/qnaboard/*
+  - /api/qnaboard/*/*
+  
+login-exclude-patterns:
+  - /api/users/login 
+  - /api/users
+  - /api/users/checkid
+  - /api/users/isYN
+  - /api/faq/Faqlist
+  - /api/faq/*/faqOne
+  
+manager-add-patterns:
+  - /api/notice/*/*
+  - /api/notice
+  - /api/users/list
+  - /api/faq/*/*
+  - /api/lecture/*/*
+  - /api/lectureReview/*/*
+  - /api/lectureStudent/*/*
+  - /api/lecture/lecutureInsert
+  - /api/lecture/{lecNum}
+  - /api/lecture/{lecNum}/lectureDelete
+  - /api/faq/*
+  
+manager-exclude-patterns:
+  - /api/users/login
+  - /api/users
+  - /api/users/checkid
+  - /api/lecture/lectureList
+  - /api/lecture/{lecNum}/lectureOne
+  - /api/lectureReview/lectureReviewList
+  - /api/faq/Faqlist
+  - /api/faq/*/faqOne

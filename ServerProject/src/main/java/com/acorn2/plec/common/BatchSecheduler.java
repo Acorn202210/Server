@@ -8,13 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.acorn2.plec.faq.service.FaqService;
-import com.acorn2.plec.lecture.Service.LectureService;
-import com.acorn2.plec.lectureReview.service.LectureReviewService;
-import com.acorn2.plec.lectureStudent.service.LectureStudentService;
-import com.acorn2.plec.notice.service.NoticeService;
-import com.acorn2.plec.qnaboard.service.QnaBoardService;
-import com.acorn2.plec.users.service.UsersService;
+import com.acorn2.plec.api.faq.service.FaqService;
+import com.acorn2.plec.api.lecture.Service.LectureService;
+import com.acorn2.plec.api.lectureReview.service.LectureReviewService;
+import com.acorn2.plec.api.lectureStudent.service.LectureStudentService;
+import com.acorn2.plec.api.notice.service.NoticeService;
+import com.acorn2.plec.api.qnaboard.service.QnaBoardService;
+import com.acorn2.plec.api.users.service.UsersService;
+
 
 @Component
 public class BatchSecheduler {
@@ -28,22 +29,17 @@ public class BatchSecheduler {
 	@Autowired private LectureStudentService lectureStudentService;
 
 	@Scheduled(cron = "0 5 0 * * *")
-	public void testSchedule() {
-//		logger로 기록하고, 위에것이 실패했을경우 넘겨서 다음것을 삭제하기 위한작업추가
-//		schedulerLock은 두개에서 한쪽이하면 한쪽은 멈추고하는 작업, 시작시간, 끝나는시간 보이게끔작업
+	public void schedule() {
+		logger.info("[delete Schedule] Schedule Start [TIME:{}]", LocalDateTime.now());
+
 		noticeService.deleteNotice();
 		faqservice.deleteFaq();
 		usersService.batchUser();
 		lectureService.batchLectureDelete();
 		lectureReviewService.batchDeleteLectureReview();
 		lectureStudentService.LectureDelete();
-		
-		logger.info("[Mytest] Notice delete {}", "[Mytest] Faq delete {}", LocalDateTime.now());
-	}
-
-	@Scheduled(cron = "0 0/30 * * * *")
-	public void qnaBoardSchedule() {
 		qnaService.QnaBoardDelete();
-		logger.info("[QnaBoardBatch] delete {}", LocalDateTime.now());
+
+		logger.info("[delete Schedule] Schedule End [TIME:{}]", LocalDateTime.now());
 	}
 }

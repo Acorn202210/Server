@@ -3,8 +3,6 @@ package com.acorn2.plec.common.config;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -13,34 +11,53 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.acorn2.plec.common.config.dto.ApiPatternsDto;
 import com.acorn2.plec.common.interceptor.LoginInterceptor;
 import com.acorn2.plec.common.interceptor.ManagerInterceptor;
 
 @Configuration
 public class ApiConfig implements WebMvcConfigurer{
-	
 	@Autowired LoginInterceptor loginInterceptor;
 	@Autowired ManagerInterceptor managerInterceptor;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		List<String> apiPatternDto = getApiPatternDto();
+		List<String> loginAddPatternDto = getLoginAddPatternDto();
+		List<String> loginExcludePatternDto = getLoginExcludePatternDto();
+		List<String> managerAddPatternDto = getManagerAddPatternDto();
+		List<String> managerExcludePatternDto = getManagerExcludePatternDto();
+		
 		registry.addInterceptor(loginInterceptor)
-			.addPathPatterns(apiPatternDto.toArray(new String[apiPatternDto.size()]))
-			.excludePathPatterns("/api/users/login", "/api/users", "/api/users/checkid", "/api/users/isYN", "/api/faq/Faqlist", "/api/faq/*/faqOne");
-			
+		.addPathPatterns(loginAddPatternDto.toArray(new String[loginAddPatternDto.size()]))
+		.excludePathPatterns(loginExcludePatternDto.toArray(new String[loginExcludePatternDto.size()]));
+		
 		registry.addInterceptor(managerInterceptor)
-			.addPathPatterns("/api/notice/*/*", "/api/notice", "/api/users/list","/api/faq/*/*","/api/lecture/*/*","/api/lectureReview/*/*","/api/lectureStudent/*/*",
-							"/api/lecture/lecutureInsert", "/api/lecture/{lecNum}","/api/lecture/{lecNum}/lectureDelete", "/api/faq/*")
-			.excludePathPatterns("/api/users/login", "/api/users", "/api/users/checkid",
-					"/api/lecture/lectureList","/api/lecture/{lecNum}/lectureOne",
-					"/api/lectureReview/lectureReviewList" ,"/api/faq/Faqlist", "/api/faq/*/faqOne");
+		.addPathPatterns(managerAddPatternDto.toArray(new String[managerAddPatternDto.size()]))
+		.excludePathPatterns(managerExcludePatternDto.toArray(new String[managerExcludePatternDto.size()]));
 	}
 	
 	@Bean
-	@ConfigurationProperties("add-patterns")
-	public List<String> getApiPatternDto() {
-    	return new ArrayList<>();
-    }
+	@ConfigurationProperties("login-add-patterns")
+	public List<String> getLoginAddPatternDto() {
+		return new ArrayList<>();
+	}
+	
+	@Bean
+	@ConfigurationProperties("login-exclude-patterns")
+	public List<String> getLoginExcludePatternDto() {
+		return new ArrayList<>();
+	}
+	
+	@Bean
+	@ConfigurationProperties("manager-add-patterns")
+	public List<String> getManagerAddPatternDto() {
+		return new ArrayList<>();
+	}
+	
+	@Bean
+	@ConfigurationProperties("manager-exclude-patterns")
+	public List<String> getManagerExcludePatternDto() {
+		return new ArrayList<>();
+	}
 
 }
