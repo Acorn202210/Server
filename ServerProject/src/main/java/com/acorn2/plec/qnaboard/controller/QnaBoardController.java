@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.acorn2.plec.api.qnaboard.dto.QnaBoardAnswerDto;
+import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardCreateReqDto;
+import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardReadReqDto;
+import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardUpdateReqDto;
+import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadDetailResDto;
+import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadListResDto;
 import com.acorn2.plec.common.ComResponseEntity;
 import com.acorn2.plec.common.dto.ComResponseDto;
-import com.acorn2.plec.qnaboard.dto.QnaBoardAnswerDto;
-import com.acorn2.plec.qnaboard.dto.QnaBoardDto;
-import com.acorn2.plec.qnaboard.dto.req.QnaBoardCreateReqDto;
-import com.acorn2.plec.qnaboard.dto.req.QnaBoardReadReqDto;
-import com.acorn2.plec.qnaboard.dto.req.QnaBoardUpdateReqDto;
-import com.acorn2.plec.qnaboard.dto.res.QnaBoardReadDetailResDto;
-import com.acorn2.plec.qnaboard.dto.res.QnaBoardReadListResDto;
+
 import com.acorn2.plec.qnaboard.service.QnaBoardService;
 
 import io.swagger.annotations.Api;

@@ -16,16 +16,17 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.acorn2.plec.api.qnaboard.dto.QnaBoardAnswerDto;
+import com.acorn2.plec.api.qnaboard.dto.QnaBoardDto;
+import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardCreateReqDto;
+import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardReadReqDto;
+import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardUpdateReqDto;
+import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadDetailResDto;
+import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadListResDto;
+import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadResDto;
 import com.acorn2.plec.qnaboard.dao.QnaBoardAnswerDao;
 import com.acorn2.plec.qnaboard.dao.QnaBoardDao;
-import com.acorn2.plec.qnaboard.dto.QnaBoardAnswerDto;
-import com.acorn2.plec.qnaboard.dto.QnaBoardDto;
-import com.acorn2.plec.qnaboard.dto.req.QnaBoardCreateReqDto;
-import com.acorn2.plec.qnaboard.dto.req.QnaBoardReadReqDto;
-import com.acorn2.plec.qnaboard.dto.req.QnaBoardUpdateReqDto;
-import com.acorn2.plec.qnaboard.dto.res.QnaBoardReadDetailResDto;
-import com.acorn2.plec.qnaboard.dto.res.QnaBoardReadListResDto;
-import com.acorn2.plec.qnaboard.dto.res.QnaBoardReadResDto;
+
 
 @EnableCaching
 @Service

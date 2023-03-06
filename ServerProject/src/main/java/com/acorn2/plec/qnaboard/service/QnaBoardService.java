@@ -4,13 +4,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.acorn2.plec.qnaboard.dto.QnaBoardAnswerDto;
-import com.acorn2.plec.qnaboard.dto.QnaBoardDto;
-import com.acorn2.plec.qnaboard.dto.req.QnaBoardCreateReqDto;
-import com.acorn2.plec.qnaboard.dto.req.QnaBoardReadReqDto;
-import com.acorn2.plec.qnaboard.dto.req.QnaBoardUpdateReqDto;
-import com.acorn2.plec.qnaboard.dto.res.QnaBoardReadDetailResDto;
-import com.acorn2.plec.qnaboard.dto.res.QnaBoardReadListResDto;
+import com.acorn2.plec.api.qnaboard.dto.QnaBoardAnswerDto;
+import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardCreateReqDto;
+import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardReadReqDto;
+import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardUpdateReqDto;
+import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadDetailResDto;
+import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadListResDto;
+
 
 public interface QnaBoardService {
 	

@@ -4,7 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.acorn2.plec.qnaboard.dto.QnaBoardAnswerDto;
+import com.acorn2.plec.api.qnaboard.dto.QnaBoardAnswerDto;
+
+
 
 @Mapper
 public interface QnaBoardAnswerDao {

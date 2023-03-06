@@ -1,0 +1,17 @@
+# code 형식: 998:사용자정의 오류, 997:시스템오류
+# desc 형식: 사용자정의 오류메세지
+success:
+  200ok:
+    code: 20000000
+    desc: "성 공 "
+    status: 200
+ 
+exception:
+  login_required:
+    code: 40000001
+    desc: "로그인 후 시도해주세요."
+    status: 401
+  permission_denied:
+    code: 40000003
+    desc: "권한이 없습니다."
+    status: 403

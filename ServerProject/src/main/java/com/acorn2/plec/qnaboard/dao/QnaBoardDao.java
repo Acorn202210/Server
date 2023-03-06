@@ -6,11 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.acorn2.plec.qnaboard.dto.QnaBoardDto;
-import com.acorn2.plec.qnaboard.dto.req.QnaBoardCreateReqDto;
-import com.acorn2.plec.qnaboard.dto.req.QnaBoardReadReqDto;
-import com.acorn2.plec.qnaboard.dto.res.QnaBoardReadDetailResDto;
-import com.acorn2.plec.qnaboard.dto.res.QnaBoardReadResDto;
+import com.acorn2.plec.api.qnaboard.dto.QnaBoardDto;
+import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardReadReqDto;
+import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadDetailResDto;
+import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadResDto;
+
+
 
 @Mapper
 public interface QnaBoardDao {

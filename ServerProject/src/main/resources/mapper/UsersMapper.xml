@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.acorn2.plec.users.dao.UsersDao">
+<mapper namespace="com.acorn2.plec.api.users.dao.UsersDao">
 	<sql id="searchCondition">
 		<if test="lecUserId != null">
 			AND lec_user_id LIKE '%'||#{lecUserId}||'%'
@@ -19,7 +19,7 @@
 		</if>
 	</sql>
 	
-	<select id="selectUsersCount" parameterType="com.acorn2.plec.users.dto.req.UsersReadReqDto" resultType="java.lang.Integer">
+	<select id="selectUsersCount" parameterType="com.acorn2.plec.api.users.dto.req.UsersReadReqDto" resultType="java.lang.Integer">
 		SELECT NVL(MAX(ROWNUM), 0)
       	 FROM USERS
         <where>
@@ -29,7 +29,7 @@
          </where>
 	</select>
 	
-	<select id="selectUsersList" parameterType="com.acorn2.plec.users.dto.req.UsersReadReqDto" resultType="com.acorn2.plec.users.dto.res.UsersReadResDto">
+	<select id="selectUsersList" parameterType="com.acorn2.plec.api.users.dto.req.UsersReadReqDto" resultType="com.acorn2.plec.api.users.dto.res.UsersReadResDto">
 		SELECT *
       	FROM
          (SELECT result1.*, ROWNUM AS rnum
@@ -45,19 +45,19 @@
         WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
 	</select>
 	
-	<select id="selectUser" parameterType="String" resultType="com.acorn2.plec.users.dto.res.UsersReadDetailResDto">
+	<select id="selectUser" parameterType="String" resultType="com.acorn2.plec.api.users.dto.res.UsersReadDetailResDto">
 		SELECT lec_user_id, user_pwd, user_email, user_regdate, user_phone, user_birth, user_nickname, manager_yn
         FROM USERS
         WHERE lec_user_id=#{lecUserId}
 	</select>
 	
-	<insert id="insertUser" parameterType="com.acorn2.plec.users.dto.req.UsersCreateReqDto">
+	<insert id="insertUser" parameterType="com.acorn2.plec.api.users.dto.req.UsersCreateReqDto">
       INSERT INTO USERS
       (lec_user_id, user_pwd, user_email, user_regdate, user_phone, user_birth, manager_yn, user_nickname, general_user_code)
       VALUES(#{lecUserId}, #{userPwd}, #{userEmail}, SYSDATE, #{userPhone}, #{userBirth}, #{managerYn}, #{userNickname}, 'Y')
    	</insert>
    	
-   	<update id="updateUser" parameterType="com.acorn2.plec.users.dto.req.UsersUpdateReqDto">
+   	<update id="updateUser" parameterType="com.acorn2.plec.api.users.dto.req.UsersUpdateReqDto">
    		UPDATE USERS
    		<set>
    			<if test="userEmail != null">, user_email=#{userEmail}</if>
@@ -67,7 +67,7 @@
    	    WHERE lec_user_id=#{lecUserId}
    	</update>
    	
-  	<update id="updateUserPwd" parameterType="com.acorn2.plec.users.dto.req.UsersUpdatePwdReqDto">
+  	<update id="updateUserPwd" parameterType="com.acorn2.plec.api.users.dto.req.UsersUpdatePwdReqDto">
   		UPDATE USERS
   		SET user_pwd=#{newPwd}
   	    WHERE lec_user_id=#{lecUserId}

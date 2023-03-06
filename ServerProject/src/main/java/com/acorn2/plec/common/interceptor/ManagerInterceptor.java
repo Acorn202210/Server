@@ -8,9 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import com.acorn2.plec.users.dao.UsersDao;
-import com.acorn2.plec.users.dto.res.UsersReadDetailResDto;
-import com.acorn2.plec.users.exception.UsersNotLoginException;
+import com.acorn2.plec.api.users.dao.UsersDao;
+import com.acorn2.plec.api.users.dto.res.UsersReadDetailResDto;
+import com.acorn2.plec.api.users.exception.ManagerException;
+
 
 @Component
 public class ManagerInterceptor implements HandlerInterceptor{
@@ -24,7 +25,7 @@ public class ManagerInterceptor implements HandlerInterceptor{
 		UsersReadDetailResDto usersReadDetailResDto = usersDao.selectUser(id);
 		
 		if(usersReadDetailResDto.getManagerYn().toString().equals("N")) {
-			throw new UsersNotLoginException("관리자가 아닙니다.");
+			throw new ManagerException("권한이 없습니다.");
 		}
 		return true;
 	}
