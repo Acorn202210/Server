@@ -82,10 +82,9 @@ public class UsersController {
 	
 	@ApiOperation(value="로그인", notes = "로그인")
 	@PostMapping(value="/login")
-	public ComResponseEntity<Void> login(@RequestBody UsersLoginReqDto usersLoginReqDto, HttpServletRequest request){
+	public ComResponseEntity<Map<String, String>> login(@RequestBody UsersLoginReqDto usersLoginReqDto, HttpServletRequest request){
 		System.out.println(usersLoginReqDto.getLecUserId());
-		userService.login(usersLoginReqDto, request);
-		return new ComResponseEntity<Void>();
+		return new ComResponseEntity<>(new ComResponseDto<>(userService.login(usersLoginReqDto, request)));
 	}
 	
 	@ApiOperation(value="로그아웃", notes = "로그아웃")
