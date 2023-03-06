@@ -77,21 +77,29 @@ public class UsersServiceImpl implements UsersService{
 	}
 
 	@Override
-	public void login(UsersLoginReqDto usersLoginReqDto, HttpServletRequest request) {
+	public Map<String, String> login(UsersLoginReqDto usersLoginReqDto, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-
+		String id = usersLoginReqDto.getLecUserId();
+		
 		boolean isValid = false;
-		UsersReadDetailResDto resultDto = usersDao.selectUser(usersLoginReqDto.getLecUserId());
+		UsersReadDetailResDto resultDto = usersDao.selectUser(id);
+
 		if(resultDto != null) {
 			isValid = BCrypt.checkpw(usersLoginReqDto.getUserPwd(), resultDto.getUserPwd());
 		}
 	
 		if(isValid) {
-			session.setAttribute("id", resultDto.getLecUserId());
-			usersDao.updateUserLastDate(resultDto.getLecUserId());
+			session.setAttribute("id", id);
+			usersDao.updateUserLastDate(id);
 		}else {
 			throw new UsersNotLoginException("비밀번호가 잘못되었습니다!");
 		}
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("isManager", resultDto.getManagerYn());
+		
+		return map;
+		
 	}
 
 	@Override
