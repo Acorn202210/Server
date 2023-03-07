@@ -24,7 +24,7 @@ public interface QnaBoardAnswerDao {
 	
 	public Integer selectQnaAnswerCount(QnaBoardAnswerDto dto);
 	
-	Integer selectQnaAnswer(int refGroup);
+	QnaBoardAnswerDto selectQnaAnswer(int refGroup);
 	
 	Integer insertQnaAnswer(QnaBoardAnswerDto dto, HttpServletRequest request);
 	

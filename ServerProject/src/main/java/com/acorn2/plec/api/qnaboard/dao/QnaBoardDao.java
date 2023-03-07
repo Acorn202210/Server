@@ -65,4 +65,7 @@ public interface QnaBoardDao {
 	
 	//detail 보기
 	public QnaBoardReadDetailResDto selectQnaBoard(QnaBoardReadReqDto qnaBoardReadReqDto);
+	
+	//답변완료 메소드
+	public void answered(QnaBoardDto dto);
 }
