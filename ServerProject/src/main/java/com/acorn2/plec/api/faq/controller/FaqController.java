@@ -39,7 +39,7 @@ public class FaqController {
 	@Autowired private FaqService service;
 	
 	@ApiOperation(value="자주묻는질문 목록", notes = "모든 자주묻는질문의 목록을 가져온다.")
-	@GetMapping("/Faqlist")
+	@GetMapping("/faq-list")
 	public ComResponseEntity<FaqReadListResDto> FaqList(
 			@Parameter(hidden = true) FaqReadReqDto faqReadReqDto) {
 		FaqReadListResDto faqReadListResDto = service.selectFaqList(faqReadReqDto);
@@ -56,7 +56,7 @@ public class FaqController {
 	
 	@ApiOperation(value="자주묻는질문 등록", notes = "자주묻는질문을 등록한다.")
 	@Transactional
-	@PostMapping("/Faqinsert")
+	@PostMapping("/faq-insert")
 	public ComResponseEntity<Void> FaqInsert(@Valid @RequestBody FaqCreateReqDto faqCreateReqDto, HttpServletRequest request){
 		service.FaqInsert(faqCreateReqDto, request);
 		return new ComResponseEntity<Void>();
