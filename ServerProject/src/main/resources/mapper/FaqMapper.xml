@@ -43,6 +43,7 @@
    	<select id="selectFaqCount" parameterType="com.acorn2.plec.api.faq.dto.req.FaqReadReqDto" resultType="java.lang.Integer">
    		SELECT NVL(MAX(ROWNUM), 0)
 		FROM FAQ
+		WHERE delete_yn_code='N'
 	</select>
 	
 	<delete id="Faqdelete" >
