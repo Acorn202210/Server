@@ -115,8 +115,8 @@ public class PagingResponseDto {
 		this.currentPage = currentPage;
 		this.startPageNum = 1+((currentPage-1)/5) * 5;
 		this.endPageNum = startPageNum+4;
-		if(endPageNum > totalCount){
-			endPageNum=totalCount; 
+		if(endPageNum > totalPage){
+			endPageNum=totalPage; 
 		}
 	}
 }
