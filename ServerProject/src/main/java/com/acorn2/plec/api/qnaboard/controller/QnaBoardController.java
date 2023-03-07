@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.acorn2.plec.api.qnaboard.dto.QnaBoardAnswerDto;
 import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardCreateReqDto;
 import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardReadReqDto;
 import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardUpdateReqDto;
@@ -80,4 +81,22 @@ public class QnaBoardController {
 		service.QnaBoardUpdateDelete(boardQuestionNum);
 		return new ComResponseEntity<Void>();
 	}
+	
+
+	//1:1문의 답변보기 (1개)
+	@ApiOperation(value = "1:1문의 답변", notes = "1:1문의 답변 한개 보기")
+	@GetMapping("/{refGroup}/answer")
+	public ComResponseEntity<QnaBoardAnswerDto> getAnswerData(@PathVariable int refGroup) {
+		QnaBoardAnswerDto qnaBoardReadAnswerResDto=service.selectComment(refGroup);
+		return new ComResponseEntity<>(new ComResponseDto<>(qnaBoardReadAnswerResDto));
+	}
+	
+	//1:1문의 답변 등록
+	@ApiOperation(value = "1:1문의 답변 등록", notes = "1:1문의 답변 등록 (boardCommentRefGroup, content만 작성)")
+	@PostMapping("/answerInsert")
+	public void qnaAnswerInsert(@RequestBody QnaBoardAnswerDto answerDto, HttpServletRequest request){
+		service.saveComment(answerDto, request);
+		
+	}	
+	
 }
