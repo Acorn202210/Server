@@ -114,40 +114,51 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 
 	//댓글 한개 보기 (selectOne)
 	@Override
-	public void selectComment(int refGroup) {
-		qnaAnswerDao.selectQnaAnswer(refGroup);
+	public QnaBoardAnswerDto selectComment(int refGroup) {
+		return qnaAnswerDao.selectQnaAnswer(refGroup);
 	}
 	
 	//댓글 저장
+	@Transactional
 	@Override
 	public void saveComment(QnaBoardAnswerDto dto, HttpServletRequest request) {
-		int ref_group=Integer.parseInt(request.getParameter("ref_group"));
-		int seq=qnaAnswerDao.getSequence();
-		String content=request.getParameter("content");
-		dto.setBoardCommentNum(seq);
-	    dto.setBoardCommentWriter((String)request.getAttribute("id")); 
-	    dto.setContent(content);
-	    dto.setBoardCommentRefGroup(ref_group);
-		qnaAnswerDao.insertQnaAnswer(dto, request);		
+		int ref_group=dto.getBoardCommentRefGroup();
+						
+		String id=request.getSession().getAttribute("id").toString();
+		//int seq=qnaAnswerDao.getSequence();
+		//dto.setBoardCommentNum(seq);
+	    dto.setBoardCommentWriter(id); 
+	    dto.setContent(dto.getContent());
+	    dto.setBoardCommentRefGroup(ref_group);	        
+		qnaAnswerDao.insertQnaAnswer(dto, request);
+		
+		QnaBoardDto dto2=new QnaBoardDto();
+	    dto2.setBoardQuestionNum(ref_group);
+	    dto2.setAnsweredYn("Y");
+	    //answered(답변여부) 정보 DB 저장
+	    qnaDao.answered(dto2);	    
 	}
 
 	//댓글 수정
+	@Transactional
 	@Override
 	public void updateComment(QnaBoardAnswerDto dto, HttpServletRequest request) {
 		qnaAnswerDao.updateQnaAnswer(dto, request);		
 	}
 
 	//댓글 삭제(삭제 칼럼 Y 변경)
+	@Transactional
 	@Override
 	public void updateDeleteComment(int boardCommentNum) {
 		qnaAnswerDao.deleteUpdateQnaAnswer(boardCommentNum);		
 	}
 
 	//댓글 삭제(batch)
+	@Transactional
 	@Override
 	public void deleteComment() {
 		qnaAnswerDao.deleteQnaBoard();		
 	}
-	
+
 
 }
