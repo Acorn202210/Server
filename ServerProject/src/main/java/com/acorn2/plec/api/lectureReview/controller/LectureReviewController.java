@@ -31,7 +31,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 
 @Api(value = "LectureReview")
 @RestController
-@RequestMapping("/api/lectureReview")
+@RequestMapping("/api/lecture-review")
 public class LectureReviewController {
 	@Autowired
 	private LectureReviewService service;
@@ -46,13 +46,13 @@ public class LectureReviewController {
 		return new ComResponseEntity<>(new ComResponseDto<>(revicewReadListResDto));
 	}
 	@ApiOperation(value="강의 후기 하나의 정보", notes = "강의 후기 하나의 정보 가져오기")
-	@GetMapping("/{lecReNum}/lectureReviewOne")
+	@GetMapping("/{lecReNum}/lecture-reviewOne")
 	public ComResponseEntity<LectureReviewDto> LectureReviewOne(@PathVariable int lecReNum){
 		LectureReviewDto dtoOne =  service.LectureReviewOne(lecReNum);
 		return new ComResponseEntity<>(new ComResponseDto<>(dtoOne));	
 	}
 	@ApiOperation(value="강의 후기 등록", notes = "강의 후기 등록하기")
-	@PostMapping("/LectureReviewinsert")
+	@PostMapping("/Lecture-review-insert")
 	public ComResponseEntity<Void> LectureReviewInsert(@Valid @RequestBody LectureReviewCreateReqDto reviewCreateReqDto, HttpServletRequest request){
 		service.LectureReviewInsert(reviewCreateReqDto, request);
 		return new ComResponseEntity<Void>();
@@ -65,7 +65,7 @@ public class LectureReviewController {
 		return new ComResponseEntity<Void>();	
 	}
 	@ApiOperation(value="강의 후기 삭제", notes = "강의 후기 삭제하기")
-	@DeleteMapping("/{lecReNum}/lectureReviewDelete")
+	@DeleteMapping("/{lecReNum}/lecture-review-delete")
 	public ComResponseEntity<Void> LectureReviewDelete(@RequestParam(value = "lecReNum", required = true) int lecReNum){
 		service.LectureReviewDelete(lecReNum);
 		return new ComResponseEntity<Void>();
