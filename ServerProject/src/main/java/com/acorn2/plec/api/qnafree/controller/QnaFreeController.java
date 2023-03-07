@@ -30,7 +30,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
 @Api(value = "QnaFreeController")
-@RequestMapping("/api/qna_free")
+@RequestMapping("/api/qna-free")
 public class QnaFreeController {
 	
 	private final Logger logger = LoggerFactory.getLogger(getClass());

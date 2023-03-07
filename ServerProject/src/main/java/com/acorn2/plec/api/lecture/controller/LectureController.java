@@ -55,7 +55,7 @@ public class LectureController {
 		return new ComResponseEntity<>(new ComResponseDto<>(lectureReadListResDto));
 	}
 	@ApiOperation(value="강의 하나의 정보", notes = "강의 하나의 정보를 가져온다.") 
-	@GetMapping("/{lecNum}/lectureOne")
+	@GetMapping("/{lecNum}/lecture-one")
 	public ComResponseEntity<LectureDto> LectureOne(@PathVariable int lecNum){
 		
 		LectureDto dtoOne = service.LectureOne(lecNum);
@@ -64,7 +64,7 @@ public class LectureController {
 	}
 	
 	@ApiOperation(value="강의 등록", notes = "강의 등록하기")
-	@PutMapping(value="/lectureInsert")
+	@PutMapping(value="/lecture-insert")
 	public ComResponseEntity<Void> update(@Parameter(
             description = "multipart/form-data 형식의 이미지 리스트를 input으로 받습니다. 이때 key 값은 multipartFile 입니다.",
             content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE))
@@ -74,7 +74,7 @@ public class LectureController {
 	}
 	
 	@ApiOperation(value="강의 이미지 가져오기", notes = "이미지 가져오기 ")
-	@GetMapping("/{lecNum}/Image")
+	@GetMapping("/{lecNum}/image")
 	public ResponseEntity<byte[]> getImage(int lecNum){
 		Map<String, Object> map = imageService.selectImage(lecNum);
 		ImageDto imageDto = (ImageDto) map.get("imageDto");
@@ -94,7 +94,7 @@ public class LectureController {
 	}
 	
 	@ApiOperation(value="강의 삭제", notes = "강의 삭제하기")
-    @DeleteMapping("/{lecNum}/lectureDelete")
+    @DeleteMapping("/{lecNum}/lecture-delete")
     public ComResponseEntity<Void> LectureDelete(@RequestParam(value = "lecNum", required = true) int lecNum){
 	   
 	    service.LectureDelete(lecNum);

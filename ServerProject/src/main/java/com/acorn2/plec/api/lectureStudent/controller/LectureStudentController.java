@@ -30,13 +30,13 @@ import io.swagger.v3.oas.annotations.Parameter;
 
 @Api(value = "LectureStudent")
 @RestController
-@RequestMapping(value = "/api/lectureStudent")
+@RequestMapping(value = "/api/lecture-student")
 public class LectureStudentController {
 
 	@Autowired private LectureStudentService service;
 	
 	@ApiOperation(value="강의 수강생 목록", notes = "강의 수강생 목록 가져오기")
-	@GetMapping("/LectureStudentList")
+	@GetMapping("/lecture-student-list")
 	public ComResponseEntity<LectureStudentReadListResDto> getStudentList(@RequestParam String largeCategory,	
 												@RequestParam(required = false) String smallCategory,				
 												@Parameter(hidden=true)LectureStudentReadReqDto studentReadReqDto){
@@ -45,7 +45,7 @@ public class LectureStudentController {
 	}
 	
 	@ApiOperation(value="강의 수강생 한 명의 정보", notes = "강의 수강생 한 명의 정보 가져오기")
-	@GetMapping("/{lecStuNum}/lectureStudentOne")
+	@GetMapping("/{lecStuNum}/lecture-student-one")
 	public ComResponseEntity<LectureStudentOneReadResDto> LectureStudentOne(@RequestParam int lecStuNum){
 		LectureStudentOneReadResDto dtoOne = service.LectureStudentOne(lecStuNum);
 		return new ComResponseEntity<>(new ComResponseDto<>(dtoOne));
@@ -53,13 +53,13 @@ public class LectureStudentController {
 	}
 	
 	@ApiOperation(value="강의 수강 신청", notes = "강의 수강 신청하기")
-	@PostMapping("/LectureSignup")
+	@PostMapping("/lecture-signup")
 	public ComResponseEntity<Void> LectureSignup(@RequestParam int lecStuRefGroup, HttpServletRequest request){
 		service.LectureSignup(lecStuRefGroup, request);
 		return new ComResponseEntity<Void>();
 	}
 	@ApiOperation(value="강의 수강 완료", notes = "강의 수강 완료하기")
-	@PutMapping("/lectureCompleteYn")
+	@PutMapping("/lecture-complete")
 	public ComResponseEntity<Void> LectureCompleteYn (@RequestParam int lecStuNum,
 												@Valid @RequestBody LectureStudentUpdateReqDto studentUpdateReqDto, HttpServletRequest request){
 		service.LectureCompleteYn(studentUpdateReqDto, request);

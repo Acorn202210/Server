@@ -31,7 +31,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
 @Api(value = "QnaBoardController")
-@RequestMapping("/api/qna_board")
+@RequestMapping("/api/qna-board")
 public class QnaBoardController {
 	
 	private final Logger logger = LoggerFactory.getLogger(getClass());
