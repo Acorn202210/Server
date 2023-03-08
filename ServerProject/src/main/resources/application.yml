@@ -51,7 +51,7 @@ login-exclude-patterns:
   - /api/users
   - /api/users/checkid
   - /api/users/isYN
-  - /api/faq/Faqlist
+  - /api/faq/faq-list
   - /api/faq/*/faqOne
   
 manager-add-patterns:
@@ -74,5 +74,5 @@ manager-exclude-patterns:
   - /api/lecture/lectureList
   - /api/lecture/{lecNum}/lectureOne
   - /api/lectureReview/lectureReviewList
-  - /api/faq/Faqlist
+  - /api/faq/faq-list
   - /api/faq/*/faqOne
