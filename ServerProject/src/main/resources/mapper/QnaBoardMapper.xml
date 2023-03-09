@@ -2,25 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.acorn2.plec.api.qnaboard.dao.QnaBoardDao">
 
-	<sql id="searchCondition">
-      <choose>
-         <when test="title != null and content != null">
-            WHERE title LIKE '%'||#{title}||'%' 
-            OR content LIKE '%'||#{content}||'%'
-         </when>
-         <when test="title != null">
-            WHERE title LIKE '%'||#{title}||'%'
-         </when>
-         <when test="boardQuestionWriter != null">
-            WHERE board_question_writer LIKE '%'||#{boardQuestionWriter}||'%'
-         </when>
-      </choose>
+	<sql id="searchCondition">      
+         <if test="title != null and content != null">
+            AND (title LIKE '%'||#{title}||'%' OR content LIKE '%'||#{content}||'%')
+         </if>
+         <if test="title != null and content == null">
+            AND title LIKE '%'||#{title}||'%'
+         </if>         
+         <if test="boardQuestionWriter != null and title == null and content == null">
+            AND board_question_writer LIKE '%'||#{boardQuestionWriter}||'%'
+         </if>      
 	</sql>
 	
 	<select id="selectQnaBoardCount" parameterType="com.acorn2.plec.api.qnaboard.dto.req.QnaBoardReadReqDto" resultType="java.lang.Integer">
 		SELECT NVL(MAX(ROWNUM), 0)
 		FROM qna_board_question
-		<include refid="searchCondition"/>
+		<where>
+			delete_YN_code = 'N'
+			<include refid="searchCondition"/>
+		</where>		
 	</select>
 	
 	<select id="selectQnaBoardList" parameterType="com.acorn2.plec.api.qnaboard.dto.req.QnaBoardReadReqDto" resultType="com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadResDto">
@@ -31,12 +31,11 @@
             (SELECT board_question_num,board_question_writer,title,content,viewCount,user_regdate,answered_yn
              FROM qna_board_question
              <where>
-             	
+             	delete_YN_code = 'N'
              	<include refid="searchCondition"/>
              </where>
              ORDER BY board_question_num DESC) result1)
-        WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
-		
+        WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}		
 	</select>
 	
 	<select id="selectQnaBoard" parameterType="com.acorn2.plec.api.qnaboard.dto.req.QnaBoardReadReqDto" resultType="com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadDetailResDto">
