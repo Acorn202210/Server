@@ -3,19 +3,10 @@
 <mapper namespace="com.acorn2.plec.api.qnafree.dao.QnaFreeDao">
 
 	<sql id="searchCondition">
-      <choose>
-         <when test="title != null and content != null">
-            WHERE title LIKE '%'||#{title}||'%' 
-            OR content LIKE '%'||#{content}||'%'
-         </when>
-         <when test="title != null">
-            WHERE title LIKE '%'||#{title}||'%'
-         </when>
-         <when test="freeQuestionWriter != null">
-            WHERE free_question_writer LIKE '%'||#{freeQuestionWriter}||'%'
-         </when>
-      </choose>
-	</sql>
+        <if test="title != null and content != null">AND (title LIKE '%'||#{title}||'%' OR content LIKE '%'||#{content}||'%')</if>
+		<if test="title != null and content == null">AND title LIKE '%'||#{title}||'%'</if>
+		<if test="title == null and content == null and freeQuestionWriter != null">AND free_question_writer LIKE '%'||#{freeQuestionWriter}||'%'</if>
+   	</sql>
 	
 	<select id="selectQnaFreeCount" parameterType="com.acorn2.plec.api.qnafree.dto.req.QnaFreeReadReqDto" resultType="java.lang.Integer">
 		SELECT NVL(MAX(ROWNUM), 0)

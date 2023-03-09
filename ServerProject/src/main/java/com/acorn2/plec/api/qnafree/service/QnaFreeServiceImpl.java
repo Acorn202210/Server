@@ -50,7 +50,7 @@ public class QnaFreeServiceImpl implements QnaFreeService {
 			}else if(qnaFreeReadReqDto.getCondition().equals("title")) {
 				qnaFreeReadReqDto.setTitle(qnaFreeReadReqDto.getKeyword());
 			}else if(qnaFreeReadReqDto.getCondition().equals("writer")) {
-				qnaFreeReadReqDto.setContent(qnaFreeReadReqDto.getKeyword());
+				qnaFreeReadReqDto.setFreeQuestionWriter(qnaFreeReadReqDto.getKeyword());
 			}
 		}
 		
