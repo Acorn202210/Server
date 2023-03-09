@@ -77,7 +77,7 @@ public class FaqServiceImpl implements FaqService{
 
 	@Transactional
 	@Override
-	public void FaqDelete(int faqNum) {
+	public void FaqDelete(Integer faqNum) {
 
 		faqDao.deleteFaq(faqNum);
 	}

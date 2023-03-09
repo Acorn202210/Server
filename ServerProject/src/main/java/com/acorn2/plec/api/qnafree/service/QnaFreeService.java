@@ -21,7 +21,7 @@ public interface QnaFreeService {
 	
 	void QnaFreeUpdate(QnaFreeUpdateReqDto qnaFreeUpdateReqDto, HttpServletRequest request);
 	
-	void QnaFreeUpdateDelete(int freeQuestionNum);
+	void QnaFreeUpdateDelete(Integer freeQuestionNum);
 	
 	void QnaFreeDelete();
 		

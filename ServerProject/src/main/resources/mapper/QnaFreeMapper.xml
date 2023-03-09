@@ -50,6 +50,7 @@
 	   		   LEAD(free_question_num, 1, 0) OVER (ORDER BY free_question_num DESC) prevNum
 			 FROM qna_free_question
 			 <where>
+			 	delete_YN_code='N'
 			 	<include refid="searchCondition"/>
 			 </where>
 			 ) result1

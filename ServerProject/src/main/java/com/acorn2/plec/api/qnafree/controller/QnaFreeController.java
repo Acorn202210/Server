@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,6 +60,7 @@ public class QnaFreeController {
 	
 	//문의 등록
 	@ApiOperation(value = "자유게시판 등록", notes = "자유게시판을 등록한다.")
+	@Transactional
 	@PostMapping("/insert")
 	public ComResponseEntity<Void> QnaFreeInsert(@RequestBody QnaFreeCreateReqDto qnaFreeCreateReqDto, HttpServletRequest request){
 		service.QnaFreeInsert(qnaFreeCreateReqDto, request);
@@ -67,6 +69,7 @@ public class QnaFreeController {
 	
 	//수정
 	@ApiOperation(value = "자유게시판 수정", notes = "자유게시판을 수정한다.")
+	@Transactional
 	@PutMapping("/{freeQuestionNum}/update")
 	public ComResponseEntity<Void> QnaFreeUpdate(@RequestBody QnaFreeUpdateReqDto qnaFreeUpdateReqDto, HttpServletRequest request){
 		service.QnaFreeUpdate(qnaFreeUpdateReqDto, request);
@@ -75,8 +78,9 @@ public class QnaFreeController {
 	
 	//삭제(deleted Y) 처리
 	@ApiOperation(value = "자유게시판 삭제처리", notes = "자유게시판의 DELETE_YN_CODE를 Y로 바꾼다.")
+	@Transactional
 	@PutMapping("/{freeQuestionNum}/delete")
-	public ComResponseEntity<Void> QnaFreeDelete(@PathVariable("freeQuestionNum") int freeQuestionNum){
+	public ComResponseEntity<Void> QnaFreeDelete(@PathVariable("freeQuestionNum") Integer freeQuestionNum){
 		service.QnaFreeUpdateDelete(freeQuestionNum);
 		return new ComResponseEntity<Void>();
 	}
