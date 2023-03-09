@@ -101,7 +101,7 @@ public class QnaFreeServiceImpl implements QnaFreeService {
 	//글 삭제(삭제 칼럼 Y 변경)
 	@Transactional
 	@Override
-	public void QnaFreeUpdateDelete(int freeQuestionNum) {
+	public void QnaFreeUpdateDelete(Integer freeQuestionNum) {
 		qnaDao.deleteUpdateQnaFree(freeQuestionNum);		
 	}
 	

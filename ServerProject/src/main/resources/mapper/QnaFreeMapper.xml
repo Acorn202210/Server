@@ -20,7 +20,10 @@
 	<select id="selectQnaFreeCount" parameterType="com.acorn2.plec.api.qnafree.dto.req.QnaFreeReadReqDto" resultType="java.lang.Integer">
 		SELECT NVL(MAX(ROWNUM), 0)
 		FROM qna_free_question
-		<include refid="searchCondition"/>
+		<where>
+			delete_YN_code='N'		
+			<include refid="searchCondition"/>
+		</where>
 	</select>
 	
 	<select id="selectQnaFreeList" parameterType="com.acorn2.plec.api.qnafree.dto.req.QnaFreeReadReqDto" resultType="com.acorn2.plec.api.qnafree.dto.res.QnaFreeReadResDto">
@@ -31,7 +34,7 @@
             (SELECT free_question_num,free_question_writer,title,content,viewCount,user_regdate,answered_yn
              FROM qna_free_question
              <where>
-             	
+             	delete_YN_code='N'
              	<include refid="searchCondition"/>
              </where>
              ORDER BY free_question_num DESC) result1)
@@ -47,6 +50,7 @@
 	   		   LEAD(free_question_num, 1, 0) OVER (ORDER BY free_question_num DESC) prevNum
 			 FROM qna_free_question
 			 <where>
+			 	delete_YN_code='N'
 			 	<include refid="searchCondition"/>
 			 </where>
 			 ) result1
