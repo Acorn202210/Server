@@ -25,6 +25,6 @@ public interface UsersService {
 	Map<String, String> login(UsersLoginReqDto usersLoginReqDto, HttpServletRequest request);
 	void updateUser(UsersUpdateReqDto usersUpdateReqDto, MultipartFile file, HttpServletRequest request);
 	void updateUserPwd(UsersUpdatePwdReqDto usersUpdatePwdReqDto, HttpServletRequest request);
-	void deleteUpdateUser(HttpServletRequest request);
+	void deleteUpdateUser(String lecUserId,HttpServletRequest request);
 	void batchUser();
 }
