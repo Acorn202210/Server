@@ -4,16 +4,16 @@ public class UsersUpdateReqDto {
 	private String lecUserId;
 	private String userEmail;
 	private String userPhone;
-	private String userNickname;
+	private String profile_num;
 
 	public UsersUpdateReqDto() {}
 
-	public UsersUpdateReqDto(String lecUserId, String userEmail, String userPhone, String userNickname) {
+	public UsersUpdateReqDto(String lecUserId, String userEmail, String userPhone, String profile_num) {
 		super();
 		this.lecUserId = lecUserId;
 		this.userEmail = userEmail;
 		this.userPhone = userPhone;
-		this.userNickname = userNickname;
+		this.profile_num = profile_num;
 	}
 
 	public String getLecUserId() {
@@ -40,11 +40,13 @@ public class UsersUpdateReqDto {
 		this.userPhone = userPhone;
 	}
 
-	public String getUserNickname() {
-		return userNickname;
+	public String getProfile_num() {
+		return profile_num;
 	}
 
-	public void setUserNickname(String userNickname) {
-		this.userNickname = userNickname;
+	public void setProfile_num(String profile_num) {
+		this.profile_num = profile_num;
 	}
+
+
 }

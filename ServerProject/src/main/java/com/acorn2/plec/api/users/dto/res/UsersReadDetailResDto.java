@@ -15,17 +15,17 @@ public class UsersReadDetailResDto {
 	private String userPhone;
 	@Schema(description = "생년월일", example = "2023.02.20", required = true, minLength = 1, maxLength = 50)
 	private String userBirth;
-	@Schema(description = "닉네임", example = "에이콘", required = true, minLength = 1, maxLength = 50)
-	private String userNickname;
 	@Schema(description = "매니저 여부", example = "Y", required = true, minLength = 1, maxLength = 3)
 	private String managerYn;
-	
+	@Schema(description = "프로필", example = "1", required = true, minLength = 1, maxLength = 3)
+	private String profile_num;
+
 	
 	public UsersReadDetailResDto() {}
 
 
 	public UsersReadDetailResDto(String lecUserId, String userPwd, String userEmail, String userRegdate,
-			String userPhone, String userBirth, String userNickname, String managerYn) {
+			String userPhone, String userBirth, String managerYn, String profile_num) {
 		super();
 		this.lecUserId = lecUserId;
 		this.userPwd = userPwd;
@@ -33,8 +33,8 @@ public class UsersReadDetailResDto {
 		this.userRegdate = userRegdate;
 		this.userPhone = userPhone;
 		this.userBirth = userBirth;
-		this.userNickname = userNickname;
 		this.managerYn = managerYn;
+		this.profile_num = profile_num;
 	}
 
 
@@ -98,16 +98,6 @@ public class UsersReadDetailResDto {
 	}
 
 
-	public String getUserNickname() {
-		return userNickname;
-	}
-
-
-	public void setUserNickname(String userNickname) {
-		this.userNickname = userNickname;
-	}
-
-
 	public String getManagerYn() {
 		return managerYn;
 	}
@@ -117,5 +107,17 @@ public class UsersReadDetailResDto {
 		this.managerYn = managerYn;
 	}
 
+
+	public String getProfile_num() {
+		return profile_num;
+	}
+
+
+	public void setProfile_num(String profile_num) {
+		this.profile_num = profile_num;
+	}
+
+
+	
 	
 }

@@ -7,7 +7,7 @@ CREATE TABLE users(
     USER_PHONE VARCHAR2(32),
     USER_BIRTH DATE,
     MANAGER_YN VARCHAR2(3) DEFAULT 'N',
-    USER_NICKNAME VARCHAR2(50),
+    profile_num NUMBER,
     USER_LAST_DATE DATE,
     LOGIN_STATUS_CODE VARCHAR2(3) DEFAULT 'N',
     GENERAL_USER_CODE VARCHAR2(3) DEFAULT 'N',
@@ -16,7 +16,8 @@ CREATE TABLE users(
 );
 
 CREATE TABLE profile_image(
-    LEC_USER_ID VARCHAR2(50) PRIMARY KEY,
+	profile_num Number PRIMARY KEY,
+    LEC_USER_ID VARCHAR2(50),
     mimetype varchar(100),
     data BLOB,
     original_name varchar(100),
@@ -24,6 +25,8 @@ CREATE TABLE profile_image(
     update_regdate DATE
     delete_YN_code VARCHAR2(3) DEFAULT 'N'
 );
+
+CREATE SEQUENCE PROFILE_seq; 
 
 
 -- QNA_BOARD_QUESTION

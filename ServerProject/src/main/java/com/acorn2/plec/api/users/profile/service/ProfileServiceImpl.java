@@ -41,4 +41,34 @@ public class ProfileServiceImpl implements ProfileService{
       
 		return map;
 	}
+
+
+	@Override
+	public void updateProfile(MultipartFile file, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String id = session.getAttribute("id").toString();
+		
+		ProfileDto dto= profileDao.selectProfile(id);
+		
+		ProfileDto profileDto = new ProfileDto();
+		if(file != null) {
+			try {
+				profileDto.setLecUserId(id);
+				profileDto.setMimetype(file.getContentType());
+				profileDto.setOriginalName(file.getOriginalFilename());
+				profileDto.setData(file.getBytes());
+				if(dto == null) {
+					profileDao.insertProfile(profileDto);
+				}else {
+					profileDao.updateProfile(profileDto);
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	
 }

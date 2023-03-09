@@ -106,31 +106,9 @@ public class UsersServiceImpl implements UsersService{
 	public void updateUser(UsersUpdateReqDto usersUpdateReqDto, MultipartFile file, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String id = session.getAttribute("id").toString();
-		
-		ProfileDto dto= profileDao.selectProfile(id);
-		
-		ProfileDto profileDto = new ProfileDto();
-		if(file != null) {
-			try {
-				profileDto.setLecUserId(id);
-				profileDto.setMimetype(file.getContentType());
-				profileDto.setOriginalName(file.getOriginalFilename());
-				profileDto.setData(file.getBytes());
-				if(dto == null) {
-					profileDao.insertProfile(profileDto);
-				}else {
-					profileDao.updateProfile(profileDto);
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-		if(usersUpdateReqDto.getUserEmail() != null || usersUpdateReqDto.getUserPhone() != null || usersUpdateReqDto.getUserPhone() != null) {
-			usersUpdateReqDto.setLecUserId(id);
-			usersDao.updateUser(usersUpdateReqDto);
-		}
+
+		usersUpdateReqDto.setLecUserId(id);
+		usersDao.updateUser(usersUpdateReqDto);
 		
 	}
 

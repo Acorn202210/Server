@@ -16,20 +16,20 @@ public class UsersReadResDto {
 	private String userPhone;
 	@Schema(description = "생년월일", example = "2023.02.20", required = true, minLength = 1, maxLength = 50)
 	private String userBirth;
-	@Schema(description = "닉네임", example = "에이콘", required = true, minLength = 1, maxLength = 50)
-	private String userNickname;
+	@Schema(description = "프로필", example = "1", required = true, minLength = 1, maxLength = 3)
+	private String profile_num;
 	
 	public UsersReadResDto() {}
 
 	public UsersReadResDto(String lecUserId, String userEmail, String userRegdate, String userPhone, String userBirth,
-			String userNickname) {
+			String profile_num) {
 		super();
 		this.lecUserId = lecUserId;
 		this.userEmail = userEmail;
 		this.userRegdate = userRegdate;
 		this.userPhone = userPhone;
 		this.userBirth = userBirth;
-		this.userNickname = userNickname;
+		this.profile_num = profile_num;
 	}
 
 	public String getLecUserId() {
@@ -71,12 +71,14 @@ public class UsersReadResDto {
 	public void setUserBirth(String userBirth) {
 		this.userBirth = userBirth;
 	}
-	
-	public String getUserNickname() {
-		return userNickname;
+
+	public String getProfile_num() {
+		return profile_num;
 	}
 
-	public void setUserNickname(String userNickname) {
-		this.userNickname = userNickname;
+	public void setProfile_num(String profile_num) {
+		this.profile_num = profile_num;
 	}
+
+	
 }

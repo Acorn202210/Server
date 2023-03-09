@@ -98,8 +98,18 @@ public class UsersController {
 	}
 	
 	
+	@ApiOperation(value="프로필 수정", notes = "프로필 수정하기")
+	@PutMapping(value="/{lecUserId}/profile-upload")
+	public ComResponseEntity<Void> updateProfile(@Parameter(
+            description = "multipart/form-data 형식의 이미지 리스트를 input으로 받습니다. 이때 key 값은 multipartFile 입니다.",
+            content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE))
+			@RequestPart(value = "multipartFile", required = false) MultipartFile file){
+		userService.updateUser(usersUpdateReqDto, file, request);
+		return new ComResponseEntity<Void>();
+	}
+	
 	@ApiOperation(value="개인정보 수정", notes = "개인정보 수정하기")
-	@PutMapping(value="/{lecUserId}")
+	@PutMapping(value="/{lecUserId}/profile-upload")
 	public ComResponseEntity<Void> update(@Parameter(
             description = "multipart/form-data 형식의 이미지 리스트를 input으로 받습니다. 이때 key 값은 multipartFile 입니다.",
             content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE))
