@@ -96,4 +96,10 @@
 		SET answered_YN='Y'
 		WHERE free_question_num=#{freeQuestionNum}
 	</update>
+	
+	<update id="addViewCount" parameterType="Integer">
+   		UPDATE QNA_FREE_QUESTION
+   		SET viewcount = viewcount+1
+   		WHERE free_question_num=#{freeQuestionNum}
+   </update>
 </mapper>

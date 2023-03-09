@@ -45,6 +45,17 @@ public interface QnaFreeDao {
 	
 	Integer deleteQnaFree();
 	
+	/**
+	 *
+	 * @methodName : addViewCount
+	 * @author : cheon
+	 * @param Integer
+	 * @return
+	 * @return : Integer
+	 * @description : 자유게시판 조회수 추가
+	 */
+	Integer addViewCount(Integer freeQuestionNum);
+	
 	//detail 보기
 	public QnaFreeReadDetailResDto selectQnaFree(QnaFreeReadReqDto qnaFreeReadReqDto);
 }
