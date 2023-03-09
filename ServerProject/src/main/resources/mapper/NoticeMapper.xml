@@ -39,6 +39,7 @@
 	   		   LEAD(noti_num, 1, 0) OVER (ORDER BY noti_num DESC) prevNum
 			 FROM NOTICE
 			 <where>
+			 	delete_YN_code='N'
 			 	<include refid="searchCondition"/>
 			 </where>
 			 ) result1
