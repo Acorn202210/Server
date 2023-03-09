@@ -16,6 +16,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.acorn2.plec.api.notice.exception.NoticeNotFoundException;
 import com.acorn2.plec.api.qnafree.dao.QnaFreeAnswerDao;
 import com.acorn2.plec.api.qnafree.dao.QnaFreeDao;
 import com.acorn2.plec.api.qnafree.dto.QnaFreeAnswerDto;
@@ -65,7 +66,10 @@ public class QnaFreeServiceImpl implements QnaFreeService {
 	//상세보기
 	@Override
 	public QnaFreeReadDetailResDto selectOne(QnaFreeReadReqDto qnaFreeReadReqDto) {
-		
+		if(qnaDao.selectQnaFree(qnaFreeReadReqDto)== null) {
+			throw new NoticeNotFoundException("공지사항이 없습니다.");
+		}
+		qnaDao.addViewCount(qnaFreeReadReqDto.getFreeQuestionNum());
 		return qnaDao.selectQnaFree(qnaFreeReadReqDto);
 	}
 	
