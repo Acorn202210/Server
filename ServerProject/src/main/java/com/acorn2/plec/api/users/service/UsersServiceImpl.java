@@ -149,21 +149,25 @@ public class UsersServiceImpl implements UsersService{
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			String encodedNewPwd = encoder.encode(usersUpdatePwdReqDto.getNewPwd());
 			usersUpdatePwdReqDto.setNewPwd(encodedNewPwd);
-			usersUpdatePwdReqDto.setLecUserId(id);
+		usersUpdatePwdReqDto.setLecUserId(id);
 			usersDao.updateUserPwd(usersUpdatePwdReqDto);	
 			session.removeAttribute("id");
 		}
 	}
 
 	@Override
-	public void deleteUpdateUser(HttpServletRequest request) {
+	public void deleteUpdateUser(String lecUserId, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String id = session.getAttribute("id").toString();
 		
-		usersDao.deleteUpdateUser(id);
-		profileDao.deleteUpdateProfile(id);
-		
-		session.removeAttribute("id");
+		System.out.println(id);
+		System.out.println(lecUserId);
+
+		usersDao.deleteUpdateUser(lecUserId);
+		profileDao.deleteUpdateProfile(lecUserId);
+		if(id.equals(lecUserId)) {
+			session.removeAttribute("id");
+		}
 	}
 
 	@Override
