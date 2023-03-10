@@ -18,14 +18,14 @@ public class UsersReadDetailResDto {
 	@Schema(description = "매니저 여부", example = "Y", required = true, minLength = 1, maxLength = 3)
 	private String managerYn;
 	@Schema(description = "프로필", example = "1", required = true, minLength = 1, maxLength = 3)
-	private String profile_num;
+	private Integer profileNum;
 
 	
 	public UsersReadDetailResDto() {}
 
 
 	public UsersReadDetailResDto(String lecUserId, String userPwd, String userEmail, String userRegdate,
-			String userPhone, String userBirth, String managerYn, String profile_num) {
+			String userPhone, String userBirth, String managerYn, Integer profileNum) {
 		super();
 		this.lecUserId = lecUserId;
 		this.userPwd = userPwd;
@@ -34,7 +34,7 @@ public class UsersReadDetailResDto {
 		this.userPhone = userPhone;
 		this.userBirth = userBirth;
 		this.managerYn = managerYn;
-		this.profile_num = profile_num;
+		this.profileNum = profileNum;
 	}
 
 
@@ -108,16 +108,14 @@ public class UsersReadDetailResDto {
 	}
 
 
-	public String getProfile_num() {
-		return profile_num;
+	public Integer getProfileNum() {
+		return profileNum;
 	}
 
 
-	public void setProfile_num(String profile_num) {
-		this.profile_num = profile_num;
+	public void setProfileNum(Integer profileNum) {
+		this.profileNum = profileNum;
 	}
 
-
-	
 	
 }

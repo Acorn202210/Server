@@ -103,10 +103,17 @@ public class UsersServiceImpl implements UsersService{
 	}
 
 	@Override
-	public void updateUser(UsersUpdateReqDto usersUpdateReqDto, MultipartFile file, HttpServletRequest request) {
+	public void updateUser(UsersUpdateReqDto usersUpdateReqDto, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String id = session.getAttribute("id").toString();
-
+		
+		// 이전 프로필 사진 삭제
+		Integer profileNum = usersDao.selectUser(id).getProfileNum();
+		if(usersUpdateReqDto.getProfileNum()!= null && profileNum != null) {
+			profileDao.deleteUpdateProfile(profileNum);	
+		}
+		
+		// 프로필 수정
 		usersUpdateReqDto.setLecUserId(id);
 		usersDao.updateUser(usersUpdateReqDto);
 		
@@ -137,12 +144,11 @@ public class UsersServiceImpl implements UsersService{
 	public void deleteUpdateUser(String lecUserId, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String id = session.getAttribute("id").toString();
-		
-		System.out.println(id);
-		System.out.println(lecUserId);
 
 		usersDao.deleteUpdateUser(lecUserId);
-		profileDao.deleteUpdateProfile(lecUserId);
+		Integer profileNum = usersDao.selectUser(lecUserId).getProfileNum();
+		profileDao.deleteUpdateProfile(profileNum);
+		
 		if(id.equals(lecUserId)) {
 			session.removeAttribute("id");
 		}
