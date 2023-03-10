@@ -7,7 +7,7 @@ import com.acorn2.plec.common.dto.PagingResponseDto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "코드 목록")
+@Schema(description = "자주묻는질문 목록")
 public class FaqReadListResDto extends PagingResponseDto {
 	public FaqReadListResDto() {
 		super(0, new PagingDto());
@@ -17,7 +17,7 @@ public class FaqReadListResDto extends PagingResponseDto {
 		super(totalCount, comPageDto);
 	}
 
-	@Schema(description = "코드 목록", example = "", required = true, minLength = 1, maxLength = 50)
+	@Schema(description = "자주묻는질문 목록", example = "", required = true, minLength = 1, maxLength = 50)
 	private List<FaqReadResDto> data;
 
 	public List<FaqReadResDto> getData() {
@@ -27,11 +27,9 @@ public class FaqReadListResDto extends PagingResponseDto {
 	public void setData(List<FaqReadResDto> data) {
 		this.data = data;
 	}
-	
+
 	@Override
 	public String toString() {
-	    return "FaqReadListResDto{" +
-	            "data=" + data +
-	            '}';
+		return "FaqReadListResDto{" + "data=" + data + '}';
 	}
 }

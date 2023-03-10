@@ -1,53 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.acorn2.plec.api.faq.dao.FaqDao">
-	
-	<insert id="insertFaq" parameterType="com.acorn2.plec.api.faq.dto.FaqDto" >
-		INSERT INTO FAQ
-		(faq_num,question,content,faq_writer, user_regdate)
-		VALUES(faq_seq.NEXTVAL, #{question}, #{content}, #{faqWriter}, SYSDATE )
-	</insert>
-	
-	<update id="deleteFaq" parameterType="int">
-		UPDATE FAQ
-		SET delete_yn_code='Y'
-		WHERE faq_num=#{faqNum}
-	</update>
-	
-	<update id="updateFaq" parameterType="com.acorn2.plec.api.faq.dto.FaqDto">
-		UPDATE FAQ
-		SET question=#{question}, content=#{content}, update_id=#{updateId}, update_date=SYSDATE
-		WHERE faq_num=#{faqNum}
-	</update>
-	
+
 	<select id="selectFaqList" parameterType="com.acorn2.plec.api.faq.dto.req.FaqReadReqDto" resultType="com.acorn2.plec.api.faq.dto.res.FaqReadResDto">
 		SELECT *
 		FROM
 			(SELECT result1.*, ROWNUM AS rnum
 			FROM
-				(SELECT faq_num, question, content, user_regdate, update_date,
-				 	update_id, faq_writer, delete_yn_code
+				(SELECT faq_num, question, content, user_regdate, update_date, update_id, faq_writer, delete_Yn_code
 				FROM FAQ
-				WHERE delete_yn_code='N'
+				<where>
+					delete_Yn_code='N'
+				</where>
 				ORDER BY faq_num DESC) result1)
-		 WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
-				
+		WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
 	</select>
-	
-	<select id="FaqOne" parameterType="int" resultType="com.acorn2.plec.api.faq.dto.FaqDto">
-     	SELECT faq_num, question, content
+
+	<select id="selectFaqCount" parameterType="com.acorn2.plec.api.faq.dto.req.FaqReadReqDto" resultType="java.lang.Integer">
+		SELECT NVL(MAX(ROWNUM), 0)
 		FROM FAQ
+		<where>
+			delete_Yn_code='N'
+		</where>
+	</select>
+
+	<select id="selectFaq" parameterType="com.acorn2.plec.api.faq.dto.req.FaqReadReqDto" resultType="com.acorn2.plec.api.faq.dto.res.FaqReadDetailResDto">
+		SELECT result1.*
+		FROM
+			(SELECT faq_num, question, content, user_regdate, faq_writer, update_date, update_id, delete_YN_code
+			FROM FAQ
+			<where>
+				delete_YN_code='N'
+			</where>
+			) result1
 		WHERE faq_num=#{faqNum}
-   </select>
-   
-   	<select id="selectFaqCount" parameterType="com.acorn2.plec.api.faq.dto.req.FaqReadReqDto" resultType="java.lang.Integer">
-   		SELECT NVL(MAX(ROWNUM), 0)
-		FROM FAQ
-		WHERE delete_yn_code='N'
 	</select>
-	
-	<delete id="Faqdelete" >
-      DELETE FROM FAQ
-      WHERE delete_YN_code='Y'
-   </delete>
+
+	<insert id="insertFaq" parameterType="com.acorn2.plec.api.faq.dto.FaqDto">
+		INSERT INTO FAQ
+		(faq_num, question, content, faq_writer, user_regdate, delete_YN_code)
+		VALUES(faq_seq.NEXTVAL, #{question}, #{content}, #{faqWriter}, SYSDATE, 'N')
+	</insert>
+
+	<update id="updateFaq" parameterType="com.acorn2.plec.api.faq.dto.FaqDto">
+		UPDATE FAQ
+		<set>
+			<if test="question != null">
+				question=#{question},
+			</if>
+			<if test="content != null">
+				content=#{content},
+			</if>
+			update_id=#{updateId},
+			update_date=SYSDATE
+		</set>
+		WHERE faq_num=#{faqNum}
+	</update>
+
+	<update id="deleteUpdateFaq" parameterType="Integer">
+		UPDATE FAQ
+		<set>
+			delete_Yn_code='Y'
+		</set>
+		WHERE faq_num=#{faqNum}
+	</update>
+
+	<delete id="deleteFaq">
+		DELETE FROM FAQ
+		WHERE delete_YN_code='Y'
+	</delete>
+
 </mapper>
