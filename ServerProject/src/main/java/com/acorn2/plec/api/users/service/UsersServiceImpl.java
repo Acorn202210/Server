@@ -103,34 +103,19 @@ public class UsersServiceImpl implements UsersService{
 	}
 
 	@Override
-	public void updateUser(UsersUpdateReqDto usersUpdateReqDto, MultipartFile file, HttpServletRequest request) {
+	public void updateUser(UsersUpdateReqDto usersUpdateReqDto, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String id = session.getAttribute("id").toString();
 		
-		ProfileDto dto= profileDao.selectProfile(id);
-		
-		ProfileDto profileDto = new ProfileDto();
-		if(file != null) {
-			try {
-				profileDto.setLecUserId(id);
-				profileDto.setMimetype(file.getContentType());
-				profileDto.setOriginalName(file.getOriginalFilename());
-				profileDto.setData(file.getBytes());
-				if(dto == null) {
-					profileDao.insertProfile(profileDto);
-				}else {
-					profileDao.updateProfile(profileDto);
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		// 이전 프로필 사진 삭제
+		Integer profileNum = usersDao.selectUser(id).getProfileNum();
+		if(usersUpdateReqDto.getProfileNum()!= null && profileNum != null) {
+			profileDao.deleteUpdateProfile(profileNum);	
 		}
 		
-		if(usersUpdateReqDto.getUserEmail() != null || usersUpdateReqDto.getUserPhone() != null || usersUpdateReqDto.getUserPhone() != null) {
-			usersUpdateReqDto.setLecUserId(id);
-			usersDao.updateUser(usersUpdateReqDto);
-		}
+		// 프로필 수정
+		usersUpdateReqDto.setLecUserId(id);
+		usersDao.updateUser(usersUpdateReqDto);
 		
 	}
 
@@ -159,12 +144,11 @@ public class UsersServiceImpl implements UsersService{
 	public void deleteUpdateUser(String lecUserId, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String id = session.getAttribute("id").toString();
-		
-		System.out.println(id);
-		System.out.println(lecUserId);
 
 		usersDao.deleteUpdateUser(lecUserId);
-		profileDao.deleteUpdateProfile(lecUserId);
+		Integer profileNum = usersDao.selectUser(lecUserId).getProfileNum();
+		profileDao.deleteUpdateProfile(profileNum);
+		
 		if(id.equals(lecUserId)) {
 			session.removeAttribute("id");
 		}

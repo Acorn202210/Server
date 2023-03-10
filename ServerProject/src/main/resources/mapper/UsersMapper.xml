@@ -34,7 +34,7 @@
       	FROM
          (SELECT result1.*, ROWNUM AS rnum
           FROM
-            (SELECT lec_user_id, user_email, user_regdate, user_phone, TO_CHAR(user_birth, 'YYYY-MM-DD') user_birth, user_nickname
+            (SELECT lec_user_id, user_email, user_regdate, user_phone, TO_CHAR(user_birth, 'YYYY-MM-DD') user_birth
              FROM USERS
              <where>
                 manager_yn = 'N'
@@ -46,15 +46,15 @@
 	</select>
 	
 	<select id="selectUser" parameterType="String" resultType="com.acorn2.plec.api.users.dto.res.UsersReadDetailResDto">
-		SELECT lec_user_id, user_pwd, user_email, user_regdate, user_phone, TO_CHAR(user_birth, 'YYYY-MM-DD') user_birth, user_nickname, manager_yn
+		SELECT lec_user_id, user_pwd, user_email, user_regdate, user_phone, profile_num, TO_CHAR(user_birth, 'YYYY-MM-DD') user_birth, manager_yn
         FROM USERS
         WHERE lec_user_id=#{lecUserId}
 	</select>
 	
 	<insert id="insertUser" parameterType="com.acorn2.plec.api.users.dto.req.UsersCreateReqDto">
       INSERT INTO USERS
-      (lec_user_id, user_pwd, user_email, user_regdate, user_phone, user_birth, manager_yn, user_nickname, general_user_code)
-      VALUES(#{lecUserId}, #{userPwd}, #{userEmail}, SYSDATE, #{userPhone}, #{userBirth}, #{managerYn}, #{userNickname}, 'Y')
+      (lec_user_id, user_pwd, user_email, user_regdate, user_phone, user_birth, manager_yn,  general_user_code)
+      VALUES(#{lecUserId}, #{userPwd}, #{userEmail}, SYSDATE, #{userPhone}, #{userBirth}, #{managerYn}, 'Y')
    	</insert>
    	
    	<update id="updateUser" parameterType="com.acorn2.plec.api.users.dto.req.UsersUpdateReqDto">
@@ -62,7 +62,7 @@
    		<set>
    			<if test="userEmail != null">, user_email=#{userEmail}</if>
    			<if test="userPhone != null">, user_phone=#{userPhone}</if>
-   			<if test="userNickname != null">, user_nickname=#{userNickname}</if>
+   			<if test="profileNum != null">, profile_num=#{profileNum}</if>
    		</set>
    	    WHERE lec_user_id=#{lecUserId}
    	</update>
@@ -96,9 +96,6 @@
    		DELETE FROM USERS
    		WHERE withdrewal_user_code ='Y'
    	</delete>
-   	
-   	
-
 </mapper>
 
 

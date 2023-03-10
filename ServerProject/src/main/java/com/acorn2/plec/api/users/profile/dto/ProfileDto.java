@@ -7,11 +7,12 @@ public class ProfileDto {
     private byte[] data;
     private String regdate;
     private String updateRegdate;
+    private Integer profileNum;
     
     public ProfileDto(){}
 
 	public ProfileDto(String lecUserId, String mimetype, String originalName, byte[] data, String regdate,
-			String updateRegdate) {
+			String updateRegdate, Integer profileNum) {
 		super();
 		this.lecUserId = lecUserId;
 		this.mimetype = mimetype;
@@ -19,6 +20,7 @@ public class ProfileDto {
 		this.data = data;
 		this.regdate = regdate;
 		this.updateRegdate = updateRegdate;
+		this.profileNum = profileNum;
 	}
 
 	public String getLecUserId() {
@@ -67,5 +69,15 @@ public class ProfileDto {
 
 	public void setUpdateRegdate(String updateRegdate) {
 		this.updateRegdate = updateRegdate;
-	}    
+	}
+
+	public Integer getProfileNum() {
+		return profileNum;
+	}
+
+	public void setProfileNum(Integer profileNum) {
+		this.profileNum = profileNum;
+	}
+
+
 }

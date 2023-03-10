@@ -2,28 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.acorn2.plec.api.users.profile.dao.ProflieDao">
 	
-	 <insert id="insertProfile" parameterType="com.acorn2.plec.api.users.profile.dto.ProfileDto">
+	 <insert id="insertProfile" parameterType="com.acorn2.plec.api.users.profile.dto.ProfileDto" useGeneratedKeys="true" keyColumn="profileNum" keyProperty="profileNum">
+	 	<selectKey keyProperty="profileNum" resultType="int" order="BEFORE">
+	 		SELECT PROFILE_seq.NEXTVAL FROM DUAL
+	 	</selectKey>
 	 	INSERT INTO profile_image
-      	(lec_user_id, mimetype, original_name, data, regdate)
-      	VALUES(#{lecUserId}, #{mimetype}, #{originalName}, #{data}, SYSDATE)
+      	(profile_num, lec_user_id, mimetype, original_name, data, regdate)
+      	VALUES(#{profileNum}, #{lecUserId}, #{mimetype}, #{originalName}, #{data}, SYSDATE)
 	 </insert>
 	 
-	 <select id="selectProfile" parameterType="String" resultType="com.acorn2.plec.api.users.profile.dto.ProfileDto">
-	 	SELECT lec_user_id, mimetype, original_name, data, regdate, update_regdate
+	 <select id="selectProfile" parameterType="Integer" resultType="com.acorn2.plec.api.users.profile.dto.ProfileDto">
+	 	SELECT profile_num, lec_user_id, mimetype, original_name, data, regdate, update_regdate
 	 	FROM profile_image
-	 	WHERE lec_user_id = #{lecUserId}
+	 	WHERE profile_num = #{profileNum}
 	 </select>
 	 
 	 <update id="updateProfile" parameterType="com.acorn2.plec.api.users.profile.dto.ProfileDto">
 	 	UPDATE profile_image
 	 	SET mimetype = #{mimetype}, original_name = #{originalName}, data = #{data}, update_regdate = SYSDATE
-	 	WHERE lec_user_id = #{lecUserId}
+	 	WHERE profile_num = #{profileNum}
 	 </update>
 	 
-	  <update id="deleteUpdateProfile" parameterType="String">
+	  <update id="deleteUpdateProfile" parameterType="Integer">
 	 	UPDATE profile_image
 	 	SET delete_YN_code = 'Y'
-	 	WHERE lec_user_id = #{lecUserId}
+	 	WHERE profile_num = #{profileNum}
 	 </update>
 	 
 	 <delete id="deleteProfile">
