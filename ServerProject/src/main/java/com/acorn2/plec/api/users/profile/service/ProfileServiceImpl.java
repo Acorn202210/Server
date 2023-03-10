@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.acorn2.plec.api.users.profile.dao.ProflieDao;
 import com.acorn2.plec.api.users.profile.dto.ProfileDto;
+import com.acorn2.plec.api.users.profile.dto.ProfileNumDto;
 
 
 
@@ -27,9 +28,8 @@ public class ProfileServiceImpl implements ProfileService{
 	
 
 	@Override
-	public Map<String, Object> selectProfile(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		ProfileDto profileDto = profileDao.selectProfile(session.getAttribute("id").toString());
+	public Map<String, Object> selectProfile(Integer profileNum) {
+		ProfileDto profileDto = profileDao.selectProfile(profileNum);
 		      
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", profileDto.getMimetype());
@@ -41,4 +41,47 @@ public class ProfileServiceImpl implements ProfileService{
       
 		return map;
 	}
+
+	@Override
+	public void updateProfile(MultipartFile file, Integer profileNum) {
+		ProfileDto profileDto = new ProfileDto();
+		
+		try {
+			profileDto.setMimetype(file.getContentType());
+			profileDto.setOriginalName(file.getOriginalFilename());
+			profileDto.setData(file.getBytes());
+			profileDao.updateProfile(profileDto);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
+	@Override
+	public ProfileNumDto insertProfile(MultipartFile file, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String id = session.getAttribute("id").toString();
+		
+		ProfileDto profileDto = new ProfileDto();
+		try {
+			profileDto.setLecUserId(id);
+			profileDto.setMimetype(file.getContentType());
+			profileDto.setOriginalName(file.getOriginalFilename());
+			profileDto.setData(file.getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		profileDao.insertProfile(profileDto);
+	
+		ProfileNumDto dto = new ProfileNumDto(profileDto.getProfileNum());
+		
+
+		return 	dto;
+		
+	}
+	
+	
 }

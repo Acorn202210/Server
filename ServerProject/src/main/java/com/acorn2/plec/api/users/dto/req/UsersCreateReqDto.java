@@ -31,16 +31,13 @@ public class UsersCreateReqDto {
 	@Size(min = 1, max = 3)
 	@Schema(description = "관리자여부", example = "Y", required = true, minLength = 1, maxLength = 3)
 	private String managerYn;
-	@Size(min = 1, max = 50)
-	@Schema(description = "닉네임", example = "에이콘", required = true, minLength = 1, maxLength = 50)
-	private String userNickname;
 	
 	public UsersCreateReqDto() {}
 
 	public UsersCreateReqDto(@NotEmpty @Size(min = 1, max = 50) String lecUserId,
 			@NotEmpty @Size(min = 1, max = 100) String userPwd, @NotEmpty @Size(min = 1, max = 100) String userEmail,
 			@NotEmpty @Size(min = 1, max = 32) String userPhone, @NotEmpty @Size(min = 1, max = 50) String userBirth,
-			@NotEmpty @Size(min = 1, max = 3) String managerYn, @Size(min = 1, max = 50) String userNickname) {
+			@NotEmpty @Size(min = 1, max = 3) String managerYn) {
 		super();
 		this.lecUserId = lecUserId;
 		this.userPwd = userPwd;
@@ -48,7 +45,6 @@ public class UsersCreateReqDto {
 		this.userPhone = userPhone;
 		this.userBirth = userBirth;
 		this.managerYn = managerYn;
-		this.userNickname = userNickname;
 	}
 
 	public String getLecUserId() {
@@ -99,13 +95,7 @@ public class UsersCreateReqDto {
 		this.managerYn = managerYn;
 	}
 
-	public String getUserNickname() {
-		return userNickname;
-	}
-
-	public void setUserNickname(String userNickname) {
-		this.userNickname = userNickname;
-	}
+	
 	
 	
 }

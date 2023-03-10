@@ -32,6 +32,7 @@ import com.acorn2.plec.api.users.dto.req.UsersUpdateReqDto;
 import com.acorn2.plec.api.users.dto.res.UsersReadDetailResDto;
 import com.acorn2.plec.api.users.dto.res.UsersReadListResDto;
 import com.acorn2.plec.api.users.profile.dto.ProfileDto;
+import com.acorn2.plec.api.users.profile.dto.ProfileNumDto;
 import com.acorn2.plec.api.users.profile.service.ProfileService;
 import com.acorn2.plec.api.users.service.UsersService;
 import com.acorn2.plec.common.ComResponseEntity;
@@ -83,6 +84,7 @@ public class UsersController {
 	
 	
 	@ApiOperation(value="로그인", notes = "로그인")
+	@Transactional
 	@PostMapping(value="/login")
 	public ComResponseEntity<Map<String, String>> login(@RequestBody UsersLoginReqDto usersLoginReqDto, HttpServletRequest request){
 		System.out.println(usersLoginReqDto.getLecUserId());
@@ -90,6 +92,7 @@ public class UsersController {
 	}
 	
 	@ApiOperation(value="로그아웃", notes = "로그아웃")
+	@Transactional
 	@PostMapping(value="/{lecUserId}/logout")
 	public ComResponseEntity<Void> logout(HttpServletRequest request){
 		HttpSession session = request.getSession();
@@ -98,17 +101,27 @@ public class UsersController {
 	}
 	
 	
-	@ApiOperation(value="개인정보 수정", notes = "개인정보 수정하기")
-	@PutMapping(value="/{lecUserId}")
-	public ComResponseEntity<Void> update(@Parameter(
+	@ApiOperation(value="프로필 업로드", notes = "프로필 업로드")
+	@Transactional
+	@PostMapping(value="/{lecUserId}/profile-img-upload")
+	public ComResponseEntity<ProfileNumDto> updateProfile(@Parameter(
             description = "multipart/form-data 형식의 이미지 리스트를 input으로 받습니다. 이때 key 값은 multipartFile 입니다.",
             content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE))
-			@RequestPart(value = "multipartFile", required = false) MultipartFile file, @RequestBody UsersUpdateReqDto usersUpdateReqDto, HttpServletRequest request){
-		userService.updateUser(usersUpdateReqDto, file, request);
+			@RequestPart(value = "multipartFile", required = false) MultipartFile file, HttpServletRequest request){
+		
+		return new ComResponseEntity<>(new ComResponseDto<>(profileService.insertProfile(file, request)));
+	}
+	
+	@ApiOperation(value="개인정보 수정", notes = "개인정보 수정하기")
+	@Transactional
+	@PutMapping(value="/{lecUserId}/profile-upload")
+	public ComResponseEntity<Void> update(@RequestBody UsersUpdateReqDto usersUpdateReqDto, HttpServletRequest request){
+		userService.updateUser(usersUpdateReqDto, request);
 		return new ComResponseEntity<Void>();
 	}
 	
 	@ApiOperation(value="비밀번호 수정", notes = "비밀번호 수정하기")
+	@Transactional
 	@PutMapping(value="/{lecUserId}/pwdUpdate")
 	public ComResponseEntity<Void> updatePwd(@RequestBody UsersUpdatePwdReqDto usersUpdatePwdReqDto, HttpServletRequest request){
 		userService.updateUserPwd(usersUpdatePwdReqDto, request);
@@ -116,6 +129,7 @@ public class UsersController {
 	}
 	
 	@ApiOperation(value="회원 탈퇴", notes = "회원 탈퇴 ")
+	@Transactional
 	@PutMapping(value="/{lecUserId}/delete")
 	public ComResponseEntity<Void> deleteUser(@PathVariable(required = false) String lecUserId, HttpServletRequest request){		
 		userService.deleteUpdateUser(lecUserId, request);
@@ -123,9 +137,9 @@ public class UsersController {
 	}
 	
 	@ApiOperation(value="프로필 가져오기", notes = "프로필 가져오기 ")
-	@GetMapping("/{lecUserId}/profile")
-	public ResponseEntity<byte[]> getProfile(HttpServletRequest request){
-		Map<String, Object> map = profileService.selectProfile(request);
+	@GetMapping("/profile/{profileNum}")
+	public ResponseEntity<byte[]> getProfile(@PathVariable Integer profileNum){
+		Map<String, Object> map = profileService.selectProfile(profileNum);
 		ProfileDto profileDto = (ProfileDto) map.get("profileDto");
 		HttpHeaders headers = (HttpHeaders) map.get("headers");
 		

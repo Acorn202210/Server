@@ -23,7 +23,7 @@ public interface UsersService {
 	UsersReadDetailResDto selectUser(HttpServletRequest request);
 	void insertUser(UsersCreateReqDto usersCreateReqDto);
 	Map<String, String> login(UsersLoginReqDto usersLoginReqDto, HttpServletRequest request);
-	void updateUser(UsersUpdateReqDto usersUpdateReqDto, MultipartFile file, HttpServletRequest request);
+	void updateUser(UsersUpdateReqDto usersUpdateReqDto, HttpServletRequest request);
 	void updateUserPwd(UsersUpdatePwdReqDto usersUpdatePwdReqDto, HttpServletRequest request);
 	void deleteUpdateUser(String lecUserId,HttpServletRequest request);
 	void batchUser();
