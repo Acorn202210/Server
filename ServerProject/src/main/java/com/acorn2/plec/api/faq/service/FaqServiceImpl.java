@@ -18,16 +18,16 @@ import com.acorn2.plec.api.faq.dto.FaqDto;
 import com.acorn2.plec.api.faq.dto.req.FaqCreateReqDto;
 import com.acorn2.plec.api.faq.dto.req.FaqReadReqDto;
 import com.acorn2.plec.api.faq.dto.req.FaqUpdateReqDto;
+import com.acorn2.plec.api.faq.dto.res.FaqReadDetailResDto;
 import com.acorn2.plec.api.faq.dto.res.FaqReadListResDto;
 import com.acorn2.plec.api.faq.dto.res.FaqReadResDto;
-
-
+import com.acorn2.plec.api.faq.exception.FaqNotFoundException;
 
 @EnableCaching
 @Service
-public class FaqServiceImpl implements FaqService{
+public class FaqServiceImpl implements FaqService {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
-	
+
 	@Autowired
 	private FaqDao faqDao;
 
@@ -43,18 +43,19 @@ public class FaqServiceImpl implements FaqService{
 	}
 
 	@Override
-	public FaqDto FaqOne(int faqNum) {
-		
-		return faqDao.FaqOne(faqNum);
+	public FaqReadDetailResDto selectFaqOne(FaqReadReqDto faqReadReqDto) {
+		if (faqDao.selectFaq(faqReadReqDto) == null) {
+			throw new FaqNotFoundException("자주묻는질문이 없습니다.");
+		}
+		return faqDao.selectFaq(faqReadReqDto);
 	}
-	
+
 	@Transactional
 	@Override
-	public void FaqInsert(FaqCreateReqDto faqCreateReqDto, HttpServletRequest request) {
+	public void insertFaq(FaqCreateReqDto faqCreateReqDto, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		
+
 		FaqDto dto = new FaqDto();
-		dto.setFaqNum(faqCreateReqDto.getFaqNum());
 		dto.setQuestion(faqCreateReqDto.getQuestion());
 		dto.setContent(faqCreateReqDto.getContent());
 		dto.setFaqWriter(session.getAttribute("id").toString());
@@ -63,30 +64,30 @@ public class FaqServiceImpl implements FaqService{
 
 	@Transactional
 	@Override
-	public void FaqUpdate(FaqUpdateReqDto faqUpdateReqDto, HttpServletRequest request) {
+	public void updateFaq(FaqUpdateReqDto faqUpdateReqDto, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		
+
 		FaqDto dto = new FaqDto();
 		dto.setFaqNum(faqUpdateReqDto.getFaqNum());
-		dto.setUpdateId(session.getAttribute("id").toString());
 		dto.setQuestion(faqUpdateReqDto.getQuestion());
 		dto.setContent(faqUpdateReqDto.getContent());
-		
+		dto.setUpdateId(session.getAttribute("id").toString());
+
 		faqDao.updateFaq(dto);
 	}
 
 	@Transactional
 	@Override
-	public void FaqDelete(Integer faqNum) {
+	public void deleteUpdateFaq(Integer faqNum) {
 
-		faqDao.deleteFaq(faqNum);
+		faqDao.deleteUpdateFaq(faqNum);
 	}
 
 	@Transactional
 	@Override
 	public void deleteFaq() {
-	
-		faqDao.Faqdelete();
+
+		faqDao.deleteFaq();
 	}
-	
+
 }

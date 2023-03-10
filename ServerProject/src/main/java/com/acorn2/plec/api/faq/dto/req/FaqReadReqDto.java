@@ -1,16 +1,14 @@
 package com.acorn2.plec.api.faq.dto.req;
 
-import org.apache.ibatis.type.Alias;
-
 import com.acorn2.plec.common.dto.PagingDto;
 
-@Alias("faqReq")
-public class FaqReadReqDto extends PagingDto{
+public class FaqReadReqDto extends PagingDto {
 	private int faqNum;
 	private String question;
 	private String content;
-	
-	public FaqReadReqDto() {}
+
+	public FaqReadReqDto() {
+	}
 
 	public FaqReadReqDto(int faqNum, String question, String content) {
 		super();
@@ -42,5 +40,5 @@ public class FaqReadReqDto extends PagingDto{
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
+
 }
