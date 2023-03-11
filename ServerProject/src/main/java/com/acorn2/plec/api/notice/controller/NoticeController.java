@@ -22,6 +22,7 @@ import com.acorn2.plec.api.notice.dto.res.NoticeReadListResDto;
 import com.acorn2.plec.api.notice.service.NoticeService;
 import com.acorn2.plec.common.ComResponseEntity;
 import com.acorn2.plec.common.dto.ComResponseDto;
+import com.acorn2.plec.common.utils.SessionUtils;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -53,16 +54,16 @@ public class NoticeController {
 	@ApiOperation(value="공지사항 등록", notes = "공지사항을 등록한다.")
 	@Transactional
 	@PostMapping
-	public ComResponseEntity<Void> insertNotice(@RequestBody NoticeCreateReqDto noticeCreateReqDto, HttpServletRequest request){
-		service.insertNotice(noticeCreateReqDto, request);
+	public ComResponseEntity<Void> insertNotice(@RequestBody NoticeCreateReqDto noticeCreateReqDto, String id){
+		service.insertNotice(noticeCreateReqDto, SessionUtils.getUserId());
 		return new ComResponseEntity<Void>();
 	}
 	
 	@ApiOperation(value="공지사항 수정", notes = "공지사항을 수정한다.")
 	@Transactional
 	@PutMapping(value="/{notiNum}/update")
-	public ComResponseEntity<Void> updateNotice(@RequestBody NoticeUpdateReqDto noticeUpdateReqDto, HttpServletRequest request){
-		service.updateNotice(noticeUpdateReqDto, request);
+	public ComResponseEntity<Void> updateNotice(@RequestBody NoticeUpdateReqDto noticeUpdateReqDto, String id){
+		service.updateNotice(noticeUpdateReqDto, SessionUtils.getUserId());
 		return new ComResponseEntity<Void>();
 	}
 	

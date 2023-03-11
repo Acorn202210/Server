@@ -27,6 +27,7 @@ import com.acorn2.plec.api.users.dto.res.UsersReadResDto;
 import com.acorn2.plec.api.users.exception.UsersNotLoginException;
 import com.acorn2.plec.api.users.profile.dao.ProflieDao;
 import com.acorn2.plec.api.users.profile.dto.ProfileDto;
+import com.acorn2.plec.common.utils.SessionUtils;
 
 @Service
 public class UsersServiceImpl implements UsersService{
@@ -59,9 +60,8 @@ public class UsersServiceImpl implements UsersService{
 	}
 
 	@Override
-	public UsersReadDetailResDto selectUser(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		return usersDao.selectUser(session.getAttribute("id").toString());
+	public UsersReadDetailResDto selectUser(String id) {
+		return usersDao.selectUser(id);
 	}
 
 	@Transactional
@@ -77,8 +77,7 @@ public class UsersServiceImpl implements UsersService{
 	}
 
 	@Override
-	public Map<String, String> login(UsersLoginReqDto usersLoginReqDto, HttpServletRequest request) {
-		HttpSession session = request.getSession();
+	public Map<String, String> login(UsersLoginReqDto usersLoginReqDto) {
 		String id = usersLoginReqDto.getLecUserId();
 		
 		boolean isValid = false;
@@ -89,7 +88,7 @@ public class UsersServiceImpl implements UsersService{
 		}
 	
 		if(isValid) {
-			session.setAttribute("id", id);
+			SessionUtils.setAttribute(id);
 			usersDao.updateUserLastDate(id);
 		}else {
 			throw new UsersNotLoginException("비밀번호가 잘못되었습니다!");
@@ -103,9 +102,7 @@ public class UsersServiceImpl implements UsersService{
 	}
 
 	@Override
-	public void updateUser(UsersUpdateReqDto usersUpdateReqDto, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String id = session.getAttribute("id").toString();
+	public void updateUser(UsersUpdateReqDto usersUpdateReqDto, String id) {
 		
 		// 이전 프로필 사진 삭제
 		Integer profileNum = usersDao.selectUser(id).getProfileNum();
@@ -120,10 +117,7 @@ public class UsersServiceImpl implements UsersService{
 	}
 
 	@Override
-	public void updateUserPwd(UsersUpdatePwdReqDto usersUpdatePwdReqDto, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-
-		String id = session.getAttribute("id").toString();
+	public void updateUserPwd(UsersUpdatePwdReqDto usersUpdatePwdReqDto, String id) {
 		
 		UsersReadDetailResDto resultDto = usersDao.selectUser(id);
 		String encodedPwd = resultDto.getUserPwd();
@@ -136,21 +130,20 @@ public class UsersServiceImpl implements UsersService{
 			usersUpdatePwdReqDto.setNewPwd(encodedNewPwd);
 		usersUpdatePwdReqDto.setLecUserId(id);
 			usersDao.updateUserPwd(usersUpdatePwdReqDto);	
-			session.removeAttribute("id");
+			SessionUtils.removeAttribute();
 		}
 	}
 
 	@Override
-	public void deleteUpdateUser(String lecUserId, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String id = session.getAttribute("id").toString();
+	public void deleteUpdateUser(String lecUserId) {
+		String id = SessionUtils.getUserId();
 
 		usersDao.deleteUpdateUser(lecUserId);
 		Integer profileNum = usersDao.selectUser(lecUserId).getProfileNum();
 		profileDao.deleteUpdateProfile(profileNum);
 		
 		if(id.equals(lecUserId)) {
-			session.removeAttribute("id");
+			SessionUtils.removeAttribute();
 		}
 	}
 

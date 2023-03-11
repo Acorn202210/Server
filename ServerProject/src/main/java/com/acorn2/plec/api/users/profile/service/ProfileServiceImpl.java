@@ -60,9 +60,7 @@ public class ProfileServiceImpl implements ProfileService{
 
 
 	@Override
-	public ProfileNumDto insertProfile(MultipartFile file, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String id = session.getAttribute("id").toString();
+	public ProfileNumDto insertProfile(MultipartFile file, String id) {
 		
 		ProfileDto profileDto = new ProfileDto();
 		try {
