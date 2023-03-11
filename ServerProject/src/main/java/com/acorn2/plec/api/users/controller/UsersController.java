@@ -57,7 +57,7 @@ public class UsersController {
 	@GetMapping(value = "/checkid")
 	public ComResponseEntity<Map<String, Object>> checkid(String lecUserId) {
 		
-		return new ComResponseEntity<>(new ComResponseDto<>(userService.isValidId(lecUserId)));
+		return new ComResponseEntity<>(new ComResponseDto<>(userService.isValid(lecUserId)));
 	}
 	
 	@ApiOperation(value="회원 목록", notes = "모든 회원의 목록을 가져온다.")

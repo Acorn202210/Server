@@ -18,7 +18,7 @@ import com.acorn2.plec.api.users.dto.res.UsersReadListResDto;
 
 
 public interface UsersService {
-	Map<String, Object> isValidId(String lecUserId);
+	Map<String, Object> isValid(String lecUserId);
 	UsersReadListResDto selectUsersList(UsersReadReqDto usersReadReqDto);
 	UsersReadDetailResDto selectUser(String id);
 	void insertUser(UsersCreateReqDto usersCreateReqDto);

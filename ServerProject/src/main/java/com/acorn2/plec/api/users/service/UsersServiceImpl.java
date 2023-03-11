@@ -36,7 +36,7 @@ public class UsersServiceImpl implements UsersService{
 	@Autowired private ProflieDao profileDao;
 
 	@Override
-	public Map<String, Object> isValidId(String lecUserId) {
+	public Map<String, Object> isValid(String lecUserId) {
 		Map<String, Object> isValid = new HashMap<>();
 		
 		UsersReadDetailResDto dto = usersDao.selectUser(lecUserId);

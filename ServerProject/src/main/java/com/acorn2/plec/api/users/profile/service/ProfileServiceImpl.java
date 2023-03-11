@@ -43,18 +43,14 @@ public class ProfileServiceImpl implements ProfileService{
 	}
 
 	@Override
-	public void updateProfile(MultipartFile file, Integer profileNum) {
+	public void updateProfile(MultipartFile file, Integer profileNum) throws IOException {
 		ProfileDto profileDto = new ProfileDto();
+	
+		profileDto.setMimetype(file.getContentType());
+		profileDto.setOriginalName(file.getOriginalFilename());
+		profileDto.setData(file.getBytes());
+		profileDao.updateProfile(profileDto);
 		
-		try {
-			profileDto.setMimetype(file.getContentType());
-			profileDto.setOriginalName(file.getOriginalFilename());
-			profileDto.setData(file.getBytes());
-			profileDao.updateProfile(profileDto);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 	}
 
