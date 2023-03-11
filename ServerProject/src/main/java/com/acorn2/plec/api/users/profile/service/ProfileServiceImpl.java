@@ -13,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.acorn2.plec.api.users.profile.dao.ProflieDao;
@@ -42,6 +43,7 @@ public class ProfileServiceImpl implements ProfileService{
 		return map;
 	}
 
+	@Transactional
 	@Override
 	public void updateProfile(MultipartFile file, Integer profileNum) throws IOException {
 		ProfileDto profileDto = new ProfileDto();
@@ -54,20 +56,16 @@ public class ProfileServiceImpl implements ProfileService{
 		
 	}
 
-
+	@Transactional
 	@Override
-	public ProfileNumDto insertProfile(MultipartFile file, String id) {
+	public ProfileNumDto insertProfile(MultipartFile file, String id) throws IOException {
 		
 		ProfileDto profileDto = new ProfileDto();
-		try {
 			profileDto.setLecUserId(id);
 			profileDto.setMimetype(file.getContentType());
 			profileDto.setOriginalName(file.getOriginalFilename());
 			profileDto.setData(file.getBytes());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		profileDao.insertProfile(profileDto);
 	
 		ProfileNumDto dto = new ProfileNumDto(profileDto.getProfileNum());

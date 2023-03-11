@@ -1,5 +1,6 @@
 package com.acorn2.plec.api.users.controller;
 
+import java.io.IOException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -107,7 +108,7 @@ public class UsersController {
 	public ComResponseEntity<ProfileNumDto> updateProfile(@Parameter(
             description = "multipart/form-data 형식의 이미지 리스트를 input으로 받습니다. 이때 key 값은 multipartFile 입니다.",
             content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE))
-			@RequestPart(value = "multipartFile", required = false) MultipartFile file){
+			@RequestPart(value = "multipartFile", required = false) MultipartFile file) throws IOException{
 		
 		return new ComResponseEntity<>(new ComResponseDto<>(profileService.insertProfile(file, SessionUtils.getUserId())));
 	}

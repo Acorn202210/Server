@@ -15,6 +15,6 @@ import com.acorn2.plec.api.users.profile.dto.ProfileNumDto;
 public interface ProfileService {
 	Map<String, Object> selectProfile(Integer profileNum);
 	void updateProfile(MultipartFile file, Integer profileNum) throws IOException;
-	ProfileNumDto insertProfile(MultipartFile file, String id);
+	ProfileNumDto insertProfile(MultipartFile file, String id) throws IOException;
 
 }

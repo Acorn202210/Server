@@ -128,7 +128,7 @@ public class UsersServiceImpl implements UsersService{
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			String encodedNewPwd = encoder.encode(usersUpdatePwdReqDto.getNewPwd());
 			usersUpdatePwdReqDto.setNewPwd(encodedNewPwd);
-		usersUpdatePwdReqDto.setLecUserId(id);
+			usersUpdatePwdReqDto.setLecUserId(id);
 			usersDao.updateUserPwd(usersUpdatePwdReqDto);	
 			SessionUtils.removeAttribute();
 		}
