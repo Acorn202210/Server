@@ -35,13 +35,15 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public NoticeReadListResDto selectNoticeList(NoticeReadReqDto noticeReadReqDto) {		
 		if(noticeReadReqDto.getKeyword() != null){
-			if(noticeReadReqDto.getCondition().equals("title_content")){
-				noticeReadReqDto.setTitle(noticeReadReqDto.getKeyword());
+			String condition = noticeReadReqDto.getCondition();
+			String keyword = noticeReadReqDto.getKeyword();
+			if("title_content".equals(condition)){
+				noticeReadReqDto.setTitle(keyword);
 				noticeReadReqDto.setContent(noticeReadReqDto.getKeyword());
-			}else if(noticeReadReqDto.getCondition().equals("title")){ 
-				noticeReadReqDto.setTitle(noticeReadReqDto.getKeyword());
-			}else if(noticeReadReqDto.getCondition().equals("content")){ 
-				noticeReadReqDto.setContent(noticeReadReqDto.getKeyword());
+			}else if("title".equals(condition)){ 
+				noticeReadReqDto.setTitle(keyword);
+			}else if("content".equals(condition)){ 
+				noticeReadReqDto.setContent(keyword);
 			}
 		}
 		
