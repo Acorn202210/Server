@@ -12,5 +12,6 @@ public interface ProflieDao {
 	ProfileDto selectProfile(Integer profileNum);
 	void updateProfile(ProfileDto profileDto);
 	void deleteUpdateProfile(Integer profileNum);
+	Integer deleteUpdateProfileN(Integer profileNum);
 	void deleteProfile();
 }
