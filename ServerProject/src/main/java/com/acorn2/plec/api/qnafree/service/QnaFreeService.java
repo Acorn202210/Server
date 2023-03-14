@@ -26,7 +26,7 @@ public interface QnaFreeService {
 	void QnaFreeDelete();
 		
 	//댓글 관련 메소드
-	void selectComment(int refGroup);
+	QnaFreeAnswerDto selectComment(int refGroup);
 	
 	void saveComment(QnaFreeAnswerDto dto, HttpServletRequest request);
 	

@@ -12,7 +12,7 @@ public interface QnaFreeAnswerDao {
 	
 	public Integer selectQnaAnswerCount(QnaFreeAnswerDto dto);
 	
-	Integer selectQnaAnswer(int refGroup);
+	QnaFreeAnswerDto selectQnaAnswer(int refGroup);
 	
 	Integer insertQnaAnswer(QnaFreeAnswerDto dto, HttpServletRequest request);
 	

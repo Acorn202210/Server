@@ -1,14 +1,10 @@
 package com.acorn2.plec.api.qnafree.service;
 
-import java.net.URLEncoder;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.logging.log4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -16,7 +12,6 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.acorn2.plec.api.notice.exception.NoticeNotFoundException;
 import com.acorn2.plec.api.qnafree.dao.QnaFreeAnswerDao;
 import com.acorn2.plec.api.qnafree.dao.QnaFreeDao;
 import com.acorn2.plec.api.qnafree.dto.QnaFreeAnswerDto;
@@ -27,8 +22,7 @@ import com.acorn2.plec.api.qnafree.dto.req.QnaFreeUpdateReqDto;
 import com.acorn2.plec.api.qnafree.dto.res.QnaFreeReadDetailResDto;
 import com.acorn2.plec.api.qnafree.dto.res.QnaFreeReadListResDto;
 import com.acorn2.plec.api.qnafree.dto.res.QnaFreeReadResDto;
-
-
+import com.acorn2.plec.api.qnafree.exception.QnaFreeNotFoundException;
 
 @EnableCaching
 @Service
@@ -67,7 +61,7 @@ public class QnaFreeServiceImpl implements QnaFreeService {
 	@Override
 	public QnaFreeReadDetailResDto selectOne(QnaFreeReadReqDto qnaFreeReadReqDto) {
 		if(qnaDao.selectQnaFree(qnaFreeReadReqDto)== null) {
-			throw new NoticeNotFoundException("공지사항이 없습니다.");
+			throw new QnaFreeNotFoundException("자유게시판이 없습니다.");
 		}
 		qnaDao.addViewCount(qnaFreeReadReqDto.getFreeQuestionNum());
 		return qnaDao.selectQnaFree(qnaFreeReadReqDto);
@@ -118,11 +112,12 @@ public class QnaFreeServiceImpl implements QnaFreeService {
 
 	//댓글 한개 보기 (selectOne)
 	@Override
-	public void selectComment(int refGroup) {
-		qnaAnswerDao.selectQnaAnswer(refGroup);
+	public QnaFreeAnswerDto selectComment(int refGroup) {
+		return qnaAnswerDao.selectQnaAnswer(refGroup);
 	}
 	
 	//댓글 저장
+	@Transactional
 	@Override
 	public void saveComment(QnaFreeAnswerDto dto, HttpServletRequest request) {
 		int ref_group=Integer.parseInt(request.getParameter("ref_group"));
@@ -136,18 +131,21 @@ public class QnaFreeServiceImpl implements QnaFreeService {
 	}
 
 	//댓글 수정
+	@Transactional
 	@Override
 	public void updateComment(QnaFreeAnswerDto dto, HttpServletRequest request) {
 		qnaAnswerDao.updateQnaAnswer(dto, request);		
 	}
 
 	//댓글 삭제(삭제 칼럼 Y 변경)
+	@Transactional
 	@Override
 	public void updateDeleteComment(int freeCommentNum) {
 		qnaAnswerDao.deleteUpdateQnaAnswer(freeCommentNum);		
 	}
 
 	//댓글 삭제(batch)
+	@Transactional
 	@Override
 	public void deleteComment() {
 		qnaAnswerDao.deleteQnaFree();		
