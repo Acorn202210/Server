@@ -44,7 +44,7 @@ public class LectureServiceImpl implements LectureService{
 	@Transactional
 	@Override
 	public void LectureInsert(LectureCreateReqDto lectureCreateReqDto) {
-		String id = SessionUtils.getuserId();
+		String id = SessionUtils.getUserId();
 
 		LectureDto dto = new LectureDto();
 	    ImageDto imageDto = new ImageDto();

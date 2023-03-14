@@ -64,7 +64,7 @@
 	<update id="LectureCompleteYn" parameterType="com.acorn2.plec.api.lectureStudent.dto.LectureStudentDto">
 		UPDATE LECTURE_STUDENT
 		SET Complete_Yn='Y', Update_Date=SYSDATE
-		WHERE lec_Stu_Num=#{lecStuNum}
+		WHERE lec_Stu_Ref_Group=#{lecStuRefGroup} AND lec_Stu_User_Id=#{lecStuUserId}
 	</update>
 	
 	<insert id="LectureSignup" parameterType="com.acorn2.plec.api.lectureStudent.dto.LectureStudentDto">

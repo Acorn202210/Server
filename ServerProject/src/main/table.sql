@@ -170,7 +170,7 @@ CREATE TABLE lecture_image(
     original_name varchar(100),
     regdate DATE,
     update_regdate DATE,
-    delete_YN_code VARCHAR2(3) DEFAULT 'N'
+    delete_YN_code VARCHAR2(3) DEFAULT 'Y'
 );
 
 -- QNA_FREE_QUESTION

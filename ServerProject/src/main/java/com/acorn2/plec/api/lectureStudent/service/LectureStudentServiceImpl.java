@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.acorn2.plec.api.lectureStudent.dao.LectureStudentDao;
 import com.acorn2.plec.api.lectureStudent.dto.LectureStudentDto;
+import com.acorn2.plec.api.lectureStudent.dto.req.LectureStudentCreateReqDto;
 import com.acorn2.plec.api.lectureStudent.dto.req.LectureStudentReadReqDto;
 import com.acorn2.plec.api.lectureStudent.dto.req.LectureStudentUpdateReqDto;
 import com.acorn2.plec.api.lectureStudent.dto.res.LectureStudentOneReadResDto;
@@ -63,12 +64,12 @@ public class LectureStudentServiceImpl implements LectureStudentService{
 
 	@Transactional
 	@Override
-	public void LectureSignup(Integer lecStuRefGroup, HttpServletRequest request) {
+	public void LectureSignup(LectureStudentCreateReqDto lecstudentCreateDto, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String id = session.getAttribute("id").toString();
 		LectureStudentDto dto = new LectureStudentDto();
 		dto.setLecStuUserId(id);
-		dto.setLecStuRefGroup(lecStuRefGroup);
+		dto.setLecStuRefGroup(lecstudentCreateDto.getLecStuRefGroup());
 		
 		studentDao.LectureSignup(dto);
 	}
@@ -80,7 +81,7 @@ public class LectureStudentServiceImpl implements LectureStudentService{
 		HttpSession session = request.getSession();
 		String id = session.getAttribute("id").toString();
 		dto.setLecStuUserId(id);
-		dto.setLecStuNum(studentUpdateReqDto.getLecStuNum());
+		dto.setLecStuRefGroup(studentUpdateReqDto.getLecStuRefGroup());
 		
 		studentDao.LectureCompleteYn(dto);
 	}

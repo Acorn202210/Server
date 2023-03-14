@@ -3,7 +3,7 @@ package com.acorn2.plec.api.lectureStudent.dto;
 public class LectureStudentDto {
 	private int lecStuNum;
 	private String lecStuUserId;
-	private int lecStuRefGroup;
+	private Integer lecStuRefGroup;
 	private String completeYn;
 	private String userRegdate;
 	private String updateDate;
@@ -17,7 +17,7 @@ public class LectureStudentDto {
 	public LectureStudentDto() {}
 
 
-	public LectureStudentDto(int lecStuNum, String lecStuUserId, int lecStuRefGroup, String completeYn,
+	public LectureStudentDto(int lecStuNum, String lecStuUserId, Integer lecStuRefGroup, String completeYn,
 			String userRegdate, String updateDate, String email, String phone, String birth, String largeCategory,
 			String smallCategory) {
 		super();
@@ -55,12 +55,12 @@ public class LectureStudentDto {
 	}
 
 
-	public int getLecStuRefGroup() {
+	public Integer getLecStuRefGroup() {
 		return lecStuRefGroup;
 	}
 
 
-	public void setLecStuRefGroup(int lecStuRefGroup) {
+	public void setLecStuRefGroup(Integer lecStuRefGroup) {
 		this.lecStuRefGroup = lecStuRefGroup;
 	}
 
