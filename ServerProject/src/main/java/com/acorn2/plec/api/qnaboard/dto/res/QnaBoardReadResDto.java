@@ -14,6 +14,8 @@ public class QnaBoardReadResDto {
 	private String boardQuestionWriter;
 	@Schema(description = "1:1문의 제목", example = "제목", required = true, minLength = 1, maxLength = 50)
 	private String title;
+	@Schema(description = "1:1문의 내용", example = "내용", required = true, minLength = 1, maxLength = 10000)
+	private String content;
 	@Schema(description = "1:1문의 조회수", example = "0", required = true, minLength = 1, maxLength = 10000)
 	private int viewCount;
 	@Schema(description = "1:1문의 작성일", example = "2023-02-21", required = true, minLength = 1, maxLength = 30)
@@ -21,14 +23,15 @@ public class QnaBoardReadResDto {
 	@Schema(description = "1:1문의 답변여부", example = "N", required = true, minLength = 1, maxLength = 50)
 	private String answeredYn;	
 	
-	public QnaBoardReadResDto() {}
+	public QnaBoardReadResDto() {}	
 
-	public QnaBoardReadResDto(int boardQuestionNum, String boardQuestionWriter, String title, int viewCount,
-			String userRegdate, String answeredYn) {
+	public QnaBoardReadResDto(int boardQuestionNum, String boardQuestionWriter, String title, String content,
+			int viewCount, String userRegdate, String answeredYn) {
 		super();
 		this.boardQuestionNum = boardQuestionNum;
 		this.boardQuestionWriter = boardQuestionWriter;
 		this.title = title;
+		this.content = content;
 		this.viewCount = viewCount;
 		this.userRegdate = userRegdate;
 		this.answeredYn = answeredYn;
@@ -56,6 +59,14 @@ public class QnaBoardReadResDto {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public int getViewCount() {

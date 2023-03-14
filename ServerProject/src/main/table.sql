@@ -23,7 +23,7 @@ CREATE TABLE profile_image(
     original_name varchar(100),
     regdate DATE,
     update_regdate DATE
-    delete_YN_code VARCHAR2(3) DEFAULT 'N'
+    delete_YN_code VARCHAR2(3) DEFAULT 'Y'
 );
 
 CREATE SEQUENCE PROFILE_seq; 

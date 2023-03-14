@@ -6,9 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.acorn2.plec.api.faq.dto.FaqDto;
 import com.acorn2.plec.api.faq.dto.req.FaqReadReqDto;
+import com.acorn2.plec.api.faq.dto.res.FaqReadDetailResDto;
 import com.acorn2.plec.api.faq.dto.res.FaqReadResDto;
-
-
 
 @Mapper
 public interface FaqDao {
@@ -23,7 +22,7 @@ public interface FaqDao {
 	 * @description : 자주묻는질문 리스트 카운트 조회
 	 */
 	public Integer selectFaqCount(FaqReadReqDto faqReadReqDto);
-	
+
 	/**
 	 *
 	 * @methodName : selectFaqList
@@ -34,51 +33,60 @@ public interface FaqDao {
 	 * @description : 자주묻는질문 조회
 	 */
 	public List<FaqReadResDto> selectFaqList(FaqReadReqDto faqReadReqDto);
-	
+
 	/**
 	 * 
-	 * @methodName : FaqOne
+	 * @methodName : selectFaq
 	 * @author : jo
-	 * @param faq_num
+	 * @param FaqReadReqDto
 	 * @return
-	 * @return : FaqDto
-	 * @description : 자주묻는질문 조회
+	 * @return : FaqReadResDto
+	 * @description : 자주묻는질문 단건 조회
 	 */
-	
-	public FaqDto FaqOne(int faqNum);
-	
+
+	public FaqReadDetailResDto selectFaq(FaqReadReqDto faqReadReqDto);
+
 	/**
 	 * 
 	 * @methodName : insertFaq
 	 * @author : jo
-	 * @param dto
+	 * @param Faqdto
 	 * @return
 	 * @return : Integer
 	 * @description : 자주묻는질문 등록
 	 */
 	Integer insertFaq(FaqDto dto);
-	
+
 	/**
 	 * 
-	 * @methodName : deleteFaq
+	 * @methodName : deleteUpdateFaq
 	 * @author : jo
-	 * @param faq_num
+	 * @param FaqDto
 	 * @return
 	 * @return : Integer
-	 * @description : 자주묻는질문 삭제
+	 * @description : 자주묻는질문 삭제(deleteYncode Y로변경)
 	 */
-	Integer deleteFaq(int faqNum);
-	
+	Integer deleteUpdateFaq(Integer faqNum);
+
 	/**
 	 * 
 	 * @methodName : updateFaq
 	 * @author jo
-	 * @param dto
+	 * @param Faqdto
 	 * @return
 	 * @return : Integer
 	 * @description : 자주묻는질문 수정
 	 */
 	Integer updateFaq(FaqDto dto);
 
-	Integer Faqdelete();
+	/**
+	 * 
+	 * @methodName : deleteUpdateFaq
+	 * @author : jo
+	 * @param FaqDto
+	 * @return
+	 * @return : Integer
+	 * @description : 자주묻는질문 DB삭제
+	 */
+	Integer deleteFaq();
 }

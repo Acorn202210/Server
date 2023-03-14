@@ -1,5 +1,6 @@
 package com.acorn2.plec.api.users.profile.service;
 
+import java.io.IOException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,7 @@ import com.acorn2.plec.api.users.profile.dto.ProfileNumDto;
 
 public interface ProfileService {
 	Map<String, Object> selectProfile(Integer profileNum);
-	void updateProfile(MultipartFile file, Integer profileNum);
-	ProfileNumDto insertProfile(MultipartFile file, HttpServletRequest request);
+	void updateProfile(MultipartFile file, Integer profileNum) throws IOException;
+	ProfileNumDto insertProfile(MultipartFile file, String id) throws IOException;
 
 }
