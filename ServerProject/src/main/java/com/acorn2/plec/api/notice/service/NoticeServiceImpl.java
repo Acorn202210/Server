@@ -60,6 +60,20 @@ public class NoticeServiceImpl implements NoticeService{
 		if(noticeDao.selectNotice(noticeReadReqDto)== null) {
 			throw new NoticeNotFoundException("공지사항이 없습니다.");
 		}
+		
+		if(noticeReadReqDto.getKeyword() != null){
+			String condition = noticeReadReqDto.getCondition();
+			String keyword = noticeReadReqDto.getKeyword();
+			if("title_content".equals(condition)){
+				noticeReadReqDto.setTitle(keyword);
+				noticeReadReqDto.setContent(noticeReadReqDto.getKeyword());
+			}else if("title".equals(condition)){ 
+				noticeReadReqDto.setTitle(keyword);
+			}else if("content".equals(condition)){ 
+				noticeReadReqDto.setContent(keyword);
+			}
+		}
+		
 		noticeDao.addViewCount(noticeReadReqDto.getNotiNum());
 		return noticeDao.selectNotice(noticeReadReqDto);
 	}
