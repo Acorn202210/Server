@@ -7,7 +7,7 @@
 		FROM	
 			(SELECT result1.*, ROWNUM as rnum
 			FROM
-				(SELECT LEC_NUM, TEACHER, LEC_WRITER, TITLE, DESCRIBE ,VIDEOPATH, VIEWCOUNT, 
+				(SELECT LEC_NUM, IMAGE_NUM, TEACHER, LEC_WRITER, TITLE, DESCRIBE ,VIDEOPATH, VIEWCOUNT, 
 					USER_REGDATE, LARGE_CATEGORY, SMALL_CATEGORY, UPDATE_ID, SERVICE_YN_CODE
 				FROM LECTURE
 				<choose>
@@ -28,7 +28,7 @@
 	</select>
 	
 	<select id="lectureOne" parameterType="int" resultType="com.acorn2.plec.api.lecture.dto.LectureDto">
-		SELECT LEC_NUM, TEACHER, LEC_WRITER, TITLE, DESCRIBE ,VIDEOPATH, VIEWCOUNT, 
+		SELECT LEC_NUM, IMAGE_NUM, TEACHER, LEC_WRITER, TITLE, DESCRIBE ,VIDEOPATH, VIEWCOUNT, IMAGE_NUM,
 					USER_REGDATE, LARGE_CATEGORY, SMALL_CATEGORY
 		FROM LECTURE
 		WHERE LEC_NUM = #{lecNum}
@@ -41,9 +41,9 @@
 	
 	<insert id="lectureInsert" parameterType="com.acorn2.plec.api.lecture.dto.LectureDto">
 		INSERT INTO LECTURE
-		(LEC_NUM, TEACHER, LEC_WRITER, TITLE, DESCRIBE,
+		(LEC_NUM, IMAGE_NUM, TEACHER, LEC_WRITER, TITLE, DESCRIBE,
 		VIDEOPATH, VIEWCOUNT, USER_REGDATE, LARGE_CATEGORY,SMALL_CATEGORY)
-		VALUES(LECTURE_seq.NEXTVAL, #{teacher}, #{lecWriter}, #{title}, #{describe}, #{videoPath}, #{viewCount}, SYSDATE, #{largeCategory}, #{smallCategory} )
+		VALUES(LECTURE_seq.NEXTVAL, #{imageNum}, #{teacher}, #{lecWriter}, #{title}, #{describe}, #{videoPath}, #{viewCount}, SYSDATE, #{largeCategory}, #{smallCategory} )
 	</insert>
 	
 	<update id="addViewCount" parameterType="int">
@@ -54,7 +54,7 @@
 	
 	<update id="lectureUpdate" parameterType="com.acorn2.plec.api.lecture.dto.LectureDto">
 		UPDATE LECTURE
-		SET TITLE= #{title},UPDATE_ID=#{updateId} ,TEACHER=#{teacher},DESCRIBE=#{describe}, VIDEOPATH=#{videoPath}, UPDATE_DATE=SYSDATE, LARGE_CATEGORY=#{largeCategory},SMALL_CATEGORY=#{smallCategory}
+		SET TITLE= #{title} ,IMAGE_NUM={imageNum} ,UPDATE_ID=#{updateId} ,TEACHER=#{teacher},DESCRIBE=#{describe}, VIDEOPATH=#{videoPath}, UPDATE_DATE=SYSDATE, LARGE_CATEGORY=#{largeCategory},SMALL_CATEGORY=#{smallCategory}
 		WHERE LEC_NUM = #{lecNum}
 	</update>
 	

@@ -3,6 +3,8 @@ package com.acorn2.plec.api.lecture.dto.req;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "강의 등록")
@@ -33,67 +35,67 @@ public class LectureCreateReqDto {
 	@NotEmpty
 	@Size(min = 1, max = 10)
 	private String smallCategory;
-	
-	public LectureCreateReqDto( String teacher, String title, String describe,
-			String videoPath, String largeCategory, String smallCategory) {
+	private int imageNum;
+	public LectureCreateReqDto(@NotEmpty @Size(min = 1, max = 50) String title,
+			@NotEmpty @Size(min = 1, max = 10) String teacher, @NotEmpty @Size(min = 1, max = 10000) String describe,
+			@NotEmpty @Size(min = 1, max = 500) String videoPath,
+			@NotEmpty @Size(min = 1, max = 10) String largeCategory,
+			@NotEmpty @Size(min = 1, max = 10) String smallCategory, int imageNum) {
 		super();
-		this.teacher = teacher;
 		this.title = title;
+		this.teacher = teacher;
 		this.describe = describe;
 		this.videoPath = videoPath;
 		this.largeCategory = largeCategory;
 		this.smallCategory = smallCategory;
+		this.imageNum = imageNum;
 	}
-
-	public String getTeacher() {
-		return teacher;
-	}
-
-	public void setTeacher(String teacher) {
-		this.teacher = teacher;
-	}
-
 	public String getTitle() {
 		return title;
 	}
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
+	public String getTeacher() {
+		return teacher;
+	}
+	public void setTeacher(String teacher) {
+		this.teacher = teacher;
+	}
 	public String getDescribe() {
 		return describe;
 	}
-
 	public void setDescribe(String describe) {
 		this.describe = describe;
 	}
-
 	public String getVideoPath() {
 		return videoPath;
 	}
-
 	public void setVideoPath(String videoPath) {
 		this.videoPath = videoPath;
 	}
-
-
 	public String getLargeCategory() {
 		return largeCategory;
 	}
-
 	public void setLargeCategory(String largeCategory) {
 		this.largeCategory = largeCategory;
 	}
-
 	public String getSmallCategory() {
 		return smallCategory;
 	}
-
 	public void setSmallCategory(String smallCategory) {
 		this.smallCategory = smallCategory;
 	}
+	public int getImageNum() {
+		return imageNum;
+	}
+	public void setImageNum(int imageNum) {
+		this.imageNum = imageNum;
+	}
+	
 
+	
+	
 	
 	
 	

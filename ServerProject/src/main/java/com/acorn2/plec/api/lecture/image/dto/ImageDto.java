@@ -1,7 +1,7 @@
 package com.acorn2.plec.api.lecture.image.dto;
 
 public class ImageDto {
-	private int lecNum;
+	private Integer imageNum;
 	private String mimetype;
     private String originalName;
     private byte[] data;
@@ -10,10 +10,10 @@ public class ImageDto {
     
     public ImageDto() {}
 
-	public ImageDto(int lecNum, String mimetype, String originalName, byte[] data, String regdate,
+	public ImageDto(Integer imageNum, String mimetype, String originalName, byte[] data, String regdate,
 			String updateRegdate) {
 		super();
-		this.lecNum = lecNum;
+		this.imageNum = imageNum;
 		this.mimetype = mimetype;
 		this.originalName = originalName;
 		this.data = data;
@@ -21,12 +21,12 @@ public class ImageDto {
 		this.updateRegdate = updateRegdate;
 	}
 
-	public int getLecNum() {
-		return lecNum;
+	public Integer getImageNum() {
+		return imageNum;
 	}
 
-	public void setLecNum(int lecNum) {
-		this.lecNum = lecNum;
+	public void setImageNum(Integer imageNum) {
+		this.imageNum = imageNum;
 	}
 
 	public String getMimetype() {
@@ -68,6 +68,9 @@ public class ImageDto {
 	public void setUpdateRegdate(String updateRegdate) {
 		this.updateRegdate = updateRegdate;
 	}
+
+	
+	
     
     
 }

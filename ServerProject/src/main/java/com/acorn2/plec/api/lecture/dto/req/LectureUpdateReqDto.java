@@ -17,7 +17,7 @@ public class LectureUpdateReqDto {
 	private String largeCategory;
 	@Schema(description = "강의 소분류", example = "js", required = true, minLength = 1, maxLength = 10)
 	private String smallCategory;
-	
+	private int imageNum;
 	public int getLecNum() {
 		return lecNum;
 	}
@@ -60,6 +60,13 @@ public class LectureUpdateReqDto {
 	public void setSmallCategory(String smallCategory) {
 		this.smallCategory = smallCategory;
 	}
+	public int getImageNum() {
+		return imageNum;
+	}
+	public void setImageNum(int imageNum) {
+		this.imageNum = imageNum;
+	}
+	
 	
 	
 	

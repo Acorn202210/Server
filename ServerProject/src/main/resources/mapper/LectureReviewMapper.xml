@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.acorn2.FinalProject.api.lectureReview.dao.LectureReviewDao">
+<mapper namespace="com.acorn2.plec.api.lectureReview.dao.LectureReviewDao">
 
 	<select id="selectLectureReivewCount" parameterType="com.acorn2.plec.api.lectureReview.dto.req.LectureReviewReadReqDto" resultType="java.lang.Integer">
 		SELECT NVL(MAX(ROWNUM), 0)
@@ -25,7 +25,7 @@
 	<insert id="insertLectureReview" parameterType="com.acorn2.plec.api.lectureReview.dto.LectureReviewDto">
 		INSERT INTO LECTURE_REVIEW
 		(LEC_RE_NUM, LEC_RE_WRITER, CONTENT, LEC_RE_STU_REF_GROUP, STAR,USER_REGDATE)
-		VALUES(#{lecReNum},#{lecReWriter},#{content},#{lecReStuRefGroup},#{star},SYSDATE)
+		VALUES(LECTURE_REVIEW_seq.NEXTVAL, #{lecReWriter},#{content},#{lecReStuRefGroup},#{star},SYSDATE)
 	</insert> 
 	
 	<update id="deleteLectureReview" parameterType="int">

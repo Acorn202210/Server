@@ -20,6 +20,8 @@ import com.acorn2.plec.api.lectureReview.dto.req.LectureReviewReadReqDto;
 import com.acorn2.plec.api.lectureReview.dto.req.LectureReviewUpdateReqDto;
 import com.acorn2.plec.api.lectureReview.dto.res.LectureReviewReadListResDto;
 import com.acorn2.plec.api.lectureReview.dto.res.LectureReviewReadResDto;
+import com.acorn2.plec.common.constant.SessionConstant;
+import com.acorn2.plec.common.utils.SessionUtils;
 
 
 @EnableCaching
@@ -48,9 +50,8 @@ public class LectureReviewServiceImpl implements LectureReviewService{
 
 	@Transactional
 	@Override
-	public void LectureReviewInsert(LectureReviewCreateReqDto ReviewCreateReqDto, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String id = session.getAttribute("id").toString();
+	public void LectureReviewInsert(LectureReviewCreateReqDto ReviewCreateReqDto) {
+		String id = SessionUtils.getuserId();
 		
 		LectureReviewDto dto = new LectureReviewDto();
 		dto.setLecReWriter(id);

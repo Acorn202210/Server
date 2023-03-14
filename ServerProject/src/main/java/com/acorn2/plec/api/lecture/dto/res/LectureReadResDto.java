@@ -27,7 +27,7 @@ public class LectureReadResDto {
 	private String updateId;
 	@Schema(description = "강의 서비스 여부", example = "Y", required = true, minLength = 1, maxLength = 3)
 	private String serviceYnCode;
-	
+	private int imageNum;
 	public int getLecNum() {
 		return lecNum;
 	}
@@ -70,10 +70,10 @@ public class LectureReadResDto {
 	public void setViewCount(int viewCount) {
 		this.viewCount = viewCount;
 	}
-	public String getuserRegdate() {
+	public String getUserRegdate() {
 		return userRegdate;
 	}
-	public void setuserRegdate(String userRegdate) {
+	public void setUserRegdate(String userRegdate) {
 		this.userRegdate = userRegdate;
 	}
 	public String getLargeCategory() {
@@ -100,6 +100,14 @@ public class LectureReadResDto {
 	public void setServiceYnCode(String serviceYnCode) {
 		this.serviceYnCode = serviceYnCode;
 	}
+	public int getImageNum() {
+		return imageNum;
+	}
+	public void setImageNum(int imageNum) {
+		this.imageNum = imageNum;
+	}
+	
+	
 	
 	
 

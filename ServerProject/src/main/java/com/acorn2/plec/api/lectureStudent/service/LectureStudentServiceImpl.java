@@ -33,16 +33,18 @@ public class LectureStudentServiceImpl implements LectureStudentService{
 	public LectureStudentReadListResDto LectureStudentList(LectureStudentReadReqDto studentReadReqDto) {
 		
 		if(studentReadReqDto.getKeyword() != null){
-			if(studentReadReqDto.getCondition().equals("lecUserId")){
-				studentReadReqDto.setLecUserId(studentReadReqDto.getKeyword());
-			}else if(studentReadReqDto.getCondition().equals("userBirth")){ 
-				studentReadReqDto.setUserBirth(studentReadReqDto.getKeyword());
-			}else if(studentReadReqDto.getCondition().equals("userPhone")){ 
-				studentReadReqDto.setUserPhone(studentReadReqDto.getKeyword());
-			}else if(studentReadReqDto.getCondition().equals("userEmail")){ 
-				studentReadReqDto.setUserEmail(studentReadReqDto.getKeyword());
-			}else if(studentReadReqDto.getCondition().equals("userRegdate")){ 
-				studentReadReqDto.setUserRegdate(studentReadReqDto.getKeyword());
+			String condition = studentReadReqDto.getCondition();
+			String keword = studentReadReqDto.getKeyword();
+			if("lecUserId".equals(condition)){
+				studentReadReqDto.setLecUserId(keword);
+			}else if("userBirth".equals(condition)){ 
+				studentReadReqDto.setUserBirth(keword);
+			}else if("userPhone".equals(condition)){ 
+				studentReadReqDto.setUserPhone(keword);
+			}else if("userEmail".equals(condition)){ 
+				studentReadReqDto.setUserEmail(keword);
+			}else if("userRegdate".equals(condition)){ 
+				studentReadReqDto.setUserRegdate(keword);
 			}
 		}
 		

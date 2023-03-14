@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.acorn2.plec.api.lecture.image.dao.ImageDao">
-	
-	 <insert id="insertImage" parameterType="com.acorn2.plec.api.lecture.image.dto.ImageDto">
+
+	<insert id="insertImage" parameterType="com.acorn2.plec.api.lecture.image.dto.ImageDto" useGeneratedKeys="true" keyColumn="imageNum" keyProperty="imageNum">
+	 	<selectKey keyProperty="imageNum" resultType="int" order="BEFORE">
+	 		SELECT PROFILE_seq.NEXTVAL FROM DUAL
+	 	</selectKey>
 	 	INSERT INTO lecture_image
-      	(LEC_NUM, mimetype, original_name, data, regdate)
-      	VALUES(#{lecNum}, #{mimetype}, #{originalName}, #{data}, SYSDATE)
+      	(image_num, mimetype, original_name, data, regdate)
+      	VALUES(#{imageNum}, #{mimetype}, #{originalName}, #{data}, SYSDATE)
 	 </insert>
 	 
-	 <select id="selectImage" parameterType="int" resultType="com.acorn2.plec.api.lecture.image.dto.ImageDto">
-	 	SELECT LEC_NUM, mimetype, original_name, data, regdate, update_regdate
+	 <select id="selectImage" parameterType="Integer" resultType="com.acorn2.plec.api.lecture.image.dto.ImageDto">
+	 	SELECT image_num, mimetype, original_name, data, regdate, update_regdate
 	 	FROM lecture_image
-	 	WHERE LEC_NUM = #{lecNum}
+	 	WHERE image_num = #{imageNum}
 	 </select>
 	 
 	 <update id="updateImage" parameterType="com.acorn2.plec.api.lecture.image.dto.ImageDto">
 	 	UPDATE lecture_image
 	 	SET mimetype = #{mimetype}, original_name = #{originalName}, data = #{data}, update_regdate = SYSDATE
-	 	WHERE LEC_NUM = #{lecNum}
+	 	WHERE image_num = #{imageNum}
 	 </update>
 	 
-	  <update id="deleteUpdateImage" parameterType="int">
+	  <update id="deleteUpdateImage" parameterType="Integer">
 	 	UPDATE lecture_image
 	 	SET delete_YN_code = 'Y'
-	 	WHERE LEC_NUM = #{lecNum}
+	 	WHERE image_num = #{imageNum}
 	 </update>
 	 
 	 <delete id="deleteImage">
 	 	DELETE lecture_image
 	 	WHERE delete_YN_code = 'Y'
 	 </delete>
+	
 
 </mapper>
 
