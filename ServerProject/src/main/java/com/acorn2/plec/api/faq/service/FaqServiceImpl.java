@@ -19,13 +19,12 @@ import com.acorn2.plec.api.faq.dto.res.FaqReadDetailResDto;
 import com.acorn2.plec.api.faq.dto.res.FaqReadListResDto;
 import com.acorn2.plec.api.faq.dto.res.FaqReadResDto;
 import com.acorn2.plec.api.faq.exception.FaqNotFoundException;
-import com.acorn2.plec.common.utils.SessionUtils;
 
 @EnableCaching
 @Service
 public class FaqServiceImpl implements FaqService {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
-	
+
 	private static final String SESSION_USERT_ID = "id";
 
 	@Autowired
@@ -52,8 +51,8 @@ public class FaqServiceImpl implements FaqService {
 
 	@Transactional
 	@Override
-	public void insertFaq(FaqCreateReqDto faqCreateReqDto) {
-		String id = SessionUtils.getUserId();
+	public void insertFaq(FaqCreateReqDto faqCreateReqDto, String id) {
+
 		FaqDto dto = new FaqDto();
 		dto.setQuestion(faqCreateReqDto.getQuestion());
 		dto.setContent(faqCreateReqDto.getContent());
@@ -63,8 +62,8 @@ public class FaqServiceImpl implements FaqService {
 
 	@Transactional
 	@Override
-	public void updateFaq(FaqUpdateReqDto faqUpdateReqDto) {
-		String id = SessionUtils.getUserId();
+	public void updateFaq(FaqUpdateReqDto faqUpdateReqDto, String id) {
+
 		FaqDto dto = new FaqDto();
 		dto.setFaqNum(faqUpdateReqDto.getFaqNum());
 		dto.setQuestion(faqUpdateReqDto.getQuestion());

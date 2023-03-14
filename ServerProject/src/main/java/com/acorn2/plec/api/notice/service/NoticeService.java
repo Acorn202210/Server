@@ -14,8 +14,8 @@ import com.acorn2.plec.api.notice.dto.res.NoticeReadListResDto;
 public interface NoticeService {
 	NoticeReadListResDto selectNoticeList(NoticeReadReqDto noticeReadReqDto);
 	NoticeReadDetailResDto selectNoticeOne(NoticeReadReqDto noticeReadReqDto);
-	void insertNotice(NoticeCreateReqDto noticeCreateReqDto, HttpServletRequest request);
-	void updateNotice(NoticeUpdateReqDto noticeUpdateReqDto, HttpServletRequest request);
+	void insertNotice(NoticeCreateReqDto noticeCreateReqDto, String id);
+	void updateNotice(NoticeUpdateReqDto noticeUpdateReqDto, String id);
 	void deleteUpdateNotice(Integer notiNum);
 	void deleteNotice();
 }

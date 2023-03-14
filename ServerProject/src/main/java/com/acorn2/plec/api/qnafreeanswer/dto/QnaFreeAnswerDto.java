@@ -1,4 +1,4 @@
-package com.acorn2.plec.api.qnafree.dto;
+package com.acorn2.plec.api.qnafreeanswer.dto;
 
 import org.apache.ibatis.type.Alias;
 

@@ -11,9 +11,9 @@ public interface FaqService {
 
 	FaqReadDetailResDto selectFaqOne(FaqReadReqDto faqReadReqDto);
 
-	void insertFaq(FaqCreateReqDto faqCreateReqDto);
+	void insertFaq(FaqCreateReqDto faqCreateReqDto, String id);
 
-	void updateFaq(FaqUpdateReqDto faqUpdateReqDto);
+	void updateFaq(FaqUpdateReqDto faqUpdateReqDto, String id);
 
 	void deleteUpdateFaq(Integer faqNum);
 

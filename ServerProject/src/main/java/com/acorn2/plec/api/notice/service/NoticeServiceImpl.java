@@ -35,13 +35,15 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public NoticeReadListResDto selectNoticeList(NoticeReadReqDto noticeReadReqDto) {		
 		if(noticeReadReqDto.getKeyword() != null){
-			if(noticeReadReqDto.getCondition().equals("title_content")){
-				noticeReadReqDto.setTitle(noticeReadReqDto.getKeyword());
+			String condition = noticeReadReqDto.getCondition();
+			String keyword = noticeReadReqDto.getKeyword();
+			if("title_content".equals(condition)){
+				noticeReadReqDto.setTitle(keyword);
 				noticeReadReqDto.setContent(noticeReadReqDto.getKeyword());
-			}else if(noticeReadReqDto.getCondition().equals("title")){ 
-				noticeReadReqDto.setTitle(noticeReadReqDto.getKeyword());
-			}else if(noticeReadReqDto.getCondition().equals("content")){ 
-				noticeReadReqDto.setContent(noticeReadReqDto.getKeyword());
+			}else if("title".equals(condition)){ 
+				noticeReadReqDto.setTitle(keyword);
+			}else if("content".equals(condition)){ 
+				noticeReadReqDto.setContent(keyword);
 			}
 		}
 		
@@ -64,27 +66,24 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Transactional
 	@Override
-	public void insertNotice(NoticeCreateReqDto noticeCreateReqDto, HttpServletRequest request) {
-		HttpSession session = request.getSession();
+	public void insertNotice(NoticeCreateReqDto noticeCreateReqDto, String id) {
 		
 		NoticeDto dto = new NoticeDto();
 		dto.setTitle(noticeCreateReqDto.getTitle());
 		dto.setContent(noticeCreateReqDto.getContent());
-		dto.setNotiWriter(session.getAttribute("id").toString());
+		dto.setNotiWriter(id);
 		noticeDao.insertNotice(dto);
 	}
 
 	@Transactional
 	@Override
-	public void updateNotice(NoticeUpdateReqDto noticeUpdateReqDto, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-
-		
+	public void updateNotice(NoticeUpdateReqDto noticeUpdateReqDto, String id) {
+	
 		NoticeDto dto = new NoticeDto();
 		dto.setNotiNum(noticeUpdateReqDto.getNotiNum());
 		dto.setTitle(noticeUpdateReqDto.getTitle());
 		dto.setContent(noticeUpdateReqDto.getContent());
-		dto.setUpdateId(session.getAttribute("id").toString());
+		dto.setUpdateId(id);
 		noticeDao.updateNotice(dto);
 	}
 

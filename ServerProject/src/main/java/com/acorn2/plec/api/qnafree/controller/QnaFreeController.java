@@ -1,7 +1,5 @@
 package com.acorn2.plec.api.qnafree.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +21,7 @@ import com.acorn2.plec.api.qnafree.dto.res.QnaFreeReadListResDto;
 import com.acorn2.plec.api.qnafree.service.QnaFreeService;
 import com.acorn2.plec.common.ComResponseEntity;
 import com.acorn2.plec.common.dto.ComResponseDto;
+import com.acorn2.plec.common.utils.SessionUtils;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -41,7 +40,7 @@ public class QnaFreeController {
 	@ApiResponse(responseCode = "200", description = "성공!")
 	
 	@Cacheable(cacheNames = "qnaFree")
-	@ApiOperation(value = "자유게시판 목록보기", notes = "자유게시판 목록을 출력한다.")
+	@ApiOperation(value = "자유게시판 목록", notes = "자유게시판 목록을 가져온다.")
 	@GetMapping("/list")
 	public ComResponseEntity<QnaFreeReadListResDto> getCdList(
 			@Parameter(hidden = true) QnaFreeReadReqDto qnaFreeReqDto){
@@ -50,38 +49,34 @@ public class QnaFreeController {
 		return new ComResponseEntity<>(new ComResponseDto<>(qnaFreeReadListResDto));
 	}
 	
-	//상세보기
-	@ApiOperation(value = "자유게시판 상세보기", notes = "자유게시판 글 한개 자세히 보기")
+	@ApiOperation(value = "단일 자유게시판 상세", notes = "하나의 자유게시판 상세 정보를 가져온다.")
 	@GetMapping(value = "/{freeQuestionNum}")
 	public ComResponseEntity<QnaFreeReadDetailResDto> getData(@Parameter(hidden = true) QnaFreeReadReqDto qnaFreeReadReqDto) {
-		QnaFreeReadDetailResDto qnaFreeReadDetailResDto=service.selectOne(qnaFreeReadReqDto);
+		QnaFreeReadDetailResDto qnaFreeReadDetailResDto=service.selectQnaFreeOne(qnaFreeReadReqDto);
 		return new ComResponseEntity<QnaFreeReadDetailResDto>(new ComResponseDto<>(qnaFreeReadDetailResDto));
 	}
 	
-	//문의 등록
 	@ApiOperation(value = "자유게시판 등록", notes = "자유게시판을 등록한다.")
 	@Transactional
 	@PostMapping("/insert")
-	public ComResponseEntity<Void> QnaFreeInsert(@RequestBody QnaFreeCreateReqDto qnaFreeCreateReqDto, HttpServletRequest request){
-		service.QnaFreeInsert(qnaFreeCreateReqDto, request);
+	public ComResponseEntity<Void> QnaFreeInsert(@RequestBody QnaFreeCreateReqDto qnaFreeCreateReqDto, String id){
+		service.insertQnaFree(qnaFreeCreateReqDto, SessionUtils.getUserId());
 		return new ComResponseEntity<Void>();
 	}
 	
-	//수정
 	@ApiOperation(value = "자유게시판 수정", notes = "자유게시판을 수정한다.")
 	@Transactional
 	@PutMapping("/{freeQuestionNum}/update")
-	public ComResponseEntity<Void> QnaFreeUpdate(@RequestBody QnaFreeUpdateReqDto qnaFreeUpdateReqDto, HttpServletRequest request){
-		service.QnaFreeUpdate(qnaFreeUpdateReqDto, request);
+	public ComResponseEntity<Void> QnaFreeUpdate(@RequestBody QnaFreeUpdateReqDto qnaFreeUpdateReqDto){
+		service.updateQnaFree(qnaFreeUpdateReqDto);
 		return new ComResponseEntity<Void>();
 	}
 	
-	//삭제(deleted Y) 처리
-	@ApiOperation(value = "자유게시판 삭제처리", notes = "자유게시판의 DELETE_YN_CODE를 Y로 바꾼다.")
+	@ApiOperation(value = "자유게시판 삭제", notes = "자유게시판의 DELETE_YN_CODE를 'Y'로 수정한다.")
 	@Transactional
 	@PutMapping("/{freeQuestionNum}/delete")
 	public ComResponseEntity<Void> QnaFreeDelete(@PathVariable("freeQuestionNum") Integer freeQuestionNum){
-		service.QnaFreeUpdateDelete(freeQuestionNum);
+		service.deleteUpdateQnaFree(freeQuestionNum);
 		return new ComResponseEntity<Void>();
 	}
 	

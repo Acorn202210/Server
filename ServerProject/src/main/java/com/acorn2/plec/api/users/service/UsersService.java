@@ -18,13 +18,13 @@ import com.acorn2.plec.api.users.dto.res.UsersReadListResDto;
 
 
 public interface UsersService {
-	Map<String, Object> isValidId(String lecUserId);
+	Map<String, Object> isValid(String lecUserId);
 	UsersReadListResDto selectUsersList(UsersReadReqDto usersReadReqDto);
-	UsersReadDetailResDto selectUser(HttpServletRequest request);
+	UsersReadDetailResDto selectUser(String id);
 	void insertUser(UsersCreateReqDto usersCreateReqDto);
-	Map<String, String> login(UsersLoginReqDto usersLoginReqDto, HttpServletRequest request);
-	void updateUser(UsersUpdateReqDto usersUpdateReqDto, HttpServletRequest request);
-	void updateUserPwd(UsersUpdatePwdReqDto usersUpdatePwdReqDto, HttpServletRequest request);
-	void deleteUpdateUser(String lecUserId,HttpServletRequest request);
+	Map<String, String> login(UsersLoginReqDto usersLoginReqDto);
+	void updateUser(UsersUpdateReqDto usersUpdateReqDto, String id);
+	void updateUserPwd(UsersUpdatePwdReqDto usersUpdatePwdReqDto, String id);
+	void deleteUpdateUser(String lecUserId);
 	void batchUser();
 }

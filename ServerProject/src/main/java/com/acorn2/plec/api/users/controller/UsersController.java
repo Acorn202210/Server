@@ -1,5 +1,6 @@
 package com.acorn2.plec.api.users.controller;
 
+import java.io.IOException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +38,7 @@ import com.acorn2.plec.api.users.profile.service.ProfileService;
 import com.acorn2.plec.api.users.service.UsersService;
 import com.acorn2.plec.common.ComResponseEntity;
 import com.acorn2.plec.common.dto.ComResponseDto;
+import com.acorn2.plec.common.utils.SessionUtils;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -56,7 +58,7 @@ public class UsersController {
 	@GetMapping(value = "/checkid")
 	public ComResponseEntity<Map<String, Object>> checkid(String lecUserId) {
 		
-		return new ComResponseEntity<>(new ComResponseDto<>(userService.isValidId(lecUserId)));
+		return new ComResponseEntity<>(new ComResponseDto<>(userService.isValid(lecUserId)));
 	}
 	
 	@ApiOperation(value="회원 목록", notes = "모든 회원의 목록을 가져온다.")
@@ -69,8 +71,8 @@ public class UsersController {
 	
 	@ApiOperation(value="마이페이지", notes = "마이페이지의 회원 정보를 가져온다.")
 	@GetMapping(value = "/{lecUserId}")
-	public ComResponseEntity<UsersReadDetailResDto> getNotice(HttpServletRequest request) {
-		UsersReadDetailResDto usersReadResDto = userService.selectUser(request);
+	public ComResponseEntity<UsersReadDetailResDto> getNotice() {
+		UsersReadDetailResDto usersReadResDto = userService.selectUser(SessionUtils.getUserId());
 		return new ComResponseEntity<>(new ComResponseDto<>(usersReadResDto));
 	}
 	
@@ -86,17 +88,16 @@ public class UsersController {
 	@ApiOperation(value="로그인", notes = "로그인")
 	@Transactional
 	@PostMapping(value="/login")
-	public ComResponseEntity<Map<String, String>> login(@RequestBody UsersLoginReqDto usersLoginReqDto, HttpServletRequest request){
+	public ComResponseEntity<Map<String, String>> login(@RequestBody UsersLoginReqDto usersLoginReqDto){
 		System.out.println(usersLoginReqDto.getLecUserId());
-		return new ComResponseEntity<>(new ComResponseDto<>(userService.login(usersLoginReqDto, request)));
+		return new ComResponseEntity<>(new ComResponseDto<>(userService.login(usersLoginReqDto)));
 	}
 	
 	@ApiOperation(value="로그아웃", notes = "로그아웃")
 	@Transactional
 	@PostMapping(value="/{lecUserId}/logout")
-	public ComResponseEntity<Void> logout(HttpServletRequest request){
-		HttpSession session = request.getSession();
-		session.removeAttribute("id");
+	public ComResponseEntity<Void> logout(){
+		SessionUtils.removeAttribute();
 		return new ComResponseEntity<Void>();
 	}
 	
@@ -107,32 +108,32 @@ public class UsersController {
 	public ComResponseEntity<ProfileNumDto> updateProfile(@Parameter(
             description = "multipart/form-data 형식의 이미지 리스트를 input으로 받습니다. 이때 key 값은 multipartFile 입니다.",
             content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE))
-			@RequestPart(value = "multipartFile", required = false) MultipartFile file, HttpServletRequest request){
+			@RequestPart(value = "multipartFile", required = false) MultipartFile file) throws IOException{
 		
-		return new ComResponseEntity<>(new ComResponseDto<>(profileService.insertProfile(file, request)));
+		return new ComResponseEntity<>(new ComResponseDto<>(profileService.insertProfile(file, SessionUtils.getUserId())));
 	}
 	
 	@ApiOperation(value="개인정보 수정", notes = "개인정보 수정하기")
 	@Transactional
 	@PutMapping(value="/{lecUserId}/profile-upload")
-	public ComResponseEntity<Void> update(@RequestBody UsersUpdateReqDto usersUpdateReqDto, HttpServletRequest request){
-		userService.updateUser(usersUpdateReqDto, request);
+	public ComResponseEntity<Void> update(@RequestBody UsersUpdateReqDto usersUpdateReqDto){
+		userService.updateUser(usersUpdateReqDto, SessionUtils.getUserId());
 		return new ComResponseEntity<Void>();
 	}
 	
 	@ApiOperation(value="비밀번호 수정", notes = "비밀번호 수정하기")
 	@Transactional
 	@PutMapping(value="/{lecUserId}/pwdUpdate")
-	public ComResponseEntity<Void> updatePwd(@RequestBody UsersUpdatePwdReqDto usersUpdatePwdReqDto, HttpServletRequest request){
-		userService.updateUserPwd(usersUpdatePwdReqDto, request);
+	public ComResponseEntity<Void> updatePwd(@RequestBody UsersUpdatePwdReqDto usersUpdatePwdReqDto){
+		userService.updateUserPwd(usersUpdatePwdReqDto, SessionUtils.getUserId());
 		return new ComResponseEntity<Void>();
 	}
 	
 	@ApiOperation(value="회원 탈퇴", notes = "회원 탈퇴 ")
 	@Transactional
 	@PutMapping(value="/{lecUserId}/delete")
-	public ComResponseEntity<Void> deleteUser(@PathVariable(required = false) String lecUserId, HttpServletRequest request){		
-		userService.deleteUpdateUser(lecUserId, request);
+	public ComResponseEntity<Void> deleteUser(@PathVariable(required = false) String lecUserId){		
+		userService.deleteUpdateUser(lecUserId);
 		return new ComResponseEntity<Void>();
 	}
 	
