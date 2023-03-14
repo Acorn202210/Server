@@ -114,6 +114,9 @@ public class UsersServiceImpl implements UsersService{
 		usersUpdateReqDto.setLecUserId(id);
 		usersDao.updateUser(usersUpdateReqDto);
 		
+		// 프로필  delete_YN_code 'N'으로 변경
+		profileDao.deleteUpdateProfileN(usersUpdateReqDto.getProfileNum());
+		
 	}
 
 	@Override

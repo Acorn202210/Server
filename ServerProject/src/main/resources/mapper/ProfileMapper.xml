@@ -29,6 +29,12 @@
 	 	WHERE profile_num = #{profileNum}
 	 </update>
 	 
+	 <update id="deleteUpdateProfileN" parameterType="Integer">
+	 	UPDATE profile_image
+	 	SET delete_YN_code = 'N'
+	 	WHERE profile_num = #{profileNum}
+	 </update>
+	 
 	 <delete id="deleteProfile">
 	 	DELETE profile_image
 	 	WHERE delete_YN_code = 'Y'

@@ -16,14 +16,14 @@ CREATE TABLE users(
 );
 
 CREATE TABLE profile_image(
-	profile_num Number PRIMARY KEY,
+    profile_num Number PRIMARY KEY,
     LEC_USER_ID VARCHAR2(50),
     mimetype varchar(100),
     data BLOB,
     original_name varchar(100),
     regdate DATE,
     update_regdate DATE
-    delete_YN_code VARCHAR2(3) DEFAULT 'N'
+    delete_YN_code VARCHAR2(3) DEFAULT 'Y'
 );
 
 CREATE SEQUENCE PROFILE_seq; 

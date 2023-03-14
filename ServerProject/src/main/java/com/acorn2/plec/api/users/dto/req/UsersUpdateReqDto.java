@@ -4,11 +4,11 @@ public class UsersUpdateReqDto {
 	private String lecUserId;
 	private String userEmail;
 	private String userPhone;
-	private String profileNum;
+	private Integer profileNum;
 
 	public UsersUpdateReqDto() {}
 
-	public UsersUpdateReqDto(String lecUserId, String userEmail, String userPhone, String profileNum) {
+	public UsersUpdateReqDto(String lecUserId, String userEmail, String userPhone, Integer profileNum) {
 		super();
 		this.lecUserId = lecUserId;
 		this.userEmail = userEmail;
@@ -40,11 +40,13 @@ public class UsersUpdateReqDto {
 		this.userPhone = userPhone;
 	}
 
-	public String getProfileNum() {
+	public Integer getProfileNum() {
 		return profileNum;
 	}
 
-	public void setProfileNum(String profileNum) {
+	public void setProfileNum(Integer profileNum) {
 		this.profileNum = profileNum;
 	}
+
+	
 }
