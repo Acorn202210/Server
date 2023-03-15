@@ -1,5 +1,7 @@
 package com.acorn2.plec.api.lecture.Service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.acorn2.plec.api.lecture.dto.LectureDto;
@@ -15,11 +17,11 @@ public interface LectureService {
 	
 	LectureDto LectureOne(int lecNum);
 	
-	void LectureInsert(LectureCreateReqDto lectureCreateReqDto);
+	void LectureInsert(LectureCreateReqDto lectureCreateReqDto, String id);
 	
 	void LectureDelete(int lecNum);
 
-	void LectureUpdate(LectureUpdateReqDto lectureUpdateReqDto, MultipartFile file);
+	void LectureUpdate(LectureUpdateReqDto lectureUpdateReqDto, HttpServletRequest request);
 
 	void batchLectureDelete();
 	

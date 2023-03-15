@@ -1,12 +1,13 @@
 package com.acorn2.plec.api.lecture.Service;
 
-import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.acorn2.plec.api.lecture.dao.LectureDao;
 import com.acorn2.plec.api.lecture.dto.LectureDto;
@@ -43,9 +44,7 @@ public class LectureServiceImpl implements LectureService{
 
 	@Transactional
 	@Override
-	public void LectureInsert(LectureCreateReqDto lectureCreateReqDto) {
-		String id = SessionUtils.getUserId();
-
+	public void LectureInsert(LectureCreateReqDto lectureCreateReqDto, String id) {
 		LectureDto dto = new LectureDto();
 	    ImageDto imageDto = new ImageDto();
 	    imageDto.setImageNum(lectureCreateReqDto.getImageNum()); 
@@ -73,10 +72,14 @@ public class LectureServiceImpl implements LectureService{
 
 	@Transactional
 	@Override
-	public void LectureUpdate(LectureUpdateReqDto lectureUpdateReqDto, MultipartFile file) {
-		String id = SessionUtils.getAttribute();
-		
+	public void LectureUpdate(LectureUpdateReqDto lectureUpdateReqDto , HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String id = session.getAttribute("id").toString();
 		LectureDto dto = new LectureDto();
+		ImageDto imageDto = new ImageDto();
+		imageDto.setImageNum(lectureUpdateReqDto.getImageNum()); 
+		
+		dto.setImageNum(imageDto.getImageNum());
 		dto.setLecNum(lectureUpdateReqDto.getLecNum());
 		dto.setTitle(lectureUpdateReqDto.getTitle());
 		dto.setTeacher(lectureUpdateReqDto.getTeacher());
@@ -86,25 +89,7 @@ public class LectureServiceImpl implements LectureService{
 		dto.setLargeCategory(lectureUpdateReqDto.getLargeCategory());
 		dto.setSmallCategory(lectureUpdateReqDto.getSmallCategory());
 		lectureDao.lectureUpdate(dto);
-		
-		Integer lecNum = lectureDao.currentLecNum();
-		ImageDto imageDto= new ImageDto();
-		ImageDto imageSelectDto= imageDao.selectImage(lecNum);
-		if(file != null) {
-			try {
-				imageDto.setMimetype(file.getContentType());
-				imageDto.setOriginalName(file.getOriginalFilename());
-				imageDto.setData(file.getBytes());
-				if(imageSelectDto == null) {
-					imageDao.insertImage(imageDto);
-				}else {
-					imageDao.updateImage(imageDto);
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		
+
 	}
 	
 	@Transactional

@@ -54,7 +54,7 @@
 	
 	<update id="lectureUpdate" parameterType="com.acorn2.plec.api.lecture.dto.LectureDto">
 		UPDATE LECTURE
-		SET TITLE= #{title},IMAGE_NUM=#{imageNum},IMAGE_NUM={imageNum} ,UPDATE_ID=#{updateId} ,TEACHER=#{teacher},DESCRIBE=#{describe}, VIDEOPATH=#{videoPath}, UPDATE_DATE=SYSDATE, LARGE_CATEGORY=#{largeCategory},SMALL_CATEGORY=#{smallCategory}
+		SET TITLE= #{title},IMAGE_NUM=#{imageNum}, UPDATE_ID=#{updateId} ,TEACHER=#{teacher},DESCRIBE=#{describe}, VIDEOPATH=#{videoPath}, UPDATE_DATE=SYSDATE, LARGE_CATEGORY=#{largeCategory},SMALL_CATEGORY=#{smallCategory}
 		WHERE LEC_NUM = #{lecNum}
 	</update>
 	

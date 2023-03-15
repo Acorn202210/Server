@@ -154,8 +154,7 @@ public class LectureDto {
 		this.serviceYnCode = serviceYnCode;
 	}
 
-	
-	
+		
 	
 	
 }
