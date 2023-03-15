@@ -87,8 +87,8 @@ public class LectureController {
 	
 	@ApiOperation(value="강의 이미지 가져오기", notes = "이미지 가져오기 ")
 	@GetMapping("/{lecNum}/image")
-	public ResponseEntity<byte[]> getImage(int lecNum){
-		Map<String, Object> map = imageService.selectImage(lecNum);
+	public ResponseEntity<byte[]> getImage(int imageNum){
+		Map<String, Object> map = imageService.selectImage(imageNum);
 		ImageDto imageDto = (ImageDto) map.get("imageDto");
 		HttpHeaders headers = (HttpHeaders) map.get("headers");
 		

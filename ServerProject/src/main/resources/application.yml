@@ -57,6 +57,7 @@ login-exclude-patterns:
   - /api/users/isYN
   - /api/faq/faq-list
   - /api/faq/*/faqOne
+  - /api/lecture/{lecNum}/image
   
 manager-add-patterns:
   - /api/notice/*/*
@@ -80,3 +81,5 @@ manager-exclude-patterns:
   - /api/lectureReview/lectureReviewList
   - /api/faq/faq-list
   - /api/faq/*/faqOne
+  - /api/lecture/{lecNum}/image
+  - /api/lecture/{lecNum}/lecture-one
