@@ -6,6 +6,8 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +25,7 @@ import com.acorn2.plec.api.lectureStudent.dto.res.LectureStudentReadListResDto;
 import com.acorn2.plec.api.lectureStudent.service.LectureStudentService;
 import com.acorn2.plec.common.ComResponseEntity;
 import com.acorn2.plec.common.dto.ComResponseDto;
+import com.acorn2.plec.common.utils.SessionUtils;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -47,11 +50,21 @@ public class LectureStudentController {
 	
 	@ApiOperation(value="강의 수강생 한 명의 정보", notes = "강의 수강생 한 명의 정보 가져오기")
 	@GetMapping("/{lecStuNum}/lecture-student-one")
-	public ComResponseEntity<LectureStudentOneReadResDto> LectureStudentOne(@RequestParam int lecStuNum){
-		LectureStudentOneReadResDto dtoOne = service.LectureStudentOne(lecStuNum);
+	public ComResponseEntity<LectureStudentOneReadResDto> LectureStudentOne(int lecStuRefGroup){
+		LectureStudentOneReadResDto dtoOne = service.LectureStudentOne(SessionUtils.getUserId(),lecStuRefGroup);
 		return new ComResponseEntity<>(new ComResponseDto<>(dtoOne));
 		
 	}
+	@ApiOperation(value="강의 수강생 여부", notes = "강의 수강생 여부")
+	@GetMapping("/lecture/{lecStuUserId}/{lecStuRefGroup}")
+	public ResponseEntity<LectureStudentOneReadResDto> getLectureStudentOne(int lecStuRefGroup) {
+	    LectureStudentOneReadResDto dto = service.LectureStudentOne(SessionUtils.getUserId(), lecStuRefGroup);
+	    if(dto == null) {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
+	    return new ResponseEntity<>(dto, HttpStatus.OK);
+	}
+
 	
 	@ApiOperation(value="강의 수강 신청", notes = "강의 수강 신청하기")
 	@PostMapping("/lecture-signup")

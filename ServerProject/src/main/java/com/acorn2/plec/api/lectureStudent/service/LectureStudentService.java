@@ -14,7 +14,9 @@ public interface LectureStudentService {
 
 	LectureStudentReadListResDto LectureStudentList(LectureStudentReadReqDto studentReadReqDto);
 
-	LectureStudentOneReadResDto LectureStudentOne(int lecStuNum);
+	LectureStudentOneReadResDto LectureStudentOne(String lecStuUserId, int lecStuRefGroup);
+	
+	public boolean hasStudentDataOne(String lecStuUserId, int lecStuRefGroup);
 	
 	void LectureSignup (LectureStudentCreateReqDto lecstudentCreateDto, HttpServletRequest request);
 	

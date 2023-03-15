@@ -58,8 +58,14 @@ public class LectureStudentServiceImpl implements LectureStudentService{
 	}
 
 	@Override
-	public LectureStudentOneReadResDto LectureStudentOne(int lecStuNum) {
-		return studentDao.studentDataOne(lecStuNum);
+	public LectureStudentOneReadResDto LectureStudentOne(String lecStuUserId, int lecStuRefGroup) {
+		return studentDao.studentDataOne(lecStuUserId, lecStuRefGroup);
+	}
+	
+	@Override
+	public boolean hasStudentDataOne(String lecStuUserId, int lecStuRefGroup) {
+	    LectureStudentOneReadResDto result = studentDao.studentDataOne(lecStuUserId, lecStuRefGroup);
+	    return result != null ? true : false;
 	}
 
 	@Transactional
@@ -92,6 +98,7 @@ public class LectureStudentServiceImpl implements LectureStudentService{
 		studentDao.LectureStudentDelete();
 		
 	}
+
 
 
 }

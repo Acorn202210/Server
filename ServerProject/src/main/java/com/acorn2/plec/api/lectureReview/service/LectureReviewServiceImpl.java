@@ -69,6 +69,7 @@ public class LectureReviewServiceImpl implements LectureReviewService{
 		dto.setLecReNum(reviewUpdateReqDto.getLecReNum());
 		dto.setContent(reviewUpdateReqDto.getContent());
 		dto.setStar(reviewUpdateReqDto.getStar());
+		System.out.println(dto.getLecReNum()+"|"+dto.getContent());
 		reviewDao.updateLectureReview(dto);	
 	}
 

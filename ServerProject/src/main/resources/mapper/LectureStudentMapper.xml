@@ -55,10 +55,10 @@
 			]]>
 	</select>
 	
-    <select id="studentDataOne" parameterType="int" resultType="com.acorn2.plec.api.lectureStudent.dto.res.LectureStudentOneReadResDto">
+    <select id="studentDataOne" parameterType="com.acorn2.plec.api.lectureStudent.dto.LectureStudentDto" resultType="com.acorn2.plec.api.lectureStudent.dto.res.LectureStudentOneReadResDto">
 		SELECT lec_Stu_Num,lec_Stu_User_Id,lec_Stu_Ref_Group,Complete_Yn,User_Regdate,Update_Date 
 		FROM LECTURE_STUDENT
-		WHERE lec_Stu_Num=#{lecStuNum}
+		WHERE lec_Stu_Ref_Group=#{lecStuRefGroup} AND lec_Stu_User_Id=#{lecStuUserId}
 	</select>
 	
 	<update id="LectureCompleteYn" parameterType="com.acorn2.plec.api.lectureStudent.dto.LectureStudentDto">

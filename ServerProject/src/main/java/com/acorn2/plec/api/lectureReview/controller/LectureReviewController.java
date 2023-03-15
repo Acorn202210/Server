@@ -59,8 +59,8 @@ public class LectureReviewController {
 	}
 	@ApiOperation(value="강의 후기 수정", notes = "강의 후기 수정하기")
 	@PutMapping("/{lecReNum}/update")
-	public ComResponseEntity<Void> LectureReviewUpdate(@RequestParam(value = "lecReNum", required = true) int lecReNum,
-											@Valid @RequestBody LectureReviewUpdateReqDto reviewUpdateReqDto){
+	public ComResponseEntity<Void> LectureReviewUpdate(@RequestBody LectureReviewUpdateReqDto reviewUpdateReqDto, @PathVariable int lecReNum){
+		reviewUpdateReqDto.setLecReNum(lecReNum);
 		service.LectureReviewUpdate(reviewUpdateReqDto);
 		return new ComResponseEntity<Void>();	
 	}
