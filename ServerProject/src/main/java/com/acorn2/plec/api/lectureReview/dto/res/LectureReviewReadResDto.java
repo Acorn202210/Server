@@ -20,6 +20,8 @@ public class LectureReviewReadResDto {
     private String content;
 	@Schema(description = "강의 후기 등록일", example = "2022-01-02", required = true, minLength = 1, maxLength = 30)
     private String updateDate;
+	@Schema(description = "강의 후기 작성자 프로필 번호", example = "1", required = true, minLength = 1, maxLength = 30)
+    private String profileNum;
     
 	public int getLecReNum() {
 		return lecReNum;
@@ -69,8 +71,16 @@ public class LectureReviewReadResDto {
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
+	
+	
     
-	 @Override
+	 public String getProfileNum() {
+		return profileNum;
+	}
+	public void setProfileNum(String profileNum) {
+		this.profileNum = profileNum;
+	}
+	@Override
 	 public String toString() {
 		 return "LectureReviewReadResDto{" +
 	                "lecReWriter=" + lecReWriter +
