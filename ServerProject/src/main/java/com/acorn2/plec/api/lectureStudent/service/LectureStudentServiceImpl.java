@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.acorn2.plec.api.lectureStudent.dao.LectureStudentDao;
 import com.acorn2.plec.api.lectureStudent.dto.LectureStudentDto;
+import com.acorn2.plec.api.lectureStudent.dto.req.LectureStudentCreateReqDto;
 import com.acorn2.plec.api.lectureStudent.dto.req.LectureStudentReadReqDto;
 import com.acorn2.plec.api.lectureStudent.dto.req.LectureStudentUpdateReqDto;
 import com.acorn2.plec.api.lectureStudent.dto.res.LectureStudentOneReadResDto;
@@ -33,16 +34,18 @@ public class LectureStudentServiceImpl implements LectureStudentService{
 	public LectureStudentReadListResDto LectureStudentList(LectureStudentReadReqDto studentReadReqDto) {
 		
 		if(studentReadReqDto.getKeyword() != null){
-			if(studentReadReqDto.getCondition().equals("lecUserId")){
-				studentReadReqDto.setLecUserId(studentReadReqDto.getKeyword());
-			}else if(studentReadReqDto.getCondition().equals("userBirth")){ 
-				studentReadReqDto.setUserBirth(studentReadReqDto.getKeyword());
-			}else if(studentReadReqDto.getCondition().equals("userPhone")){ 
-				studentReadReqDto.setUserPhone(studentReadReqDto.getKeyword());
-			}else if(studentReadReqDto.getCondition().equals("userEmail")){ 
-				studentReadReqDto.setUserEmail(studentReadReqDto.getKeyword());
-			}else if(studentReadReqDto.getCondition().equals("userRegdate")){ 
-				studentReadReqDto.setUserRegdate(studentReadReqDto.getKeyword());
+			String condition = studentReadReqDto.getCondition();
+			String keword = studentReadReqDto.getKeyword();
+			if("lecUserId".equals(condition)){
+				studentReadReqDto.setLecUserId(keword);
+			}else if("userBirth".equals(condition)){ 
+				studentReadReqDto.setUserBirth(keword);
+			}else if("userPhone".equals(condition)){ 
+				studentReadReqDto.setUserPhone(keword);
+			}else if("userEmail".equals(condition)){ 
+				studentReadReqDto.setUserEmail(keword);
+			}else if("userRegdate".equals(condition)){ 
+				studentReadReqDto.setUserRegdate(keword);
 			}
 		}
 		
@@ -61,12 +64,12 @@ public class LectureStudentServiceImpl implements LectureStudentService{
 
 	@Transactional
 	@Override
-	public void LectureSignup(Integer lecStuRefGroup, HttpServletRequest request) {
+	public void LectureSignup(LectureStudentCreateReqDto lecstudentCreateDto, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String id = session.getAttribute("id").toString();
 		LectureStudentDto dto = new LectureStudentDto();
 		dto.setLecStuUserId(id);
-		dto.setLecStuRefGroup(lecStuRefGroup);
+		dto.setLecStuRefGroup(lecstudentCreateDto.getLecStuRefGroup());
 		
 		studentDao.LectureSignup(dto);
 	}
@@ -78,7 +81,7 @@ public class LectureStudentServiceImpl implements LectureStudentService{
 		HttpSession session = request.getSession();
 		String id = session.getAttribute("id").toString();
 		dto.setLecStuUserId(id);
-		dto.setLecStuNum(studentUpdateReqDto.getLecStuNum());
+		dto.setLecStuRefGroup(studentUpdateReqDto.getLecStuRefGroup());
 		
 		studentDao.LectureCompleteYn(dto);
 	}

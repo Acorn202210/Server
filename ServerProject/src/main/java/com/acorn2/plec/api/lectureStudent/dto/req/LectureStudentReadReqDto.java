@@ -5,7 +5,7 @@ import com.acorn2.plec.common.dto.PagingDto;
 public class LectureStudentReadReqDto extends PagingDto{
 
 	private String lecStuUserId;
-	private int lecStuRefGroup;
+	private Integer lecStuRefGroup;
 	private String largeCategory;
 	private String smallCategory;
 	private String lecUserId;
@@ -21,7 +21,7 @@ public class LectureStudentReadReqDto extends PagingDto{
 	public LectureStudentReadReqDto() {}
 
 
-	public LectureStudentReadReqDto(String lecStuUserId, int lecStuRefGroup, String largeCategory, String smallCategory,
+	public LectureStudentReadReqDto(String lecStuUserId, Integer lecStuRefGroup, String largeCategory, String smallCategory,
 			String lecUserId, String userBirth, String userPhone, String userEmail, String userRegdate,
 			String generalUserCode, String keyword, String condition) {
 		super();
@@ -50,12 +50,12 @@ public class LectureStudentReadReqDto extends PagingDto{
 	}
 
 
-	public int getLecStuRefGroup() {
+	public Integer getLecStuRefGroup() {
 		return lecStuRefGroup;
 	}
 
 
-	public void setLecStuRefGroup(int lecStuRefGroup) {
+	public void setLecStuRefGroup(Integer lecStuRefGroup) {
 		this.lecStuRefGroup = lecStuRefGroup;
 	}
 

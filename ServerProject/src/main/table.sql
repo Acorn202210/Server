@@ -23,7 +23,7 @@ CREATE TABLE profile_image(
     original_name varchar(100),
     regdate DATE,
     update_regdate DATE,
-    delete_YN_code VARCHAR2(3) DEFAULT 'N'
+    delete_YN_code VARCHAR2(3) DEFAULT 'Y'
 );
 
 CREATE SEQUENCE PROFILE_seq; 
@@ -118,6 +118,7 @@ CREATE SEQUENCE FAQ_seq;
 -- LECTURE 테이블 
 CREATE TABLE LECTURE(
     LEC_NUM NUMBER PRIMARY KEY, --글번호
+    IMAGE_NUM Number,
     LEC_WRITER VARCHAR2(50) NOT NULL,
     TEACHER VARCHAR2(50) NOT NULL, --선생님
     TITLE VARCHAR2(50) NOT NULL, --제목
@@ -163,13 +164,13 @@ CREATE SEQUENCE LECTURE_STUDENT_seq;
 
 -- 강의 이미지
 CREATE TABLE lecture_image(
-    LEC_NUM NUMBER VARCHAR2(50) PRIMARY KEY,
+    IMAGE_NUM Number PRIMARY KEY,
     mimetype varchar(100),
     data BLOB,
     original_name varchar(100),
     regdate DATE,
-    update_regdate DATE
-    delete_YN_code VARCHAR2(3) DEFAULT 'N'
+    update_regdate DATE,
+    delete_YN_code VARCHAR2(3) DEFAULT 'Y'
 );
 
 -- QNA_FREE_QUESTION

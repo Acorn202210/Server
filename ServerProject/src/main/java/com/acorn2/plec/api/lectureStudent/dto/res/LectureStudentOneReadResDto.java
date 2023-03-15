@@ -8,7 +8,7 @@ public class LectureStudentOneReadResDto {
 	@Schema(description = "수강생 아이디", example = "admin", required = true, minLength = 1, maxLength = 50)
 	private String lecStuUserId;
 	@Schema(description = "강의의 번호", example = "1", required = true, minLength = 1, maxLength = 50)
-	private int lecStuRefGroup;
+	private Integer lecStuRefGroup;
 	@Schema(description = "강의 완료 여부", example = "N", required = true, minLength = 1, maxLength = 3)
 	private String completeYn;
 	@Schema(description = "수강 시작 날짜", example = "2022-01-01", required = true, minLength = 1, maxLength = 30)
@@ -27,10 +27,10 @@ public class LectureStudentOneReadResDto {
 	public void setLecStuUserId(String lecStuUserId) {
 		this.lecStuUserId = lecStuUserId;
 	}
-	public int getLecStuRefGroup() {
+	public Integer getLecStuRefGroup() {
 		return lecStuRefGroup;
 	}
-	public void setLecStuRefGroup(int lecStuRefGroup) {
+	public void setLecStuRefGroup(Integer lecStuRefGroup) {
 		this.lecStuRefGroup = lecStuRefGroup;
 	}
 	public String getCompleteYn() {

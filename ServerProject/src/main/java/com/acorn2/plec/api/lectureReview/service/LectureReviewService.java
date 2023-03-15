@@ -1,7 +1,5 @@
 package com.acorn2.plec.api.lectureReview.service;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.acorn2.plec.api.lectureReview.dto.LectureReviewDto;
 import com.acorn2.plec.api.lectureReview.dto.req.LectureReviewCreateReqDto;
 import com.acorn2.plec.api.lectureReview.dto.req.LectureReviewReadReqDto;
@@ -15,7 +13,7 @@ public interface LectureReviewService {
 	
 	LectureReviewDto LectureReviewOne(int lecReNum);
 	
-	void LectureReviewInsert(LectureReviewCreateReqDto ReviewCreateReqDto, HttpServletRequest request);
+	void LectureReviewInsert(LectureReviewCreateReqDto ReviewCreateReqDto);
 	
 	void LectureReviewDelete(int lecReNum);
 	

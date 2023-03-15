@@ -7,14 +7,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(description = "강의 완료")
 public class LectureStudentUpdateReqDto {
 	
-	private int lecStuNum;
-	
-	public int getLecStuNum() {
-		return lecStuNum;
-	}
-	public void setLecStuNum(int lecStuNum) {
-		this.lecStuNum = lecStuNum;
+	private Integer lecStuRefGroup;
+
+	public Integer getLecStuRefGroup() {
+		return lecStuRefGroup;
 	}
 
+	public void setLecStuRefGroup(Integer lecStuRefGroup) {
+		this.lecStuRefGroup = lecStuRefGroup;
+	}
 	
 }

@@ -3,6 +3,7 @@ package com.acorn2.plec.api.lectureStudent.service;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.acorn2.plec.api.lectureStudent.dto.req.LectureStudentCreateReqDto;
 import com.acorn2.plec.api.lectureStudent.dto.req.LectureStudentReadReqDto;
 import com.acorn2.plec.api.lectureStudent.dto.req.LectureStudentUpdateReqDto;
 import com.acorn2.plec.api.lectureStudent.dto.res.LectureStudentOneReadResDto;
@@ -15,7 +16,7 @@ public interface LectureStudentService {
 
 	LectureStudentOneReadResDto LectureStudentOne(int lecStuNum);
 	
-	void LectureSignup (Integer lecStuRefGroup, HttpServletRequest request);
+	void LectureSignup (LectureStudentCreateReqDto lecstudentCreateDto, HttpServletRequest request);
 	
 	void LectureCompleteYn (LectureStudentUpdateReqDto studentUpdateReqDto, HttpServletRequest request);
 	

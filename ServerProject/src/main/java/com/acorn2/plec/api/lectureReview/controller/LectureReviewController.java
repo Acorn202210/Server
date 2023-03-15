@@ -53,8 +53,8 @@ public class LectureReviewController {
 	}
 	@ApiOperation(value="강의 후기 등록", notes = "강의 후기 등록하기")
 	@PostMapping("/Lecture-review-insert")
-	public ComResponseEntity<Void> LectureReviewInsert(@Valid @RequestBody LectureReviewCreateReqDto reviewCreateReqDto, HttpServletRequest request){
-		service.LectureReviewInsert(reviewCreateReqDto, request);
+	public ComResponseEntity<Void> LectureReviewInsert(@Valid @RequestBody LectureReviewCreateReqDto reviewCreateReqDto){
+		service.LectureReviewInsert(reviewCreateReqDto);
 		return new ComResponseEntity<Void>();
 	}
 	@ApiOperation(value="강의 후기 수정", notes = "강의 후기 수정하기")

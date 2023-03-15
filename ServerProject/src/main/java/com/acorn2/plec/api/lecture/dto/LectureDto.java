@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Alias("lectureDto")
 public class LectureDto {
 	private int lecNum;
+	private int imageNum;
 	private String teacher;
 	private String lecWriter;
 	private String title;
@@ -21,11 +22,12 @@ public class LectureDto {
 	
 	public LectureDto() {}
 
-	public LectureDto(int lecNum, String teacher, String lecWriter, String title, String describe, String videoPath,
-			String userRegdate, String updateDate, int viewCount, String largeCategory, String smallCategory,
-			String updateId, String serviceYnCode) {
+	public LectureDto(int lecNum, int imageNum, String teacher, String lecWriter, String title, String describe,
+			String videoPath, String userRegdate, String updateDate, int viewCount, String largeCategory,
+			String smallCategory, String updateId, String serviceYnCode) {
 		super();
 		this.lecNum = lecNum;
+		this.imageNum = imageNum;
 		this.teacher = teacher;
 		this.lecWriter = lecWriter;
 		this.title = title;
@@ -46,6 +48,14 @@ public class LectureDto {
 
 	public void setLecNum(int lecNum) {
 		this.lecNum = lecNum;
+	}
+
+	public int getImageNum() {
+		return imageNum;
+	}
+
+	public void setImageNum(int imageNum) {
+		this.imageNum = imageNum;
 	}
 
 	public String getTeacher() {
@@ -88,11 +98,11 @@ public class LectureDto {
 		this.videoPath = videoPath;
 	}
 
-	public String getuserRegdate() {
+	public String getUserRegdate() {
 		return userRegdate;
 	}
 
-	public void setuserRegdate(String userRegdate) {
+	public void setUserRegdate(String userRegdate) {
 		this.userRegdate = userRegdate;
 	}
 
@@ -144,6 +154,7 @@ public class LectureDto {
 		this.serviceYnCode = serviceYnCode;
 	}
 
+	
 	
 	
 	

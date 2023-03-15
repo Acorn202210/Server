@@ -3,9 +3,6 @@ package com.acorn2.plec.api.lecture.Service;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +17,7 @@ import com.acorn2.plec.api.lecture.dto.res.LectureReadListResDto;
 import com.acorn2.plec.api.lecture.dto.res.LectureReadResDto;
 import com.acorn2.plec.api.lecture.image.dao.ImageDao;
 import com.acorn2.plec.api.lecture.image.dto.ImageDto;
+import com.acorn2.plec.common.utils.SessionUtils;
 
 
 
@@ -45,11 +43,14 @@ public class LectureServiceImpl implements LectureService{
 
 	@Transactional
 	@Override
-	public void LectureInsert(LectureCreateReqDto lectureCreateReqDto,MultipartFile file, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String id = session.getAttribute("id").toString();
-		
-		LectureDto dto = new LectureDto();		
+	public void LectureInsert(LectureCreateReqDto lectureCreateReqDto) {
+		String id = SessionUtils.getUserId();
+
+		LectureDto dto = new LectureDto();
+	    ImageDto imageDto = new ImageDto();
+	    imageDto.setImageNum(lectureCreateReqDto.getImageNum()); 
+	    
+	    dto.setImageNum(imageDto.getImageNum());
 		dto.setTeacher(lectureCreateReqDto.getTeacher());
 		dto.setLecWriter(id);
 		dto.setTitle(lectureCreateReqDto.getTitle());
@@ -60,26 +61,7 @@ public class LectureServiceImpl implements LectureService{
 		
 		lectureDao.lectureInsert(dto);
 		
-		Integer lecNum = lectureDao.currentLecNum();
 		
-		ImageDto imageSelectDto= imageDao.selectImage(lecNum);
-		
-		ImageDto imageDto = new ImageDto();
-		if(file != null) {
-			try {
-				imageDto.setLecNum(lecNum);
-				imageDto.setMimetype(file.getContentType());
-				imageDto.setOriginalName(file.getOriginalFilename());
-				imageDto.setData(file.getBytes());
-				if(imageSelectDto == null) {
-					imageDao.insertImage(imageDto);
-				}else {
-					imageDao.updateImage(imageDto);
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 	
 	@Transactional
@@ -91,9 +73,8 @@ public class LectureServiceImpl implements LectureService{
 
 	@Transactional
 	@Override
-	public void LectureUpdate(LectureUpdateReqDto lectureUpdateReqDto, MultipartFile file,HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String id = session.getAttribute("id").toString();
+	public void LectureUpdate(LectureUpdateReqDto lectureUpdateReqDto, MultipartFile file) {
+		String id = SessionUtils.getAttribute();
 		
 		LectureDto dto = new LectureDto();
 		dto.setLecNum(lectureUpdateReqDto.getLecNum());
@@ -111,7 +92,6 @@ public class LectureServiceImpl implements LectureService{
 		ImageDto imageSelectDto= imageDao.selectImage(lecNum);
 		if(file != null) {
 			try {
-				imageDto.setLecNum(lecNum);
 				imageDto.setMimetype(file.getContentType());
 				imageDto.setOriginalName(file.getOriginalFilename());
 				imageDto.setData(file.getBytes());
@@ -133,9 +113,8 @@ public class LectureServiceImpl implements LectureService{
 		lectureDao.batchLectureDelete();
 		
 	}
-
-
 	
+
 	
 	
 }

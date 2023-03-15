@@ -10,12 +10,12 @@ public class LectureStudentCreateReqDto {
 	@Schema(description = "강의의 번호", example = "1", required = true, minLength = 1, maxLength = 50)
 	@NotEmpty
 	@Size(min = 1, max = 50)
-	private int lecStuRefGroup;
+	private Integer lecStuRefGroup;
 
-	public int getLecStuRefGroup() {
+	public Integer getLecStuRefGroup() {
 		return lecStuRefGroup;
 	}
-	public void setLecStuRefGroup(int lecStuRefGroup) {
+	public void setLecStuRefGroup(Integer lecStuRefGroup) {
 		this.lecStuRefGroup = lecStuRefGroup;
 	}
 

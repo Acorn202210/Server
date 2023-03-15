@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.acorn2.plec.api.lectureStudent.dto.req.LectureStudentCreateReqDto;
 import com.acorn2.plec.api.lectureStudent.dto.req.LectureStudentReadReqDto;
 import com.acorn2.plec.api.lectureStudent.dto.req.LectureStudentUpdateReqDto;
 import com.acorn2.plec.api.lectureStudent.dto.res.LectureStudentOneReadResDto;
@@ -54,14 +55,13 @@ public class LectureStudentController {
 	
 	@ApiOperation(value="강의 수강 신청", notes = "강의 수강 신청하기")
 	@PostMapping("/lecture-signup")
-	public ComResponseEntity<Void> LectureSignup(@RequestParam int lecStuRefGroup, HttpServletRequest request){
-		service.LectureSignup(lecStuRefGroup, request);
+	public ComResponseEntity<Void> LectureSignup(@RequestBody LectureStudentCreateReqDto lecstudentCreateDto, HttpServletRequest request){
+		service.LectureSignup(lecstudentCreateDto, request);
 		return new ComResponseEntity<Void>();
 	}
 	@ApiOperation(value="강의 수강 완료", notes = "강의 수강 완료하기")
-	@PutMapping("/lecture-complete")
-	public ComResponseEntity<Void> LectureCompleteYn (@RequestParam int lecStuNum,
-												@Valid @RequestBody LectureStudentUpdateReqDto studentUpdateReqDto, HttpServletRequest request){
+	@PostMapping("/lecture-complete")
+	public ComResponseEntity<Void> LectureCompleteYn (@RequestBody LectureStudentUpdateReqDto studentUpdateReqDto, HttpServletRequest request){
 		service.LectureCompleteYn(studentUpdateReqDto, request);
 		return new ComResponseEntity<Void>();
 	}

@@ -54,7 +54,7 @@ public class NoticeController {
 	@ApiOperation(value="공지사항 등록", notes = "공지사항을 등록한다.")
 	@Transactional
 	@PostMapping
-	public ComResponseEntity<Void> insertNotice(@RequestBody NoticeCreateReqDto noticeCreateReqDto, String id){
+	public ComResponseEntity<Void> insertNotice(@RequestBody NoticeCreateReqDto noticeCreateReqDto){
 		service.insertNotice(noticeCreateReqDto, SessionUtils.getUserId());
 		return new ComResponseEntity<Void>();
 	}

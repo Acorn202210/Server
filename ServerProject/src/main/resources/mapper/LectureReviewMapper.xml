@@ -25,7 +25,7 @@
 	<insert id="insertLectureReview" parameterType="com.acorn2.plec.api.lectureReview.dto.LectureReviewDto">
 		INSERT INTO LECTURE_REVIEW
 		(LEC_RE_NUM, LEC_RE_WRITER, CONTENT, LEC_RE_STU_REF_GROUP, STAR,USER_REGDATE)
-		VALUES(#{lecReNum},#{lecReWriter},#{content},#{lecReStuRefGroup},#{star},SYSDATE)
+		VALUES(LECTURE_REVIEW_seq.NEXTVAL, #{lecReWriter},#{content},#{lecReStuRefGroup},#{star},SYSDATE)
 	</insert> 
 	
 	<update id="deleteLectureReview" parameterType="int">

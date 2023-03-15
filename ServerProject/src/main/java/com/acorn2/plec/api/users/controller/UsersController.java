@@ -105,10 +105,7 @@ public class UsersController {
 	@ApiOperation(value="프로필 업로드", notes = "프로필 업로드")
 	@Transactional
 	@PostMapping(value="/{lecUserId}/profile-img-upload")
-	public ComResponseEntity<ProfileNumDto> updateProfile(@Parameter(
-            description = "multipart/form-data 형식의 이미지 리스트를 input으로 받습니다. 이때 key 값은 multipartFile 입니다.",
-            content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE))
-			@RequestPart(value = "multipartFile", required = false) MultipartFile file) throws IOException{
+	public ComResponseEntity<ProfileNumDto> updateProfile(@RequestParam("file") MultipartFile file) throws IOException{
 		
 		return new ComResponseEntity<>(new ComResponseDto<>(profileService.insertProfile(file, SessionUtils.getUserId())));
 	}

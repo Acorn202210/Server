@@ -38,6 +38,10 @@ logging:
   level:
     org.springframework.cache: debug
 
+
+file:
+  location: C:\data
+
 login-add-patterns:
   - /api/users/**
   - /api/notice/*/*
