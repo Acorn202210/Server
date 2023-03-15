@@ -50,25 +50,15 @@ login-add-patterns:
   - /api/qnaboard/*
   - /api/qnaboard/*/*
   - /api/lecture/*/*
-<<<<<<< HEAD
-  
-=======
->>>>>>> branch 'master' of https://github.com/Acorn202210/Server.git
 login-exclude-patterns:
   - /api/users/login
   - /api/users
   - /api/users/checkid
   - /api/users/isYN
-  - /api/users/profile/{profileNum}
   - /api/faq/faq-list
   - /api/faq/*/faqOne
   - /api/lecture/lectureList
-<<<<<<< HEAD
- 
-
-=======
   - /api/users/profile/{profileNum}
->>>>>>> branch 'master' of https://github.com/Acorn202210/Server.git
 manager-add-patterns:
   - /api/notice/*/*
   - /api/notice
