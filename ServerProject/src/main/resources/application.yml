@@ -49,15 +49,16 @@ login-add-patterns:
   - /api/faq/**
   - /api/qnaboard/*
   - /api/qnaboard/*/*
-  
+  - /api/lecture/*/*
 login-exclude-patterns:
-  - /api/users/login 
+  - /api/users/login
   - /api/users
   - /api/users/checkid
   - /api/users/isYN
   - /api/faq/faq-list
   - /api/faq/*/faqOne
-  
+  - /api/lecture/lectureList
+  - /api/users/profile/{profileNum}
 manager-add-patterns:
   - /api/notice/*/*
   - /api/notice
@@ -67,16 +68,17 @@ manager-add-patterns:
   - /api/lectureReview/*/*
   - /api/lectureStudent/*/*
   - /api/lecture/lecutureInsert
-  - /api/lecture/{lecNum}
+  - /api/lecture/{lecNum}/lecture-update
   - /api/lecture/{lecNum}/lectureDelete
   - /api/faq/*
-  
 manager-exclude-patterns:
   - /api/users/login
   - /api/users
   - /api/users/checkid
   - /api/lecture/lectureList
-  - /api/lecture/{lecNum}/lectureOne
-  - /api/lectureReview/lectureReviewList
+  - /api/lecture/{lecNum}/image
+  - /api/lecture/{lecNum}/lecture-one
+  - /api/lecture-review/LectureReviewList
+  - /api/lecture-review/Lecture-review-insert
   - /api/faq/faq-list
   - /api/faq/*/faqOne

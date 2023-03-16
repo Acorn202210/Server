@@ -50,8 +50,7 @@ public class LectureReviewServiceImpl implements LectureReviewService{
 
 	@Transactional
 	@Override
-	public void LectureReviewInsert(LectureReviewCreateReqDto ReviewCreateReqDto) {
-		String id = SessionUtils.getUserId();
+	public void LectureReviewInsert(LectureReviewCreateReqDto ReviewCreateReqDto, String id) {
 		
 		LectureReviewDto dto = new LectureReviewDto();
 		dto.setLecReWriter(id);

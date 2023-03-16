@@ -22,7 +22,7 @@ import com.acorn2.plec.api.lecture.image.dto.ImageNumDto;
 @Service
 public class ImageServiceImpl implements ImageService{
 	@Autowired private ImageDao imageDao;
-	@Autowired private LectureDao lectureDao;
+
 
 	@Override
 	public Map<String, Object> selectImage(Integer imageNum) {
@@ -40,35 +40,26 @@ public class ImageServiceImpl implements ImageService{
 	}
 
 	@Override
-	public void updateImage(MultipartFile file, Integer imageNum) {
+	public void updateImage(MultipartFile file, Integer imageNum) throws IOException {
 		ImageDto imageDto = new ImageDto();
 		
-		try {
 			imageDto.setImageNum(imageNum);
 			imageDto.setMimetype(file.getContentType());
 			imageDto.setOriginalName(file.getOriginalFilename());
 			imageDto.setData(file.getBytes());
 			imageDao.updateImage(imageDto);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		
 	}
 
 	@Override
-	public ImageNumDto insertImage(MultipartFile file) {
+	public ImageNumDto insertImage(MultipartFile file) throws IOException {
 
 		ImageDto imageDto = new ImageDto();
-		if(file != null) {
-			try {
-				imageDto.setMimetype(file.getContentType());
-				imageDto.setOriginalName(file.getOriginalFilename());
-				imageDto.setData(file.getBytes());
+		imageDto.setMimetype(file.getContentType());
+		imageDto.setOriginalName(file.getOriginalFilename());
+		imageDto.setData(file.getBytes());
 				
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+
 		imageDao.insertImage(imageDto);
 	
 		ImageNumDto dto = new ImageNumDto(imageDto.getImageNum());
