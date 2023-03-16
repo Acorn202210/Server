@@ -6,7 +6,7 @@
    <insert id="insertQnaAnswer" parameterType="com.acorn2.plec.api.qnaboard.dto.QnaBoardAnswerDto">
       INSERT INTO qna_board_answer
       (BOARD_COMMENT_NUM, BOARD_COMMENT_WRITER, content, BOARD_COMMENT_REF_GROUP, USER_REGDATE, update_id,update_date)
-      VALUES(qna_board_answer_seq.NEXTVAL, #{dto.boardCommentWriter}, #{dto.content}, #{dto.boardCommentRefGroup}, SYSDATE, #{dto.boardCommentWriter}, SYSDATE)
+      VALUES(qna_board_answer_seq.NEXTVAL, #{boardCommentWriter}, #{content}, #{boardCommentRefGroup}, SYSDATE, #{boardCommentWriter}, SYSDATE)
    </insert>
    
    <!-- 저장 예정인 댓글의 글번호를 미리 얻어내기--> 
@@ -15,12 +15,12 @@
       FROM DUAL
    </select>
    
-   <!-- 댓글 수정
-   <update id="update" parameterType="com.acorn2.plec.api.qnaboard.dto.qnaBoardAnswerDto">
+   <!-- 댓글 수정 -->
+   <update id="updateQnaAnswer" parameterType="com.acorn2.plec.api.qnaboard.dto.QnaBoardAnswerDto">
       UPDATE qna_board_answer
-      SET content=#{content}, UPDATE_DATE=SYSDATE, UPDATE_ID=#{boardCommentWriter}
-      WHERE BOARD_COMMENT_REF_GROUP=#{boardCommentRefGrou}
-   </update>--> 
+      SET content=#{content}, UPDATE_DATE=SYSDATE, UPDATE_ID=#{updateId}
+      WHERE BOARD_COMMENT_REF_GROUP=#{boardCommentRefGroup}
+   </update> 
    
    <!-- 댓글 한개 보기 selectOne -->
    <select id="selectQnaAnswer" parameterType="int" resultType="com.acorn2.plec.api.qnaboard.dto.QnaBoardAnswerDto">
@@ -29,13 +29,12 @@
       WHERE BOARD_COMMENT_REF_GROUP=#{boardCommentRefGroup}
    </select>
       
-   <!-- 댓글 삭제(DB Y로 변경)
-   <update>
+   <!-- 댓글 삭제(DB Y로 변경)-->
+   <update id="deleteUpdateQnaAnswer" parameterType="int">
       UPDATE qna_board_answer
       SET delete_Yn_code='Y'
-      WHERE BOARD_COMMENT_NUM=#{boardCommentNum} 
-   </update>
-   -->      
+      WHERE BOARD_COMMENT_REF_GROUP=#{boardCommentRefGroup} 
+   </update>   
    
    <!-- 댓글 삭제(batch)
    <delete id="deleteQnaBoard">
