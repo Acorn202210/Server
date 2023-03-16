@@ -1,32 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.acorn2.plec.api.qnafree.dao.QnaFreeAnswerDao">
-	
+<mapper namespace="com.acorn2.plec.api.qnafreeanswer.dao.QnaFreeAnswerDao">
+   
+   <select id="selectQnaFreeAnswerList" parameterType="com.acorn2.plec.api.qnafreeanswer.dto.req.QnaFreeAnswerReadReqDto" resultType="com.acorn2.plec.api.qnafreeanswer.dto.res.QnaFreeAnswerReadResDto">
+		SELECT
+			*
+		FROM (
+			SELECT
+				result1.*
+				, ROWNUM AS rnum
+			FROM (
+				SELECT 
+					FREE_COMMENT_NUM
+					, FREE_COMMENT_WRITER
+					, content
+					, TARGET_ID
+					, COMMENT_GROUP
+					, FREE_COMMENT_REF_GROUP
+					, qna_free_answer.USER_REGDATE
+					, update_date
+					, update_id
+					, delete_Yn_code
+				FROM qna_free_answer
+				INNER JOIN users ON qna_free_answer.FREE_COMMENT_WRITER=users.LEC_USER_ID
+				WHERE FREE_COMMENT_REF_GROUP=#{freeCommentRefGroup} AND delete_Yn_code='N'
+				ORDER BY FREE_COMMENT_NUM DESC) result1)
+		WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
+	</select>
 
-   <!-- 댓글 저장. 댓글의 글번호도 미리 QnaBoardAnswerDto 객체에 담아와야 한다.--> 
-   <insert id="insertQnaAnswer" parameterType="com.acorn2.plec.api.qnafree.dto.QnaFreeAnswerDto">
-      INSERT INTO qna_free_answer
-      (FREE_COMMENT_NUM, FREE_COMMENT_WRITER, content, FREE_COMMENT_REF_GROUP, USER_REGDATE, update_id,update_date)
-      VALUES(qna_free_answer_seq.NEXTVAL, #{dto.freeCommentWriter}, #{dto.content}, #{dto.freeCommentRefGroup}, SYSDATE, #{dto.freeCommentWriter}, SYSDATE)
-   </insert>
-   
-   <!-- 저장 예정인 댓글의 글번호를 미리 얻어내기--> 
-   <select id="getSequence" resultType="int">
-      SELECT qna_free_answer_seq.NEXTVAL
-      FROM DUAL
-   </select>
-   
-   <!-- 댓글 수정
-   <update id="update" parameterType="com.acorn2.plec.api.qnaboard.dto.qnaBoardAnswerDto">
-      UPDATE qna_board_answer
-      SET content=#{content}, UPDATE_DATE=SYSDATE, UPDATE_ID=#{boardCommentWriter}
-      WHERE BOARD_COMMENT_REF_GROUP=#{boardCommentRefGrou}
-   </update>--> 
-   
-   <!-- 댓글 한개 보기 selectOne -->
-   <select id="selectQnaAnswer" parameterType="int" resultType="com.acorn2.plec.api.qnafree.dto.QnaFreeAnswerDto">
-      SELECT FREE_COMMENT_NUM, FREE_COMMENT_WRITER, content, BOARD_COMMENT_REF_GROUP, USER_REGDATE
-      FROM qna_free_answer
-      WHERE FREE_COMMENT_REF_GROUP=#{freeCommentRefGroup}
-   </select>
+	<select id="selectQnaFreeAnswerCount" parameterType="com.acorn2.plec.api.qnafreeanswer.dto.req.QnaFreeAnswerReadReqDto" resultType="java.lang.Integer">
+		SELECT NVL(MAX(ROWNUM), 0)
+		FROM qna_free_answer
+		<where>
+			delete_Yn_code='N'
+		</where>
+	</select>
+
+	<select id="selectQnaFreeAnswerOne" parameterType="com.acorn2.plec.api.qnafreeanswer.dto.req.QnaFreeAnswerReadReqDto" resultType="com.acorn2.plec.api.qnafreeanswer.dto.res.QnaFreeAnswerReadDetailResDto">
+		SELECT result1.*
+		FROM
+			(SELECT FREE_COMMENT_NUM, FREE_COMMENT_WRITER, content, TARGET_ID, FREE_COMMENT_REF_GROUP, COMMENT_GROUP, user_regdate, update_date, update_id, delete_YN_code
+			FROM qna_free_answer
+			<where>
+				delete_YN_code='N'
+			</where>
+			) result1
+		WHERE FREE_COMMENT_NUM=#{freeCommentNum}
+	</select>
+	
+	<select id="getSequence" resultType="Integer">
+      	SELECT qna_free_answer_seq.NEXTVAL
+      	FROM DUAL
+   	</select>
+
+	<insert id="insertQnaFreeAnswer" parameterType="com.acorn2.plec.api.qnafreeanswer.dto.QnaFreeAnswerDto">
+		INSERT INTO qna_free_answer
+		(FREE_COMMENT_NUM, FREE_COMMENT_WRITER, content, TARGET_ID, FREE_COMMENT_REF_GROUP, COMMENT_GROUP, user_regdate, delete_YN_code)
+		VALUES(#{freeCommentNum}, #{freeCommentWriter}, #{content}, #{targetId}, #{freeCommentRefGroup}, #{commentGroup}, SYSDATE, 'N')
+	</insert>
+
+	<update id="updateQnaFreeAnswer" parameterType="com.acorn2.plec.api.qnafreeanswer.dto.QnaFreeAnswerDto">
+		UPDATE qna_free_answer
+		<set>
+			<if test="content != null">
+				content=#{content},
+			</if>
+			update_id=#{updateId},
+			update_date=SYSDATE
+		</set>
+		WHERE FREE_COMMENT_NUM=#{freeCommentNum}
+	</update>
+
+	<update id="deleteUpdateQnaFreeAnswer" parameterType="Integer">
+		UPDATE qna_free_answer
+		<set>
+			delete_Yn_code='Y'
+		</set>
+		WHERE FREE_COMMENT_NUM=#{freeCommentNum}
+	</update>
+
+	<delete id="deleteQnaFreeAnswer">
+		DELETE FROM qna_free_answer
+		WHERE delete_YN_code='Y'
+	</delete>
 </mapper>

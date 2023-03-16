@@ -4,7 +4,7 @@ import org.apache.ibatis.type.Alias;
 
 import com.acorn2.plec.common.dto.PagingDto;
 
-@Alias("QnaFreeDto")
+@Alias("qnaFreeDto")
 public class QnaFreeDto extends PagingDto {	
 		private int freeQuestionNum;
 		private String freeQuestionWriter;

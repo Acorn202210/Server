@@ -2,9 +2,6 @@ package com.acorn2.plec.api.faq.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +24,8 @@ import com.acorn2.plec.api.faq.exception.FaqNotFoundException;
 @Service
 public class FaqServiceImpl implements FaqService {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
+
+	private static final String SESSION_USERT_ID = "id";
 
 	@Autowired
 	private FaqDao faqDao;
@@ -52,26 +51,24 @@ public class FaqServiceImpl implements FaqService {
 
 	@Transactional
 	@Override
-	public void insertFaq(FaqCreateReqDto faqCreateReqDto, HttpServletRequest request) {
-		HttpSession session = request.getSession();
+	public void insertFaq(FaqCreateReqDto faqCreateReqDto, String id) {
 
 		FaqDto dto = new FaqDto();
 		dto.setQuestion(faqCreateReqDto.getQuestion());
 		dto.setContent(faqCreateReqDto.getContent());
-		dto.setFaqWriter(session.getAttribute("id").toString());
+		dto.setFaqWriter(id);
 		faqDao.insertFaq(dto);
 	}
 
 	@Transactional
 	@Override
-	public void updateFaq(FaqUpdateReqDto faqUpdateReqDto, HttpServletRequest request) {
-		HttpSession session = request.getSession();
+	public void updateFaq(FaqUpdateReqDto faqUpdateReqDto, String id) {
 
 		FaqDto dto = new FaqDto();
 		dto.setFaqNum(faqUpdateReqDto.getFaqNum());
 		dto.setQuestion(faqUpdateReqDto.getQuestion());
 		dto.setContent(faqUpdateReqDto.getContent());
-		dto.setUpdateId(session.getAttribute("id").toString());
+		dto.setUpdateId(id);
 
 		faqDao.updateFaq(dto);
 	}

@@ -1,7 +1,5 @@
 package com.acorn2.plec.api.faq.service;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.acorn2.plec.api.faq.dto.req.FaqCreateReqDto;
 import com.acorn2.plec.api.faq.dto.req.FaqReadReqDto;
 import com.acorn2.plec.api.faq.dto.req.FaqUpdateReqDto;
@@ -13,11 +11,12 @@ public interface FaqService {
 
 	FaqReadDetailResDto selectFaqOne(FaqReadReqDto faqReadReqDto);
 
-	void insertFaq(FaqCreateReqDto faqCreateReqDto, HttpServletRequest request);
+	void insertFaq(FaqCreateReqDto faqCreateReqDto, String id);
 
-	void updateFaq(FaqUpdateReqDto faqUpdateReqDto, HttpServletRequest request);
+	void updateFaq(FaqUpdateReqDto faqUpdateReqDto, String id);
 
 	void deleteUpdateFaq(Integer faqNum);
 
 	void deleteFaq();
+
 }
