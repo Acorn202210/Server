@@ -86,7 +86,7 @@ public class LectureController {
 	
 	
 	@ApiOperation(value="강의 이미지 가져오기", notes = "이미지 가져오기 ")
-	@GetMapping("/{lecNum}/image")
+	@GetMapping("/{imageNum}/image")
 	public ResponseEntity<byte[]> getImage(int imageNum){
 		Map<String, Object> map = imageService.selectImage(imageNum);
 		ImageDto imageDto = (ImageDto) map.get("imageDto");
@@ -97,8 +97,8 @@ public class LectureController {
 	
 	@ApiOperation(value="강의 수정", notes = "강의 수정하기")
 	@PutMapping(value="/{lecNum}/lecture-update")
-	public ComResponseEntity<Void> lectureUpdate(@RequestBody LectureUpdateReqDto lectureUpdateReqDto, HttpServletRequest request) throws IOException{
-		service.LectureUpdate(lectureUpdateReqDto, request);
+	public ComResponseEntity<Void> lectureUpdate(@RequestBody LectureUpdateReqDto lectureUpdateReqDto) throws IOException{
+		service.LectureUpdate(lectureUpdateReqDto, SessionUtils.getUserId());
 		return new ComResponseEntity<Void>();
 	}
 	

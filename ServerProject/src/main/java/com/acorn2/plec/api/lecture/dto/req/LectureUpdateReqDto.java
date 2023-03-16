@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 public class LectureUpdateReqDto {
 	@Schema(description = "강의 번호", example = "1", required = true, minLength = 1, maxLength = 50)
-	private int lecNum;
+	private Integer lecNum;
 	@Schema(description = "강의 선생님", example = "seodongmin", required = true, minLength = 1, maxLength = 50)
 	private String teacher;
 	@Schema(description = "강의 제목", example = "자바 강의", required = true, minLength = 1, maxLength = 50)
@@ -17,11 +17,11 @@ public class LectureUpdateReqDto {
 	private String largeCategory;
 	@Schema(description = "강의 소분류", example = "js", required = true, minLength = 1, maxLength = 10)
 	private String smallCategory;
-	private int imageNum;
-	public int getLecNum() {
+	private Integer imageNum;
+	public Integer getLecNum() {
 		return lecNum;
 	}
-	public void setLecNum(int lecNum) {
+	public void setLecNum(Integer lecNum) {
 		this.lecNum = lecNum;
 	}
 	public String getTeacher() {
@@ -60,10 +60,10 @@ public class LectureUpdateReqDto {
 	public void setSmallCategory(String smallCategory) {
 		this.smallCategory = smallCategory;
 	}
-	public int getImageNum() {
+	public Integer getImageNum() {
 		return imageNum;
 	}
-	public void setImageNum(int imageNum) {
+	public void setImageNum(Integer imageNum) {
 		this.imageNum = imageNum;
 	}
 	

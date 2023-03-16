@@ -23,6 +23,7 @@ import com.acorn2.plec.api.lectureReview.dto.res.LectureReviewReadListResDto;
 import com.acorn2.plec.api.lectureReview.service.LectureReviewService;
 import com.acorn2.plec.common.ComResponseEntity;
 import com.acorn2.plec.common.dto.ComResponseDto;
+import com.acorn2.plec.common.utils.SessionUtils;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -54,7 +55,7 @@ public class LectureReviewController {
 	@ApiOperation(value="강의 후기 등록", notes = "강의 후기 등록하기")
 	@PostMapping("/Lecture-review-insert")
 	public ComResponseEntity<Void> LectureReviewInsert(@Valid @RequestBody LectureReviewCreateReqDto reviewCreateReqDto){
-		service.LectureReviewInsert(reviewCreateReqDto);
+		service.LectureReviewInsert(reviewCreateReqDto, SessionUtils.getUserId());
 		return new ComResponseEntity<Void>();
 	}
 	@ApiOperation(value="강의 후기 수정", notes = "강의 후기 수정하기")

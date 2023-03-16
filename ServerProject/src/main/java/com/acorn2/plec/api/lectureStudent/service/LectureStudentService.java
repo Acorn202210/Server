@@ -1,6 +1,8 @@
 package com.acorn2.plec.api.lectureStudent.service;
 
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.acorn2.plec.api.lectureStudent.dto.req.LectureStudentCreateReqDto;
@@ -16,11 +18,11 @@ public interface LectureStudentService {
 
 	LectureStudentOneReadResDto LectureStudentOne(String lecStuUserId, int lecStuRefGroup);
 	
-	public boolean hasStudentDataOne(String lecStuUserId, int lecStuRefGroup);
+	Map<String, Object> isStudent(String lecStuUserId, int lecStuRefGroup);
 	
-	void LectureSignup (LectureStudentCreateReqDto lecstudentCreateDto, HttpServletRequest request);
+	void LectureSignup (LectureStudentCreateReqDto lecstudentCreateDto, String id);
 	
-	void LectureCompleteYn (LectureStudentUpdateReqDto studentUpdateReqDto, HttpServletRequest request);
+	void LectureCompleteYn (LectureStudentUpdateReqDto studentUpdateReqDto, String id);
 	
 	void LectureDelete();
 

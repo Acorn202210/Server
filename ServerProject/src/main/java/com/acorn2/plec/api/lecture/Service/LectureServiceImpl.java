@@ -2,9 +2,6 @@ package com.acorn2.plec.api.lecture.Service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +15,6 @@ import com.acorn2.plec.api.lecture.dto.res.LectureReadListResDto;
 import com.acorn2.plec.api.lecture.dto.res.LectureReadResDto;
 import com.acorn2.plec.api.lecture.image.dao.ImageDao;
 import com.acorn2.plec.api.lecture.image.dto.ImageDto;
-import com.acorn2.plec.common.utils.SessionUtils;
 
 
 
@@ -37,7 +33,7 @@ public class LectureServiceImpl implements LectureService{
 	}
 
 	@Override
-	public LectureDto LectureOne(int lecNum) {
+	public LectureDto LectureOne(Integer lecNum) {
 		
 		return lectureDao.lectureOne(lecNum);
 	}
@@ -65,16 +61,14 @@ public class LectureServiceImpl implements LectureService{
 	
 	@Transactional
 	@Override
-	public void LectureDelete(int lecNum) {
+	public void LectureDelete(Integer lecNum) {
 		lectureDao.lectureDelete(lecNum);
 		
 	}
 
 	@Transactional
 	@Override
-	public void LectureUpdate(LectureUpdateReqDto lectureUpdateReqDto , HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String id = session.getAttribute("id").toString();
+	public void LectureUpdate(LectureUpdateReqDto lectureUpdateReqDto, String id) {
 		LectureDto dto = new LectureDto();
 		ImageDto imageDto = new ImageDto();
 		imageDto.setImageNum(lectureUpdateReqDto.getImageNum()); 

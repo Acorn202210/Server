@@ -15,11 +15,11 @@ public interface LectureDao {
 
 	public Integer selectLectureCount(LectureReadReqDto lectureReadReqDto);
 	
-	public LectureDto lectureOne(int lecNum);
+	public LectureDto lectureOne(Integer lecNum);
 	
 	Integer lectureInsert(LectureDto dto);
 	
-	Integer lectureDelete(int lecNum);
+	Integer lectureDelete(Integer lecNum);
 	
 	Integer lectureUpdate(LectureDto dto);
 	

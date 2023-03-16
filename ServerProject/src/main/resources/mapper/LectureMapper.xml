@@ -22,19 +22,19 @@
 		WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
 	</select>
 	
-	<select id="selectLectureCount" parameterType="com.acorn2.plec.api.lecture.dto.req.LectureReadReqDto" resultType="java.lang.Integer">
+	<select id="selectLectureCount" parameterType="com.acorn2.plec.api.lecture.dto.req.LectureReadReqDto" resultType="Integer">
 		SELECT NVL(MAX(ROWNUM), 0)
 		FROM LECTURE
 	</select>
 	
-	<select id="lectureOne" parameterType="int" resultType="com.acorn2.plec.api.lecture.dto.LectureDto">
+	<select id="lectureOne" parameterType="Integer" resultType="com.acorn2.plec.api.lecture.dto.LectureDto">
 		SELECT LEC_NUM, IMAGE_NUM, TEACHER, LEC_WRITER, TITLE, DESCRIBE ,VIDEOPATH, VIEWCOUNT, IMAGE_NUM,
 					USER_REGDATE, LARGE_CATEGORY, SMALL_CATEGORY
 		FROM LECTURE
 		WHERE LEC_NUM = #{lecNum}
 	</select>
 	
-	<select id = "currentLecNum" resultType="java.lang.Integer">
+	<select id = "currentLecNum" resultType="Integer">
 		SELECT MAX(LEC_NUM)
 		FROM LECTURE
 	</select>
@@ -46,7 +46,7 @@
 		VALUES(LECTURE_seq.NEXTVAL, #{imageNum}, #{teacher}, #{lecWriter}, #{title}, #{describe}, #{videoPath}, #{viewCount}, SYSDATE, #{largeCategory}, #{smallCategory} )
 	</insert>
 	
-	<update id="addViewCount" parameterType="int">
+	<update id="addViewCount" parameterType="Integer">
 		UPDATE LECTURE
 		SET VIEWCOUNT=VIEWCOUNT+1
 		WHERE LEC_NUM=#{lecNum}
@@ -58,7 +58,7 @@
 		WHERE LEC_NUM = #{lecNum}
 	</update>
 	
-	<update id="lectureDelete" parameterType="int">
+	<update id="lectureDelete" parameterType="Integer">
 	    UPDATE LECTURE
 	    SET SERVICE_YN_CODE='N'
 	    WHERE LEC_NUM=#{lecNum}

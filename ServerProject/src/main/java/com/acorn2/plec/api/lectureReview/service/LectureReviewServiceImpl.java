@@ -50,8 +50,7 @@ public class LectureReviewServiceImpl implements LectureReviewService{
 
 	@Transactional
 	@Override
-	public void LectureReviewInsert(LectureReviewCreateReqDto ReviewCreateReqDto) {
-		String id = SessionUtils.getUserId();
+	public void LectureReviewInsert(LectureReviewCreateReqDto ReviewCreateReqDto, String id) {
 		
 		LectureReviewDto dto = new LectureReviewDto();
 		dto.setLecReWriter(id);
@@ -69,7 +68,6 @@ public class LectureReviewServiceImpl implements LectureReviewService{
 		dto.setLecReNum(reviewUpdateReqDto.getLecReNum());
 		dto.setContent(reviewUpdateReqDto.getContent());
 		dto.setStar(reviewUpdateReqDto.getStar());
-		System.out.println(dto.getLecReNum()+"|"+dto.getContent());
 		reviewDao.updateLectureReview(dto);	
 	}
 

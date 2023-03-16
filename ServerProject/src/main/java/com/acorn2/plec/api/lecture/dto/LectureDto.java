@@ -5,8 +5,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Alias("lectureDto")
 public class LectureDto {
-	private int lecNum;
-	private int imageNum;
+	private Integer lecNum;
+	private Integer imageNum;
 	private String teacher;
 	private String lecWriter;
 	private String title;
@@ -14,7 +14,7 @@ public class LectureDto {
 	private String videoPath;
 	private String userRegdate;
 	private String updateDate;
-	private int viewCount;
+	private Integer viewCount;
 	private String largeCategory;
 	private String smallCategory;
 	private String updateId;
@@ -22,8 +22,8 @@ public class LectureDto {
 	
 	public LectureDto() {}
 
-	public LectureDto(int lecNum, int imageNum, String teacher, String lecWriter, String title, String describe,
-			String videoPath, String userRegdate, String updateDate, int viewCount, String largeCategory,
+	public LectureDto(Integer lecNum, Integer imageNum, String teacher, String lecWriter, String title, String describe,
+			String videoPath, String userRegdate, String updateDate, Integer viewCount, String largeCategory,
 			String smallCategory, String updateId, String serviceYnCode) {
 		super();
 		this.lecNum = lecNum;
@@ -42,19 +42,19 @@ public class LectureDto {
 		this.serviceYnCode = serviceYnCode;
 	}
 
-	public int getLecNum() {
+	public Integer getLecNum() {
 		return lecNum;
 	}
 
-	public void setLecNum(int lecNum) {
+	public void setLecNum(Integer lecNum) {
 		this.lecNum = lecNum;
 	}
 
-	public int getImageNum() {
+	public Integer getImageNum() {
 		return imageNum;
 	}
 
-	public void setImageNum(int imageNum) {
+	public void setImageNum(Integer imageNum) {
 		this.imageNum = imageNum;
 	}
 
@@ -114,11 +114,11 @@ public class LectureDto {
 		this.updateDate = updateDate;
 	}
 
-	public int getViewCount() {
+	public Integer getViewCount() {
 		return viewCount;
 	}
 
-	public void setViewCount(int viewCount) {
+	public void setViewCount(Integer viewCount) {
 		this.viewCount = viewCount;
 	}
 

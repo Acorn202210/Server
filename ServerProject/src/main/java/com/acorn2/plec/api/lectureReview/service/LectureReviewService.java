@@ -13,7 +13,7 @@ public interface LectureReviewService {
 	
 	LectureReviewDto LectureReviewOne(int lecReNum);
 	
-	void LectureReviewInsert(LectureReviewCreateReqDto ReviewCreateReqDto);
+	void LectureReviewInsert(LectureReviewCreateReqDto ReviewCreateReqDto, String id);
 	
 	void LectureReviewDelete(int lecReNum);
 	

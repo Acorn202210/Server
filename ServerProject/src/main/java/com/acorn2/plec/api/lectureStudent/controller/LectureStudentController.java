@@ -1,5 +1,7 @@
 package com.acorn2.plec.api.lectureStudent.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -55,27 +57,25 @@ public class LectureStudentController {
 		return new ComResponseEntity<>(new ComResponseDto<>(dtoOne));
 		
 	}
-	@ApiOperation(value="강의 수강생 여부", notes = "강의 수강생 여부")
-	@GetMapping("/lecture/{lecStuUserId}/{lecStuRefGroup}")
-	public ResponseEntity<LectureStudentOneReadResDto> getLectureStudentOne(int lecStuRefGroup) {
-	    LectureStudentOneReadResDto dto = service.LectureStudentOne(SessionUtils.getUserId(), lecStuRefGroup);
-	    if(dto == null) {
-	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    }
-	    return new ResponseEntity<>(dto, HttpStatus.OK);
+	
+	@ApiOperation(value="수강생 확인", notes = "수강생 확인한다.")
+	@GetMapping(value = "/checkStudent")
+	public ComResponseEntity<Map<String, Object>> checkStudent(int lecStuRefGroup) {
+		
+		return new ComResponseEntity<>(new ComResponseDto<>(service.isStudent(SessionUtils.getUserId(), lecStuRefGroup)));
 	}
 
 	
 	@ApiOperation(value="강의 수강 신청", notes = "강의 수강 신청하기")
 	@PostMapping("/lecture-signup")
-	public ComResponseEntity<Void> LectureSignup(@RequestBody LectureStudentCreateReqDto lecstudentCreateDto, HttpServletRequest request){
-		service.LectureSignup(lecstudentCreateDto, request);
+	public ComResponseEntity<Void> LectureSignup(@RequestBody LectureStudentCreateReqDto lecstudentCreateDto){
+		service.LectureSignup(lecstudentCreateDto, SessionUtils.getUserId());
 		return new ComResponseEntity<Void>();
 	}
 	@ApiOperation(value="강의 수강 완료", notes = "강의 수강 완료하기")
 	@PostMapping("/lecture-complete")
-	public ComResponseEntity<Void> LectureCompleteYn (@RequestBody LectureStudentUpdateReqDto studentUpdateReqDto, HttpServletRequest request){
-		service.LectureCompleteYn(studentUpdateReqDto, request);
+	public ComResponseEntity<Void> LectureCompleteYn (@RequestBody LectureStudentUpdateReqDto studentUpdateReqDto){
+		service.LectureCompleteYn(studentUpdateReqDto, SessionUtils.getUserId());
 		return new ComResponseEntity<Void>();
 	}
 

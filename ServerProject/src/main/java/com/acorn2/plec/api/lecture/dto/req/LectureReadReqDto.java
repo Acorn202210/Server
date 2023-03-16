@@ -23,7 +23,7 @@ public class LectureReadReqDto extends PagingDto{
 		this.smallCategory = smallCategory;
 	}
 
-	public int getLecNum() {
+	public Integer getLecNum() {
 		return lecNum;
 	}
 

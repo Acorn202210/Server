@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 public class LectureReadResDto {
 	@Schema(description = "강의 번호", example = "1", required = true, minLength = 1, maxLength = 50)
-	private int lecNum;
+	private Integer lecNum;
 	@Schema(description = "강의 선생님", example = "seodongmin", required = true, minLength = 1, maxLength = 50)
 	private String teacher;
 	@Schema(description = "강의 작성자", example = "admin", required = true, minLength = 1, maxLength = 50)
@@ -16,7 +16,7 @@ public class LectureReadResDto {
 	@Schema(description = "강의 링크", example = "naver.com", required = true, minLength = 1, maxLength = 500)
 	private String videoPath;
 	@Schema(description = "강의 조회수", example = "0", required = true, minLength = 1, maxLength = 50)
-	private int viewCount;
+	private Integer viewCount;
 	@Schema(description = "강의 등록일", example = "2022-01-01", required = true, minLength = 1, maxLength = 30)
 	private String userRegdate;
 	@Schema(description = "강의 대분류", example = "front", required = true, minLength = 1, maxLength = 10)
@@ -27,11 +27,12 @@ public class LectureReadResDto {
 	private String updateId;
 	@Schema(description = "강의 서비스 여부", example = "Y", required = true, minLength = 1, maxLength = 3)
 	private String serviceYnCode;
-	private int imageNum;
-	public int getLecNum() {
+	private Integer imageNum;
+	
+	public Integer getLecNum() {
 		return lecNum;
 	}
-	public void setLecNum(int lecNum) {
+	public void setLecNum(Integer lecNum) {
 		this.lecNum = lecNum;
 	}
 	public String getTeacher() {
@@ -64,10 +65,10 @@ public class LectureReadResDto {
 	public void setVideoPath(String videoPath) {
 		this.videoPath = videoPath;
 	}
-	public int getViewCount() {
+	public Integer getViewCount() {
 		return viewCount;
 	}
-	public void setViewCount(int viewCount) {
+	public void setViewCount(Integer viewCount) {
 		this.viewCount = viewCount;
 	}
 	public String getUserRegdate() {
@@ -100,10 +101,10 @@ public class LectureReadResDto {
 	public void setServiceYnCode(String serviceYnCode) {
 		this.serviceYnCode = serviceYnCode;
 	}
-	public int getImageNum() {
+	public Integer getImageNum() {
 		return imageNum;
 	}
-	public void setImageNum(int imageNum) {
+	public void setImageNum(Integer imageNum) {
 		this.imageNum = imageNum;
 	}
 	

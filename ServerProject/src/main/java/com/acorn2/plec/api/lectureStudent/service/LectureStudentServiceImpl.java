@@ -1,6 +1,8 @@
 package com.acorn2.plec.api.lectureStudent.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -63,16 +65,23 @@ public class LectureStudentServiceImpl implements LectureStudentService{
 	}
 	
 	@Override
-	public boolean hasStudentDataOne(String lecStuUserId, int lecStuRefGroup) {
-	    LectureStudentOneReadResDto result = studentDao.studentDataOne(lecStuUserId, lecStuRefGroup);
-	    return result != null ? true : false;
-	}
+	public Map<String, Object> isStudent(String lecStuUserId, int lecStuRefGroup) {
+		Map<String, Object> isStudent = new HashMap<>();
+		
+		LectureStudentOneReadResDto dto = studentDao.studentDataOne(lecStuUserId, lecStuRefGroup);
+		
+		if(dto == null) {
+			isStudent.put("isStudent", false);
+		}else {
+			isStudent.put("isStudent", true);
+		}
+		
+		return isStudent;
+	}	
 
 	@Transactional
 	@Override
-	public void LectureSignup(LectureStudentCreateReqDto lecstudentCreateDto, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String id = session.getAttribute("id").toString();
+	public void LectureSignup(LectureStudentCreateReqDto lecstudentCreateDto, String id) {
 		LectureStudentDto dto = new LectureStudentDto();
 		dto.setLecStuUserId(id);
 		dto.setLecStuRefGroup(lecstudentCreateDto.getLecStuRefGroup());
@@ -82,10 +91,8 @@ public class LectureStudentServiceImpl implements LectureStudentService{
 
 	@Transactional
 	@Override
-	public void LectureCompleteYn(LectureStudentUpdateReqDto studentUpdateReqDto, HttpServletRequest request) {
+	public void LectureCompleteYn(LectureStudentUpdateReqDto studentUpdateReqDto, String id) {
 		LectureStudentDto dto = new LectureStudentDto();
-		HttpSession session = request.getSession();
-		String id = session.getAttribute("id").toString();
 		dto.setLecStuUserId(id);
 		dto.setLecStuRefGroup(studentUpdateReqDto.getLecStuRefGroup());
 		
@@ -99,6 +106,7 @@ public class LectureStudentServiceImpl implements LectureStudentService{
 		
 	}
 
+	
 
 
 }
