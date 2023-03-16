@@ -62,13 +62,13 @@
 	<update id="updateQnaBoard" parameterType="com.acorn2.plec.api.qnaboard.dto.QnaBoardDto">
 		UPDATE qna_board_question
 		<set>
-      	<if test="title != null">
-      		title = #{title},
-      	</if>
-      	<if test="content != null">
-      		content=#{content},
-      	</if>
-		update_date=SYSDATE
+	      	<if test="title != null">
+	      		title = #{title},
+	      	</if>
+	      	<if test="content != null">
+	      		content=#{content},
+	      	</if>
+			update_date=SYSDATE
 		</set>
 		WHERE board_question_num=#{boardQuestionNum}
 	</update>
