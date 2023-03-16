@@ -16,24 +16,25 @@ public class SessionUtils {
 //		}
 //		return id;
 //	}
-	
-	
+
 	public static String getAttribute() {
-		return RequestContextHolder.getRequestAttributes().getAttribute("id", RequestAttributes.SCOPE_SESSION).toString();
+		return RequestContextHolder.getRequestAttributes().getAttribute("id", RequestAttributes.SCOPE_SESSION)
+				.toString();
 	}
-	
+
 	public static void removeAttribute() {
 		getRequest().getSession().removeAttribute("id");
 	}
-	
+
 	public static void setAttribute(String id) {
 		getRequest().getSession().setAttribute("id", id);
 	}
-	
+
 	public static HttpServletRequest getRequest() {
-		return ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+		return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 	}
+
 	public static String getUserId() {
-		return  getRequest().getSession().getAttribute("id").toString();
+		return getRequest().getSession().getAttribute("id").toString();
 	}
 }

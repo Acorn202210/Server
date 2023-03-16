@@ -36,6 +36,7 @@ import com.acorn2.plec.api.faq.dto.res.FaqReadResDto;
 import com.acorn2.plec.api.faq.service.FaqService;
 import com.acorn2.plec.common.ComResponseEntity;
 import com.acorn2.plec.common.dto.ComResponseDto;
+import com.acorn2.plec.common.utils.SessionUtils;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -147,16 +148,16 @@ public class FaqController {
 	@ApiOperation(value = "자주묻는질문 등록", notes = "자주묻는질문을 등록한다.")
 	@Transactional
 	@PostMapping
-	public ComResponseEntity<Void> insertFaq(@RequestBody FaqCreateReqDto faqCreateReqDto, HttpServletRequest request) {
-		service.insertFaq(faqCreateReqDto, request);
+	public ComResponseEntity<Void> insertFaq(@RequestBody FaqCreateReqDto faqCreateReqDto, String id) {
+		service.insertFaq(faqCreateReqDto, SessionUtils.getUserId());
 		return new ComResponseEntity<Void>();
 	}
 
 	@ApiOperation(value = "자주묻는질문 수정", notes = "자주묻는질문을 수정한다.")
 	@Transactional
 	@PutMapping(value = "/{faqNum}/update")
-	public ComResponseEntity<Void> updateFaq(@RequestBody FaqUpdateReqDto faqUpdateReqDto, HttpServletRequest request) {
-		service.updateFaq(faqUpdateReqDto, request);
+	public ComResponseEntity<Void> updateFaq(@RequestBody FaqUpdateReqDto faqUpdateReqDto, String id) {
+		service.updateFaq(faqUpdateReqDto, SessionUtils.getUserId());
 		return new ComResponseEntity<Void>();
 	}
 

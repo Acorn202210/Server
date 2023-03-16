@@ -26,7 +26,7 @@ public class FaqUpdateReqDto {
 		return faqNum;
 	}
 
-	public void setFaqNum(int faqNum) {
+	public void setFaqNum(Integer faqNum) {
 		this.faqNum = faqNum;
 	}
 
