@@ -37,16 +37,16 @@ public class QnaFreeAnswerController {
 	private QnaFreeAnswerService service;
 
 	@ApiOperation(value = "자유게시판 댓글 목록", notes = "모든 자주묻는질문의 목록을 가져온다.")
-	@GetMapping("/qna-free-answer-list")
+	@GetMapping("list")
 	public ComResponseEntity<QnaFreeAnswerReadListResDto> getQnaFreeAnswerList(@Parameter(hidden = true) QnaFreeAnswerReadReqDto qnaFreeAnswerReadReqDto) {
 		QnaFreeAnswerReadListResDto qnaFreeAnswerReadListResDto = service.selectQnaFreeAnswerList(qnaFreeAnswerReadReqDto);
-		logger.debug("qnaFreeAnswerReadReqDto parameter : {}", qnaFreeAnswerReadReqDto.getFreeCommentRefGroup());
+		logger.debug("qnaFreeAnswerReadReqDto parameter : {}", qnaFreeAnswerReadReqDto.getFreeCommentNum());
 		return new ComResponseEntity<>(new ComResponseDto<>(qnaFreeAnswerReadListResDto));
 	}
 
 	@ApiOperation(value = "단일 자유게시판 댓글 상세", notes = "하나의 자유게시판 댓글의 상세 정보를 가져온다.")
 	@GetMapping(value = "/{freeCommentNum}")
-	public ComResponseEntity<QnaFreeAnswerReadDetailResDto> getQnaFreeAnswer(@Parameter(hidden = true) QnaFreeAnswerReadReqDto qnaFreeAnswerReadReqDto) {
+	public ComResponseEntity<QnaFreeAnswerReadDetailResDto> getQnaFreeAnswer(@Parameter(hidden = true)QnaFreeAnswerReadReqDto qnaFreeAnswerReadReqDto) {
 		QnaFreeAnswerReadDetailResDto qnaFreeAnswerReadResDto = service.selectQnaFreeAnswerOne(qnaFreeAnswerReadReqDto);
 		return new ComResponseEntity<>(new ComResponseDto<>(qnaFreeAnswerReadResDto));
 	}
@@ -54,7 +54,7 @@ public class QnaFreeAnswerController {
 	@ApiOperation(value = "자유게시판 댓글 등록", notes = "자유게시판 댓글을 등록한다.")
 	@Transactional
 	@PostMapping
-	public ComResponseEntity<Void> insertQnaFreeAnswer(@RequestBody QnaFreeAnswerCreateReqDto qnaFreeAnswerCreateReqDto, String id) {
+	public ComResponseEntity<Void> insertQnaFreeAnswer(@RequestBody QnaFreeAnswerCreateReqDto qnaFreeAnswerCreateReqDto) {
 		service.insertQnaFreeAnswer(qnaFreeAnswerCreateReqDto, SessionUtils.getUserId());
 		return new ComResponseEntity<Void>();
 	}

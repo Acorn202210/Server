@@ -23,13 +23,14 @@ import com.acorn2.plec.api.qnafreeanswer.exception.QnaFreeAnswerNotFoundExceptio
 @EnableCaching
 @Service
 public class QnaFreeAnswerServiceImpl implements QnaFreeAnswerService{
-	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
+	private final Logger logger = LoggerFactory.getLogger(getClass());
+
 	@Autowired
 	private QnaFreeAnswerDao qnaFreeAnswerDao;
-
+	
 	@Override
-	@Cacheable(value = "qnaFreeAnswer", key = "#qnaFreeAnswerReadReq.hashCode()")
+	@Cacheable(value = "qnaFreeAnswer", key = "#qnaFreeAnswerReadReqDto.hashCode()")
 	public QnaFreeAnswerReadListResDto selectQnaFreeAnswerList(QnaFreeAnswerReadReqDto qnaFreeAnswerReadReqDto) {
 		Integer totalCount = qnaFreeAnswerDao.selectQnaFreeAnswerCount(qnaFreeAnswerReadReqDto);
 		List<QnaFreeAnswerReadResDto> qnaFreeAnswerReadResDtoList = qnaFreeAnswerDao.selectQnaFreeAnswerList(qnaFreeAnswerReadReqDto);
@@ -41,10 +42,10 @@ public class QnaFreeAnswerServiceImpl implements QnaFreeAnswerService{
 
 	@Override
 	public QnaFreeAnswerReadDetailResDto selectQnaFreeAnswerOne(QnaFreeAnswerReadReqDto qnaFreeAnswerReadReqDto) {
-		if (qnaFreeAnswerDao.selectQnaFreeAnswer(qnaFreeAnswerReadReqDto) == null) {
+		if (qnaFreeAnswerDao.selectQnaFreeAnswerOne(qnaFreeAnswerReadReqDto) == null) {
 			throw new QnaFreeAnswerNotFoundException("자유게시판 댓글이 없습니다.");
 		}
-		return qnaFreeAnswerDao.selectQnaFreeAnswer(qnaFreeAnswerReadReqDto);
+		return qnaFreeAnswerDao.selectQnaFreeAnswerOne(qnaFreeAnswerReadReqDto);
 	}
 
 	@Transactional
@@ -52,6 +53,18 @@ public class QnaFreeAnswerServiceImpl implements QnaFreeAnswerService{
 	public void insertQnaFreeAnswer(QnaFreeAnswerCreateReqDto qnaFreeAnswerCreateReqDto, String id) {
 		QnaFreeAnswerDto dto = new QnaFreeAnswerDto();
 		dto.setFreeCommentRefGroup(qnaFreeAnswerCreateReqDto.getFreeCommentRefGroup());
+		dto.setTargetId(qnaFreeAnswerCreateReqDto.getTargetId());
+		//댓글의 시퀀스 번호 미리 얻어내기
+	    Integer seq=qnaFreeAnswerDao.getSequence();
+	    dto.setFreeCommentNum(seq);
+		//원글의 댓글인경우
+		if(qnaFreeAnswerCreateReqDto.getCommentGroup() == null){
+		       //댓글의 글번호를 comment_group 번호로 사용한다.
+		       dto.setCommentGroup(seq);
+		    }else{
+		       //전송된 comment_group 번호를 숫자로 바꾸서 dto 에 넣어준다. 
+		       dto.setCommentGroup(qnaFreeAnswerCreateReqDto.getCommentGroup());
+		    }
 		dto.setContent(qnaFreeAnswerCreateReqDto.getContent());
 		dto.setFreeCommentWriter(id);
 		qnaFreeAnswerDao.insertQnaFreeAnswer(dto);

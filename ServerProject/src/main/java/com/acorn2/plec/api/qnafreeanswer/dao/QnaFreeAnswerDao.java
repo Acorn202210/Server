@@ -36,15 +36,15 @@ public interface QnaFreeAnswerDao {
 
 	/**
 	 * 
-	 * @methodName : selectQnaFreeAnswer
+	 * @methodName : selectQnaFreeAnswerOne
 	 * @author : jo
 	 * @param QnaFreeAnswerReadReqDto
 	 * @return
-	 * @return : QnaFreeAnswerReadResDto
+	 * @return : QnaFreeAnswerReadReqDto
 	 * @description : 자유게시판 댓글 단건 조회
 	 */
 
-	public QnaFreeAnswerReadDetailResDto selectQnaFreeAnswer(QnaFreeAnswerReadReqDto qnaFreeAnswerReadReqDto);
+	public QnaFreeAnswerReadDetailResDto selectQnaFreeAnswerOne(QnaFreeAnswerReadReqDto qnaFreeAnswerReadReqDto);
 
 	/**
 	 * 
@@ -80,4 +80,6 @@ public interface QnaFreeAnswerDao {
 	Integer deleteUpdateQnaFreeAnswer(Integer freeCommentNum);
 
 	Integer deleteQnaFreeAnswer();
+
+	Integer getSequence();
 }

@@ -9,8 +9,12 @@ public class QnaFreeAnswerReadDetailResDto {
 	private String freeCommentWriter;
 	@Schema(description = "자유게시판 댓글 내용", example = "답변", required = true, minLength = 1, maxLength = 10000)
 	private String content;
-	@Schema(description = "자유게시판 댓글 그룹 번호", example = "1", required = true, minLength = 1, maxLength = 50)
+	@Schema(description = "자유게시판 댓글 대상 아이디", example = "user", required = true, minLength = 1, maxLength = 50)
+	private String targetId;
+	@Schema(description = "자유게시판 그룹 댓글 번호", example = "1", required = true, minLength = 1, maxLength = 50)
 	private int freeCommentRefGroup;
+	@Schema(description = "자유게시판 댓글 그룹 번호", example = "1", required = true, minLength = 1, maxLength = 50)
+	private int commentGroup;
 	@Schema(description = "자유게시판 댓글 등록일", example = "2023-02-15", required = true, minLength = 1, maxLength = 30)
 	private String userRegdate;
 	@Schema(description = "자유게시판 댓글 수정일", example = "2023-02-15", required = true, minLength = 1, maxLength = 30)
@@ -23,13 +27,16 @@ public class QnaFreeAnswerReadDetailResDto {
 	public QnaFreeAnswerReadDetailResDto() {
 	}
 
-	public QnaFreeAnswerReadDetailResDto(int freeCommentNum, String freeCommentWriter, String content,
-			int freeCommentRefGroup, String userRegdate, String updateDate, String updateId, String deleteYNCode) {
+	public QnaFreeAnswerReadDetailResDto(int freeCommentNum, String freeCommentWriter, String content, String targetId,
+			int freeCommentRefGroup, int commentGroup, String userRegdate, String updateDate, String updateId,
+			String deleteYNCode) {
 		super();
 		this.freeCommentNum = freeCommentNum;
 		this.freeCommentWriter = freeCommentWriter;
 		this.content = content;
+		this.targetId = targetId;
 		this.freeCommentRefGroup = freeCommentRefGroup;
+		this.commentGroup = commentGroup;
 		this.userRegdate = userRegdate;
 		this.updateDate = updateDate;
 		this.updateId = updateId;
@@ -60,12 +67,28 @@ public class QnaFreeAnswerReadDetailResDto {
 		this.content = content;
 	}
 
+	public String getTargetId() {
+		return targetId;
+	}
+
+	public void setTargetId(String targetId) {
+		this.targetId = targetId;
+	}
+
 	public int getFreeCommentRefGroup() {
 		return freeCommentRefGroup;
 	}
 
 	public void setFreeCommentRefGroup(int freeCommentRefGroup) {
 		this.freeCommentRefGroup = freeCommentRefGroup;
+	}
+
+	public int getCommentGroup() {
+		return commentGroup;
+	}
+
+	public void setCommentGroup(int commentGroup) {
+		this.commentGroup = commentGroup;
 	}
 
 	public String getUserRegdate() {
