@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.acorn2.plec.api.qnaboard.dao.QnaBoardAnswerDao">
-
-   <!-- 댓글 저장. 댓글의 글번호도 미리 QnaBoardAnswerDto 객체에 담아와야 한다.--> 
-   <insert id="insertQnaAnswer" parameterType="com.acorn2.plec.api.qnaboard.dto.QnaBoardAnswerDto">
-      INSERT INTO qna_board_answer
-      (BOARD_COMMENT_NUM, BOARD_COMMENT_WRITER, content, BOARD_COMMENT_REF_GROUP, USER_REGDATE, update_id,update_date)
-      VALUES(qna_board_answer_seq.NEXTVAL, #{boardCommentWriter}, #{content}, #{boardCommentRefGroup}, SYSDATE, #{boardCommentWriter}, SYSDATE)
-   </insert>
-   
+     
    <!-- 저장 예정인 댓글의 글번호를 미리 얻어내기--> 
    <select id="getSequence" resultType="int">
       SELECT qna_board_answer_seq.NEXTVAL
       FROM DUAL
    </select>
    
-   <!-- 댓글 수정 -->
-   <update id="updateQnaAnswer" parameterType="com.acorn2.plec.api.qnaboard.dto.QnaBoardAnswerDto">
-      UPDATE qna_board_answer
-      SET content=#{content}, UPDATE_DATE=SYSDATE, UPDATE_ID=#{updateId}
-      WHERE BOARD_COMMENT_REF_GROUP=#{boardCommentRefGroup}
-   </update> 
+	<!-- 댓글 개수 가져오기 -->
+	<select id="selectQnaAnswerCount" parameterType="com.acorn2.plec.api.qnaboard.dto.req.QnaBoardAnswerReadReqDto" resultType="java.lang.Integer">
+		SELECT NVL(MAX(ROWNUM), 0)
+		FROM LECTURE_REVIEW
+	</select>   
+
+	<!-- 댓글 목록 보기 -->	 
+	<select id="qnaAnswerList" parameterType="com.acorn2.plec.api.qnaboard.dto.req.QnaBoardAnswerReadReqDto" resultType="com.acorn2.plec.api.qnaboard.dto.res.QnaBoardAnswerReadResDto">
+		SELECT BOARD_COMMENT_NUM, BOARD_COMMENT_WRITER, content, BOARD_COMMENT_REF_GROUP, USER_REGDATE, update_Date, update_id
+		FROM qna_board_answer
+		WHERE BOARD_COMMENT_REF_GROUP=#{boardCommentRefGroup} AND DELETE_YN_CODE='N'
+		ORDER BY BOARD_COMMENT_NUM ASC
+	</select>  
    
    <!-- 댓글 한개 보기 selectOne -->
    <select id="selectQnaAnswer" parameterType="int" resultType="com.acorn2.plec.api.qnaboard.dto.QnaBoardAnswerDto">
@@ -29,6 +29,20 @@
       WHERE BOARD_COMMENT_REF_GROUP=#{boardCommentRefGroup}
    </select>
       
+   <!-- 댓글 저장. 댓글의 글번호도 미리 QnaBoardAnswerDto 객체에 담아와야 한다.--> 
+   <insert id="insertQnaAnswer" parameterType="com.acorn2.plec.api.qnaboard.dto.QnaBoardAnswerDto">
+      INSERT INTO qna_board_answer
+      (BOARD_COMMENT_NUM, BOARD_COMMENT_WRITER, content, BOARD_COMMENT_REF_GROUP, USER_REGDATE, update_id,update_date)
+      VALUES(qna_board_answer_seq.NEXTVAL, #{boardCommentWriter}, #{content}, #{boardCommentRefGroup}, SYSDATE, #{boardCommentWriter}, SYSDATE)
+   </insert>
+   
+   <!-- 댓글 수정 -->
+   <update id="updateQnaAnswer" parameterType="com.acorn2.plec.api.qnaboard.dto.QnaBoardAnswerDto">
+      UPDATE qna_board_answer
+      SET content=#{content}, UPDATE_DATE=SYSDATE, UPDATE_ID=#{updateId}
+      WHERE BOARD_COMMENT_REF_GROUP=#{boardCommentRefGroup}
+   </update> 
+   
    <!-- 댓글 삭제(DB Y로 변경)-->
    <update id="deleteUpdateQnaAnswer" parameterType="int">
       UPDATE qna_board_answer
