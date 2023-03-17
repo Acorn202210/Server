@@ -34,7 +34,7 @@
 		FROM	
 			(SELECT result1.*, ROWNUM as rnum
 			FROM
-				(SELECT IMAGE_NUM, Complete_Yn
+				(SELECT IMAGE_NUM, Complete_Yn, LEC_NUM
 					FROM users 
 					JOIN LECTURE_STUDENT
 					ON users.lec_user_id=LECTURE_STUDENT.lec_Stu_User_Id
