@@ -22,7 +22,7 @@ CREATE TABLE profile_image(
     data BLOB,
     original_name varchar(100),
     regdate DATE,
-    update_regdate DATE
+    update_regdate DATE,
     delete_YN_code VARCHAR2(3) DEFAULT 'Y'
 );
 
@@ -192,7 +192,9 @@ CREATE SEQUENCE QNA_FREE_QUESTION_seq;
 CREATE TABLE QNA_FREE_ANSWER(
     FREE_COMMENT_NUM NUMBER,
     FREE_COMMENT_WRITER VARCHAR2(50),
+    TARGET_ID VARCHAR2(50),
     FREE_COMMENT_REF_GROUP NUMBER,
+    COMMENT_GROUP NUMBER,
     USER_REGDATE DATE,
     CONTENT CLOB,
     UPDATE_DATE DATE,

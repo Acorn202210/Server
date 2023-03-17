@@ -1,4 +1,4 @@
-package com.acorn2.plec.api.qnafree.dto;
+package com.acorn2.plec.api.qnafreeanswer.dto;
 
 import org.apache.ibatis.type.Alias;
 
@@ -6,22 +6,28 @@ import org.apache.ibatis.type.Alias;
 public class QnaFreeAnswerDto {
 	private int freeCommentNum;
 	private String freeCommentWriter;
-	private String content;	
-	private int freeCommentRefGroup;	
+	private String content;
+	private String targetId;
+	private int freeCommentRefGroup;
+	private int commentGroup;
 	private String userRegdate;
 	private String updateDate;
 	private String updateId;
 	private String deleteYnCode;
-	
-	public QnaFreeAnswerDto () {}
 
-	public QnaFreeAnswerDto(int freeCommentNum, String freeCommentWriter, String content, int freeCommentRefGroup,
-			String userRegdate, String updateDate, String updateId, String deleteYnCode) {
+	public QnaFreeAnswerDto() {
+	}
+
+	public QnaFreeAnswerDto(int freeCommentNum, String freeCommentWriter, String content, String targetId,
+			int freeCommentRefGroup, int commentGroup, String userRegdate, String updateDate, String updateId,
+			String deleteYnCode) {
 		super();
 		this.freeCommentNum = freeCommentNum;
 		this.freeCommentWriter = freeCommentWriter;
 		this.content = content;
+		this.targetId = targetId;
 		this.freeCommentRefGroup = freeCommentRefGroup;
+		this.commentGroup = commentGroup;
 		this.userRegdate = userRegdate;
 		this.updateDate = updateDate;
 		this.updateId = updateId;
@@ -52,12 +58,28 @@ public class QnaFreeAnswerDto {
 		this.content = content;
 	}
 
+	public String getTargetId() {
+		return targetId;
+	}
+
+	public void setTargetId(String targetId) {
+		this.targetId = targetId;
+	}
+
 	public int getFreeCommentRefGroup() {
 		return freeCommentRefGroup;
 	}
 
 	public void setFreeCommentRefGroup(int freeCommentRefGroup) {
 		this.freeCommentRefGroup = freeCommentRefGroup;
+	}
+
+	public int getCommentGroup() {
+		return commentGroup;
+	}
+
+	public void setCommentGroup(int commentGroup) {
+		this.commentGroup = commentGroup;
 	}
 
 	public String getUserRegdate() {
@@ -93,4 +115,3 @@ public class QnaFreeAnswerDto {
 	}
 
 }
-	

@@ -3,11 +3,22 @@
 <mapper namespace="com.acorn2.plec.api.faq.dao.FaqDao">
 
 	<select id="selectFaqList" parameterType="com.acorn2.plec.api.faq.dto.req.FaqReadReqDto" resultType="com.acorn2.plec.api.faq.dto.res.FaqReadResDto">
-		SELECT *
-		FROM
-			(SELECT result1.*, ROWNUM AS rnum
-			FROM
-				(SELECT faq_num, question, content, user_regdate, update_date, update_id, faq_writer, delete_Yn_code
+		SELECT
+			*
+		FROM (
+			SELECT
+				result1.*
+				, ROWNUM AS rnum
+			FROM (
+				SELECT 
+					faq_num
+					, question
+					, content
+					, user_regdate
+					, update_date
+					, update_id
+					, faq_writer
+					, delete_Yn_code
 				FROM FAQ
 				<where>
 					delete_Yn_code='N'

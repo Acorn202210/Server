@@ -3,6 +3,8 @@ package com.acorn2.plec.api.qnaboard.service;
 import javax.servlet.http.HttpServletRequest;
 
 import com.acorn2.plec.api.qnaboard.dto.QnaBoardAnswerDto;
+import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardAnswerCreateReqDto;
+import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardAnswerUpdateReqDto;
 import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardCreateReqDto;
 import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardReadReqDto;
 import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardUpdateReqDto;
@@ -25,13 +27,13 @@ public interface QnaBoardService {
 	void QnaBoardDelete();
 		
 	//댓글 관련 메소드
-	QnaBoardAnswerDto selectComment(int refGroup);
+	QnaBoardAnswerDto selectComment(int boardCommentRefGroup);
 	
-	void saveComment(QnaBoardAnswerDto dto, HttpServletRequest request);
+	void saveComment(QnaBoardAnswerCreateReqDto dto, String id);
 	
-	void updateComment(QnaBoardAnswerDto dto, HttpServletRequest request);
+	void updateComment(QnaBoardAnswerUpdateReqDto dto, String id);
 	
-	void updateDeleteComment(int boardCommentNum);
+	void updateDeleteComment(int boardCommentRefGroup);
 	
 	void deleteComment();
 	

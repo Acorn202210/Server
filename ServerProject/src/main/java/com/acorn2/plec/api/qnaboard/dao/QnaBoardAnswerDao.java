@@ -24,13 +24,13 @@ public interface QnaBoardAnswerDao {
 	
 	public Integer selectQnaAnswerCount(QnaBoardAnswerDto dto);
 	
-	QnaBoardAnswerDto selectQnaAnswer(int refGroup);
+	QnaBoardAnswerDto selectQnaAnswer(int boardCommentRefGroup);
 	
-	Integer insertQnaAnswer(QnaBoardAnswerDto dto, HttpServletRequest request);
+	Integer insertQnaAnswer(QnaBoardAnswerDto dto);
 	
-	Integer updateQnaAnswer(QnaBoardAnswerDto dto, HttpServletRequest request);
+	Integer updateQnaAnswer(QnaBoardAnswerDto dto);
 	
-	Integer deleteUpdateQnaAnswer(int boardCommentNum);
+	Integer deleteUpdateQnaAnswer(int boardCommentRefGroup);
 	
 	Integer deleteQnaBoard();	
 	//댓글번호 미리 얻어내기

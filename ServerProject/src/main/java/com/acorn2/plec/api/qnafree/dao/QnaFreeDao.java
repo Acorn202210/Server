@@ -9,42 +9,64 @@ import com.acorn2.plec.api.qnafree.dto.req.QnaFreeReadReqDto;
 import com.acorn2.plec.api.qnafree.dto.res.QnaFreeReadDetailResDto;
 import com.acorn2.plec.api.qnafree.dto.res.QnaFreeReadResDto;
 
-
 @Mapper
 public interface QnaFreeDao {
-	
+
 	/**
 	 *
 	 * @methodName : selectQnaFreeCount
-	 * @author : originChoi
+	 * @author : jo
 	 * @param qnaFreeReadReqDto
 	 * @return
 	 * @return : Integer
 	 * @description : 자유게시판 리스트 카운트 조회
 	 */
 	public Integer selectQnaFreeCount(QnaFreeReadReqDto qnaFreeReadReqDto);
-	
-	
+
 	/**
 	 *
 	 * @methodName : selectQnaFreeList
-	 * @author : originChoi
-	 * @param qnaFreeReadReqDto
+	 * @author : jo
+	 * @param QnaFreeReadReqDto
 	 * @return
-	 * @return : qnaFreeReadResDto
-	 * @description : 공통코드 조회
+	 * @return : QnaFreeReadResDto
+	 * @description : 자유게시판 조회
 	 */
 	public List<QnaFreeReadResDto> selectQnaFreeList(QnaFreeReadReqDto qnaFreeReadReqDto);
-	
-	
+
+	/**
+	 * 
+	 * @methodName : insertQnaFree
+	 * @author : jo
+	 * @param QnaFreedto
+	 * @return
+	 * @return : Integer
+	 * @description : 자유게시판 등록
+	 */
 	Integer insertQnaFree(QnaFreeDto dto);
-	
+
+	/**
+	 * 
+	 * @methodName : updateQnaFree
+	 * @author jo
+	 * @param QnaFreedto
+	 * @return
+	 * @return : Integer
+	 * @description : 자유게시판 수정
+	 */
 	Integer updateQnaFree(QnaFreeDto dto);
-	
+
+	/**
+	 * 
+	 * @methodName : deleteUpdateQnaFree
+	 * @author : jo
+	 * @param QnaFreeDto
+	 * @return
+	 * @return : Integer
+	 * @description : 자유게시판 삭제(deleteYncode Y로변경)
+	 */
 	Integer deleteUpdateQnaFree(int free_question_num);
-	
-	Integer deleteQnaFree();
-	
+
 	/**
 	 *
 	 * @methodName : addViewCount
@@ -55,7 +77,17 @@ public interface QnaFreeDao {
 	 * @description : 자유게시판 조회수 추가
 	 */
 	Integer addViewCount(Integer freeQuestionNum);
-	
-	//detail 보기
+
+	/**
+	 * 
+	 * @methodName : selectQnaFree
+	 * @author : jo
+	 * @param QnaFreeReadReqDto
+	 * @return
+	 * @return : QnaFreeReadResDto
+	 * @description : 자유게시판 단건 조회
+	 */
 	public QnaFreeReadDetailResDto selectQnaFree(QnaFreeReadReqDto qnaFreeReadReqDto);
+
+	Integer deleteQnaFree();
 }
