@@ -66,7 +66,7 @@ public class LectureReviewController {
 		return new ComResponseEntity<Void>();	
 	}
 	@ApiOperation(value="강의 후기 삭제", notes = "강의 후기 삭제하기")
-	@DeleteMapping("/{lecReNum}/lecture-review-delete")
+	@PutMapping("/{lecReNum}/lecture-review-delete")
 	public ComResponseEntity<Void> LectureReviewDelete(@RequestParam(value = "lecReNum", required = true) int lecReNum){
 		service.LectureReviewDelete(lecReNum);
 		return new ComResponseEntity<Void>();

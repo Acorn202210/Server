@@ -20,9 +20,9 @@ public interface LectureStudentService {
 	
 	Map<String, Object> isStudent(String lecStuUserId, int lecStuRefGroup);
 	
-	void LectureSignup (LectureStudentCreateReqDto lecstudentCreateDto, String id);
+	void LectureSignup (LectureStudentCreateReqDto lecstudentCreateDto, String lecStuUserId);
 	
-	void LectureCompleteYn (LectureStudentUpdateReqDto studentUpdateReqDto, String id);
+	void LectureCompleteYn (LectureStudentUpdateReqDto studentUpdateReqDto, String lecStuUserId);
 	
 	void LectureDelete();
 

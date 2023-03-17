@@ -10,6 +10,6 @@ public class PagingConstant {
 	/*
 	 * 페이징 처리시, 페이지당 조회수량이 빈값일 경우 기본값
 	 */
-	public final static int DEFAULT_LIMIT = 20;
+	public final static int DEFAULT_LIMIT = 12;
 
 }

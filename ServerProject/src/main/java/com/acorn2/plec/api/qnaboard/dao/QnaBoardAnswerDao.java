@@ -1,11 +1,12 @@
 package com.acorn2.plec.api.qnaboard.dao;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import com.acorn2.plec.api.qnaboard.dto.QnaBoardAnswerDto;
-
+import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardAnswerReadReqDto;
+import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardAnswerReadResDto;
 
 @Mapper
 public interface QnaBoardAnswerDao {
@@ -22,15 +23,20 @@ public interface QnaBoardAnswerDao {
 //		//댓글의 갯수를 리턴하는 메소드
 //		public int getCount(int ref_group);
 	
-	public Integer selectQnaAnswerCount(QnaBoardAnswerDto dto);
 	
-	QnaBoardAnswerDto selectQnaAnswer(int refGroup);
+	//댓글개수
+	public Integer selectQnaAnswerCount(QnaBoardAnswerReadReqDto answerReadReq);
 	
-	Integer insertQnaAnswer(QnaBoardAnswerDto dto, HttpServletRequest request);
+	//댓글 목록
+	public List<QnaBoardAnswerReadResDto> qnaAnswerList(QnaBoardAnswerReadReqDto answerReadReq);
+		
+	QnaBoardAnswerDto selectQnaAnswer(int boardCommentRefGroup);
 	
-	Integer updateQnaAnswer(QnaBoardAnswerDto dto, HttpServletRequest request);
+	Integer insertQnaAnswer(QnaBoardAnswerDto dto);
 	
-	Integer deleteUpdateQnaAnswer(int boardCommentNum);
+	Integer updateQnaAnswer(QnaBoardAnswerDto dto);
+	
+	Integer deleteUpdateQnaAnswer(int boardCommentRefGroup);
 	
 	Integer deleteQnaBoard();	
 	//댓글번호 미리 얻어내기

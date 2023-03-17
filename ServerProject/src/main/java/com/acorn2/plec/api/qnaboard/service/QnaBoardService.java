@@ -3,9 +3,13 @@ package com.acorn2.plec.api.qnaboard.service;
 import javax.servlet.http.HttpServletRequest;
 
 import com.acorn2.plec.api.qnaboard.dto.QnaBoardAnswerDto;
+import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardAnswerCreateReqDto;
+import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardAnswerReadReqDto;
+import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardAnswerUpdateReqDto;
 import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardCreateReqDto;
 import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardReadReqDto;
 import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardUpdateReqDto;
+import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardAnswerReadListResDto;
 import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadDetailResDto;
 import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadListResDto;
 
@@ -25,13 +29,15 @@ public interface QnaBoardService {
 	void QnaBoardDelete();
 		
 	//댓글 관련 메소드
-	QnaBoardAnswerDto selectComment(int refGroup);
+	QnaBoardAnswerReadListResDto qnaAnswerList(QnaBoardAnswerReadReqDto qnaAnswerReadReq);
 	
-	void saveComment(QnaBoardAnswerDto dto, HttpServletRequest request);
+	QnaBoardAnswerDto selectComment(int boardCommentRefGroup);
 	
-	void updateComment(QnaBoardAnswerDto dto, HttpServletRequest request);
+	void saveComment(QnaBoardAnswerCreateReqDto dto, String id);
 	
-	void updateDeleteComment(int boardCommentNum);
+	void updateComment(QnaBoardAnswerUpdateReqDto dto, String id);
+	
+	void updateDeleteComment(int boardCommentRefGroup);
 	
 	void deleteComment();
 	

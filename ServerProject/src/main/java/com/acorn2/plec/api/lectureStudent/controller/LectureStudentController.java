@@ -53,13 +53,13 @@ public class LectureStudentController {
 	@ApiOperation(value="강의 수강생 한 명의 정보", notes = "강의 수강생 한 명의 정보 가져오기")
 	@GetMapping("/{lecStuNum}/lecture-student-one")
 	public ComResponseEntity<LectureStudentOneReadResDto> LectureStudentOne(int lecStuRefGroup){
-		LectureStudentOneReadResDto dtoOne = service.LectureStudentOne(SessionUtils.getUserId(),lecStuRefGroup);
+		LectureStudentOneReadResDto dtoOne = service.LectureStudentOne(SessionUtils.getUserId(), lecStuRefGroup);
 		return new ComResponseEntity<>(new ComResponseDto<>(dtoOne));
 		
 	}
 	
 	@ApiOperation(value="수강생 확인", notes = "수강생 확인한다.")
-	@GetMapping(value = "/checkStudent")
+	@GetMapping(value = "/checkStudent/")
 	public ComResponseEntity<Map<String, Object>> checkStudent(int lecStuRefGroup) {
 		
 		return new ComResponseEntity<>(new ComResponseDto<>(service.isStudent(SessionUtils.getUserId(), lecStuRefGroup)));

@@ -16,9 +16,14 @@ import com.acorn2.plec.api.qnaboard.dao.QnaBoardAnswerDao;
 import com.acorn2.plec.api.qnaboard.dao.QnaBoardDao;
 import com.acorn2.plec.api.qnaboard.dto.QnaBoardAnswerDto;
 import com.acorn2.plec.api.qnaboard.dto.QnaBoardDto;
+import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardAnswerCreateReqDto;
+import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardAnswerReadReqDto;
+import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardAnswerUpdateReqDto;
 import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardCreateReqDto;
 import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardReadReqDto;
 import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardUpdateReqDto;
+import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardAnswerReadListResDto;
+import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardAnswerReadResDto;
 import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadDetailResDto;
 import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadListResDto;
 import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadResDto;
@@ -108,28 +113,36 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 		qnaDao.deleteQnaBoard();
 	}
 
+	
+	//댓글 목록 보기	
+	@Override
+	public QnaBoardAnswerReadListResDto qnaAnswerList(QnaBoardAnswerReadReqDto qnaAnswerReadReq) {
+		Integer totalCount=qnaAnswerDao.selectQnaAnswerCount(qnaAnswerReadReq);	
+		List<QnaBoardAnswerReadResDto> answerReadList=qnaAnswerDao.qnaAnswerList(qnaAnswerReadReq);
+		QnaBoardAnswerReadListResDto answerListRes=new QnaBoardAnswerReadListResDto(totalCount, qnaAnswerReadReq);
+		answerListRes.setData(answerReadList);
+		return answerListRes;
+	}
+	
 	//댓글 한개 보기 (selectOne)
 	@Override
-	public QnaBoardAnswerDto selectComment(int refGroup) {
-		return qnaAnswerDao.selectQnaAnswer(refGroup);
+	public QnaBoardAnswerDto selectComment(int boardCommentRefGroup) {
+		return qnaAnswerDao.selectQnaAnswer(boardCommentRefGroup);
 	}
 	
 	//댓글 저장
 	@Transactional
 	@Override
-	public void saveComment(QnaBoardAnswerDto dto, HttpServletRequest request) {
-		int ref_group=dto.getBoardCommentRefGroup();
-						
-		String id=request.getSession().getAttribute("id").toString();
-		//int seq=qnaAnswerDao.getSequence();
-		//dto.setBoardCommentNum(seq);
-	    dto.setBoardCommentWriter(id); 
-	    dto.setContent(dto.getContent());
-	    dto.setBoardCommentRefGroup(ref_group);	        
-		qnaAnswerDao.insertQnaAnswer(dto, request);
+	public void saveComment(QnaBoardAnswerCreateReqDto answerCreateReqDto, String id) {
+		     
+		QnaBoardAnswerDto dto=new QnaBoardAnswerDto();
+		dto.setBoardCommentWriter(id);
+	    dto.setBoardCommentRefGroup(answerCreateReqDto.getBoardCommentRefGroup());
+	    dto.setContent(answerCreateReqDto.getContent());
+		qnaAnswerDao.insertQnaAnswer(dto);
 		
 		QnaBoardDto dto2=new QnaBoardDto();
-	    dto2.setBoardQuestionNum(ref_group);
+	    dto2.setBoardQuestionNum(answerCreateReqDto.getBoardCommentRefGroup());
 	    dto2.setAnsweredYn("Y");
 	    //answered(답변여부) 정보 DB 저장
 	    qnaDao.answered(dto2);	    
@@ -138,15 +151,20 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	//댓글 수정
 	@Transactional
 	@Override
-	public void updateComment(QnaBoardAnswerDto dto, HttpServletRequest request) {
-		qnaAnswerDao.updateQnaAnswer(dto, request);		
+	public void updateComment(QnaBoardAnswerUpdateReqDto answerUpdateReqDto, String id) {
+		
+		QnaBoardAnswerDto dto=new QnaBoardAnswerDto();
+		dto.setBoardCommentRefGroup(answerUpdateReqDto.getBoardCommentRefGroup());
+		dto.setContent(answerUpdateReqDto.getContent());		
+		dto.setUpdateId(id);
+		qnaAnswerDao.updateQnaAnswer(dto);		
 	}
 
 	//댓글 삭제(삭제 칼럼 Y 변경)
 	@Transactional
 	@Override
-	public void updateDeleteComment(int boardCommentNum) {
-		qnaAnswerDao.deleteUpdateQnaAnswer(boardCommentNum);		
+	public void updateDeleteComment(int boardCommentRefGroup) {
+		qnaAnswerDao.deleteUpdateQnaAnswer(boardCommentRefGroup);		
 	}
 
 	//댓글 삭제(batch)
@@ -154,7 +172,6 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	@Override
 	public void deleteComment() {
 		qnaAnswerDao.deleteQnaBoard();		
-	}
-
+	}	
 
 }

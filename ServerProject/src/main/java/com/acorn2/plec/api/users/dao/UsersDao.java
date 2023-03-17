@@ -8,6 +8,7 @@ import com.acorn2.plec.api.users.dto.req.UsersCreateReqDto;
 import com.acorn2.plec.api.users.dto.req.UsersReadReqDto;
 import com.acorn2.plec.api.users.dto.req.UsersUpdatePwdReqDto;
 import com.acorn2.plec.api.users.dto.req.UsersUpdateReqDto;
+import com.acorn2.plec.api.users.dto.res.MyLectureReadResDto;
 import com.acorn2.plec.api.users.dto.res.UsersReadDetailResDto;
 import com.acorn2.plec.api.users.dto.res.UsersReadResDto;
 
@@ -15,7 +16,11 @@ import com.acorn2.plec.api.users.dto.res.UsersReadResDto;
 @Mapper
 public interface UsersDao {
 	public Integer selectUsersCount(UsersReadReqDto usersReadReqDto);
+	public Integer selectMyLecCount(UsersReadReqDto usersReadReqDto);
+	public Integer selectMyLecCountY(UsersReadReqDto usersReadReqDto);
 	public List<UsersReadResDto> selectUsersList(UsersReadReqDto usersReadReqDto);
+	public List<MyLectureReadResDto> myLectureList(UsersReadReqDto usersReadReqDto);
+	public List<MyLectureReadResDto> myLectureListY(UsersReadReqDto usersReadReqDto);
 	public UsersReadDetailResDto selectUser(String lecUserId);
 	Integer insertUser(UsersCreateReqDto usersCreateReqDto);
 	Integer updateUser(UsersUpdateReqDto usersUpdateReqDto);

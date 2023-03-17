@@ -2,11 +2,6 @@ package com.acorn2.plec.api.users.service;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.web.multipart.MultipartFile;
-
 import com.acorn2.plec.api.users.dto.req.UsersCreateReqDto;
 import com.acorn2.plec.api.users.dto.req.UsersLoginReqDto;
 import com.acorn2.plec.api.users.dto.req.UsersReadReqDto;
@@ -20,6 +15,8 @@ import com.acorn2.plec.api.users.dto.res.UsersReadListResDto;
 public interface UsersService {
 	Map<String, Object> isValid(String lecUserId);
 	UsersReadListResDto selectUsersList(UsersReadReqDto usersReadReqDto);
+	UsersReadListResDto myLectureList(UsersReadReqDto usersReadReqDto, String id);
+	UsersReadListResDto myLectureListY(UsersReadReqDto usersReadReqDto, String id);
 	UsersReadDetailResDto selectUser(String id);
 	void insertUser(UsersCreateReqDto usersCreateReqDto);
 	Map<String, String> login(UsersLoginReqDto usersLoginReqDto);

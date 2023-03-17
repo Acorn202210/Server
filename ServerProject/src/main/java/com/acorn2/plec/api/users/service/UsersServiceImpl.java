@@ -1,19 +1,14 @@
 package com.acorn2.plec.api.users.service;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.acorn2.plec.api.users.dao.UsersDao;
 import com.acorn2.plec.api.users.dto.req.UsersCreateReqDto;
@@ -21,12 +16,12 @@ import com.acorn2.plec.api.users.dto.req.UsersLoginReqDto;
 import com.acorn2.plec.api.users.dto.req.UsersReadReqDto;
 import com.acorn2.plec.api.users.dto.req.UsersUpdatePwdReqDto;
 import com.acorn2.plec.api.users.dto.req.UsersUpdateReqDto;
+import com.acorn2.plec.api.users.dto.res.MyLectureReadResDto;
 import com.acorn2.plec.api.users.dto.res.UsersReadDetailResDto;
 import com.acorn2.plec.api.users.dto.res.UsersReadListResDto;
 import com.acorn2.plec.api.users.dto.res.UsersReadResDto;
 import com.acorn2.plec.api.users.exception.UsersNotLoginException;
 import com.acorn2.plec.api.users.profile.dao.ProflieDao;
-import com.acorn2.plec.api.users.profile.dto.ProfileDto;
 import com.acorn2.plec.common.utils.SessionUtils;
 
 @Service
@@ -156,5 +151,28 @@ public class UsersServiceImpl implements UsersService{
 		profileDao.deleteProfile();
 		
 		usersDao.updateRestUser();
-	}	
+	}
+
+
+	@Override
+	public UsersReadListResDto myLectureList(UsersReadReqDto usersReadReqDto, String id) {
+		usersReadReqDto.setLecUserId(id);
+		Integer totalCount = usersDao.selectMyLecCount(usersReadReqDto);
+		List<MyLectureReadResDto> myLectureReadResDtoList = usersDao.myLectureList(usersReadReqDto);
+		UsersReadListResDto usersReadListResDto = new UsersReadListResDto(totalCount, usersReadReqDto);
+		usersReadListResDto.setLectureData(myLectureReadResDtoList);
+		return usersReadListResDto;
+	}
+	
+	@Override
+	public UsersReadListResDto myLectureListY(UsersReadReqDto usersReadReqDto, String id) {
+		usersReadReqDto.setLecUserId(id);
+		Integer totalCount = usersDao.selectMyLecCountY(usersReadReqDto);
+		List<MyLectureReadResDto> myLectureReadResDtoList = usersDao.myLectureListY(usersReadReqDto);
+		UsersReadListResDto usersReadListResDto = new UsersReadListResDto(totalCount, usersReadReqDto);
+		usersReadListResDto.setLectureData(myLectureReadResDtoList);
+		return usersReadListResDto;
+	}
+
+	
 }

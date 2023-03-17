@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.acorn2.plec.api.qnaboard.dto.QnaBoardAnswerDto;
+import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardAnswerCreateReqDto;
+import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardAnswerUpdateReqDto;
 import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardCreateReqDto;
 import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardReadReqDto;
 import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardUpdateReqDto;
@@ -23,6 +26,7 @@ import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadListResDto;
 import com.acorn2.plec.api.qnaboard.service.QnaBoardService;
 import com.acorn2.plec.common.ComResponseEntity;
 import com.acorn2.plec.common.dto.ComResponseDto;
+import com.acorn2.plec.common.utils.SessionUtils;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -60,6 +64,7 @@ public class QnaBoardController {
 	
 	//문의 등록
 	@ApiOperation(value = "1:1 문의 등록", notes = "1:1문의를 등록한다.")
+	@Transactional
 	@PostMapping("/insert")
 	public ComResponseEntity<Void> QnaBoardInsert(@RequestBody QnaBoardCreateReqDto qnaBoardCreateReqDto, HttpServletRequest request){
 		service.QnaBoardInsert(qnaBoardCreateReqDto, request);
@@ -68,6 +73,7 @@ public class QnaBoardController {
 	
 	//수정
 	@ApiOperation(value = "1:1 문의 수정", notes = "1:1문의를 수정한다.")
+	@Transactional
 	@PutMapping("/{boardQuestionNum}/update")
 	public ComResponseEntity<Void> QnaBoardUpdate(@RequestBody QnaBoardUpdateReqDto qnaBoardUpdateReqDto, HttpServletRequest request){
 		service.QnaBoardUpdate(qnaBoardUpdateReqDto, request);
@@ -80,23 +86,7 @@ public class QnaBoardController {
 	public ComResponseEntity<Void> QnaBoardDelete(@PathVariable("boardQuestionNum") int boardQuestionNum){
 		service.QnaBoardUpdateDelete(boardQuestionNum);
 		return new ComResponseEntity<Void>();
-	}
-	
-
-	//1:1문의 답변보기 (1개)
-	@ApiOperation(value = "1:1문의 답변", notes = "1:1문의 답변 한개 보기")
-	@GetMapping("/{refGroup}/answer")
-	public ComResponseEntity<QnaBoardAnswerDto> getAnswerData(@PathVariable int refGroup) {
-		QnaBoardAnswerDto qnaBoardReadAnswerResDto=service.selectComment(refGroup);
-		return new ComResponseEntity<>(new ComResponseDto<>(qnaBoardReadAnswerResDto));
-	}
-	
-	//1:1문의 답변 등록
-	@ApiOperation(value = "1:1문의 답변 등록", notes = "1:1문의 답변 등록 (boardCommentRefGroup, content만 작성)")
-	@PostMapping("/answerInsert")
-	public void qnaAnswerInsert(@RequestBody QnaBoardAnswerDto answerDto, HttpServletRequest request){
-		service.saveComment(answerDto, request);
-		
 	}	
+
 	
 }

@@ -3,15 +3,11 @@ package com.acorn2.plec.api.users.controller;
 import java.io.IOException;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +17,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,7 +38,6 @@ import com.acorn2.plec.common.utils.SessionUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
 
 @RestController
 @Api("Users")
@@ -68,6 +62,22 @@ public class UsersController {
 		logger.debug("usersReadReqDto parameter:{}", usersReadReqDto.getLecUserId());
 		return new ComResponseEntity<>(new ComResponseDto<>(usersReadListResDto));
 	}
+	
+	@ApiOperation(value="나의 수강 중인 강의 목록", notes = "나의 수강 중인 강의 목록을 가져온다.")
+	@GetMapping(value = "/my-lecture-list")
+	public ComResponseEntity<UsersReadListResDto> getMyLectureList(@Parameter(hidden = true) UsersReadReqDto usersReadReqDto) {
+		UsersReadListResDto usersReadListResDto = userService.myLectureList(usersReadReqDto, SessionUtils.getUserId());
+		return new ComResponseEntity<>(new ComResponseDto<>(usersReadListResDto));
+	}
+	
+	@ApiOperation(value="나의 수강 완료한 강의 목록", notes = "나의 수강 완료한 강의 목록을 가져온다.")
+	@GetMapping(value = "/my-complete-lecture-list")
+	public ComResponseEntity<UsersReadListResDto> getCompleteMyLectureList(@Parameter(hidden = true) UsersReadReqDto usersReadReqDto) {
+		UsersReadListResDto usersReadListResDto = userService.myLectureListY(usersReadReqDto, SessionUtils.getUserId());
+		return new ComResponseEntity<>(new ComResponseDto<>(usersReadListResDto));
+	}
+	
+
 	
 	@ApiOperation(value="마이페이지", notes = "마이페이지의 회원 정보를 가져온다.")
 	@GetMapping(value = "/{lecUserId}")

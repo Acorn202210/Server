@@ -23,9 +23,24 @@ public class UsersReadListResDto extends PagingResponseDto{
 	public List<UsersReadResDto> getData() {
 		return data;
 	}
-
+	
 	public void setData(List<UsersReadResDto> data) {
 		this.data = data;
 	}
+	
+	@Schema(description = "나의 회원 목록", example = "", required = true, minLength = 1, maxLength = 50)
+	private List<MyLectureReadResDto> lectureData;
+
+	public List<MyLectureReadResDto> getLectureData() {
+		return lectureData;
+	}
+
+	public void setLectureData(List<MyLectureReadResDto> lectureData) {
+		this.lectureData = lectureData;
+	}
+	
+	
+
+	
 
 }
