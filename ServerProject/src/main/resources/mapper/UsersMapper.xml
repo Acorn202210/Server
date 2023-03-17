@@ -29,6 +29,19 @@
          </where>
 	</select>
 	
+	<select id="selectMyLecCount" parameterType="com.acorn2.plec.api.users.dto.req.UsersReadReqDto" resultType="java.lang.Integer">
+		SELECT NVL(MAX(ROWNUM), 0)
+      	FROM
+		(SELECT IMAGE_NUM, Complete_Yn, LEC_NUM
+			FROM users 
+			JOIN LECTURE_STUDENT
+			ON users.lec_user_id=LECTURE_STUDENT.lec_Stu_User_Id
+			JOIN LECTURE 
+			on LECTURE.LEC_NUM=LECTURE_STUDENT.lec_Stu_Ref_Group
+			WHERE users.lec_user_id = #{lecUserId}
+			ORDER BY users.lec_user_id DESC)
+	</select>
+	
 	<select id="myLectureList" parameterType="com.acorn2.plec.api.users.dto.req.UsersReadReqDto" resultType="com.acorn2.plec.api.users.dto.res.MyLectureReadResDto">
 		SELECT *
 		FROM	

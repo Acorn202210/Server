@@ -16,6 +16,7 @@ import com.acorn2.plec.api.users.dto.res.UsersReadResDto;
 @Mapper
 public interface UsersDao {
 	public Integer selectUsersCount(UsersReadReqDto usersReadReqDto);
+	public Integer selectMyLecCount(UsersReadReqDto usersReadReqDto);
 	public List<UsersReadResDto> selectUsersList(UsersReadReqDto usersReadReqDto);
 	public List<MyLectureReadResDto> myLectureList(UsersReadReqDto usersReadReqDto);
 	public UsersReadDetailResDto selectUser(String lecUserId);

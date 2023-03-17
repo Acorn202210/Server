@@ -157,7 +157,7 @@ public class UsersServiceImpl implements UsersService{
 	@Override
 	public UsersReadListResDto myLectureList(UsersReadReqDto usersReadReqDto, String id) {
 		usersReadReqDto.setLecUserId(id);
-		Integer totalCount = usersDao.selectUsersCount(usersReadReqDto);
+		Integer totalCount = usersDao.selectMyLecCount(usersReadReqDto);
 		List<MyLectureReadResDto> myLectureReadResDtoList = usersDao.myLectureList(usersReadReqDto);
 		UsersReadListResDto usersReadListResDto = new UsersReadListResDto(totalCount, usersReadReqDto);
 		usersReadListResDto.setLectureData(myLectureReadResDtoList);
