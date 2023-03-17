@@ -21,6 +21,7 @@
 					, update_date
 					, update_id
 					, delete_Yn_code
+					, PROFILE_NUM
 				FROM qna_free_answer
 				INNER JOIN users ON qna_free_answer.FREE_COMMENT_WRITER=users.LEC_USER_ID
 				WHERE FREE_COMMENT_REF_GROUP=#{freeCommentRefGroup} AND delete_Yn_code='N'

@@ -24,6 +24,8 @@ public class QnaFreeAnswerReadResDto {
 	private String updateId;
 	@Schema(description = "자유게시판 댓글 삭제 여부", example = "N", required = true, minLength = 1, maxLength = 3)
 	private String deleteYn;
+	@Schema(description = "자유게시판 댓글 작성자 프로필 번호", example = "1", required = true, minLength = 1, maxLength = 30)
+	private String profileNum;
 
 	public int getFreeCommentNum() {
 		return freeCommentNum;
@@ -103,6 +105,14 @@ public class QnaFreeAnswerReadResDto {
 
 	public void setDeleteYn(String deleteYn) {
 		this.deleteYn = deleteYn;
+	}
+
+	public String getProfileNum() {
+		return profileNum;
+	}
+
+	public void setProfileNum(String profileNum) {
+		this.profileNum = profileNum;
 	}
 
 	@Override
