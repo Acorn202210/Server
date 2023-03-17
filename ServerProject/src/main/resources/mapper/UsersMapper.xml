@@ -29,6 +29,22 @@
          </where>
 	</select>
 	
+	<select id="myLectureList" parameterType="com.acorn2.plec.api.users.dto.req.UsersReadReqDto" resultType="com.acorn2.plec.api.users.dto.res.MyLectureReadResDto">
+		SELECT *
+		FROM	
+			(SELECT result1.*, ROWNUM as rnum
+			FROM
+				(SELECT IMAGE_NUM, Complete_Yn
+					FROM users 
+					JOIN LECTURE_STUDENT
+					ON users.lec_user_id=LECTURE_STUDENT.lec_Stu_User_Id
+					JOIN LECTURE 
+					on LECTURE.LEC_NUM=LECTURE_STUDENT.lec_Stu_Ref_Group
+					WHERE users.lec_user_id = #{lecUserId}
+					ORDER BY users.lec_user_id DESC) result1)
+		WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
+	</select>
+	
 	<select id="selectUsersList" parameterType="com.acorn2.plec.api.users.dto.req.UsersReadReqDto" resultType="com.acorn2.plec.api.users.dto.res.UsersReadResDto">
 		SELECT *
       	FROM

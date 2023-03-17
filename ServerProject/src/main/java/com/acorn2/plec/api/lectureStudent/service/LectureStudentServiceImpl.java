@@ -75,15 +75,14 @@ public class LectureStudentServiceImpl implements LectureStudentService{
 		}else {
 			isStudent.put("isStudent", true);
 		}
-		
 		return isStudent;
 	}	
 
 	@Transactional
 	@Override
-	public void LectureSignup(LectureStudentCreateReqDto lecstudentCreateDto, String id) {
+	public void LectureSignup(LectureStudentCreateReqDto lecstudentCreateDto, String lecStuUserId) {
 		LectureStudentDto dto = new LectureStudentDto();
-		dto.setLecStuUserId(id);
+		dto.setLecStuUserId(lecStuUserId);
 		dto.setLecStuRefGroup(lecstudentCreateDto.getLecStuRefGroup());
 		
 		studentDao.LectureSignup(dto);

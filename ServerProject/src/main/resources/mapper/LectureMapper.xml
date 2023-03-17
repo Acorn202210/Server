@@ -43,7 +43,7 @@
 		INSERT INTO LECTURE
 		(LEC_NUM, IMAGE_NUM, TEACHER, LEC_WRITER, TITLE, DESCRIBE,
 		VIDEOPATH, VIEWCOUNT, USER_REGDATE, LARGE_CATEGORY,SMALL_CATEGORY)
-		VALUES(LECTURE_seq.NEXTVAL, #{imageNum}, #{teacher}, #{lecWriter}, #{title}, #{describe}, #{videoPath}, #{viewCount}, SYSDATE, #{largeCategory}, #{smallCategory} )
+		VALUES(LECTURE_seq.NEXTVAL, #{imageNum}, #{teacher}, #{lecWriter}, #{title}, #{describe}, #{videoPath}, 0, SYSDATE, #{largeCategory}, #{smallCategory} )
 	</insert>
 	
 	<update id="addViewCount" parameterType="Integer">
