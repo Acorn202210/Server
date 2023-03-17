@@ -16,6 +16,7 @@ public interface UsersService {
 	Map<String, Object> isValid(String lecUserId);
 	UsersReadListResDto selectUsersList(UsersReadReqDto usersReadReqDto);
 	UsersReadListResDto myLectureList(UsersReadReqDto usersReadReqDto, String id);
+	UsersReadListResDto myLectureListY(UsersReadReqDto usersReadReqDto, String id);
 	UsersReadDetailResDto selectUser(String id);
 	void insertUser(UsersCreateReqDto usersCreateReqDto);
 	Map<String, String> login(UsersLoginReqDto usersLoginReqDto);

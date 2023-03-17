@@ -32,13 +32,28 @@
 	<select id="selectMyLecCount" parameterType="com.acorn2.plec.api.users.dto.req.UsersReadReqDto" resultType="java.lang.Integer">
 		SELECT NVL(MAX(ROWNUM), 0)
       	FROM
-		(SELECT IMAGE_NUM, Complete_Yn, LEC_NUM
+		(SELECT IMAGE_NUM, LEC_NUM
 			FROM users 
 			JOIN LECTURE_STUDENT
 			ON users.lec_user_id=LECTURE_STUDENT.lec_Stu_User_Id
 			JOIN LECTURE 
 			on LECTURE.LEC_NUM=LECTURE_STUDENT.lec_Stu_Ref_Group
 			WHERE users.lec_user_id = #{lecUserId}
+			AND LECTURE_STUDENT.Complete_Yn='N'
+			ORDER BY users.lec_user_id DESC)
+	</select>
+	
+	<select id="selectMyLecCountY" parameterType="com.acorn2.plec.api.users.dto.req.UsersReadReqDto" resultType="java.lang.Integer">
+		SELECT NVL(MAX(ROWNUM), 0)
+      	FROM
+		(SELECT IMAGE_NUM, LEC_NUM
+			FROM users 
+			JOIN LECTURE_STUDENT
+			ON users.lec_user_id=LECTURE_STUDENT.lec_Stu_User_Id
+			JOIN LECTURE 
+			on LECTURE.LEC_NUM=LECTURE_STUDENT.lec_Stu_Ref_Group
+			WHERE users.lec_user_id = #{lecUserId}
+			AND LECTURE_STUDENT.Complete_Yn='Y'
 			ORDER BY users.lec_user_id DESC)
 	</select>
 	
@@ -47,13 +62,31 @@
 		FROM	
 			(SELECT result1.*, ROWNUM as rnum
 			FROM
-				(SELECT IMAGE_NUM, Complete_Yn, LEC_NUM
+				(SELECT IMAGE_NUM,  LEC_NUM
 					FROM users 
 					JOIN LECTURE_STUDENT
 					ON users.lec_user_id=LECTURE_STUDENT.lec_Stu_User_Id
 					JOIN LECTURE 
 					on LECTURE.LEC_NUM=LECTURE_STUDENT.lec_Stu_Ref_Group
 					WHERE users.lec_user_id = #{lecUserId}
+					AND LECTURE_STUDENT.Complete_Yn='N'
+					ORDER BY users.lec_user_id DESC) result1)
+		WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
+	</select>
+	
+	<select id="myLectureListY" parameterType="com.acorn2.plec.api.users.dto.req.UsersReadReqDto" resultType="com.acorn2.plec.api.users.dto.res.MyLectureReadResDto">
+		SELECT *
+		FROM	
+			(SELECT result1.*, ROWNUM as rnum
+			FROM
+				(SELECT IMAGE_NUM, LEC_NUM
+					FROM users 
+					JOIN LECTURE_STUDENT
+					ON users.lec_user_id=LECTURE_STUDENT.lec_Stu_User_Id
+					JOIN LECTURE 
+					on LECTURE.LEC_NUM=LECTURE_STUDENT.lec_Stu_Ref_Group
+					WHERE users.lec_user_id = #{lecUserId}
+					AND LECTURE_STUDENT.Complete_Yn='Y'
 					ORDER BY users.lec_user_id DESC) result1)
 		WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
 	</select>
