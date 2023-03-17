@@ -2,14 +2,14 @@ package com.acorn2.plec.api.users.dto.res;
 
 public class MyLectureReadResDto {
 	private Integer imageNum;
-	private String CompleteYn;
+	private Integer lecNum;
 	
 	public MyLectureReadResDto() {}
 		
-	public MyLectureReadResDto(Integer imageNum, String completeYn) {
+	public MyLectureReadResDto(Integer imageNum, Integer lecNum) {
 		super();
 		this.imageNum = imageNum;
-		CompleteYn = completeYn;
+		this.lecNum = lecNum;
 	}
 
 	public Integer getImageNum() {
@@ -18,12 +18,15 @@ public class MyLectureReadResDto {
 	public void setImageNum(Integer imageNum) {
 		this.imageNum = imageNum;
 	}
-	public String getCompleteYn() {
-		return CompleteYn;
+
+	public Integer getLecNum() {
+		return lecNum;
 	}
-	public void setComplete_Yn(String completeYn) {
-		CompleteYn = completeYn;
+
+	public void setLecNum(Integer lecNum) {
+		this.lecNum = lecNum;
 	}
+	
 	
 	
 }

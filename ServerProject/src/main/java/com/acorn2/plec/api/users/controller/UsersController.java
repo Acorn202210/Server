@@ -63,10 +63,17 @@ public class UsersController {
 		return new ComResponseEntity<>(new ComResponseDto<>(usersReadListResDto));
 	}
 	
-	@ApiOperation(value="나의 수강 목록", notes = "나의 수강 목록을 가져온다.")
-	@GetMapping(value = "/myLcetureList")
+	@ApiOperation(value="나의 수강 중인 강의 목록", notes = "나의 수강 중인 강의 목록을 가져온다.")
+	@GetMapping(value = "/my-lecture-list")
 	public ComResponseEntity<UsersReadListResDto> getMyLectureList(@Parameter(hidden = true) UsersReadReqDto usersReadReqDto) {
 		UsersReadListResDto usersReadListResDto = userService.myLectureList(usersReadReqDto, SessionUtils.getUserId());
+		return new ComResponseEntity<>(new ComResponseDto<>(usersReadListResDto));
+	}
+	
+	@ApiOperation(value="나의 수강 완료한 강의 목록", notes = "나의 수강 완료한 강의 목록을 가져온다.")
+	@GetMapping(value = "/my-complete-lecture-list")
+	public ComResponseEntity<UsersReadListResDto> getCompleteMyLectureList(@Parameter(hidden = true) UsersReadReqDto usersReadReqDto) {
+		UsersReadListResDto usersReadListResDto = userService.myLectureListY(usersReadReqDto, SessionUtils.getUserId());
 		return new ComResponseEntity<>(new ComResponseDto<>(usersReadListResDto));
 	}
 	

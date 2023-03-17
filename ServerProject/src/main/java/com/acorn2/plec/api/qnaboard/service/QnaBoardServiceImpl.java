@@ -17,10 +17,13 @@ import com.acorn2.plec.api.qnaboard.dao.QnaBoardDao;
 import com.acorn2.plec.api.qnaboard.dto.QnaBoardAnswerDto;
 import com.acorn2.plec.api.qnaboard.dto.QnaBoardDto;
 import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardAnswerCreateReqDto;
+import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardAnswerReadReqDto;
 import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardAnswerUpdateReqDto;
 import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardCreateReqDto;
 import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardReadReqDto;
 import com.acorn2.plec.api.qnaboard.dto.req.QnaBoardUpdateReqDto;
+import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardAnswerReadListResDto;
+import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardAnswerReadResDto;
 import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadDetailResDto;
 import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadListResDto;
 import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadResDto;
@@ -110,6 +113,17 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 		qnaDao.deleteQnaBoard();
 	}
 
+	
+	//댓글 목록 보기	
+	@Override
+	public QnaBoardAnswerReadListResDto qnaAnswerList(QnaBoardAnswerReadReqDto qnaAnswerReadReq) {
+		Integer totalCount=qnaAnswerDao.selectQnaAnswerCount(qnaAnswerReadReq);	
+		List<QnaBoardAnswerReadResDto> answerReadList=qnaAnswerDao.qnaAnswerList(qnaAnswerReadReq);
+		QnaBoardAnswerReadListResDto answerListRes=new QnaBoardAnswerReadListResDto(totalCount, qnaAnswerReadReq);
+		answerListRes.setData(answerReadList);
+		return answerListRes;
+	}
+	
 	//댓글 한개 보기 (selectOne)
 	@Override
 	public QnaBoardAnswerDto selectComment(int boardCommentRefGroup) {
@@ -158,7 +172,6 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	@Override
 	public void deleteComment() {
 		qnaAnswerDao.deleteQnaBoard();		
-	}
-
+	}	
 
 }
