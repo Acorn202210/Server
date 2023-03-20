@@ -66,7 +66,7 @@ login-exclude-patterns:
   - /api/faq/faq-list
   - /api/faq/*/faqOne
   - /api/lecture/lectureList
-  - /api/lecture/{lecNum}/lecture-one
+  - /api/lecture/lecture-one/{lecNum}
   - /api/lecture/{imageNum}/image
   - /api/users/profile/{profileNum}
 manager-add-patterns:
@@ -87,7 +87,7 @@ manager-exclude-patterns:
   - /api/users/checkid
   - /api/lecture/lectureList
   - /api/lecture/{lecNum}/image
-  - /api/lecture/{lecNum}/lecture-one
+  - /api/lecture/lecture-one/{lecNum}
   - /api/lecture-review/LectureReviewList
   - /api/lecture-review/Lecture-review-insert
   - /api/faq/faq-list
