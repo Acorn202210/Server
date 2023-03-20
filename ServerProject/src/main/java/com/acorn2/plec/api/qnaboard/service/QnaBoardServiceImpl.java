@@ -154,7 +154,7 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	public void updateComment(QnaBoardAnswerUpdateReqDto answerUpdateReqDto, String id) {
 		
 		QnaBoardAnswerDto dto=new QnaBoardAnswerDto();
-		dto.setBoardCommentRefGroup(answerUpdateReqDto.getBoardCommentRefGroup());
+		dto.setBoardCommentNum(answerUpdateReqDto.getBoardCommentNum());
 		dto.setContent(answerUpdateReqDto.getContent());		
 		dto.setUpdateId(id);
 		qnaAnswerDao.updateQnaAnswer(dto);		
@@ -163,8 +163,8 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	//댓글 삭제(삭제 칼럼 Y 변경)
 	@Transactional
 	@Override
-	public void updateDeleteComment(int boardCommentRefGroup) {
-		qnaAnswerDao.deleteUpdateQnaAnswer(boardCommentRefGroup);		
+	public void updateDeleteComment(int boardCommentNum) {
+		qnaAnswerDao.deleteUpdateQnaAnswer(boardCommentNum);		
 	}
 
 	//댓글 삭제(batch)

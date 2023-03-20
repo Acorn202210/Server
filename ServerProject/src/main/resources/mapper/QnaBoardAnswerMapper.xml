@@ -26,7 +26,7 @@
    <select id="selectQnaAnswer" parameterType="int" resultType="com.acorn2.plec.api.qnaboard.dto.QnaBoardAnswerDto">
       SELECT BOARD_COMMENT_NUM, BOARD_COMMENT_WRITER, content, BOARD_COMMENT_REF_GROUP, USER_REGDATE
       FROM qna_board_answer
-      WHERE BOARD_COMMENT_REF_GROUP=#{boardCommentRefGroup}
+      WHERE BOARD_COMMENT_NUM=#{BOARD_COMMENT_NUM}
    </select>
       
    <!-- 댓글 저장. 댓글의 글번호도 미리 QnaBoardAnswerDto 객체에 담아와야 한다.--> 
@@ -40,14 +40,14 @@
    <update id="updateQnaAnswer" parameterType="com.acorn2.plec.api.qnaboard.dto.QnaBoardAnswerDto">
       UPDATE qna_board_answer
       SET content=#{content}, UPDATE_DATE=SYSDATE, UPDATE_ID=#{updateId}
-      WHERE BOARD_COMMENT_REF_GROUP=#{boardCommentRefGroup}
+      WHERE BOARD_COMMENT_NUM=#{boardCommentNum}
    </update> 
    
    <!-- 댓글 삭제(DB Y로 변경)-->
    <update id="deleteUpdateQnaAnswer" parameterType="int">
       UPDATE qna_board_answer
       SET delete_Yn_code='Y'
-      WHERE BOARD_COMMENT_REF_GROUP=#{boardCommentRefGroup} 
+      WHERE BOARD_COMMENT_NUM=#{boardCommentNum} 
    </update>   
    
    <!-- 댓글 삭제(batch)

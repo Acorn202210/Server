@@ -30,13 +30,13 @@ public interface QnaBoardAnswerDao {
 	//댓글 목록
 	public List<QnaBoardAnswerReadResDto> qnaAnswerList(QnaBoardAnswerReadReqDto answerReadReq);
 		
-	QnaBoardAnswerDto selectQnaAnswer(int boardCommentRefGroup);
+	QnaBoardAnswerDto selectQnaAnswer(int boardCommentNum);
 	
 	Integer insertQnaAnswer(QnaBoardAnswerDto dto);
 	
 	Integer updateQnaAnswer(QnaBoardAnswerDto dto);
 	
-	Integer deleteUpdateQnaAnswer(int boardCommentRefGroup);
+	Integer deleteUpdateQnaAnswer(int boardCommentNum);
 	
 	Integer deleteQnaBoard();	
 	//댓글번호 미리 얻어내기
