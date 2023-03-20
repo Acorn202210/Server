@@ -31,7 +31,7 @@ public interface QnaBoardService {
 	//댓글 관련 메소드
 	QnaBoardAnswerReadListResDto qnaAnswerList(QnaBoardAnswerReadReqDto qnaAnswerReadReq);
 	
-	QnaBoardAnswerDto selectComment(int boardCommentRefGroup);
+	QnaBoardAnswerDto selectComment(int boardCommentNum);
 	
 	void saveComment(QnaBoardAnswerCreateReqDto dto, String id);
 	
