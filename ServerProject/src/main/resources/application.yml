@@ -14,8 +14,9 @@ spring:
     password: tiger
   mvc:
     view:
-      prefix: /WEB-INF/views/
-      suffix: .jsp
+      prefix: /static/
+      suffix: .html
+      static-path-pattern: /static/**
     pathmatch:
       matching-strategy: ant-path-matcher
   servlet:
@@ -24,8 +25,11 @@ spring:
       max-request-size: 20MB
   web:
     resources:
-            static-locations: classpath:/static/,classpath:/static/dist/
-
+            static-locations: classpath:/resources,classpath:/static/
+  server:
+    error:
+      whitelabel:
+        enabled: false
      
 
 mybatis:

@@ -60,7 +60,7 @@ public class LectureController {
 		return new ComResponseEntity<>(new ComResponseDto<>(lectureReadListResDto));
 	}
 	@ApiOperation(value="강의 하나의 정보", notes = "강의 하나의 정보를 가져온다.") 
-	@GetMapping("/{lecNum}/lecture-one")
+	@GetMapping("/lecture-one/{lecNum}")
 	public ComResponseEntity<LectureDto> LectureOne(@PathVariable int lecNum){
 		
 		LectureDto dtoOne = service.LectureOne(lecNum);
