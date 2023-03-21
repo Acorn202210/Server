@@ -16,7 +16,7 @@ public interface LectureStudentDao {
 	
 	public Integer SelectLectureStudentCount(LectureStudentReadReqDto studentReadReqDto);
 
-	public LectureStudentOneReadResDto studentDataOne (String lecStuUserId, int lecStuRefGroup);
+	public LectureStudentOneReadResDto studentDataOne (String lecStuUserId, Integer lecStuRefGroup);
 	
 	Integer LectureSignup(LectureStudentDto dto);
 	

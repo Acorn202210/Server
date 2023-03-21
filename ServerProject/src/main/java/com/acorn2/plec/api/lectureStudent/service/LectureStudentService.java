@@ -16,9 +16,9 @@ public interface LectureStudentService {
 
 	LectureStudentReadListResDto LectureStudentList(LectureStudentReadReqDto studentReadReqDto);
 
-	LectureStudentOneReadResDto LectureStudentOne(String lecStuUserId, int lecStuRefGroup);
+	LectureStudentOneReadResDto LectureStudentOne(String lecStuUserId, Integer lecStuRefGroup);
 	
-	Map<String, Object> isStudent(String lecStuUserId, int lecStuRefGroup);
+	Map<String, Object> isStudent(String lecStuUserId, Integer lecStuRefGroup);
 	
 	void LectureSignup (LectureStudentCreateReqDto lecstudentCreateDto, String lecStuUserId);
 	

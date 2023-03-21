@@ -60,12 +60,12 @@ public class LectureStudentServiceImpl implements LectureStudentService{
 	}
 
 	@Override
-	public LectureStudentOneReadResDto LectureStudentOne(String lecStuUserId, int lecStuRefGroup) {
+	public LectureStudentOneReadResDto LectureStudentOne(String lecStuUserId, Integer lecStuRefGroup) {
 		return studentDao.studentDataOne(lecStuUserId, lecStuRefGroup);
 	}
 	
 	@Override
-	public Map<String, Object> isStudent(String lecStuUserId, int lecStuRefGroup) {
+	public Map<String, Object> isStudent(String lecStuUserId, Integer lecStuRefGroup) {
 		Map<String, Object> isStudent = new HashMap<>();
 		
 		LectureStudentOneReadResDto dto = studentDao.studentDataOne(lecStuUserId, lecStuRefGroup);
