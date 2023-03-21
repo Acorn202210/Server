@@ -69,6 +69,13 @@ public class LectureServiceImpl implements LectureService{
 	@Transactional
 	@Override
 	public void LectureUpdate(LectureUpdateReqDto lectureUpdateReqDto, String id) {
+		
+		Integer imageNum = lectureDao.lectureOne(lectureUpdateReqDto.getLecNum()).getImageNum();
+		if(lectureUpdateReqDto.getImageNum()!= null && imageNum != null) {
+			imageDao.deleteUpdateImage(imageNum);	
+		}
+		
+		
 		LectureDto dto = new LectureDto();
 		ImageDto imageDto = new ImageDto();
 		imageDto.setImageNum(lectureUpdateReqDto.getImageNum()); 
