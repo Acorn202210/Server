@@ -3,10 +3,10 @@
 <mapper namespace="com.acorn2.plec.api.qnaboard.dao.QnaBoardDao">
 
 	<sql id="searchCondition">      
-         <if test="title != null and content != null">
+         <if test="title != null and content != null and boardQuestionWriter == null">
             AND (title LIKE '%'||#{title}||'%' OR content LIKE '%'||#{content}||'%')
          </if>
-         <if test="title != null and content == null">
+         <if test="title != null and content == null and boardQuestionWriter == null">
             AND title LIKE '%'||#{title}||'%'
          </if>         
          <if test="boardQuestionWriter != null and title == null and content == null">
@@ -46,6 +46,7 @@
 	   		   LEAD(board_question_num, 1, 0) OVER (ORDER BY board_question_num DESC) prevNum
 			 FROM qna_board_question
 			 <where>
+			 	delete_YN_code='N'
 			 	<include refid="searchCondition"/>
 			 </where>
 			 ) result1

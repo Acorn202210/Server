@@ -27,6 +27,7 @@ import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardAnswerReadResDto;
 import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadDetailResDto;
 import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadListResDto;
 import com.acorn2.plec.api.qnaboard.dto.res.QnaBoardReadResDto;
+import com.acorn2.plec.api.qnaboard.exception.QnaNotFoundException;
 
 
 
@@ -50,7 +51,7 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 			}else if(qnaBoardReadReqDto.getCondition().equals("title")) {
 				qnaBoardReadReqDto.setTitle(qnaBoardReadReqDto.getKeyword());
 			}else if(qnaBoardReadReqDto.getCondition().equals("writer")) {
-				qnaBoardReadReqDto.setContent(qnaBoardReadReqDto.getKeyword());
+				qnaBoardReadReqDto.setBoardQuestionWriter(qnaBoardReadReqDto.getKeyword());
 			}
 		}
 		
@@ -66,6 +67,22 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	//상세보기
 	@Override
 	public QnaBoardReadDetailResDto selectOne(QnaBoardReadReqDto qnaBoardReadReqDto) {
+		if(qnaDao.selectQnaBoard(qnaBoardReadReqDto) == null) {
+			throw new QnaNotFoundException("1:1문의가 없습니다.");
+		}
+		
+		if(qnaBoardReadReqDto.getKeyword() !=null) {
+			String condition=qnaBoardReadReqDto.getCondition();
+			String keyword=qnaBoardReadReqDto.getKeyword();
+			if("title_content".equals(condition)) {
+				qnaBoardReadReqDto.setTitle(keyword);
+				qnaBoardReadReqDto.setContent(keyword);
+			}else if("title".equals(condition)) {
+				qnaBoardReadReqDto.setTitle(keyword);
+			}else if("writer".equals(condition)) {
+				qnaBoardReadReqDto.setBoardQuestionWriter(keyword);
+			}
+		}	
 		
 		return qnaDao.selectQnaBoard(qnaBoardReadReqDto);
 	}
