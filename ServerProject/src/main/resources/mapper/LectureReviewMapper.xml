@@ -5,6 +5,7 @@
 	<select id="selectLectureReivewCount" parameterType="com.acorn2.plec.api.lectureReview.dto.req.LectureReviewReadReqDto" resultType="java.lang.Integer">
 		SELECT NVL(MAX(ROWNUM), 0)
 		FROM LECTURE_REVIEW
+		WHERE LEC_RE_STU_REF_GROUP=#{lecReStuRefGroup} AND DELETE_YN='N'
 	</select>
 
 	<select id="LectureReviewList" parameterType="com.acorn2.plec.api.lectureReview.dto.req.LectureReviewReadReqDto" resultType="com.acorn2.plec.api.lectureReview.dto.res.LectureReviewReadResDto">
