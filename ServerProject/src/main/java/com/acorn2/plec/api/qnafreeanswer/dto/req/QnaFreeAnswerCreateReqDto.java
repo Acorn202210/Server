@@ -37,5 +37,5 @@ public class QnaFreeAnswerCreateReqDto {
 	public void setCommentGroup(Integer commentGroup) {
 		this.commentGroup = commentGroup;
 	}
-
+	
 }

@@ -2,8 +2,10 @@ package com.acorn2.plec.api.qnafreeanswer.dto;
 
 import org.apache.ibatis.type.Alias;
 
+import com.acorn2.plec.common.dto.PagingDto;
+
 @Alias("qnaFreeAnswerDto")
-public class QnaFreeAnswerDto {
+public class QnaFreeAnswerDto extends PagingDto{
 	private int freeCommentNum;
 	private String freeCommentWriter;
 	private String content;
