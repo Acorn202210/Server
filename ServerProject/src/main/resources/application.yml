@@ -8,10 +8,10 @@ server:
 
 spring:
   datasource:
-    driver-class-name: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1521:xe
-    username: scott
-    password: tiger
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@plec_high?TNS_ADMIN=./src/main/resources/Wallet_plec
+    username: ADMIN
+    password: PlecDatabase!1
   mvc:
     view:
       prefix: /static/
