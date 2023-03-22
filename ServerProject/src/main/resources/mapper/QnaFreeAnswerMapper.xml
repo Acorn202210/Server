@@ -25,7 +25,7 @@
 				FROM qna_free_answer
 				INNER JOIN users ON qna_free_answer.FREE_COMMENT_WRITER=users.LEC_USER_ID
 				WHERE FREE_COMMENT_REF_GROUP=#{freeCommentRefGroup} AND delete_Yn_code='N'
-				ORDER BY FREE_COMMENT_NUM DESC) result1)
+				ORDER BY FREE_COMMENT_NUM ASC) result1)
 		WHERE rnum BETWEEN #{rowStart} AND #{rowEnd}
 	</select>
 
