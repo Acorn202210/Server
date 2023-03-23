@@ -32,9 +32,7 @@
 	<select id="selectQnaFreeAnswerCount" parameterType="com.acorn2.plec.api.qnafreeanswer.dto.req.QnaFreeAnswerReadReqDto" resultType="java.lang.Integer">
 		SELECT NVL(MAX(ROWNUM), 0)
 		FROM qna_free_answer
-		<where>
-			delete_Yn_code='N'
-		</where>
+		WHERE FREE_COMMENT_REF_GROUP=#{freeCommentRefGroup} AND delete_YN_code='N'
 	</select>
 
 	<select id="selectQnaFreeAnswerOne" parameterType="com.acorn2.plec.api.qnafreeanswer.dto.req.QnaFreeAnswerReadReqDto" resultType="com.acorn2.plec.api.qnafreeanswer.dto.res.QnaFreeAnswerReadDetailResDto">
