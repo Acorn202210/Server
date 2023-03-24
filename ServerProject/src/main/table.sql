@@ -87,11 +87,11 @@ CREATE SEQUENCE QNA_USERS_ANSWER_seq;
 -- NOTICE(공지사항)
 CREATE TABLE NOTICE(   
     noti_num NUMBER PRIMARY KEY, 
-      title VARCHAR2(50) NOT NULL, 
-     content CLOB, 
-      viewCount NUMBER, 
-      regdate DATE, 
-      update_regdate DATE,   
+    title VARCHAR2(50) NOT NULL, 
+    content CLOB, 
+    viewCount NUMBER, 
+    regdate DATE, 
+    update_regdate DATE,   
     update_id VARCHAR2(50),   
     noti_writer VARCHAR2(50),   
     delete_YN_code VARCHAR2(3) DEFAULT 'N'  
