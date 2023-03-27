@@ -69,29 +69,35 @@ public class LectureServiceImpl implements LectureService{
 	@Transactional
 	@Override
 	public void LectureUpdate(LectureUpdateReqDto lectureUpdateReqDto, String id) {
-		
-		Integer imageNum = lectureDao.lectureOne(lectureUpdateReqDto.getLecNum()).getImageNum();
-		if(lectureUpdateReqDto.getImageNum()!= null && imageNum != null) {
-			imageDao.deleteUpdateImage(imageNum);	
-		}
-		
-		
-		LectureDto dto = new LectureDto();
-		ImageDto imageDto = new ImageDto();
-		imageDto.setImageNum(lectureUpdateReqDto.getImageNum()); 
-		
-		dto.setImageNum(imageDto.getImageNum());
-		dto.setLecNum(lectureUpdateReqDto.getLecNum());
-		dto.setTitle(lectureUpdateReqDto.getTitle());
-		dto.setTeacher(lectureUpdateReqDto.getTeacher());
-		dto.setUpdateId(id);
-		dto.setDescribe(lectureUpdateReqDto.getDescribe());
-		dto.setVideoPath(lectureUpdateReqDto.getVideoPath());
-		dto.setLargeCategory(lectureUpdateReqDto.getLargeCategory());
-		dto.setSmallCategory(lectureUpdateReqDto.getSmallCategory());
-		lectureDao.lectureUpdate(dto);
+
+	    Integer imageNum = lectureDao.lectureOne(lectureUpdateReqDto.getLecNum()).getImageNum();
+	    ImageDto imageDto = new ImageDto();
+	    if (lectureUpdateReqDto.getImageNum() == null) {
+	        if (imageNum != null) {
+	            imageDto.setImageNum(imageNum);
+	            imageDao.deleteUpdateImage(imageNum);
+	        }
+	    } else {
+	        imageDto.setImageNum(lectureUpdateReqDto.getImageNum());
+	        if (imageNum != null) {
+	            imageDao.deleteUpdateImage(imageNum);
+	        }
+	    }
+
+	    LectureDto dto = new LectureDto();
+	    dto.setImageNum(imageDto.getImageNum());
+	    dto.setLecNum(lectureUpdateReqDto.getLecNum());
+	    dto.setTitle(lectureUpdateReqDto.getTitle());
+	    dto.setTeacher(lectureUpdateReqDto.getTeacher());
+	    dto.setUpdateId(id);
+	    dto.setDescribe(lectureUpdateReqDto.getDescribe());
+	    dto.setVideoPath(lectureUpdateReqDto.getVideoPath());
+	    dto.setLargeCategory(lectureUpdateReqDto.getLargeCategory());
+	    dto.setSmallCategory(lectureUpdateReqDto.getSmallCategory());
+	    lectureDao.lectureUpdate(dto);
 
 	}
+
 	
 	@Transactional
 	@Override
