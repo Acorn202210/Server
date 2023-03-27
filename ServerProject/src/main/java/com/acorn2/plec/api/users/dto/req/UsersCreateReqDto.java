@@ -1,5 +1,7 @@
 package com.acorn2.plec.api.users.dto.req;
 
+import java.sql.Date;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -26,7 +28,7 @@ public class UsersCreateReqDto {
 	@NotEmpty
 	@Size(min = 1, max = 50)
 	@Schema(description = "생년월일", example = "2023.02.20", required = true, minLength = 1, maxLength = 50)
-	private String userBirth;
+	private Date userBirth;
 	@NotEmpty
 	@Size(min = 1, max = 3)
 	@Schema(description = "관리자여부", example = "Y", required = true, minLength = 1, maxLength = 3)
@@ -36,7 +38,7 @@ public class UsersCreateReqDto {
 
 	public UsersCreateReqDto(@NotEmpty @Size(min = 1, max = 50) String lecUserId,
 			@NotEmpty @Size(min = 1, max = 100) String userPwd, @NotEmpty @Size(min = 1, max = 100) String userEmail,
-			@NotEmpty @Size(min = 1, max = 32) String userPhone, @NotEmpty @Size(min = 1, max = 50) String userBirth,
+			@NotEmpty @Size(min = 1, max = 32) String userPhone, @NotEmpty @Size(min = 1, max = 50) Date userBirth,
 			@NotEmpty @Size(min = 1, max = 3) String managerYn) {
 		super();
 		this.lecUserId = lecUserId;
@@ -79,11 +81,11 @@ public class UsersCreateReqDto {
 		this.userPhone = userPhone;
 	}
 
-	public String getUserBirth() {
+	public Date getUserBirth() {
 		return userBirth;
 	}
 
-	public void setUserBirth(String userBirth) {
+	public void setUserBirth(Date userBirth) {
 		this.userBirth = userBirth;
 	}
 
