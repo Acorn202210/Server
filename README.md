@@ -69,7 +69,7 @@
 ![KakaoTalk_20230328_175511259](https://user-images.githubusercontent.com/100889562/228188729-ca858226-4fcb-429a-b142-a99b9163d404.gif)
 #### 자주묻는질문
 ![plec-Chrome-2023-03-28-17-04-22](https://user-images.githubusercontent.com/100889562/228188285-74c93e43-f965-43c3-b0d5-1425db6e2a92.gif)
-#### 
+#### 자유게시판 
 ![plec-Chrome-2023-03-28-17-25-59](https://user-images.githubusercontent.com/100889562/228188325-c56531f8-f0de-4446-8294-0ce8d2aef6d5.gif)
 
 
