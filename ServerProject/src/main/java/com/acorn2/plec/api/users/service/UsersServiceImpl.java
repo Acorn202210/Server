@@ -138,7 +138,9 @@ public class UsersServiceImpl implements UsersService{
 
 		usersDao.deleteUpdateUser(lecUserId);
 		Integer profileNum = usersDao.selectUser(lecUserId).getProfileNum();
-		profileDao.deleteUpdateProfile(profileNum);
+		if(profileNum != null) {
+			profileDao.deleteUpdateProfile(profileNum);
+		}
 		
 		if(id.equals(lecUserId)) {
 			SessionUtils.removeAttribute();
