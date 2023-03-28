@@ -10,10 +10,6 @@
 - 🔗 [vue.js 링크](#-vue-링크)
 - ✨ [erd](#-erd)
 - 👨🏻‍💻 [기능 구현](#-기능-구현)
-  - [강의 리스트](#1-강의-리스트)
-  - [강의 상세보기](#2-강의-상세보기)
-  - [강의 등록 및 수정](#3-강의-등록-및-수정)
-  - [수강 신청 및 완료 및 강의 보기](#4-수강-신청-및-완료-및-강의-보기)
 - 🚀 [배포](#-배포)
 - ⏰ [커밋 히스토리](#-커밋-히스토리)
 
@@ -21,8 +17,6 @@
 <br>
 
 ## **📝 프로젝트 개요**
-
-<img width="70%" alt="메인 페이지" src="https://user-images.githubusercontent.com/116258575/227773359-68caa954-23d8-4850-8183-8285a3842e87.png" />
 
 > **프로젝트:** Plec 프로젝트
 >
@@ -34,9 +28,8 @@
 >
 > **배포일:** 2023.03.27
 >
-> **사용 기술:** JAVA, Oracle Data Base, Vue.js, Rest Api, Swagger3, Git hub
+> **사용 기술:** JAVA, OracleCloudDataBase, Vue.js, Rest Api, Swagger3, GitHub
 >
-> **문의:** sdm067@naver.com
 
 <br />
 
@@ -66,60 +59,24 @@
 
 ## **👨🏻‍💻 기능 구현**
 
-### **1. 강의 리스트**
+#### 회원가입
+![KakaoTalk_20230328_172739846](https://user-images.githubusercontent.com/100889562/228188415-e1f7e66a-b3da-4779-811c-f0cea838104c.gif)
+#### 강의
+![강의-등록_-삭제](https://user-images.githubusercontent.com/100889562/228188767-ca6049cd-534b-4dba-a87b-3dd40f874e53.gif)
+#### 공지사항
+![KakaoTalk_20230328_172804427](https://user-images.githubusercontent.com/100889562/228188436-ee21b11f-6b9b-49f3-8d3d-75938af07b2c.gif)
+#### 회원목록 
+![KakaoTalk_20230328_175511259](https://user-images.githubusercontent.com/100889562/228188729-ca858226-4fcb-429a-b142-a99b9163d404.gif)
 
-<img src = "https://user-images.githubusercontent.com/116258575/227839190-a4553099-b1bc-4ed7-b49c-9fef3ab03684.png" width="width 70%" height="70%">
+#### 자주묻는질문
+![plec-Chrome-2023-03-28-17-04-22](https://user-images.githubusercontent.com/100889562/228188285-74c93e43-f965-43c3-b0d5-1425db6e2a92.gif)
+![plec-Chrome-2023-03-28-17-25-59](https://user-images.githubusercontent.com/100889562/228188325-c56531f8-f0de-4446-8294-0ce8d2aef6d5.gif)
 
--관리자만 강의를 등록할 수 있음
-
--강의 이미지를 클릭하면 강의 상세보기로 이동함
-
--왼쪽 사이드 바에 있는 분류를 클릭하면 각 강의 리스트로 이동함
-
--각 리스트마다 페이징 처리
-
-
-### **2. 강의 상세보기**
-
-<img src = "https://user-images.githubusercontent.com/116258575/227839204-57b7b943-8e3c-448d-9708-e06295b6cdab.png" width="width 70%" height="70%">
-
--관리자만 강의를 수정, 삭제 할 수 있음
-
--수강 후기는 수강 신청한 유저만 등록 가능
-
--수강 후기를 별점으로 나타내고  페이징 처리
-
-
--수강 후기 수정 삭제는 본인만 가능함
-
--강의 상세보기 사이드바는 스크롤시 같이 이동함.
-
--1:1 문의 버튼을 클릭 시 1:1 문의로 이동
-
-### **3. 강의 등록 및 수정**
-
-<img src = "https://user-images.githubusercontent.com/116258575/227839210-77c8d74e-8831-41f7-8d78-a56edd6821a2.png" width="width 70%" height="70%">
-
--관리자만 강의를 등록 및 수정 가능
-
--각 항목 작성 및 선택 후 등록
-
--강의 수정은 기존 데이터가 출력됨
-
-### **4. 수강 신청 및 완료 및 강의 보기**
-
-<img src = "https://user-images.githubusercontent.com/116258575/227839215-240dd685-b0d9-4367-b8d2-42a6298bcf82.png" width="width 70%" height="70%">
-
--수강 신청 버튼을 누르고 신청이 완료되면 강의 완료, 강의 보기 버튼이 나타남
-
--강의 완료 버튼을  누르고 나면 강의 보기 버튼 클릭이 안됨
-
--강의 보기 버튼 클릭 시 강의 영상 페이지로 이동
 
 
 ## **🚀 배포**
 
--Oracle Data Base를 사용해서 전자지갑을 통해 Spring Boot와 연동
+-OracleDataBase를 사용해서 전자지갑을 통해 Spring Boot와 연동
 
 -Oracle Cloud를 사용해서 Spring Boot Jar 파일을 배포
 
