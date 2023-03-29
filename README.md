@@ -3,6 +3,7 @@
 ## **📗 목차**
 
 <b>
+
 - 📝 [개요](#-프로젝트-개요)
 - 📝 [설명](#-프로젝트-설명)
 - 🛠  [기술 및 도구](#-기술-및-도구)
@@ -42,6 +43,7 @@
 <br />
 
 ## **🛠 기술 및 도구**
+
 ![Java](https://img.shields.io/badge/Java-007396.svg?style=flat-square&logo=Java&logoColor=white)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26.svg?style=flat-square&logo=HTML5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6.svg?style=flat-square&logo=CSS3&logoColor=white)
@@ -75,17 +77,24 @@
 
 #### 회원가입
 ![KakaoTalk_20230328_172739846](https://user-images.githubusercontent.com/100889562/228188415-e1f7e66a-b3da-4779-811c-f0cea838104c.gif)
+
 #### 강의
 ![강의-등록_-삭제](https://user-images.githubusercontent.com/100889562/228188767-ca6049cd-534b-4dba-a87b-3dd40f874e53.gif)
+
 #### 공지사항
 ![KakaoTalk_20230328_172804427](https://user-images.githubusercontent.com/100889562/228188436-ee21b11f-6b9b-49f3-8d3d-75938af07b2c.gif)
+
 #### 회원목록 
 ![KakaoTalk_20230328_175511259](https://user-images.githubusercontent.com/100889562/228188729-ca858226-4fcb-429a-b142-a99b9163d404.gif)
+
 #### 자주묻는질문
 ![plec-Chrome-2023-03-28-17-04-22](https://user-images.githubusercontent.com/100889562/228188285-74c93e43-f965-43c3-b0d5-1425db6e2a92.gif)
+
 #### 1:1문의
+
 ##### 회원
 ![qna_user](https://user-images.githubusercontent.com/100889562/228413096-54129407-a601-48be-bb85-74fda3f7f87c.gif)
+
 ##### 관리자
 ![qna_admin](https://user-images.githubusercontent.com/100889562/228413104-e5a8f355-5e78-4205-8584-23a063f6c8a5.gif)
 
