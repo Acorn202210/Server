@@ -3,15 +3,14 @@
 ## **📗 목차**
 
 <b>
-
 - 📝 [개요](#-프로젝트-개요)
 - 📝 [설명](#-프로젝트-설명)
 - 🛠  [기술 및 도구](#-기술-및-도구)
-- 🔗 [vue.js 링크](#-vue-링크)
 - ✨ [erd](#-erd)
+- 📋 [swagger](#-swagger)
+- 🔗 [vue.js 링크](#-vue-링크)
 - 👨🏻‍💻 [기능 구현](#-기능-구현)
 - 🚀 [배포](#-배포)
-- ⏰ [커밋 히스토리](#-커밋-히스토리)
 
 </b>
 <br>
@@ -43,7 +42,27 @@
 <br />
 
 ## **🛠 기술 및 도구**
+![Java](https://img.shields.io/badge/Java-007396.svg?style=flat-square&logo=Java&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26.svg?style=flat-square&logo=HTML5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6.svg?style=flat-square&logo=CSS3&logoColor=white)
+![Vue.js](https://img.shields.io/badge/Vue.js-4FC08D.svg?style=flat-square&logo=Vue.js&logoColor=white)
+![SpringBoot](https://img.shields.io/badge/SpringBoot-6DB33F.svg?style=flat-square&logo=SpringBoot&logoColor=white)
+![Oracle](https://img.shields.io/badge/Oracle-F80000.svg?style=flat-square&logo=Oracle&logoColor=white)
+![ApacheTomcat](https://img.shields.io/badge/ApacheTomcat-F8DC75.svg?style=flat-square&logo=ApacheTomcat&logoColor=white)
+![Swagger](https://img.shields.io/badge/Swagger-85EA2D.svg?style=flat-square&logo=Swagger&logoColor=white)
 
+
+<br />
+
+## **✨ erd**
+
+![온라인강의_20230324_105823](https://user-images.githubusercontent.com/100889562/227405968-c34bc106-504d-4ea6-8509-5957af08befc.png)
+<br />
+
+## **📋 swagger**
+**swagger 링크:** [http://132.226.239.213:9000/plec/swagger-ui/index.html#/](http://132.226.239.213:9000/plec/swagger-ui/index.html#/)
+
+![Untitled (1)](https://user-images.githubusercontent.com/100889562/228413581-1c051647-76ec-4ade-9dd3-ea75ef453a3a.png)
 <br />
 
 ## **🔗 vue 링크**
@@ -51,11 +70,6 @@
 **vue.js 링크:** [https://github.com/Acorn202210/Web](https://github.com/Acorn202210/Web)
 
 <br />
-
-## **✨ erd**
-
-![온라인강의_20230324_105823](https://user-images.githubusercontent.com/100889562/227405968-c34bc106-504d-4ea6-8509-5957af08befc.png)
-
 
 ## **👨🏻‍💻 기능 구현**
 
@@ -69,6 +83,12 @@
 ![KakaoTalk_20230328_175511259](https://user-images.githubusercontent.com/100889562/228188729-ca858226-4fcb-429a-b142-a99b9163d404.gif)
 #### 자주묻는질문
 ![plec-Chrome-2023-03-28-17-04-22](https://user-images.githubusercontent.com/100889562/228188285-74c93e43-f965-43c3-b0d5-1425db6e2a92.gif)
+#### 1:1문의
+##### 회원
+![qna_user](https://user-images.githubusercontent.com/100889562/228413096-54129407-a601-48be-bb85-74fda3f7f87c.gif)
+##### 관리자
+![qna_admin](https://user-images.githubusercontent.com/100889562/228413104-e5a8f355-5e78-4205-8584-23a063f6c8a5.gif)
+
 #### 자유게시판 
 ![plec-Chrome-2023-03-28-17-25-59](https://user-images.githubusercontent.com/100889562/228188325-c56531f8-f0de-4446-8294-0ce8d2aef6d5.gif)
 
