@@ -48,7 +48,7 @@
 
 ## **🔗 vue 링크**
 
-**vue.js 링크:** [https://github.com/seo0601/plec-web.git](https://github.com/seo0601/plec-web.git)
+**vue.js 링크:** [https://github.com/Acorn202210/Web](https://github.com/Acorn202210/Web)
 
 <br />
 
