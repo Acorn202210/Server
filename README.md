@@ -28,8 +28,6 @@
 >
 > **배포일:** 2023.03.27
 >
-> **사용 기술:** JAVA, OracleCloudDataBase, Vue.js, Rest Api, Swagger3, GitHub
->
 
 <br />
 
