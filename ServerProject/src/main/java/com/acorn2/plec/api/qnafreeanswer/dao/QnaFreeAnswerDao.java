@@ -21,7 +21,7 @@ public interface QnaFreeAnswerDao {
 	 * @return : Integer
 	 * @description : 자유게시판 댓글 리스트 카운트 조회
 	 */
-	public Integer selectQnaFreeAnswerCount(QnaFreeAnswerReadReqDto dto);
+	public Integer selectQnaFreeAnswerCount(QnaFreeAnswerReadReqDto qnaFreeAnswerReadReqDto);
 
 	/**
 	 *
